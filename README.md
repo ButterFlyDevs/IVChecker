@@ -1,2 +1,2 @@
-# IVChecker-
+# IVChecker
 First app for Programación de Dispositivos Móviles.
