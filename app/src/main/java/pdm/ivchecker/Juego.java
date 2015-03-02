@@ -1,9 +1,13 @@
 package pdm.ivchecker;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -21,12 +25,34 @@ public class Juego extends ActionBarActivity {
     //Flujo de entrada para la lectura de fichero CSV:
     private InputStream inputStream;
 
+    //Botón de siguiente verbo
+    private Button btnNext;
+    private EditText txtVerbo;
 
     @Override
     //Método llamada cuando se crea por primera vez la actividad
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego);
+
+        //Obtenemos la referencia a ese botón de la vista
+        btnNext=(Button)findViewById(R.id.nextButton);
+        txtVerbo=(EditText)findViewById(R.id.formaMisteriosa);
+
+        //Implementamos el evento click del botón btnJugar:
+        btnNext.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Creamos el Intent
+                        Intent intent = new Intent(Juego.this, Juego.class);
+                        //Iniciamos la nueva actividad
+                        startActivity(intent);
+                    }
+                }
+        );
+
 
         //Abrimos el flujo del fichero almacenado en la carpeta denro de res llamada raw con el nombre iv
         inputStream=getResources().openRawResource(R.raw.iv);
