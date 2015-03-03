@@ -102,11 +102,16 @@ public class Juego extends ActionBarActivity {
         //Generamos el verbo a mostrar:
         numVerbo=(int)(rnd.nextDouble() * 4 + 0);
 
+        System.out.println("Verbo elegido: "+numVerbo);
+
         //Generamos la forma que no aparecerá
         numForma=(int)(rnd.nextDouble() * 2 + 0);
 
+        System.out.println("Forma elegida: "+numForma);
+
         //Obtenermos el verbo que falta en forma de rallitas:
         numLetrasForma=verbos[numVerbo][numForma].length();
+        System.out.println("forma elegida: "+verbos[numVerbo][numForma]+ "  tam: "+numLetrasForma);
         for(int i=0; i<numLetrasForma; i++){
             misterio+=" _ ";
         }
@@ -120,7 +125,7 @@ public class Juego extends ActionBarActivity {
         if(numForma==1)
             pasado.setText(misterio);
         else
-            infinitivo.setText(verbos[numVerbo][1]);
+            pasado.setText(verbos[numVerbo][1]);
 
         if(numForma==2)
             participio.setText(misterio);
