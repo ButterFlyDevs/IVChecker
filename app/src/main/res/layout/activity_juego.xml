@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/LytContenedor"
     android:background="#aaaaaa"
     android:layout_width="match_parent"
@@ -10,31 +10,37 @@
         android:id="@+id/infinitivo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30px"
-        android:text="" />
+        android:textSize="20px"
+        android:text="infinitivo"
+        android:layout_x="82dp"
+        android:layout_y="4dp" />
 
     <TextView
         android:id="@+id/pasado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30px"
-        android:text="" />
+        android:textSize="20px"
+        android:text="pasado"
+        android:layout_x="85dp"
+        android:layout_y="52dp" />
 
     <TextView
         android:id="@+id/participio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30px"
-        android:text=""
-    />
+        android:textSize="20px"
+        android:text="participio"
+        android:layout_x="66dp"
+        android:layout_y="97dp" />
 
 
     <EditText
         android:id="@+id/formaMisteriosa"
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:inputType="text"
-    />
+        android:layout_x="22dp"
+        android:layout_y="142dp" />
 
 
     <Button
@@ -42,8 +48,9 @@
         android:text="Next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-    />
+        android:layout_x="104dp"
+        android:layout_y="236dp" />
 
 
 
-</LinearLayout>
+</AbsoluteLayout>

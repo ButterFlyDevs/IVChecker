@@ -39,11 +39,12 @@ public class Juego extends ActionBarActivity {
         btnNext=(Button)findViewById(R.id.nextButton);
         txtVerbo=(EditText)findViewById(R.id.formaMisteriosa);
 
-        //Implementamos el evento click del botón btnJugar:
+        //Implementamos el evento click del botón next:
         btnNext.setOnClickListener(
 
                 new View.OnClickListener() {
                     @Override
+                    //Implementamos la acción del click sobre el botón next.
                     public void onClick(View v) {
                         //Creamos el Intent
                         Intent intent = new Intent(Juego.this, Juego.class);
@@ -100,12 +101,12 @@ public class Juego extends ActionBarActivity {
         String misterio="";
 
         //Generamos el verbo a mostrar:
-        numVerbo=(int)(rnd.nextDouble() * 4 + 0);
+        numVerbo=(int)(rnd.nextDouble() * 5 + 0);
 
         System.out.println("Verbo elegido: "+numVerbo);
 
         //Generamos la forma que no aparecerá
-        numForma=(int)(rnd.nextDouble() * 2 + 0);
+        numForma=(int)(rnd.nextDouble() * 3 + 0);
 
         System.out.println("Forma elegida: "+numForma);
 
