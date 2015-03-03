@@ -33,7 +33,6 @@
         android:layout_x="66dp"
         android:layout_y="97dp" />
 
-
     <EditText
         android:id="@+id/formaMisteriosa"
         android:layout_width="260dp"
@@ -41,7 +40,6 @@
         android:inputType="text"
         android:layout_x="22dp"
         android:layout_y="142dp" />
-
 
     <Button
         android:id="@+id/nextButton"
