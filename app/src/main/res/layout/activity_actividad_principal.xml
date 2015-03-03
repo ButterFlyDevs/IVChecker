@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/LytContenedor"
     android:background="#aaaaaa"
     android:layout_width="match_parent"
@@ -9,12 +9,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/listarVerbos"
-    />
+        android:layout_x="86dp"
+        android:layout_y="317dp" />
 
     <Button android:id="@+id/BtnJugar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/jugar"
-    />
+        android:layout_x="102dp"
+        android:layout_y="260dp" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20px"
+        android:text="Irregular Verbs Checker"
+        android:id="@+id/textView"
+        android:layout_x="17dp"
+        android:layout_y="121dp" />
+
+</AbsoluteLayout>

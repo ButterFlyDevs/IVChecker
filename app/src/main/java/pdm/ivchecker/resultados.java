@@ -4,14 +4,30 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class resultados extends ActionBarActivity {
+
+
+    private TextView txtPuntos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados);
+
+        //Relacionamos
+        txtPuntos=(TextView)findViewById(R.id.TxtPuntos);
+
+        //Recuperamos la información pasada en el intent
+        Bundle bundle = this.getIntent().getExtras();
+
+        //Construimos el mensaje a mostrar
+        txtPuntos.setText("puntos: " + bundle.getString("PUNTOS"));
+
+
+
     }
 
 
