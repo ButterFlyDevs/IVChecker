@@ -1,0 +1,6 @@
+C:\Users\JOSE ANTONIO\PDM\Apps\IVChecker\app\build\intermediates\classes\debug
+C:\Users\JOSE ANTONIO\PDM\Apps\IVChecker\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-52a4129acb78ce62e2bc126ca7fab883b5e60d81.jar
+C:\Users\JOSE ANTONIO\PDM\Apps\IVChecker\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-cca5784b79719d908ee8e1b90ed7daf2e1886e2d.jar
+C:\Users\JOSE ANTONIO\PDM\Apps\IVChecker\app\build\intermediates\pre-dexed\debug\androidplot-core-0.6.1-749acfb2144d0d7f4314365131a79597c8a21328.jar
+C:\Users\JOSE ANTONIO\PDM\Apps\IVChecker\app\build\intermediates\pre-dexed\debug\classes-4e70becaf90b3ae9becda24721e3d9a7f53e286c.jar
+C:\Users\JOSE ANTONIO\PDM\Apps\IVChecker\app\build\intermediates\pre-dexed\debug\classes-31bd27611b5726fd1db3e9ff659b12c8d0f7db5d.jar

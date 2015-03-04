@@ -62,7 +62,7 @@ public class Juego extends ActionBarActivity {
                         numPartida++;
                         if(numPartida==numPartidas) {
                             //Creamos el intent:
-                            Intent intent = new Intent(Juego.this, resultados.class);
+                            Intent intent = new Intent(Juego.this, Resultados.class);
 
                             //Creamos la información a pasar entre actividades:
                             Bundle b = new Bundle();
