@@ -1,6 +1,6 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".ActividadPrincipal">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/MnuOpc1" android:title="Show verb list"
+        android:icon="@drawable/ic_action"></item>
+    <item android:id="@+id/MnuOpc2" android:title="Setting"
+        android:icon="@android:drawable/ic_menu_compass"></item>
 </menu>

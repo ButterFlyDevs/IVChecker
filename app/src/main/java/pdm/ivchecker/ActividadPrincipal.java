@@ -67,16 +67,17 @@ public class ActividadPrincipal extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.MnuOpc1:
+                Intent intent = new Intent(ActividadPrincipal.this, ListaVerbos.class);
+                //Iniciamos la nueva actividad
+                startActivity(intent);
+                return true;
+            case R.id.MnuOpc2:
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }
