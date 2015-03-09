@@ -1308,6 +1308,8 @@ containing a value of this type.
         public static final int LytContenedorSaludo=0x7f0a0048;
         public static final int MnuOpc1=0x7f0a004b;
         public static final int MnuOpc2=0x7f0a004c;
+        public static final int MnuOpc3=0x7f0a004d;
+        public static final int MnuOpc4=0x7f0a004e;
         public static final int TxtVerbos=0x7f0a0049;
         public static final int action_bar=0x7f0a0031;
         public static final int action_bar_activity_content=0x7f0a0000;
@@ -1322,7 +1324,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0a002e;
         public static final int action_mode_bar_stub=0x7f0a002d;
         public static final int action_mode_close_button=0x7f0a0020;
-        public static final int action_settings=0x7f0a004d;
+        public static final int action_settings=0x7f0a004f;
         public static final int activity_chooser_view_content=0x7f0a0021;
         public static final int always=0x7f0a0016;
         public static final int beginning=0x7f0a0013;
@@ -1448,9 +1450,13 @@ containing a value of this type.
         public static final int hello_world=0x7f0c0012;
         public static final int jugar=0x7f0c0013;
         public static final int listarVerbos=0x7f0c0014;
-        public static final int title_activity_juego=0x7f0c0015;
-        public static final int title_activity_lista_verbos=0x7f0c0016;
-        public static final int title_activity_resultados=0x7f0c0017;
+        public static final int menuPrincipal1=0x7f0c0015;
+        public static final int menuPrincipal2=0x7f0c0016;
+        public static final int menuPrincipal3=0x7f0c0017;
+        public static final int menuPrincipal4=0x7f0c0018;
+        public static final int title_activity_juego=0x7f0c0019;
+        public static final int title_activity_lista_verbos=0x7f0c001a;
+        public static final int title_activity_resultados=0x7f0c001b;
     }
     public static final class style {
         /**  Customize your theme here. 

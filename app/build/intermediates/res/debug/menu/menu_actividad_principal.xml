@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/MnuOpc1" android:title="Show verb list"
-        android:icon="@drawable/ic_action"></item>
-    <item android:id="@+id/MnuOpc2" android:title="Setting"
-        android:icon="@android:drawable/ic_menu_compass"></item>
-</menu><!-- From: file:/C:/Users/JOSE%20ANTONIO/PDM/Apps/IVChecker/app/src/main/res/menu/menu_actividad_principal.xml -->
+    <item android:id="@+id/MnuOpc1" android:title="@string/menuPrincipal1"></item>
+    <item android:id="@+id/MnuOpc2" android:title="@string/menuPrincipal2"></item>
+    <item android:id="@+id/MnuOpc3" android:title="@string/menuPrincipal3"></item>
+    <item android:id="@+id/MnuOpc4" android:title="@string/menuPrincipal4"></item>
+</menu><!-- From: file:/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/src/main/res/menu/menu_actividad_principal.xml -->

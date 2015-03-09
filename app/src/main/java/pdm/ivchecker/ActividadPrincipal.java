@@ -58,6 +58,10 @@ public class ActividadPrincipal extends ActionBarActivity {
     }
 
 
+    /*
+     Esta función crea el meńu de la actividad, es decir el que aparece cuando pulsamos menú
+      en nuestro terminal. Su configuración la tenemos en res/menu/menu_actividad_principal.
+    */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -68,6 +72,7 @@ public class ActividadPrincipal extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            //Usamos los identificadores de menu_actividad_principal.xml (@+id) para definirles una acción.
             case R.id.MnuOpc1:
                 Intent intent = new Intent(ActividadPrincipal.this, ListaVerbos.class);
                 //Iniciamos la nueva actividad

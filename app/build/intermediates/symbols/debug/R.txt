@@ -340,6 +340,8 @@ int id LytContenedor 0x7f0a003f
 int id LytContenedorSaludo 0x7f0a0048
 int id MnuOpc1 0x7f0a004b
 int id MnuOpc2 0x7f0a004c
+int id MnuOpc3 0x7f0a004d
+int id MnuOpc4 0x7f0a004e
 int id TxtVerbos 0x7f0a0049
 int id action_bar 0x7f0a0031
 int id action_bar_activity_content 0x7f0a0000
@@ -354,7 +356,7 @@ int id action_menu_presenter 0x7f0a0003
 int id action_mode_bar 0x7f0a002e
 int id action_mode_bar_stub 0x7f0a002d
 int id action_mode_close_button 0x7f0a0020
-int id action_settings 0x7f0a004d
+int id action_settings 0x7f0a004f
 int id activity_chooser_view_content 0x7f0a0021
 int id always 0x7f0a0016
 int id beginning 0x7f0a0013
@@ -468,9 +470,13 @@ int string app_name 0x7f0c0011
 int string hello_world 0x7f0c0012
 int string jugar 0x7f0c0013
 int string listarVerbos 0x7f0c0014
-int string title_activity_juego 0x7f0c0015
-int string title_activity_lista_verbos 0x7f0c0016
-int string title_activity_resultados 0x7f0c0017
+int string menuPrincipal1 0x7f0c0015
+int string menuPrincipal2 0x7f0c0016
+int string menuPrincipal3 0x7f0c0017
+int string menuPrincipal4 0x7f0c0018
+int string title_activity_juego 0x7f0c0019
+int string title_activity_lista_verbos 0x7f0c001a
+int string title_activity_resultados 0x7f0c001b
 int style AppTheme 0x7f0d0000
 int style Base_TextAppearance_AppCompat 0x7f0d0001
 int style Base_TextAppearance_AppCompat_Body1 0x7f0d0002

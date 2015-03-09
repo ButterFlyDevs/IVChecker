@@ -20,4 +20,4 @@
           android:singleLine="true"
           android:layout_margin="3dip"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content" /><!-- From: file:/C:/Users/JOSE%20ANTONIO/PDM/Apps/IVChecker/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/layout/abc_simple_dropdown_hint.xml -->
+          android:layout_height="wrap_content" /><!-- From: file:/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/layout/abc_simple_dropdown_hint.xml -->
