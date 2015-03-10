@@ -1,6 +1,0 @@
-/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/classes/debug
-/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-67bf039e529c2d8dce40571fd7fbb6d5eb4da028.jar
-/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-b57794f8242f3d1b05516b51e0ff0e0fd899d0f2.jar
-/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/pre-dexed/debug/androidplot-core-0.6.1-3f1a7e8d91eb1d1f603bc7e1375af5ce572cc451.jar
-/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/pre-dexed/debug/classes-dea9c73e64242bc529f35bf8b744de6117f956e9.jar
-/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/pre-dexed/debug/classes-30dc8f765a438cf6b40871cb0ff538da0275f37b.jar
