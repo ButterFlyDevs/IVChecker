@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
 
@@ -13,7 +14,6 @@ public class ActividadPrincipal extends ActionBarActivity {
 
     //Necesitamos dos variables para tener referenciados a los botones.
     private Button btnJugar;
-    private Button btnListarVerbos;
 
 
     @Override
@@ -22,10 +22,12 @@ public class ActividadPrincipal extends ActionBarActivity {
         setContentView(R.layout.activity_actividad_principal);
         //Con esta orden conseguimos hacer que no se muestre la ActionBar.
         getSupportActionBar().hide();
+        //Con esta hacemos que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Obtenemos una referencia a los controles de la interfaz.
         btnJugar=(Button)findViewById(R.id.BtnJugar);
-        btnListarVerbos=(Button)findViewById(R.id.BtnListarVerbos);
+
 
         //Implementamos el evento click del botón btnJugar:
         btnJugar.setOnClickListener(
@@ -40,22 +42,6 @@ public class ActividadPrincipal extends ActionBarActivity {
                     }
                 }
         );
-
-        //Implementamos el evento click del botón btnListarVerbos:
-        btnListarVerbos.setOnClickListener(
-
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Creamos el Intent
-                        Intent intent = new Intent(ActividadPrincipal.this, ListaVerbos.class);
-                        //Iniciamos la nueva actividad
-                        startActivity(intent);
-                    }
-                }
-        );
-
-
 
     }
 
