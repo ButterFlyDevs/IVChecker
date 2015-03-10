@@ -25,7 +25,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        androidPlot.title="A Simple Pie Chart"
+        androidPlot.title="Resultados"
         androidPlot.titleWidget.labelPaint.textSize="@dimen/title_font_size"/>
     <LinearLayout
         android:layout_height="wrap_content"
@@ -37,21 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_gravity="center"
-            android:text="Donut Size"
-            android:id="@+id/donutSizeSeekLabel"/>
-        <SeekBar
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:max="90"
-            android:progress="50"
-            android:id="@+id/donutSizeSeekBar"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:text="unknown"
+            android:text="Estadisticas del jugador"
             android:id="@+id/donutSizeTextView"/>
     </LinearLayout>
 
