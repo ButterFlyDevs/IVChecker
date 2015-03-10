@@ -13,5 +13,6 @@
     <string name="menuPrincipal2">Show Verb Lists</string>
     <string name="menuPrincipal3">Show World Challenge Results</string>
     <string name="menuPrincipal4">About</string>
+    <string name="title_activity_about">About</string>
 
 </resources>
