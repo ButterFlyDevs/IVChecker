@@ -157,7 +157,7 @@ public class Resultados extends ActionBarActivity {
         sf3.getFillPaint().setMaskFilter(emf);
 
         SegmentFormatter sf4 = new SegmentFormatter();
-        sf4.configure(getApplicationContext(), R.xml.formato_queso4);
+        sf4.configure(getApplicationContext(), R.xml.formatoqueso5);
 
         sf4.getFillPaint().setMaskFilter(emf);
 
