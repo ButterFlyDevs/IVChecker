@@ -20,6 +20,8 @@ public class ActividadPrincipal extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividad_principal);
+        //Con esta orden conseguimos hacer que no se muestre la ActionBar.
+        getSupportActionBar().hide();
 
         //Obtenemos una referencia a los controles de la interfaz.
         btnJugar=(Button)findViewById(R.id.BtnJugar);
