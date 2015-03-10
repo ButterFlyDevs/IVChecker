@@ -124,7 +124,7 @@ public class Resultados extends ActionBarActivity {
         });
 
         s1 = new Segment("s1", 10);
-        s2 = new Segment("s2", 1);
+        s2 = new Segment("s2", 10);
         s3 = new Segment("s3", 10);
         s4 = new Segment("s4", 10);
 
