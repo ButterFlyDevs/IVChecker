@@ -104,9 +104,10 @@ public class Resultados extends ActionBarActivity {
 
         //inicializamos la referencia del objeto xml del gráfico:
         grafico = (PieChart) findViewById(R.id.graficoQueso);
+
+        //grafico.getRenderer(PieRenderer.class).setDonutSize(30 / 100f, PieRenderer.DonutMode.PERCENT);
+        /*              #### TODO: MANEJADOR DEL SEEKBAR BORRADO #####
         donutSizeSeekBar = (SeekBar) findViewById(R.id.donutSizeSeekBar);
-
-
         donutSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {}
@@ -121,7 +122,7 @@ public class Resultados extends ActionBarActivity {
                 grafico.redraw();
                 //updateDonutText();
             }
-        });
+        });*/
 
         s1 = new Segment("s1", 10);
         s2 = new Segment("s2", 10);
