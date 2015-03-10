@@ -12,16 +12,21 @@ public class About extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        //Con esta orden conseguimos hacer que no se muestre la ActionBar.
+        getSupportActionBar().hide();
     }
 
 
+    // ## CREACIÓN DEL MENÚ ##
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflamos el menú; esta orden crea el menú que está definido en /res/menu/menu_about.xml y lo asocia
+        //con el botón menu del terminal en esa actividad.
         getMenuInflater().inflate(R.menu.menu_about, menu);
         return true;
     }
 
+    // ## MANEJO DE OPCIONES DEL MENÚ ##
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

@@ -78,9 +78,13 @@ public class ActividadPrincipal extends ActionBarActivity {
                 //Iniciamos la nueva actividad
                 startActivity(intent);
                 return true;
-            case R.id.MnuOpc2:
 
+            //Para ir al la actividad About
+            case R.id.MnuOpc4:
+                Intent intent2 = new Intent(ActividadPrincipal.this, About.class);
+                startActivity(intent2);
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
