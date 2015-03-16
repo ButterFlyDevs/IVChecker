@@ -9,9 +9,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".ActividadPrincipal"
-            android:label="@string/app_name"
-        >
-
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +31,14 @@
         <activity
             android:name=".About"
             android:label="@string/title_activity_about" >
-
+        </activity>
+        <activity
+            android:name=".TrainingAreaInicio"
+            android:label="@string/title_activity_training_area_inicio" >
+        </activity>
+        <activity
+            android:name=".JuegoTraining"
+            android:label="@string/title_activity_juego_training" >
         </activity>
     </application>
 

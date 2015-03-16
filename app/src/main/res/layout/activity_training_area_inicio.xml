@@ -1,0 +1,16 @@
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LytContenedorTraining"
+    android:background="@drawable/uk"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button android:id="@+id/BtnGo"
+        android:layout_width="160dp"
+        android:layout_height="75dp"
+        android:background="@drawable/play"
+        android:layout_x="123dp"
+        android:layout_y="268dp" />
+
+
+</AbsoluteLayout>
