@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -50,7 +51,7 @@ public class ListaVerbos extends ActionBarActivity {
         int numero=1;
         try {
             String line;
-            txtVerbos.append(" ----- "+lista+" List ----- \n");
+            txtVerbos.append(" ----- "+lista+" list ----- \n");
             while(true){
                 line=reader.readLine();
                 if (line == null) break;
@@ -76,15 +77,39 @@ public class ListaVerbos extends ActionBarActivity {
         //Con esta hacemos que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
+        //Lo primero que se hace es recoger los datos enviados a esta actividad.
         Bundle extras = getIntent().getExtras();
+
+        /*
+        Si no se han recibido datos porque es la primera vez que se abre el activity se muestra la lista
+         soft.
+        */
         if(extras==null)
             mostrarVerbos("soft");
+        //Si se han enviado datos se llama a mostrarVerbos con la lista específica.
         else
             mostrarVerbos(extras.getString("lista"));
 
     }
 
+    /*
+    Sobrescribimos el método onKeyDown para programar los pocos
+    botones físicos que dispone el terminal.
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+
+        Intent intent = new Intent(ListaVerbos.this, ActividadPrincipal.class);
+
+        switch(keyCode){
+            //Programación del botón atrás del terminal.
+            case KeyEvent.KEYCODE_BACK:
+                System.out.println("Pulsado botón atrás");
+                startActivity(intent);
+
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,8 +128,10 @@ public class ListaVerbos extends ActionBarActivity {
 
             //Acción del menú para ver la lista de verbos soft.
             case R.id.soft:
-                //Iniciamos la nueva actividad, que es la misma donde estamos.
+
+                //Enviamos a la actividad el string "soft" en la variable "lista" para que este mismo intent lo coja.
                 intent.putExtra("lista","soft");
+                //Iniciamos la nueva actividad, que es la misma donde estamos.
                 startActivity(intent);
                 return true;
 
