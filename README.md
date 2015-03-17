@@ -7,4 +7,4 @@ First app for **Programación de Dispositivos Móviles**.
 
 Schematic designe:
 
-![](https://drive.google.com/drive/#folders/0B-HUO9mYFrFCfndiZnhGcU5BNmMzMFp4WTFoSXM3bHFteTZrQlk3a1laMzBOUkZhRzFZbWM)
+![](https://drive.google.com/open?id=0B-HUO9mYFrFCZ09qT2VSUl81V00&authuser=0)
