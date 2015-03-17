@@ -11,10 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
 import java.util.Random;
 
 
@@ -22,7 +22,7 @@ public class Juego extends ActionBarActivity {
 
     //Matriz donde se almacenan los verbos:
     private String [][] verbos;
-    //Flujo de entrada para la lectura de fichero:
+    //Flujo de entrada para la lectura de fichero CSV:
     private InputStream inputStream;
 
     //Botón de siguiente verbo
@@ -30,16 +30,11 @@ public class Juego extends ActionBarActivity {
     private EditText txtVerbo;
     private TextView infinitivo, pasado, participio;
 
+    private int puntuacionJugada;
     private int numPartida=0, numPartidas=5;
 
     private int numVerbo, numForma, numLetrasForma;
     private String misterio="";
-
-    //Variables de puntuacion. Un entero guarda la puntuacion, y el fichero almacenará en local la puntuación (se controla con un flujo)
-    //###### TODO : ESCRIBIR EN EL MANIFIESTO DE LA APLICACION: <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    private int puntuacionJugada;
-    FileOutputStream flujo_fichero;
 
     @Override
     //Método llamada cuando se crea por primera vez la actividad
@@ -65,12 +60,10 @@ public class Juego extends ActionBarActivity {
 
                         comprobarVerbo();
                         numPartida++;
-                        if(numPartida==numPartidas) { // La partida ha acabado si  entramos en este if
+                        if(numPartida==numPartidas) {
                             //Creamos el intent:
                             Intent intent = new Intent(Juego.this, Resultados.class);
 
-                            //Escribimos las puntuaciones en el fichero:
-                            salvar_puntuacion_local();
                             //Creamos la información a pasar entre actividades:
                             Bundle b = new Bundle();
                             b.putString("PUNTOS", String.valueOf(puntuacionJugada));
@@ -130,6 +123,7 @@ public class Juego extends ActionBarActivity {
         //Para la generación de números:
         Random rnd = new Random();
 
+
         //Generamos el verbo a mostrar:
         numVerbo=(int)(rnd.nextDouble() * 16 + 0);
 
@@ -180,50 +174,6 @@ public class Juego extends ActionBarActivity {
 
 
         txtVerbo.setText("");
-    }
-
-    //Metodo utilizado para guardar la puntuacion en un fichero local
-    private void salvar_puntuacion_local(){
-
-
-        String fichero= "puntuaciones.csv";
-
-        try {
-
-            //Apertura del fichero.
-            /* ######################## COMO BORRAR EL FICHERO DE PUNTUACIONES:
-
-                        this.flujo_fichero = openFileOutput(fichero, MODE_PRIVATE);
-            flujo_fichero.close();
-             */
-
-
-            this.flujo_fichero = openFileOutput(fichero, MODE_APPEND);
-            String prueba = "ESTO_ES_UNA_PRUEBA\n";
-            flujo_fichero.write(prueba.getBytes());
-            flujo_fichero.close();
-
-            inputStream = openFileInput(fichero);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            while(true) {
-
-                String line;
-                System.out.println("Lectura");
-                line = reader.readLine();
-                if (line == null) break;
-                String[] RowData = line.split(",");
-                System.out.println(RowData[0]);
-
-            }
-            inputStream.close();
-
-
-
-        }
-        catch (IOException ioe){
-            ioe.printStackTrace();
-            System.out.println("ERROR: No ha sido posible abrir el fichero de puntuaciones");
-        }
     }
 
     @Override
