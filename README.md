@@ -7,4 +7,4 @@ First app for **Programación de Dispositivos Móviles**.
 
 Schematic designe:
 
-![](IVChecker_designe.png)
+![](https://drive.google.com/drive/#folders/0B-HUO9mYFrFCfndiZnhGcU5BNmMzMFp4WTFoSXM3bHFteTZrQlk3a1laMzBOUkZhRzFZbWM)
