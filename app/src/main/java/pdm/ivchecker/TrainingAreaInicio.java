@@ -1,5 +1,6 @@
 package pdm.ivchecker;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,13 +28,25 @@ public class TrainingAreaInicio extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        Intent intent;
+        switch(item.getItemId()){
+            //Usamos los identificadores de menu_training_area_inicio.xml (@+id) para definirles una acción.
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            //Para ir a la configuracion
+            case R.id.Menu_Tr_Opc1:
+                intent  = new Intent(TrainingAreaInicio.this, Configuracion.class);
+                //Iniciamos la nueva actividad
+                startActivity(intent);
+                return true;
+
+            //Para ir a las estadisticas
+            case R.id.Menu_Tr_Opc2:
+                intent = new Intent(TrainingAreaInicio.this, Resultados.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }
