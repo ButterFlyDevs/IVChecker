@@ -17,5 +17,6 @@
     <string name="title_activity_training_area_inicio">TrainingAreaInicio</string>
     <string name="title_activity_juego_training">JuegoTraining</string>
     <string name="title_activity_configuracion">Configuracion</string>
+    <string name="title_activity_wcr">wcr</string>
 
 </resources>

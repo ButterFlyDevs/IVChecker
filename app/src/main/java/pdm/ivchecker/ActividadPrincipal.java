@@ -59,18 +59,30 @@ public class ActividadPrincipal extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             //Usamos los identificadores de menu_actividad_principal.xml (@+id) para definirles una acción.
-            case R.id.MnuOpc1:
-                Intent intent = new Intent(ActividadPrincipal.this, ListaVerbos.class);
+
+            case R.id.TrainingArea:
+                intent = new Intent(ActividadPrincipal.this, TrainingAreaInicio.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.ShowVerbLists:
+                intent = new Intent(ActividadPrincipal.this, ListaVerbos.class);
                 //Iniciamos la nueva actividad
                 startActivity(intent);
                 return true;
 
+            case R.id.ShowWorldChallenge:
+                intent = new Intent(ActividadPrincipal.this, wcr.class);
+                startActivity(intent);
+                return true;
+
             //Para ir al la actividad About
-            case R.id.MnuOpc4:
-                Intent intent2 = new Intent(ActividadPrincipal.this, About.class);
-                startActivity(intent2);
+            case R.id.About:
+                intent = new Intent(ActividadPrincipal.this, About.class);
+                startActivity(intent);
                 return true;
 
             default:

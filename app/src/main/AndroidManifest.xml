@@ -44,6 +44,10 @@
             android:name=".Configuracion"
             android:label="@string/title_activity_configuracion" >
         </activity>
+        <activity
+            android:name=".wcr"
+            android:label="@string/title_activity_wcr" >
+        </activity>
     </application>
 
 </manifest>

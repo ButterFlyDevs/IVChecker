@@ -83,7 +83,7 @@ public class Juego extends ActionBarActivity {
 
 
         //Abrimos el flujo del fichero almacenado en la carpeta denro de res llamada raw con el nombre iv
-        inputStream=getResources().openRawResource(R.raw.iv);
+        inputStream=getResources().openRawResource(R.raw.ivsoft);
 
         //Abrimos el flujo con un buffer.
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));

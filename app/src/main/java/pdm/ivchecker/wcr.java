@@ -1,31 +1,51 @@
 package pdm.ivchecker;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.TextView;
+
+import java.util.List;
+
+import pdm.red.ConexionServidor;
 
 
-public class TrainingAreaInicio extends ActionBarActivity {
+public class wcr extends ActionBarActivity {
+
+    private TextView rankingUsuarios;
+    private ConexionServidor miConexion = new ConexionServidor();
+    private  List<String> ranking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_training_area_inicio);
-
+        setContentView(R.layout.activity_wcr);
         //Con esta orden conseguimos hacer que no se muestre la ActionBar.
         getSupportActionBar().hide();
         //Con esta hacemos que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+        rankingUsuarios=(TextView)findViewById(R.id.rankingUsuarios);
+
+        ranking=miConexion.pedirRanking();
+
+
+        rankingUsuarios.append("Ranking!");
+        for (String dato : ranking) {
+            rankingUsuarios.append(dato);
+        }
+
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_training_area_inicio, menu);
+        getMenuInflater().inflate(R.menu.menu_wcr, menu);
         return true;
     }
 
@@ -34,25 +54,13 @@ public class TrainingAreaInicio extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        Intent intent;
-        switch(item.getItemId()){
-            //Usamos los identificadores de menu_training_area_inicio.xml (@+id) para definirles una acción.
+        int id = item.getItemId();
 
-            //Para ir a la configuracion
-            case R.id.Menu_Tr_Opc1:
-                intent  = new Intent(TrainingAreaInicio.this, Configuracion.class);
-                //Iniciamos la nueva actividad
-                startActivity(intent);
-                return true;
-
-            //Para ir a las estadisticas
-            case R.id.Menu_Tr_Opc2:
-                intent = new Intent(TrainingAreaInicio.this, Resultados.class);
-                startActivity(intent);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -35,8 +35,19 @@ public class ListaVerbos extends ActionBarActivity {
     private void mostrarVerbos(String lista){
 
 
-        //Abrimos el flujo del fichero almacenado en la carpeta denro de res llamada raw con el nombre iv
-        inputStream=getResources().openRawResource(R.raw.iv);
+        //Dependiendo de la elección se abre un fichero u otro:
+        if(lista.equals("soft")) {
+            //Abrimos el flujo del fichero almacenado en la carpeta denro de res llamada raw con el nombre ivsoft
+            inputStream = getResources().openRawResource(R.raw.ivsoft);
+        }
+        if(lista.equals("medium")){
+            inputStream=getResources().openRawResource(R.raw.ivmedium);
+        }
+        if(lista.equals("hard")){
+            inputStream=getResources().openRawResource(R.raw.ivhard);
+        }
+
+
         //Abrimos el flujo con un buffer.
         reader = new BufferedReader(new InputStreamReader(inputStream));
         //Asociamos el textView del diseño con la variable aquí:
@@ -59,6 +70,7 @@ public class ListaVerbos extends ActionBarActivity {
                 infinitivo = RowData[0];
                 pasado = RowData[1];
                 participio = RowData[2];
+                //System.out.println(numero+"  "+infinitivo+" | "+pasado+" | "+participio+"\n");
                 txtVerbos.append(numero+"  "+infinitivo+" | "+pasado+" | "+participio+"\n");
                 numero++;
             }

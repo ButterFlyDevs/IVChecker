@@ -1,4 +1,4 @@
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/LytContenedor"
     android:background="@drawable/uk"
     android:layout_width="match_parent"
@@ -9,8 +9,22 @@
         android:layout_width="160dp"
         android:layout_height="75dp"
         android:background="@drawable/play"
-        android:layout_x="123dp"
-        android:layout_y="268dp" />
+        android:layout_x="122dp"
+        android:layout_y="268dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="364dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageView"
+        android:layout_x="30dp"
+        android:layout_y="121dp"
+        android:src="@drawable/ivchecker"
+        android:layout_above="@+id/BtnJugar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="62dp" />
 
 
-</AbsoluteLayout>
+</RelativeLayout>
