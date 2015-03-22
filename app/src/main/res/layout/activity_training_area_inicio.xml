@@ -18,7 +18,7 @@
         android:id="@+id/imageView2"
         android:layout_x="2dp"
         android:layout_y="157dp"
-        android:src="@drawable/trainingArea" />
+        android:src="@drawable/trainingarea" />
 
 
 </AbsoluteLayout>

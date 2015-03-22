@@ -32,10 +32,13 @@ public class wcr extends ActionBarActivity {
 
         ranking=miConexion.pedirRanking();
 
-
-        rankingUsuarios.append("Ranking!");
+        int n=1;
+        rankingUsuarios.append("\n\n\n\n\n");
         for (String dato : ranking) {
-            rankingUsuarios.append(dato);
+            rankingUsuarios.append("\n\t\t");
+            if(!dato.equals(""))
+                rankingUsuarios.append(n+" "+dato);
+            n++;
         }
 
 

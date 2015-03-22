@@ -59,7 +59,10 @@ public class ConexionServidor {
         String respuesta="";
 
         try {
-            Socket sk = new Socket("130.206.82.231", 1234);
+            //Conexion al servidor
+            Socket sk = new Socket(host, puerto);
+
+
             BufferedReader entrada =   new BufferedReader(new InputStreamReader(sk.getInputStream()));
             PrintWriter salida = new PrintWriter(new OutputStreamWriter(sk.getOutputStream()),true);
 
@@ -83,7 +86,7 @@ public class ConexionServidor {
 
         } catch (Exception e) {
             //Si la conexión falla se muestra este mensaje
-            System.out.println("Fail");
+            System.out.println("Fallo en la conexión al servidor: Fail"+e);
         }
 
               /*

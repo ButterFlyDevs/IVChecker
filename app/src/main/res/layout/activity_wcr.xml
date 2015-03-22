@@ -1,13 +1,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:background="@drawable/wcr_background"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context="pdm.ivchecker.wcr">
 
+
+
+
     <TextView android:id="@+id/rankingUsuarios"
         android:text=""
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+    />
+
+    <ImageView
+        android:layout_width="364dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageView"
+        android:layout_x="30dp"
+        android:layout_y="121dp"
+        android:src="@drawable/wcr"
+        android:layout_above="@+id/rankingUsuarios"
+        android:layout_marginBottom="62dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
