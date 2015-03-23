@@ -52,6 +52,11 @@ public class Configuracion extends ActionBarActivity {
                 intent.putExtra("nivel",nivel);
                 intent.putExtra("numero_verbos",numero_verbos);
                 setResult(RESULT_OK,intent);
+                /*
+                    Si quisieramos cancelar los datos y ponerlos a valores por defecto (programar otro boton Cancelar):
+                    Intent returnIntent = new Intent();
+                    setResult(RESULT_CANCELED, returnIntent);
+                 */
                 //Acabamos esta actividad
                 finish();
             }

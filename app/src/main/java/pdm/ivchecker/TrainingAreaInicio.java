@@ -105,9 +105,15 @@ public class TrainingAreaInicio extends ActionBarActivity {
             //Comprobar que la petición fue correcta
             if(codigo_resultado == RESULT_OK){
                 //DATOS CORRECTOS! Se cambian las variables de esta Actividad a las descritas por el usuario en la configuracion
+                this.nivel = datos.getIntExtra("nivel",0);
+                this.lista_a_preguntar = datos.getIntExtra("lista",0);
+                this.numero_verbos = datos.getIntExtra("numero_verbos",0);
             }
             if(codigo_resultado == RESULT_CANCELED){
                 //DATOS INCORRECTOS! Las variables vuelven a sus valores por defecto (0)
+                this.nivel=0;
+                this.lista_a_preguntar=0;
+                this.numero_verbos=0;
             }
         }
     }
