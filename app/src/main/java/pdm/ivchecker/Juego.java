@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -35,6 +36,7 @@ public class Juego extends ActionBarActivity {
 
     private int numVerbo, numForma, numLetrasForma;
     private String misterio="";
+    private FileOutputStream flujo_fichero;
 
     @Override
     //Método llamada cuando se crea por primera vez la actividad
@@ -114,6 +116,45 @@ public class Juego extends ActionBarActivity {
 
     }
 
+    //Metodo utilizado para guardar la puntuacion en un fichero local
+    private void salvar_puntuacion_local(){
+
+        String fichero= "puntuaciones.csv";
+
+            try {
+
+                     //Apertura del fichero.
+                             /* ######################## COMO BORRAR EL FICHERO DE PUNTUACIONES:
+
+                            + this.flujo_fichero = openFileOutput(fichero, MODE_PRIVATE);
+                            + flujo_fichero.close();
+                            + */
+
+
+                this.flujo_fichero = openFileOutput(fichero, MODE_APPEND);
+                String prueba = "ESTO_ES_UNA_PRUEBA\n";
+                flujo_fichero.write(prueba.getBytes());
+                flujo_fichero.close();
+
+                inputStream = openFileInput(fichero);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                while(true) {
+
+                    String line;
+                    System.out.println("Lectura");
+                    line = reader.readLine();
+                    if (line == null) break;
+                    String[] RowData = line.split(",");
+                    System.out.println(RowData[0]);
+
+                }
+                inputStream.close();
+            }
+         catch (IOException ioe){
+             ioe.printStackTrace();
+             System.out.println("ERROR: No ha sido posible abrir el fichero de puntuaciones");
+             }
+         }
     public void jugar(){
         //Sección de la lógica del juego
 
