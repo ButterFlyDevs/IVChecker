@@ -240,7 +240,7 @@ public class JuegoTraining extends ActionBarActivity {
     public void acabarPartida(){
         //Creamos el intent:
 
-        Intent intent = new Intent(Juego.this, Resultados.class);
+        Intent intent = new Intent(JuegoTraining.this, Resultados.class);
 
         //Creamos la información a pasar entre actividades:
         Bundle b = new Bundle();
