@@ -5,67 +5,62 @@
     android:orientation="vertical"
     android:weightSum="1">
 
+    <RadioGroup
+        android:id="@+id/tipoLista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/radioSoft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Soft List"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/radioMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium List" />
+
+        <RadioButton
+            android:id="@+id/radioHard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hard List" />
+
+    </RadioGroup>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set Level"
-        android:id="@+id/textView"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
-        android:textSize="30px"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Level"
+        android:id="@+id/textLevel" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="345dp"
-        android:layout_height="wrap_content">
+    <Spinner
+        android:layout_width="119dp"
+        android:layout_height="47dp"
+        android:id="@+id/spinnerNivel" />
 
-        <ToggleButton
-            android:layout_width="60dp"
-            android:layout_height="35dp"
-            android:text="1"
-            android:id="@+id/toggleButton"
-            android:checked="false" />
-
-        <ToggleButton
-            android:layout_width="60dp"
-            android:layout_height="35dp"
-            android:text="New ToggleButton"
-            android:id="@+id/toggleButton2" />
-
-        <ToggleButton
-            android:layout_width="60dp"
-            android:layout_height="35dp"
-            android:text="New ToggleButton"
-            android:id="@+id/toggleButton3" />
-
-        <ToggleButton
-            android:layout_width="60dp"
-            android:layout_height="35dp"
-            android:text="New ToggleButton"
-            android:id="@+id/toggleButton4" />
-
-        <ToggleButton
-            android:layout_width="60dp"
-            android:layout_height="35dp"
-            android:text="New ToggleButton"
-            android:id="@+id/toggleButton5" />
-    </LinearLayout>
-
-    <CheckBox
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New CheckBox"
-        android:id="@+id/checkBox" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Number of verbs to ask"
+        android:id="@+id/textoVerbos" />
 
-    <RadioButton
+    <Spinner
+        android:layout_width="119dp"
+        android:layout_height="47dp"
+        android:id="@+id/spinnerVerbos" />
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New RadioButton"
-        android:id="@+id/radioButton" />
+        android:text="OK"
+        android:id="@+id/botonConfirmarCconfiguracion" />
+
+
 
 </LinearLayout>

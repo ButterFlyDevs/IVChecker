@@ -3,18 +3,11 @@ package pdm.ivchecker;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.InputType;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -162,6 +155,7 @@ public class Juego extends ActionBarActivity {
 
         //Cargamos los verbos en una matriz para manejarlos mejor durante el juego.
         try {
+            String line;
             int fila=0;
             while(true){
                 line=reader.readLine();
@@ -183,6 +177,45 @@ public class Juego extends ActionBarActivity {
 
     }
 
+    //Metodo utilizado para guardar la puntuacion en un fichero local
+    private void salvar_puntuacion_local(){
+
+        String fichero= "puntuaciones.csv";
+
+            try {
+
+                     //Apertura del fichero.
+                             /* ######################## COMO BORRAR EL FICHERO DE PUNTUACIONES:
+
+                            + this.flujo_fichero = openFileOutput(fichero, MODE_PRIVATE);
+                            + flujo_fichero.close();
+                            + */
+
+
+                this.flujo_fichero = openFileOutput(fichero, MODE_APPEND);
+                String prueba = "ESTO_ES_UNA_PRUEBA\n";
+                flujo_fichero.write(prueba.getBytes());
+                flujo_fichero.close();
+
+                inputStream = openFileInput(fichero);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                while(true) {
+
+                    String line;
+                    System.out.println("Lectura");
+                    line = reader.readLine();
+                    if (line == null) break;
+                    String[] RowData = line.split(",");
+                    System.out.println(RowData[0]);
+
+                }
+                inputStream.close();
+            }
+         catch (IOException ioe){
+             ioe.printStackTrace();
+             System.out.println("ERROR: No ha sido posible abrir el fichero de puntuaciones");
+             }
+         }
 
 
 
