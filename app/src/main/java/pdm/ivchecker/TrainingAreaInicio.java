@@ -36,11 +36,11 @@ public class TrainingAreaInicio extends ActionBarActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Obtenemos una referencia a los controles de la interfaz.
-       // boton_empezar=(Button)findViewById(R.id.BtnJugar);
+        boton_empezar=(Button)findViewById(R.id.botonGO);
 
 
         //Implementamos el evento click del botón boton_empezar:
-/*        boton_empezar.setOnClickListener(
+        boton_empezar.setOnClickListener(
 
                 new View.OnClickListener() {
                     @Override
@@ -48,10 +48,13 @@ public class TrainingAreaInicio extends ActionBarActivity {
                         //Creamos el Intent
                         Intent intent = new Intent(TrainingAreaInicio.this, JuegoTraining.class);
                         //Iniciamos la nueva actividad
+                        intent.putExtra("lista",lista_a_preguntar);
+                        intent.putExtra("nivel",nivel);
+                        intent.putExtra("numero_verbos",numero_verbos);
                         startActivity(intent);
                     }
                 }
-        );*/
+        );
     }
 
 

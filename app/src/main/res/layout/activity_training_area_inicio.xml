@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Button android:id="@+id/BtnGo"
+    <Button android:id="@+id/botonGO"
         android:layout_width="160dp"
         android:layout_height="75dp"
         android:background="@drawable/go"

@@ -34,7 +34,7 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/participio"
+        android:id="@+id/participioTraining"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20px"
@@ -42,12 +42,12 @@
         android:layout_x="66dp"
         android:layout_y="97dp"
         android:layout_marginTop="26dp"
-        android:layout_below="@+id/infinitivo"
-        android:layout_alignRight="@+id/infinitivo"
-        android:layout_alignEnd="@+id/infinitivo" />
+        android:layout_below="@+id/infinitivoTraining"
+        android:layout_alignRight="@+id/infinitivoTraining"
+        android:layout_alignEnd="@+id/infinitivoTraining" />
 
     <EditText
-        android:id="@+id/formaMisteriosa"
+        android:id="@+id/formaMisteriosaTraining"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:inputType="text"
@@ -58,7 +58,7 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        android:id="@+id/nextButton"
+        android:id="@+id/nextButtonTraining"
         android:text="Next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
