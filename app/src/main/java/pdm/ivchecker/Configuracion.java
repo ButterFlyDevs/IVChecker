@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
@@ -20,6 +21,7 @@ public class Configuracion extends ActionBarActivity {
     private Spinner spinner_nivel, spinner_num_verbos;
     private Button botonOK;
     private RadioGroup tipoLista;
+    private RadioButton boton_soft, boton_medium, boton_hard;
 
     private int nivel=0, lista_a_preguntar=0,numero_verbos=0;
 
@@ -30,6 +32,9 @@ public class Configuracion extends ActionBarActivity {
 
         botonOK = (Button) findViewById(R.id.botonConfirmarCconfiguracion);
         tipoLista = (RadioGroup) findViewById(R.id.tipoLista);
+        boton_soft = (RadioButton) findViewById(R.id.radioSoft);
+        boton_medium = (RadioButton) findViewById(R.id.radioMedium);
+        boton_hard = (RadioButton) findViewById(R.id.radioHard);
 
         //Rellenamos los spinner
         rellenar_spinner_NumVerbos();
@@ -40,8 +45,14 @@ public class Configuracion extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                //Comprobamos la lista pedida (sumamos 1 por que 0 significa aleatorio, y el radioGroup devuelve los indices de 0 a 3)
-                lista_a_preguntar = tipoLista.getCheckedRadioButtonId() +1;
+                //Comprobamos la lista pedida comparando con cada uno de los botones
+                int ID_lista = tipoLista.getCheckedRadioButtonId();
+                if(ID_lista == boton_soft.getId())
+                    lista_a_preguntar = 1;
+                if(ID_lista == boton_medium.getId())
+                    lista_a_preguntar = 2;
+                if(ID_lista == boton_hard.getId())
+                    lista_a_preguntar = 3;
                 //Comprobamos el nivel (sumamos 1 por que la lista va del nivel 1 al 15, pero sus indices son del 0 al 14, además de que 0 significa aleatorio)
                 nivel = Integer.parseInt( String.valueOf (spinner_nivel.getSelectedItem() ) );
                 //Comprobamos el numero de verbos
@@ -90,7 +101,7 @@ public class Configuracion extends ActionBarActivity {
 
     private void rellenar_spinner_Nivel() {
 
-        spinner_nivel= (Spinner) findViewById(R.id.spinnerVerbos);
+        spinner_nivel= (Spinner) findViewById(R.id.spinnerNivel);
         List<String> list = new ArrayList<String>();
         list.add("1");
         list.add("2");

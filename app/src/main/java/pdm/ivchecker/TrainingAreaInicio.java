@@ -36,11 +36,11 @@ public class TrainingAreaInicio extends ActionBarActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Obtenemos una referencia a los controles de la interfaz.
-        boton_empezar=(Button)findViewById(R.id.BtnJugar);
+       // boton_empezar=(Button)findViewById(R.id.BtnJugar);
 
 
         //Implementamos el evento click del botón boton_empezar:
-        boton_empezar.setOnClickListener(
+/*        boton_empezar.setOnClickListener(
 
                 new View.OnClickListener() {
                     @Override
@@ -51,7 +51,7 @@ public class TrainingAreaInicio extends ActionBarActivity {
                         startActivity(intent);
                     }
                 }
-        );
+        );*/
     }
 
 
@@ -105,9 +105,15 @@ public class TrainingAreaInicio extends ActionBarActivity {
             //Comprobar que la petición fue correcta
             if(codigo_resultado == RESULT_OK){
                 //DATOS CORRECTOS! Se cambian las variables de esta Actividad a las descritas por el usuario en la configuracion
+                System.out.println("Nivel: "+nivel);
+                System.out.println("Lista verbos: "+lista_a_preguntar);
+                System.out.println("Numero verbos: "+numero_verbos);
                 this.nivel = datos.getIntExtra("nivel",0);
                 this.lista_a_preguntar = datos.getIntExtra("lista",0);
                 this.numero_verbos = datos.getIntExtra("numero_verbos",0);
+                System.out.println("Nivel: "+nivel);
+                System.out.println("Lista verbos: "+lista_a_preguntar);
+                System.out.println("Numero verbos: "+numero_verbos);
             }
             if(codigo_resultado == RESULT_CANCELED){
                 //DATOS INCORRECTOS! Las variables vuelven a sus valores por defecto (0)
