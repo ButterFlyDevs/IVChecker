@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pdm.ivchecker" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -18,9 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-         <uses-permission android:name="android.permission.INTERNET"/>
-
-
+            <uses-permission android:name="android.permission.INTERNET" />
         </activity>
         <activity
             android:name=".ListaVerbos"
@@ -53,6 +51,10 @@
         <activity
             android:name=".wcr"
             android:label="@string/title_activity_wcr" >
+        </activity>
+        <activity
+            android:name=".juego_show_level"
+            android:label="@string/title_activity_juego_show_level" >
         </activity>
     </application>
 

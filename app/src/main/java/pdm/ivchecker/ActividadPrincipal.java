@@ -36,7 +36,7 @@ public class ActividadPrincipal extends ActionBarActivity {
                     @Override
                     public void onClick(View v) {
                         //Creamos el Intent
-                        Intent intent = new Intent(ActividadPrincipal.this, Juego.class);
+                        Intent intent = new Intent(ActividadPrincipal.this, juego_show_level.class);
                         //Iniciamos la nueva actividad
                         startActivity(intent);
                     }
