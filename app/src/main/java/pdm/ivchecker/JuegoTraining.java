@@ -26,18 +26,25 @@ public class JuegoTraining extends ActionBarActivity {
     //Flujo de entrada para la lectura de fichero CSV:
     private InputStream inputStream;
 
+    //Lista de indices de los verbos fallados
+    ArrayList<Integer> verbos_fallados = null;
+
     //Botón de siguiente verbo
     private Button btnNext;
     private EditText txtVerbo;
+
     private TextView infinitivo, pasado, participio;
 
-    private int puntuacionJugada;
+    private int puntuacionJugada=0, verbos_acertados=0;
     private int numPartida=0;
 
-    private int numVerbo, numForma, numLetrasForma;
+    private int numVerbo, numForma, numLetrasForma, total_verbos_lista;
     private String misterio="";
     private FileOutputStream flujo_fichero;
 
+
+    //Variable Intent con los datos que TrainingAreaInicio ha pasado
+    Intent intent;
     //Variables de control del entrenamiento
     private int nivel=0, lista_a_preguntar=0,numero_verbos=0;
 
@@ -45,13 +52,10 @@ public class JuegoTraining extends ActionBarActivity {
     //Método llamada cuando se crea por primera vez la actividad
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_juego);
+        setContentView(R.layout.activity_juego_training);
 
         //Primero, obtenemos el intent con los datos importantes, y configuramos el juego
-        Intent intent = getIntent();
-        this.nivel=intent.getIntExtra("nivel",0);
-        this.lista_a_preguntar = intent.getIntExtra("lista",0);
-        this.numero_verbos = intent.getIntExtra("numero_verbos",0);
+        intent = getIntent();
 
         //Obtenemos la referencia a ese botón de la vista
         btnNext=(Button)findViewById(R.id.nextButtonTraining);
@@ -81,19 +85,35 @@ public class JuegoTraining extends ActionBarActivity {
                 }
         );
 
-        leerVerbos();
 
+        prepararJuego();
+        leerVerbos();
+        jugar();
 
 
     }
 
-    private void leerVerbos(){
+    /*
+    Funcion que prepara las variables configuradas por el usuario en el menú de Configuración del
+    Activity anterior (TrainingAreaInicio). Recordamos que el valor 0 es aleatorio.
+     */
+    private void prepararJuego(){
+        Random rnd = new Random();
+        //Obtencion de valores
+        this.nivel=intent.getIntExtra("nivel",0);
+        this.lista_a_preguntar = intent.getIntExtra("lista",0);
+        this.numero_verbos = intent.getIntExtra("numero_verbos",0);
 
-        //Seleccionamos la lista a preguntar
-        if(lista_a_preguntar ==0){
-            Random rnd = new Random();
-            lista_a_preguntar=(int)(rnd.nextDouble() % 3) +1;
-        }
+        //Si los valores son 0, generamos los aleatorios:
+        if(nivel ==0)
+            nivel = rnd.nextInt(16);    //Genera unn numero entre 0 (inbluido) y 15 (16 excluido)
+        if(lista_a_preguntar==0)
+            lista_a_preguntar = rnd.nextInt(3) +1;
+        if(numero_verbos==0)
+            numero_verbos = 10 + rnd.nextInt(31); //Genera un numero entre 10 y 40.
+
+    }
+    private void leerVerbos(){
 
         switch(lista_a_preguntar){
             case 1: //Lista soft
@@ -110,31 +130,25 @@ public class JuegoTraining extends ActionBarActivity {
         //Abrimos el flujo con un buffer.
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-
         try {
             //Leemos la primera linea del CSV para crear la matriz de verbos
             String line;
             line = reader.readLine();
             //Creamos la matriz de verbos
-            verbos = new String [Integer.parseInt(line)][3];
+            total_verbos_lista = Integer.parseInt(line);
+            verbos = new String [total_verbos_lista][3];
             //Leemos los verbos
-            int fila=0;
-            while(true){
+            for(int i=0;i<total_verbos_lista;i++){
                 line=reader.readLine();
-                if (line == null) break;
                 String[] RowData = line.split(",");
-                verbos[fila][0] = RowData[0];
-                verbos[fila][1] = RowData[1];
-                verbos[fila][2] = RowData[2];
-                fila++;
+                verbos[i][0] = RowData[0];
+                verbos[i][1] = RowData[1];
+                verbos[i][2] = RowData[2];
             }
             inputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //Después de cargar los datos comienza el juego:
-        this.jugar();
     }
 
     //Metodo utilizado para guardar la puntuacion en un fichero local
@@ -143,56 +157,39 @@ public class JuegoTraining extends ActionBarActivity {
         String fichero= "puntuaciones.csv";
 
         try {
-
-            //Apertura del fichero.
-                             /* ######################## COMO BORRAR EL FICHERO DE PUNTUACIONES:
-
-                            + this.flujo_fichero = openFileOutput(fichero, MODE_PRIVATE);
-                            + flujo_fichero.close();
-                            + */
-
-
+            //Abrimos el fichero
             this.flujo_fichero = openFileOutput(fichero, MODE_APPEND);
-            String prueba = "ESTO_ES_UNA_PRUEBA\n";
-            flujo_fichero.write(prueba.getBytes());
-            flujo_fichero.close();
-
-            inputStream = openFileInput(fichero);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            while(true) {
-
-                String line;
-                System.out.println("Lectura");
-                line = reader.readLine();
-                if (line == null) break;
-                String[] RowData = line.split(",");
-                System.out.println(RowData[0]);
-
+            /*
+            Formato de la linea a guardar:
+            Puntuacion, Lista preguntada, Nivel,{Lista de verbos fallados}
+             */
+            String linea;
+            linea = String.valueOf(this.puntuacionJugada)+","+String.valueOf(this.lista_a_preguntar)+","String.valueOf(this.nivel);
+            if(this.verbos_fallados!=null){
+                for(int i=0; i<verbos_fallados.size();i++)
+                    linea = linea+","+verbos_fallados.get(i);
             }
-            inputStream.close();
+
+            flujo_fichero.write(linea.getBytes());
+            flujo_fichero.close();
         }
         catch (IOException ioe){
             ioe.printStackTrace();
-            System.out.println("ERROR: No ha sido posible abrir el fichero de puntuaciones");
+            System.out.println("ERROR: No ha sido posible escribir en el fichero de puntuaciones");
         }
     }
     public void jugar(){
-        //Sección de la lógica del juego
-
-        //Asociamos los objetos de la lógica a los de la vista.
-
 
         //Para la generación de números:
         Random rnd = new Random();
 
-
-        //Generamos el verbo a mostrar:
-        numVerbo=(int)(rnd.nextDouble() * 16 + 0);
+        //Generamos el verbo a mostrar (en función del tamaño de lista)
+        numVerbo = rnd.nextInt(this.total_verbos_lista);    //Genera un aleatorio desde 0 hasta el máximo de verbos almacenados
 
         System.out.println("Verbo elegido: "+numVerbo);
 
         //Generamos la forma que no aparecerá
-        numForma=(int)(rnd.nextDouble() * 3 + 0);
+        numForma= rnd.nextInt(3);
 
         System.out.println("Forma elegida: "+numForma);
 
@@ -225,12 +222,26 @@ public class JuegoTraining extends ActionBarActivity {
 
     }
 
+    /*
+    Funcion de comprobar verbo introducido.
+    En esta variante de Training, la App debe guardar los verbos en los que se falla
+     */
     public void comprobarVerbo(){
         System.out.println("Texto introducido: "+txtVerbo.getText());
         System.out.println("Verbo a comparar: "+verbos[numVerbo][numForma]);
 
         if(txtVerbo.getText().toString().equals(verbos[numVerbo][numForma])){
-            puntuacionJugada++;
+            //Usuario ha acertado
+            puntuacionJugada = puntuacionJugada + lista_a_preguntar;
+            this.verbos_acertados++;
+        }
+        else{
+            //Usuario ha fallado
+            if(this.verbos_fallados==null)  //Si es el primer fallo, creamos la lista
+                this.verbos_fallados = new ArrayList();
+
+            //Añadimos el indice del verbo fallado
+            this.verbos_fallados.add(this.numVerbo);
         }
 
 
@@ -238,13 +249,18 @@ public class JuegoTraining extends ActionBarActivity {
     }
 
     public void acabarPartida(){
-        //Creamos el intent:
+        //Partida acabada. Salvamos la puntuación del jugador.
+        this.salvar_puntuacion_local();
 
+        //Creamos el intent:
         Intent intent = new Intent(JuegoTraining.this, Resultados.class);
 
-        //Creamos la información a pasar entre actividades:
+        //Creamos la información a pasar entre actividades: puntuación obtenida, numero verbos_preguntados y acertados.
         Bundle b = new Bundle();
         b.putString("PUNTOS", String.valueOf(puntuacionJugada));
+        b.putString("NUMERO_VERBOS_PREGUNTADOS",String.valueOf(this.numero_verbos));
+        b.putString("NUMERO_VERBOS_ACERTADOS", String.valueOf(this.verbos_acertados));
+
 
         //Añadimos la información al intent:
         intent.putExtras(b);
