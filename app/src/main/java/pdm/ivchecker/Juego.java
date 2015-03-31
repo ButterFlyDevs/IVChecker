@@ -30,24 +30,40 @@ public class Juego extends ActionBarActivity {
     //Flujo de entrada para la lectura de fichero CSV:
     private InputStream inputStream;
 
-    //Botón de siguiente verbo
+    //Elementos de la vista:
     private Button btnNext;
     private EditText txtVerbo;
     private TextView infinitivo, pasado, participio, puntos;
 
     private ImageView vida1, vida2, vida3, vida4;
 
-    private int puntuacionJugada=0;
+    private int puntuacionJugada;
 
-    private int puntuacionPartida=0;
+    private int puntuacionPartida;
 
     //Número de vidas
-    private int nVidas=4;
+    private int nVidas;
 
-    private int numPartida=0, numPartidas=5;
+    private int numPartida, numPartidas;
 
     private int numVerbo, numForma, numLetrasForma;
-    private String misterio="";
+    private String misterio;
+
+    int numVerbosLista;
+
+    private Random rnd;
+
+    //Constructor:
+    public Juego(){
+        numVerbosLista=0;
+        misterio="";
+        puntuacionJugada=puntuacionPartida=numPartida=0;
+        numPartidas=5;
+        nVidas=4;
+        //Inicializamos  el objeto de tipo Random().
+        rnd = new Random();
+    }
+
 
     @Override
     //Método llamada cuando se crea por primera vez la actividad
@@ -121,7 +137,19 @@ public class Juego extends ActionBarActivity {
                     public void onClick(View v) {
 
                         comprobarVerbo();
+                        //Aumentamos el número de la partida. ( el número de verbos)
                         numPartida++;
+
+
+                        /*
+                        Hay que cambiar el flujo de ejecución...
+                        La implementación del botón no debería ser la que controlase el fin de la partida
+                        sino la lógica del juego.
+                        EL botón solo debe de llamar a jugar y que sea en jugar donde se desarrolle
+                        la lógica del juego.
+                         */
+
+
                         //Si se han completado todos los verbos vamos a otra activity.
                         if (numPartida == numPartidas) {
                             //Creamos el intent:
@@ -137,16 +165,16 @@ public class Juego extends ActionBarActivity {
                             //Nos vamos al activity resultados:
                             startActivity(intent);
                         }
-                        //Si no se han completado jugamos!
+                        //Si no se han completado seguimos jugando!
                         jugar();
 
 
                     }
                 }
-        );
+        ); //Fin del manejador del botón next.
 
 
-        //Abrimos el flujo del fichero almacenado en la carpeta denro de res llamada raw con el nombre iv
+        //Abrimos el flujo del fichero almacenado en la carpeta dentro de res llamada raw con el nombre iv
         inputStream=getResources().openRawResource(R.raw.ivsoft);
 
         //Abrimos el flujo con un buffer.
@@ -156,13 +184,25 @@ public class Juego extends ActionBarActivity {
 
 
 
-        verbos = new String [50][3];
+        try {
+            /*
+            Extraemos la primera linea del fichero que es la que indica el número de verbos que este
+            contiene y que nose será util para crear la matriz del tamaño exacto. Hacemos esto pensando
+            en el momento que se tenga que modifcar la lista sin tener que modificar ningún valor en
+            el programa. Es uso de try-catch es obligatorio.
+             */
+            line=reader.readLine();
+            System.out.println("El fichero contiene " + line + " verbos.");
+            numVerbosLista=Integer.parseInt(line);
+        } catch (IOException e) {
+            //Para que no falle el programa si no se cargase el número lo ponemos nosotros.
+            numVerbosLista=50;
+            e.printStackTrace();
+        }
+        verbos = new String [numVerbosLista][3];
 
         //Cargamos los verbos en una matriz para manejarlos mejor durante el juego.
         try {
-            //Saltamos la primera linea
-            line=reader.readLine();
-            //String line;
             int fila=0;
             while(true){
                 line=reader.readLine();
@@ -225,19 +265,12 @@ public class Juego extends ActionBarActivity {
          }
 
 
-
+    // ## LÓGICA DEL JUEGO ## //
     public void jugar(){
-        //Sección de la lógica del juego
-
-        //Asociamos los objetos de la lógica a los de la vista.
-
-
-        //Para la generación de números:
-        Random rnd = new Random();
 
 
         //Generamos el verbo a mostrar:
-        numVerbo=(int)(rnd.nextDouble() * 50 + 0);
+        numVerbo=(int)(rnd.nextDouble() * numVerbosLista + 0);
 
         System.out.println("Verbo elegido: "+numVerbo);
 
