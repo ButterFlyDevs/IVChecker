@@ -164,7 +164,7 @@ public class JuegoTraining extends ActionBarActivity {
             Puntuacion, Lista preguntada, Nivel,{Lista de verbos fallados}
              */
             String linea;
-            linea = String.valueOf(this.puntuacionJugada)+","+String.valueOf(this.lista_a_preguntar)+","String.valueOf(this.nivel);
+            linea = String.valueOf(this.puntuacionJugada)+","+String.valueOf(this.lista_a_preguntar)+","+String.valueOf(this.nivel);
             if(this.verbos_fallados!=null){
                 for(int i=0; i<verbos_fallados.size();i++)
                     linea = linea+","+verbos_fallados.get(i);
