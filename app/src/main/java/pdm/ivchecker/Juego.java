@@ -1,6 +1,8 @@
 package pdm.ivchecker;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -57,17 +60,27 @@ public class Juego extends ActionBarActivity {
     private String formaMisteriosa; //Forma que el usuario debe introducir.
     private int nivel; //Nivel por el que el usuario va.
     private int jugadaEnNivel; //Jugada (de 10) por la que va dentro del nivel.
+    Intent intent;
 
 
     // Fin variables globales de partida.
 
+
+
+    SharedPreferences prefe;
+
     //Constructor:
     public Juego(){
+        System.out.println("Constructor de JUEGO");
         numVerbosListaSoft=numVerbosListaMedium=numVerbosListaHard=0;
         formaMisteriosa="";
         puntuacionPartida=0;
         nVidas=4;
         nivel=1;
+
+        int defecto=0;
+
+//        nivel=Integer.parseInt(getIntent().getStringExtra("nivel"));
         jugadaEnNivel=1;
         //Inicializamos  el objeto de tipo Random().
         rnd = new Random();
@@ -231,6 +244,10 @@ public class Juego extends ActionBarActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
+        intent = getIntent();
+        nivel=intent.getIntExtra("nivel",0);
+        System.out.println("Nivel recibido en Juego: "+nivel);
+
         /* ## Referencias a los elementos del layout (vista) ## */
 
         //Obtenemos la referencia al botón de la vista "Next"
@@ -248,7 +265,7 @@ public class Juego extends ActionBarActivity {
 
         //Al campo de los puntos
         puntos=(TextView)findViewById(R.id.viewPuntos);
-        puntos.setText(Integer.toString(0));
+       // puntos.setText(Integer.toString(0));
 
         //A las imágenes de las vidas:
         vida1=(ImageView)findViewById(R.id.vida1);
@@ -257,6 +274,17 @@ public class Juego extends ActionBarActivity {
         vida4=(ImageView)findViewById(R.id.vida4);
 
         /* Fin de las referencias*/
+
+
+
+        //Otro intento de creación de datos almacenados:
+        prefe=getSharedPreferences("datos", Context.MODE_PRIVATE);
+        System.out.println("REcibido del Prefe getInt: "+prefe.getInt("puntos",0));
+        //Almacenamos en la variable global el valor de la puntuación que teníamos:
+        puntuacionPartida=prefe.getInt("puntos",0);
+        //Insteramos esta puntuación en TextViewPuntos:
+        puntos.setText(Integer.toString(puntuacionPartida));
+
 
 
         // Para cerrar el teclado al pulsar intro
@@ -301,9 +329,21 @@ public class Juego extends ActionBarActivity {
                         /*
                         10 jugadas por nivel!
                          */
-                        if(jugadaEnNivel>10) { //Si hemos completado las diez jugadas por nivel pasamos de nivel.
+                        if(jugadaEnNivel>2) { //Si hemos completado las diez jugadas por nivel pasamos de nivel.
                             nivel++; //Pasamos de nivel
                             jugadaEnNivel=1; //Reiniciamos.
+                            //Nos vamos a la actividad que muestra el nivel:
+                            Intent intent = new Intent(Juego.this, juego_show_level.class);
+
+                            System.out.println("Vamos a show_level pasando nivel  "+nivel);
+                            //Vamos a la activity juego con el nivel 1
+                            intent.putExtra("nivel",nivel);
+
+                            //Antes de pasar de actividad guardamos los datos para volver luego
+                            SharedPreferences.Editor editor=prefe.edit();
+                            editor.putInt("puntos",puntuacionPartida);
+                            editor.commit();
+                            startActivity(intent);
                         }
 
 
@@ -348,6 +388,40 @@ public class Juego extends ActionBarActivity {
 
     }
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+
+        //Si pulsamos el botón back nos devuelve a la pantalla principal perdiendo todos los puntos.
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            System.out.println("pulsado boton back");
+            SharedPreferences.Editor editor=prefe.edit();
+            //Escribimos 0 en puntos
+            editor.putInt("puntos",0);
+            //Realizamos la escritura
+            editor.commit();
+            finish();
+
+
+            Intent intent = new Intent(Juego.this, ActividadPrincipal.class);
+            startActivity(intent);
+
+            return true;
+        }
+
+        /*
+        switch(keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                System.out.println("pulsado boton back");
+                Toast.makeText(this, "Abandonas cobarde",Toast.LENGTH_SHORT);
+                SharedPreferences.Editor editor=prefe.edit();
+                editor.putInt("puntos",0);
+                editor.commit();
+                return true;
+        }*/
+        return super.onKeyDown(keyCode, event);
+
+    }
 
 
 
@@ -649,6 +723,7 @@ public class Juego extends ActionBarActivity {
         if(nivel>=1 && nivel<=5) {
             if (txtVerbo.getText().toString().equals(verbosSoft[numVerbo][numFormaA])) {
                 puntuacionPartida++;
+
             } else {
                 //Pierde una vida: ohhh!!
                 perderVida();
