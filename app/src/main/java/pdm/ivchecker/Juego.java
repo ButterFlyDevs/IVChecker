@@ -1,5 +1,6 @@
 package pdm.ivchecker;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -344,6 +345,9 @@ public class Juego extends ActionBarActivity {
                 return false;
             }
         });
+
+
+
         // Para cerrar el teclado al pulsar intro
         campoVerboIntroducidoB.setOnKeyListener(new View.OnKeyListener() {
             /**
@@ -375,8 +379,9 @@ public class Juego extends ActionBarActivity {
                         //Comprobamos el verbo:
                         comprobarVerbo();
 
-                        //Limpiamos el contenido del editText:
+                        //Limpiamos el contenido de los editText aunque dependiendo del nivel no se verán los dos:
                         campoVerboIntroducidoA.setText("");
+                        campoVerboIntroducidoB.setText("");
 
                         //Aumentamos el número de la jugada en el nivel (10 verbos por nivel)
                         jugadaEnNivel++;
@@ -537,6 +542,19 @@ public class Juego extends ActionBarActivity {
         String verboInfinitivo="";
         String verboPasado="";
         String verboParticipio="";
+
+        /*
+        Para evitar que modificaciones del color de las cajas queden en posteriores jugadas resetamos las tres:
+         */
+        infinitivo.setBackgroundColor(Color.TRANSPARENT);
+        pasado.setBackgroundColor(Color.TRANSPARENT);
+        participio.setBackgroundColor(Color.TRANSPARENT);
+
+
+       // infinitivo.setLayoutParams(ActionBar.LayoutParams.MATCH_PARENT);
+
+
+
 
 
         System.out.println("### Creando jugada "+this.jugadaEnNivel+" en nivel "+nivel+" ###");
@@ -776,6 +794,47 @@ public class Juego extends ActionBarActivity {
 
             }else{
                 System.out.println("Resto de niveles");
+
+                /*
+                Si se trata del nivel 4 se marcar de colores los cuadros donde irán las formas y no se introduce nada:
+                 */
+                if(nivel==4 || nivel==9 || nivel==14){
+
+                    //Ponemos las tres formas en su orden:
+                    infinitivo.setText(verboInfinitivo);
+                    pasado.setText(verboPasado);
+                    participio.setText(verboParticipio);
+
+
+                    System.out.println("Configurando nivel 4, 9 o 14");
+
+                    //Pintamos de azul el verbo que corresponda la forma A
+                    if(numFormaA==0) {
+                        infinitivo.setBackgroundColor(Color.rgb(49, 193, 255));
+                        infinitivo.setText("");
+                    }if(numFormaA==1) {
+                        pasado.setBackgroundColor(Color.rgb(49, 193, 255));
+                        pasado.setText("");
+                    }if(numFormaA==2) {
+                        participio.setBackgroundColor(Color.rgb(49, 193, 255));
+                        participio.setText("");
+                    }
+
+                    //Pintamos de verde el verbo que corresponda la forma B
+                    if(numFormaB==0) {
+                        infinitivo.setBackgroundColor(Color.rgb(48, 255, 173));
+                        infinitivo.setText("");
+                    }if(numFormaB==1) {
+                        pasado.setBackgroundColor(Color.rgb(48, 255, 173));
+                        pasado.setText("");
+                    }if(numFormaB==2) {
+                        participio.setBackgroundColor(Color.rgb(48, 255, 173));
+                        participio.setText("");
+                    }
+
+                }
+
+
             }
         }
 
@@ -858,10 +917,23 @@ public class Juego extends ActionBarActivity {
 
     public void comprobarVerbo(){
 
-        System.out.println("Texto introducido: "+campoVerboIntroducidoA.getText());
+
+        //INFO DE DEPURACIÓN:
+
+        if(nivel!=4 && nivel!=5 && nivel!=9 && nivel!=10 && nivel!=14 && nivel!=15)
+            System.out.println("Verbo introducido: "+campoVerboIntroducidoA.getText());
+        else{
+            System.out.println("Verbo Introducido azul: "+campoVerboIntroducidoA.getText());
+            System.out.println("Verbo Introducido verde: "+campoVerboIntroducidoB.getText());
+        }
 
         if(nivel>=1 && nivel<=5)
-            System.out.println("Respuesta correcta: "+verbosSoft[numVerbo][numFormaA]);
+            if(nivel==1 || nivel==2 || nivel==3)
+                System.out.println("Respuesta correcta: "+verbosSoft[numVerbo][numFormaA]);
+            else {
+                System.out.println("Respuesta correcta azul: "+verbosSoft[numVerbo][numFormaA]);
+                System.out.println("Respuesta correcta verde: "+verbosSoft[numVerbo][numFormaB]);
+            }
         else if(nivel>=6 && nivel<=10)
             System.out.println("Respuesta correcta: "+verbosMedium[numVerbo][numFormaA]);
         else if(nivel>=11 && nivel <=15)
@@ -870,14 +942,34 @@ public class Juego extends ActionBarActivity {
 
 
 
+        //Comprobación de verbos:
 
         if(nivel>=1 && nivel<=5) {
-            if (campoVerboIntroducidoA.getText().toString().equals(verbosSoft[numVerbo][numFormaA])) {
-                puntuacionPartida++;
 
-            } else {
-                //Pierde una vida: ohhh!!
-                perderVida();
+            if(nivel==1 || nivel==2 || nivel==3) {
+                if (campoVerboIntroducidoA.getText().toString().equals(verbosSoft[numVerbo][numFormaA])) {
+                    puntuacionPartida++;
+
+                } else {
+                    //Pierde una vida: ohhh!!
+                    perderVida();
+                }
+            }
+            else{
+
+                if(nivel==4) {
+                    if (campoVerboIntroducidoA.getText().toString().equals(verbosSoft[numVerbo][numFormaA]))
+                        puntuacionPartida++;
+                    else
+                        perderVida();
+                    if (campoVerboIntroducidoB.getText().toString().equals(verbosSoft[numVerbo][numFormaB]))
+                        puntuacionPartida++;
+                    else
+                        perderVida();
+                }
+                if(nivel==5){
+                    //DOY hOSTIAS COMO PANES
+                }
             }
         }
         else if(nivel>=6 && nivel<=10) {

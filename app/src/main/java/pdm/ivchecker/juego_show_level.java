@@ -29,7 +29,7 @@ public class juego_show_level extends ActionBarActivity {
         String tS=""; //textoSecundario
 
         if(nivel==0)
-            this.nivel=1;
+            this.nivel=4;
         else
             this.nivel=nivel;
 
