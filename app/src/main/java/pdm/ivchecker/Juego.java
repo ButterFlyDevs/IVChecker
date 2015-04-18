@@ -325,7 +325,7 @@ public class Juego extends ActionBarActivity {
          }
 
 
-
+        //Esta clase mola.
 
         // Para cerrar el teclado al pulsar intro
         campoVerboIntroducidoA.setOnKeyListener(new View.OnKeyListener() {
