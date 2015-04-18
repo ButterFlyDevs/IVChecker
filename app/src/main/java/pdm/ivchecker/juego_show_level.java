@@ -39,11 +39,19 @@ public class juego_show_level extends ActionBarActivity {
         switch (this.nivel) {
 
             case 1:
-                tS="Yes, you can!";
+                tS="Are you ready?";
                 break;
             case 2:
                 tS="It's good";
                 break;
+            case 3:
+                tS="You are a master!";
+                break;
+            case 4:
+                tS="You are a hero!";
+                break;
+
+
             default:
                 tS="Default";
                 break;

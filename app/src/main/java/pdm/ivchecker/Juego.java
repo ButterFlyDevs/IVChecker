@@ -3,6 +3,7 @@ package pdm.ivchecker;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -15,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,18 +37,18 @@ public class Juego extends ActionBarActivity {
 
     //Elementos de la vista:
     private Button btnNext;
-    private EditText txtVerbo;
+    private EditText campoVerboIntroducidoA, campoVerboIntroducidoB;
+
     private TextView infinitivo, pasado, participio, puntos;
-    private ImageView vida1, vida2, vida3, vida4;
+    private ImageView vida1, vida2, vida3; // vida4, vida5;
+
+    //Layouts:
+    private LinearLayout layoutCampoVerboIntroducidoA, layoutCampoVerboIntroducidoB;
 
     private Random rnd;
 
     //Número de verbos de las listas
     private int numVerbosListaSoft, numVerbosListaMedium, numVerbosListaHard;
-
-
-
-
 
 
     // ## VARIABLES GLOBALES DE PARTIDA que van modificandose conforme avanza esta y que todas las funciones necesitan. ## //
@@ -75,7 +77,7 @@ public class Juego extends ActionBarActivity {
         numVerbosListaSoft=numVerbosListaMedium=numVerbosListaHard=0;
         formaMisteriosa="";
         puntuacionPartida=0;
-        nVidas=4;
+        nVidas=3;
         nivel=1;
 
         int defecto=0;
@@ -243,9 +245,9 @@ public class Juego extends ActionBarActivity {
         //Para que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
+        //Recibido desde otra actividad
         intent = getIntent();
-        nivel=intent.getIntExtra("nivel",0);
+        nivel=intent.getIntExtra("nivel", 0); //El nivel que nos dice la aplicación anterior.
         System.out.println("Nivel recibido en Juego: "+nivel);
 
         /* ## Referencias a los elementos del layout (vista) ## */
@@ -253,15 +255,26 @@ public class Juego extends ActionBarActivity {
         //Obtenemos la referencia al botón de la vista "Next"
         btnNext=(Button)findViewById(R.id.nextButton);
 
-        //Al campo de texto donde el jugador introduce el verbo
-        txtVerbo=(EditText)findViewById(R.id.formaMisteriosa);
-        txtVerbo.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+        //Campos de texto donde el jugador introduce los verbos:
+        campoVerboIntroducidoA=(EditText)findViewById(R.id.formaMisteriosaA);
+        campoVerboIntroducidoA.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+
+        campoVerboIntroducidoB=(EditText)findViewById(R.id.formaMisteriosaB);
+        campoVerboIntroducidoB.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+
+        //Referencias a los layouts de las cajas de texto EditText:
+        layoutCampoVerboIntroducidoA=(LinearLayout)findViewById(R.id.LinearLayoutA);
+        layoutCampoVerboIntroducidoB=(LinearLayout)findViewById(R.id.LinearLayoutB);
 
 
 
         infinitivo=(TextView)findViewById(R.id.infinitivo);
         pasado=(TextView)findViewById(R.id.pasado);
         participio=(TextView)findViewById(R.id.participio);
+
+
+
+
 
         //Al campo de los puntos
         puntos=(TextView)findViewById(R.id.viewPuntos);
@@ -271,41 +284,83 @@ public class Juego extends ActionBarActivity {
         vida1=(ImageView)findViewById(R.id.vida1);
         vida2=(ImageView)findViewById(R.id.vida2);
         vida3=(ImageView)findViewById(R.id.vida3);
-        vida4=(ImageView)findViewById(R.id.vida4);
+      //  vida4=(ImageView)findViewById(R.id.vida4);
+      //  vida5=(ImageView)findViewById(R.id.vida5);
+
+
+        //Sólo se verán en un principio las primeras tres.
+      //  vida4.setVisibility(ImageView.INVISIBLE);
+        //    vida5.setVisibility(ImageView.VISIBLE);
+
 
         /* Fin de las referencias*/
 
 
+        //Recuperación de datos almacenados:
 
-        //Otro intento de creación de datos almacenados:
+        //Recuperación de datos almacenados:
         prefe=getSharedPreferences("datos", Context.MODE_PRIVATE);
-        System.out.println("REcibido del Prefe getInt: "+prefe.getInt("puntos",0));
+
+        System.out.println("Recibido del Prefe getInt: "+prefe.getInt("puntos",0));
         //Almacenamos en la variable global el valor de la puntuación que teníamos:
-        puntuacionPartida=prefe.getInt("puntos",0);
+        puntuacionPartida=prefe.getInt("puntos",0); //Los puntos de la partida
+        nVidas=prefe.getInt("vidas",3); //El número de vidas de la partida. Si no devuelve nada es que acaba de empezar y es 3.
         //Insteramos esta puntuación en TextViewPuntos:
         puntos.setText(Integer.toString(puntuacionPartida));
+
+        System.out.println("Recibido del Prefe getInt: "+puntuacionPartida+" puntos "+nVidas+" vidas");
+        ajustarVidas(nVidas);
+
+
+        //Ajustamos los elmentos de la vista según el nivel:
+
+         if(nivel!=4 && nivel!=5 && nivel!=9 && nivel!=10 && nivel!=14 && nivel!=15) {
+             campoVerboIntroducidoB.setVisibility(TextView.INVISIBLE);
+             layoutCampoVerboIntroducidoB.setVisibility(LinearLayout.INVISIBLE);
+             layoutCampoVerboIntroducidoA.setBackgroundColor(Color.TRANSPARENT);
+         }else{
+             layoutCampoVerboIntroducidoA.setBackgroundColor(Color.rgb(49,193,255));
+             campoVerboIntroducidoB.setVisibility(TextView.VISIBLE);
+             layoutCampoVerboIntroducidoB.setVisibility(LinearLayout.VISIBLE);
+         }
+
 
 
 
         // Para cerrar el teclado al pulsar intro
-        txtVerbo.setOnKeyListener(new View.OnKeyListener()
-        {
+        campoVerboIntroducidoA.setOnKeyListener(new View.OnKeyListener() {
             /**
              * This listens for the user to press the enter button on
              * the keyboard and then hides the virtual keyboard
              */
             public boolean onKey(View arg0, int arg1, KeyEvent event) {
                 // If the event is a key-down event on the "enter" button
-                if ( (event.getAction() == KeyEvent.ACTION_DOWN  ) &&
-                        (arg1           == KeyEvent.KEYCODE_ENTER)   )
-                {
-                    InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(txtVerbo.getWindowToken(), 0);
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (arg1 == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(campoVerboIntroducidoA.getWindowToken(), 0);
                     return true;
                 }
                 return false;
             }
-        } );
+        });
+        // Para cerrar el teclado al pulsar intro
+        campoVerboIntroducidoB.setOnKeyListener(new View.OnKeyListener() {
+            /**
+             * This listens for the user to press the enter button on
+             * the keyboard and then hides the virtual keyboard
+             */
+            public boolean onKey(View arg0, int arg1, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (arg1 == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(campoVerboIntroducidoB.getWindowToken(), 0);
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
         //Implementamos el evento click del botón next:
@@ -321,7 +376,7 @@ public class Juego extends ActionBarActivity {
                         comprobarVerbo();
 
                         //Limpiamos el contenido del editText:
-                        txtVerbo.setText("");
+                        campoVerboIntroducidoA.setText("");
 
                         //Aumentamos el número de la jugada en el nivel (10 verbos por nivel)
                         jugadaEnNivel++;
@@ -329,7 +384,7 @@ public class Juego extends ActionBarActivity {
                         /*
                         10 jugadas por nivel!
                          */
-                        if(jugadaEnNivel>2) { //Si hemos completado las diez jugadas por nivel pasamos de nivel.
+                        if(jugadaEnNivel>4) { //Si hemos completado las diez jugadas por nivel pasamos de nivel.
                             nivel++; //Pasamos de nivel
                             jugadaEnNivel=1; //Reiniciamos.
                             //Nos vamos a la actividad que muestra el nivel:
@@ -339,10 +394,15 @@ public class Juego extends ActionBarActivity {
                             //Vamos a la activity juego con el nivel 1
                             intent.putExtra("nivel",nivel);
 
-                            //Antes de pasar de actividad guardamos los datos para volver luego
+                            //Antes de pasar de actividad guardamos los datos para que al volver a la actividad los tengamos disponibles:
                             SharedPreferences.Editor editor=prefe.edit();
-                            editor.putInt("puntos",puntuacionPartida);
+                            editor.putInt("puntos",puntuacionPartida); //La puntuación de la partida
+                            editor.putInt("vidas",nVidas); //El número de vidas
                             editor.commit();
+
+                            System.out.println("Grabamos nivel: "+nivel+" y vidas: "+nVidas);
+
+
                             startActivity(intent);
                         }
 
@@ -398,6 +458,7 @@ public class Juego extends ActionBarActivity {
             SharedPreferences.Editor editor=prefe.edit();
             //Escribimos 0 en puntos
             editor.putInt("puntos",0);
+            editor.putInt("vidas",3); //El número de vidas
             //Realizamos la escritura
             editor.commit();
             finish();
@@ -489,7 +550,9 @@ public class Juego extends ActionBarActivity {
         //Ademas lo cargarmos:
 
 
-        if(nivel>=1 && nivel<=3) { //Si estamos en los niveles 1-5
+        if(nivel>=1 && nivel<=5) { //Si estamos en los niveles 1-5
+
+            System.out.println("Elegimos verbo de la lista SOFT");
 
             //Elegimos el verbo de forma aleatoria:
             numVerbo = (int) (rnd.nextDouble() * numVerbosListaSoft + 0);
@@ -508,6 +571,7 @@ public class Juego extends ActionBarActivity {
                 verboPasado=verbosMedium[numVerbo][1];
                 verboParticipio=verbosMedium[numVerbo][2];
 
+                System.out.println("Elegimos verbo de la lista MEDIUM");
 
         } if(nivel>=11 && nivel<=15) { //Si estamos en los niveles 6-10
 
@@ -518,12 +582,14 @@ public class Juego extends ActionBarActivity {
             verboPasado=verbosHard[numVerbo][1];
             verboParticipio=verbosHard[numVerbo][2];
 
+            System.out.println("Elegimos verbo de la lista HARD");
+
         }
 
 
         System.out.println("Verbo elegido nº: "+numVerbo+"\nInfinitivo: "+verboInfinitivo+" Pasado: "+verboPasado+" Participio: "+verboParticipio);
 
-
+        String verbos[]={verboInfinitivo,verboPasado,verboParticipio};
 
 
 
@@ -607,51 +673,100 @@ public class Juego extends ActionBarActivity {
 
 
         else
-
+            //Entonces se colocan las tres formas verbales de forma no ordenada donde sigue habiendo una sin pista
             if(nivel==3 || nivel==8 || nivel==13) {
-                //Entonces se colocan las tres formas verbales de forma no ordenada
 
-            //Envío el infinitivo a:
+
+
+                //El lugar donde poner la forma misteriosa
                 int lugar = (int) (rnd.nextDouble() * 3 + 0); //(0 - 1- 2)
 
-                if(lugar==0) {
-                    infinitivo.setText(verboInfinitivo);
+                /*
+                Si el lugar decidido para poner la forma misteriosa es 0 ahí se coloca la forma misteriosa.
+                 */
+                if(lugar==0) { //Lugar = 0 -> en el infinitivo se pone la forma misteriosa.
+
+                    //Colocamos la forma misteriosa:
+                    infinitivo.setText(formaMisteriosa);
+
                     //Quedan dos huecos:
-                    if( (int)(rnd.nextDouble()*2+0) == 0  ) {
+
+                    /*
+                    El número de la fomra misteriosa era la fomra elegida: numFormaA
+                     */
+
+
+                    if( (int)(rnd.nextDouble()*2+0) == 0  ) { //Cara o cruz:
+                        //Cara
+                        pasado.setText(verbos[(numFormaA+1)%3]);
+                        participio.setText(verbos[(numFormaA+2)%3]);
+                        /*
                         pasado.setText(verboPasado);
                         participio.setText(verboParticipio);
+                        */
                     }else {
+                        participio.setText(verbos[(numFormaA+1)%3]);
+                        pasado.setText(verbos[(numFormaA+2)%3]);
+
+                        /*
                         pasado.setText(verboParticipio);
                         participio.setText(verboPasado);
+                        */
                     }
 
 
                 }
                 if(lugar==1){
 
-                    pasado.setText(verboInfinitivo);
+                    pasado.setText(formaMisteriosa);
+
+
                     //Quedan dos huecos;
                     if( (int)(rnd.nextDouble()*2+0) == 0  ) {
+
+
+                        //Cara
+                        infinitivo.setText(verbos[(numFormaA+1)%3]);
+                        participio.setText(verbos[(numFormaA+2)%3]);
+
+                        /*
                         infinitivo.setText(verboPasado);
                         participio.setText(verboParticipio);
+                        */
                     }else {
+                        participio.setText(verbos[(numFormaA+1)%3]);
+                        infinitivo.setText(verbos[(numFormaA+2)%3]);
+                        /*
                         participio.setText(verboPasado);
                         infinitivo.setText(verboParticipio);
+                        */
                     }
 
                 }
                 if(lugar==2){
 
 
-                    participio.setText(verboInfinitivo);
+                    participio.setText(formaMisteriosa);
 
                     //Quedan dos huecos;
                     if( (int)(rnd.nextDouble()*2+0) == 0  ) {
+
+                        //Cara
+                        infinitivo.setText(verbos[(numFormaA+1)%3]);
+                        pasado.setText(verbos[(numFormaA + 2) % 3]);
+
+                        /*
                         infinitivo.setText(verboPasado);
                         pasado.setText(verboParticipio);
+                        */
                     }else {
+                        //Cara
+                        pasado.setText(verbos[(numFormaA+1)%3]);
+                        infinitivo.setText(verbos[(numFormaA+2)%3]);
+                        /*
                         participio.setText(verboPasado);
                         infinitivo.setText(verboParticipio);
+                        */
                     }
 
                 }
@@ -659,24 +774,50 @@ public class Juego extends ActionBarActivity {
 
 
 
-            } //Fin nivel 2, 8 y 14
+            }else{
+                System.out.println("Resto de niveles");
+            }
+        }
+
+
+    public void ganarVida(){
+
+
+
+
+    }
+
+    public void ajustarVidas(int numero){
+        if(numero==3) {
+            vida3.setImageResource(R.drawable.corazonvivo);
+            vida2.setImageResource(R.drawable.corazonvivo);
+            vida1.setImageResource(R.drawable.corazonvivo);
+        }
+        if(numero==2){
+            vida3.setImageResource(R.drawable.corazonmuerto);
+            vida2.setImageResource(R.drawable.corazonvivo);
+            vida1.setImageResource(R.drawable.corazonvivo);
+        }
+        if(numero==1){
+            vida3.setImageResource(R.drawable.corazonmuerto);
+            vida2.setImageResource(R.drawable.corazonmuerto);
+            vida1.setImageResource(R.drawable.corazonvivo);
+
+        }
+        if(numero==0){
+            vida3.setImageResource(R.drawable.corazonmuerto);
+            vida2.setImageResource(R.drawable.corazonmuerto);
+            vida1.setImageResource(R.drawable.corazonmuerto);
         }
 
 
 
+    }
 
 
     public void perderVida(){
 
-        //Si le quedan 4 vidas:
-        if(this.nVidas==4) {
-            //Se rompe el corazón 4:
-            vida4.setImageResource(R.drawable.corazonmuerto);
-            //Se le resta una:
-            nVidas--;
-            //Queda con 3 vidas!
-        }
-        else if(this.nVidas==3) {
+        if(this.nVidas==3) {
             //Se rompe el corazón 3:
             vida3.setImageResource(R.drawable.corazonmuerto);
             //Se le resta una:
@@ -698,8 +839,18 @@ public class Juego extends ActionBarActivity {
         }
         //Si no le queda ninguna vida:
         else if(this.nVidas==0) {
-            //Nos vamos a la pantalla de fin de partida: YOU ARE DEAD!
-            System.out.println("Eres malo malo");
+
+            //Mostramos un mensaje toast! YOU ARE DEAD!
+            Context context = getApplicationContext();
+            CharSequence text = "YOU ARE DEAD!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
+            Intent intent = new Intent(Juego.this, Resultados.class);
+            startActivity(intent);
+
         }
 
 
@@ -707,7 +858,7 @@ public class Juego extends ActionBarActivity {
 
     public void comprobarVerbo(){
 
-        System.out.println("Texto introducido: "+txtVerbo.getText());
+        System.out.println("Texto introducido: "+campoVerboIntroducidoA.getText());
 
         if(nivel>=1 && nivel<=5)
             System.out.println("Respuesta correcta: "+verbosSoft[numVerbo][numFormaA]);
@@ -721,7 +872,7 @@ public class Juego extends ActionBarActivity {
 
 
         if(nivel>=1 && nivel<=5) {
-            if (txtVerbo.getText().toString().equals(verbosSoft[numVerbo][numFormaA])) {
+            if (campoVerboIntroducidoA.getText().toString().equals(verbosSoft[numVerbo][numFormaA])) {
                 puntuacionPartida++;
 
             } else {
@@ -730,14 +881,14 @@ public class Juego extends ActionBarActivity {
             }
         }
         else if(nivel>=6 && nivel<=10) {
-            if (txtVerbo.getText().toString().equals(verbosMedium[numVerbo][numFormaA])) {
+            if (campoVerboIntroducidoA.getText().toString().equals(verbosMedium[numVerbo][numFormaA])) {
                 puntuacionPartida++;
             } else {
                 //Pierde una vida: ohhh!!
                 perderVida();
             }
         }else if(nivel>=11 && nivel<=15) {
-            if (txtVerbo.getText().toString().equals(verbosMedium[numVerbo][numFormaA])) {
+            if (campoVerboIntroducidoA.getText().toString().equals(verbosMedium[numVerbo][numFormaA])) {
                 puntuacionPartida++;
             } else {
                 //Pierde una vida: ohhh!!

@@ -31,14 +31,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:id="@+id/vida4"
-                android:layout_gravity="bottom"
-                android:src="@drawable/corazonvivo"
 
-            />
 
             <ImageView
                 android:layout_width="20dp"
@@ -106,16 +99,41 @@
         android:layout_alignEnd="@+id/infinitivo"
         android:gravity="center" />
 
-    <EditText
-        android:id="@+id/formaMisteriosa"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:id="@+id/LinearLayoutA"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:layout_x="22dp"
-        android:layout_y="142dp"
-        android:layout_above="@+id/nextButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:weightSum="1"
+        android:background="#ff31c1ff">
+
+        <EditText
+            android:id="@+id/formaMisteriosaA"
+            android:layout_width="245dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_x="22dp"
+            android:layout_y="142dp"
+            android:layout_above="@+id/nextButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutB"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#ff30ffad">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/formaMisteriosaB"
+            android:layout_weight="0.70" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/nextButton"
@@ -128,7 +146,7 @@
         android:layout_toRightOf="@+id/infinitivo"
         android:layout_toEndOf="@+id/infinitivo"
         android:gravity="center"
-        android:layout_gravity="center" />
+        android:layout_gravity="center_horizontal" />
 
 
 </LinearLayout>

@@ -50,7 +50,6 @@ public class ConexionServidor {
         }
     }
 
-
     public List<String> pedirRanking(){
 
         List<String>ranking=new ArrayList();
@@ -87,6 +86,7 @@ public class ConexionServidor {
         } catch (Exception e) {
             //Si la conexión falla se muestra este mensaje
             System.out.println("Fallo en la conexión al servidor: Fail"+e);
+            return null;
         }
 
               /*

@@ -27,20 +27,25 @@ public class wcr extends ActionBarActivity {
         //Con esta hacemos que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
+        //Enlace conexión con elemento de la vista:
         rankingUsuarios=(TextView)findViewById(R.id.rankingUsuarios);
+        rankingUsuarios.append("\n\n\n\n\n");
 
         ranking=miConexion.pedirRanking();
+        if(ranking!=null) {
 
-        int n=1;
-        rankingUsuarios.append("\n\n\n\n\n");
-        for (String dato : ranking) {
-            rankingUsuarios.append("\n\t\t");
-            if(!dato.equals(""))
-                rankingUsuarios.append(n+" "+dato);
-            n++;
+            int n = 1;
+
+            for (String dato : ranking) {
+                rankingUsuarios.append("\n\t\t");
+                if (!dato.equals(""))
+                    rankingUsuarios.append(n + " " + dato);
+                n++;
+            }
+        }else{
+            String mensaje="Lo sentimos. No se ha podido establacer conexión con el servidor. Inténtelo de nuevo más tarde.";
+            rankingUsuarios.append(mensaje);
         }
-
 
     }
 
