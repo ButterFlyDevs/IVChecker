@@ -12,12 +12,15 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,8 +46,16 @@ public class Juego extends ActionBarActivity {
     private TextView infinitivo, pasado, participio, puntos;
     private ImageView vida1, vida2, vida3; // vida4, vida5;
 
+
+    //Botones de niveles superiores
+    private CheckBox botonInfinitivoAzul, botonInfinitivoVerde;
+    private CheckBox botonPasadoAzul, botonPasadoVerde;
+    private CheckBox botonParticipioAzul, botonParticipioVerde;
+
     //Layouts:
     private LinearLayout layoutCampoVerboIntroducidoA, layoutCampoVerboIntroducidoB;
+
+    private RelativeLayout layoutInfinitivo, layoutPasado, layoutParticipio;
 
     private Random rnd;
 
@@ -310,6 +321,11 @@ public class Juego extends ActionBarActivity {
         puntos.setText(Integer.toString(puntuacionPartida));
 
         System.out.println("Recibido del Prefe getInt: "+puntuacionPartida+" puntos "+nVidas+" vidas");
+
+        //Cuando se llega al nivel 4 y 9 se gana una vida.
+        if(nivel==4 || nivel==9 )
+            ganarVida();
+
         ajustarVidas(nVidas);
 
 
@@ -319,11 +335,17 @@ public class Juego extends ActionBarActivity {
              campoVerboIntroducidoB.setVisibility(TextView.INVISIBLE);
              layoutCampoVerboIntroducidoB.setVisibility(LinearLayout.INVISIBLE);
              layoutCampoVerboIntroducidoA.setBackgroundColor(Color.TRANSPARENT);
+
          }else{
              layoutCampoVerboIntroducidoA.setBackgroundColor(Color.rgb(49,193,255));
+
              campoVerboIntroducidoB.setVisibility(TextView.VISIBLE);
              layoutCampoVerboIntroducidoB.setVisibility(LinearLayout.VISIBLE);
          }
+
+
+
+
 
 
         //Esta clase mola.
@@ -389,7 +411,7 @@ public class Juego extends ActionBarActivity {
                         /*
                         10 jugadas por nivel!
                          */
-                        if(jugadaEnNivel>4) { //Si hemos completado las diez jugadas por nivel pasamos de nivel.
+                        if(jugadaEnNivel>2) { //Si hemos completado las diez jugadas por nivel pasamos de nivel.
                             nivel++; //Pasamos de nivel
                             jugadaEnNivel=1; //Reiniciamos.
                             //Nos vamos a la actividad que muestra el nivel:
@@ -422,7 +444,7 @@ public class Juego extends ActionBarActivity {
 
 
                         //Si se han completado todos los niveles (se ha acabado el juego) vamos a una pantalla de resultados:.
-                        if (nivel > 15) {
+                        else if (nivel > 15) {
                             //Creamos el intent:
                             Intent intent = new Intent(Juego.this, Resultados.class);
 
@@ -437,7 +459,9 @@ public class Juego extends ActionBarActivity {
                             startActivity(intent);
                         }
                         //Si no se han completado seguimos jugando!
-                        crearJugada();
+                        else
+                            //Si no estuviera dentro de la estructura else nos crearía una jugada antes de pasar de nivel.
+                            crearJugada();
 
 
                     }
@@ -832,7 +856,213 @@ public class Juego extends ActionBarActivity {
                         participio.setText("");
                     }
 
-                }
+                }else if(nivel==5 || nivel==10 || nivel==15){
+
+                    System.out.println("Config nivel 5. ");
+
+                    int formaVisible=3-(numFormaA+numFormaB);
+
+
+                    //El lugar donde poner la forma visible
+                    int lugar = (int) (rnd.nextDouble() * 3 + 0); //(0 - 1- 2)
+                    System.out.println("Lugar de la forma visible: "+lugar+" Forma visible: "+formaVisible);
+
+                    if(lugar==0){ //Si la forma visible se coloca en hueco del infinitivo
+
+                        //Dependiendo de la forma verbal que se vaya a mostrar se mete un texto u otro en ##ESE HUECO##.
+                        if(formaVisible==0)
+                            infinitivo.setText(verboInfinitivo);
+                        if(formaVisible==1)
+                            infinitivo.setText(verboPasado);
+                        if(formaVisible==2)
+                            infinitivo.setText(verboParticipio);
+
+
+                        //Quedan dos huecos:
+
+                        if( (int)(rnd.nextDouble()*2+0) == 0  ) { //Cara o cruz:
+                            //Cara
+
+
+                            //Colocalción de la formaA en el pasado.
+                            if(numFormaA==0)
+                                pasado.setText("INFINITIVO");
+                            if(numFormaA==1)
+                                pasado.setText("PASADO");
+                            if(numFormaA==2)
+                                pasado.setText("PARTICIPIO");
+                            //Sea como sea pones el pasado azul (de la forma verboIntroducidoA:
+                            pasado.setBackgroundColor(Color.rgb(49,193,255));
+
+                            //Colocación de la fomra B en el participio
+                            if(numFormaB==0)
+                                participio.setText("INFINITIVO");
+                            if(numFormaB==1)
+                                participio.setText("PASADO");
+                            if(numFormaB==2)
+                                participio.setText("PARTICIPIO");
+
+                            participio.setBackgroundColor(Color.rgb(48,255,173));
+
+                        }else {
+                            //Cruz
+
+                            //Colocalción de la formaA en el participio.
+                            if(numFormaA==0)
+                                participio.setText("INFINITIVO");
+                            if(numFormaA==1)
+                                participio.setText("PASADO");
+                            if(numFormaA==2)
+                                participio.setText("PARTICIPIO");
+                            //Sea como sea pones el pasado azul (de la forma verboIntroducidoA:
+                            participio.setBackgroundColor(Color.rgb(49,193,255));
+
+                            //Colocación de la fomra B en el pasado
+                            if(numFormaB==0)
+                                pasado.setText("INFINITIVO");
+                            if(numFormaB==1)
+                                pasado.setText("PASADO");
+                            if(numFormaB==2)
+                                pasado.setText("PARTICIPIO");
+
+                            pasado.setBackgroundColor(Color.rgb(48,255,173));
+
+
+                        }
+
+                    }
+
+                    if(lugar==1){//Si la forma visible se coloca en el hueco del pasado
+
+                        if(formaVisible==0)
+                            pasado.setText(verboInfinitivo);
+                        if(formaVisible==1)
+                            pasado.setText(verboPasado);
+                        if(formaVisible==2)
+                            pasado.setText(verboParticipio);
+
+
+                        //Quedan dos huecos:
+
+                        if( (int)(rnd.nextDouble()*2+0) == 0  ) { //Cara o cruz:
+                            //Cara
+
+
+                            //Colocalción de la formaA en el infinitivo.
+                            if(numFormaA==0)
+                                infinitivo.setText("INFINITIVO");
+                            if(numFormaA==1)
+                                infinitivo.setText("PASADO");
+                            if(numFormaA==2)
+                                infinitivo.setText("PARTICIPIO");
+                            //Sea como sea pones el pasado azul (de la forma verboIntroducidoA:
+                            infinitivo.setBackgroundColor(Color.rgb(49,193,255));
+
+                            //Colocación de la fomra B en el participio
+                            if(numFormaB==0)
+                                participio.setText("INFINITIVO");
+                            if(numFormaB==1)
+                                participio.setText("PASADO");
+                            if(numFormaB==2)
+                                participio.setText("PARTICIPIO");
+
+                            participio.setBackgroundColor(Color.rgb(48,255,173));
+
+                        }else {
+                            //Cruz
+
+                            //Colocalción de la formaA en el participio.
+                            if(numFormaA==0)
+                                participio.setText("INFINITIVO");
+                            if(numFormaA==1)
+                                participio.setText("PASADO");
+                            if(numFormaA==2)
+                                participio.setText("PARTICIPIO");
+                            //Sea como sea pones el pasado azul (de la forma verboIntroducidoA:
+                            participio.setBackgroundColor(Color.rgb(49,193,255));
+
+                            //Colocación de la fomra B en el infinitivo
+                            if(numFormaB==0)
+                                infinitivo.setText("INFINITIVO");
+                            if(numFormaB==1)
+                                infinitivo.setText("PASADO");
+                            if(numFormaB==2)
+                                infinitivo.setText("PARTICIPIO");
+
+                            infinitivo.setBackgroundColor(Color.rgb(48,255,173));
+
+
+                        }
+                    }
+
+                    if(lugar==2){
+
+                        if(formaVisible==0)
+                            participio.setText(verboInfinitivo);
+                        if(formaVisible==1)
+                            participio.setText(verboPasado);
+                        if(formaVisible==2)
+                            participio.setText(verboParticipio);
+
+
+                        //Quedan dos huecos:
+
+                        if( (int)(rnd.nextDouble()*2+0) == 0  ) { //Cara o cruz:
+                            //Cara
+
+
+                            //Colocalción de la formaA en el pasado.
+                            if(numFormaA==0)
+                                pasado.setText("INFINITIVO");
+                            if(numFormaA==1)
+                                pasado.setText("PASADO");
+                            if(numFormaA==2)
+                                pasado.setText("PARTICIPIO");
+                            //Sea como sea pones el pasado azul (de la forma verboIntroducidoA:
+                            pasado.setBackgroundColor(Color.rgb(49,193,255));
+
+                            //Colocación de la fomra B en el infinitivo
+                            if(numFormaB==0)
+                                infinitivo.setText("INFINITIVO");
+                            if(numFormaB==1)
+                                infinitivo.setText("PASADO");
+                            if(numFormaB==2)
+                                infinitivo.setText("PARTICIPIO");
+
+                            infinitivo.setBackgroundColor(Color.rgb(48,255,173));
+
+                        }else {
+                            //Cruz
+
+                            //Colocalción de la formaA en el infinitivo.
+                            if(numFormaA==0)
+                                infinitivo.setText("INFINITIVO");
+                            if(numFormaA==1)
+                                infinitivo.setText("PASADO");
+                            if(numFormaA==2)
+                                infinitivo.setText("PARTICIPIO");
+                            //Sea como sea pones el pasado azul (de la forma verboIntroducidoA:
+                            infinitivo.setBackgroundColor(Color.rgb(49,193,255));
+
+                            //Colocación de la fomra B en el pasado
+                            if(numFormaB==0)
+                                pasado.setText("INFINITIVO");
+                            if(numFormaB==1)
+                                pasado.setText("PASADO");
+                            if(numFormaB==2)
+                                pasado.setText("PARTICIPIO");
+
+                            pasado.setBackgroundColor(Color.rgb(48,255,173));
+
+
+                        }
+
+
+                    }
+
+
+
+                }//Fin nivel 5,10,15
 
 
             }
@@ -841,6 +1071,25 @@ public class Juego extends ActionBarActivity {
 
     public void ganarVida(){
 
+        //Configuramos el mensaje de vida ganada:
+        Context context = getApplicationContext();
+        CharSequence text = "You win one life!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+
+        //Si no le queda ninguna vida
+        if(this.nVidas==0) {
+            vida1.setImageResource(R.drawable.corazonvivo);
+            nVidas++;
+        }else if(this.nVidas==1){ //Si le queda una vida
+            vida2.setImageResource(R.drawable.corazonvivo);
+            nVidas++;
+        }else if(this.nVidas==2){
+            vida3.setImageResource(R.drawable.corazonvivo);
+            nVidas++;
+        }
+        toast.show();
 
 
 
@@ -948,7 +1197,10 @@ public class Juego extends ActionBarActivity {
 
             if(nivel==1 || nivel==2 || nivel==3) {
                 if (campoVerboIntroducidoA.getText().toString().equals(verbosSoft[numVerbo][numFormaA])) {
-                    puntuacionPartida++;
+                    /*
+                    En el nivel 1 cada acierto suma 1 en el nivel 2 suma 2 y así con el resto de niveles
+                     */
+                    puntuacionPartida=puntuacionPartida+nivel;
 
                 } else {
                     //Pierde una vida: ohhh!!
@@ -957,35 +1209,73 @@ public class Juego extends ActionBarActivity {
             }
             else{
 
-                if(nivel==4) {
+                if(nivel==4 || nivel==5) {
                     if (campoVerboIntroducidoA.getText().toString().equals(verbosSoft[numVerbo][numFormaA]))
-                        puntuacionPartida++;
+                        puntuacionPartida=puntuacionPartida+nivel;
                     else
                         perderVida();
                     if (campoVerboIntroducidoB.getText().toString().equals(verbosSoft[numVerbo][numFormaB]))
-                        puntuacionPartida++;
+                        puntuacionPartida=puntuacionPartida+nivel;
                     else
                         perderVida();
                 }
-                if(nivel==5){
-                    //DOY hOSTIAS COMO PANES
-                }
+
             }
         }
         else if(nivel>=6 && nivel<=10) {
-            if (campoVerboIntroducidoA.getText().toString().equals(verbosMedium[numVerbo][numFormaA])) {
-                puntuacionPartida++;
-            } else {
-                //Pierde una vida: ohhh!!
-                perderVida();
+
+            if(nivel==6 || nivel==7 || nivel==8) {
+                if (campoVerboIntroducidoA.getText().toString().equals(verbosMedium[numVerbo][numFormaA])) {
+                    puntuacionPartida=puntuacionPartida+nivel;
+
+                } else {
+                    //Pierde una vida: ohhh!!
+                    perderVida();
+                }
             }
+            else{
+
+                if(nivel==9 || nivel==10) {
+                    if (campoVerboIntroducidoA.getText().toString().equals(verbosMedium[numVerbo][numFormaA]))
+                        puntuacionPartida=puntuacionPartida+nivel;
+                    else
+                        perderVida();
+                    if (campoVerboIntroducidoB.getText().toString().equals(verbosMedium[numVerbo][numFormaB]))
+                        puntuacionPartida=puntuacionPartida+nivel;
+                    else
+                        perderVida();
+                }
+
+            }
+
         }else if(nivel>=11 && nivel<=15) {
-            if (campoVerboIntroducidoA.getText().toString().equals(verbosMedium[numVerbo][numFormaA])) {
-                puntuacionPartida++;
-            } else {
-                //Pierde una vida: ohhh!!
-                perderVida();
+
+
+            if(nivel==11 || nivel==12 || nivel==13) {
+                if (campoVerboIntroducidoA.getText().toString().equals(verbosHard[numVerbo][numFormaA])) {
+                    puntuacionPartida=puntuacionPartida+nivel;
+
+                } else {
+                    //Pierde una vida: ohhh!!
+                    perderVida();
+                }
             }
+            else{
+
+                if(nivel==14 || nivel==15) {
+                    if (campoVerboIntroducidoA.getText().toString().equals(verbosHard[numVerbo][numFormaA]))
+                        puntuacionPartida=puntuacionPartida+nivel;
+                    else
+                        perderVida();
+                    if (campoVerboIntroducidoB.getText().toString().equals(verbosHard[numVerbo][numFormaB]))
+                        puntuacionPartida=puntuacionPartida+nivel;
+                    else
+                        perderVida();
+                }
+
+            }
+
+
         }
 
 

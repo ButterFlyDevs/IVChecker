@@ -8,6 +8,9 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import android.os.Handler;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -16,7 +19,7 @@ public class juego_show_level extends ActionBarActivity {
 
     int nivel;
 
-    private TextView texto, texto2;
+    private TextView texto, texto2, texto3;
 
     public juego_show_level(){
         nivel=0;
@@ -27,41 +30,88 @@ public class juego_show_level extends ActionBarActivity {
     public void configuradorMensajePantalla(int nivel){
 
         String tS=""; //textoSecundario
+        String tD=""; //textoTerciario: Descripción de nivel.
 
+        //Si es la primera vez qu ese entra nos e recibirán datos desde juego y por tanto será el nivel 1.
         if(nivel==0)
-            this.nivel=4;
+            this.nivel=1;
         else
             this.nivel=nivel;
 
-
+        //Seteamos el texto de nivel:
         texto.setText("Level " + this.nivel);
 
-        switch (this.nivel) {
 
+
+        //Aparece por la izquierda:
+        //texto.startAnimation(AnimationUtils.loadAnimation(juego_show_level.this, android.R.anim.slide_in_left));
+        //texto.startAnimation(AnimationUtils.loadAnimation(juego_show_level.this, android.R.anim.fade_in));
+
+        //Animacion creada en res/anim/ con nombre myanimation.
+        final Animation myAnimation=AnimationUtils.loadAnimation(this,R.anim.myanimation);
+        texto.startAnimation(myAnimation);
+
+
+        //Seteamos el mensaje secundario que acompaña al nivel:
+        switch (this.nivel) {
             case 1:
                 tS="Are you ready?";
+                tD="Uso de la lista simple con ayuda";
                 break;
             case 2:
                 tS="It's good";
+                tD="Uso de la lista simple sin ayuda";
                 break;
             case 3:
                 tS="You are a master!";
+                tD="Uso de la lista simple sin ayuda";
                 break;
             case 4:
                 tS="You are a hero!";
                 break;
-
-
-            default:
-                tS="Default";
+            case 5:
+                tS="Oh my good #/?";
+                break;
+            case 6:
+                tS="";
+                break;
+            case 7:
+                tS="";
+                break;
+            case 8:
+                tS="";
+                break;
+            case 9:
+                tS="";
+                break;
+            case 10:
+                tS="";
+                break;
+            case 11:
+                tS="";
+                break;
+            case 12:
+                tS="";
+                break;
+            case 13:
+                tS="";
+                break;
+            case 14:
+                tS="";
+                break;
+            case 15:
+                tS="It's the final countdown!";
                 break;
 
+            default:
+                tS="Oups!";
+                break;
         }
         texto2.setText(tS);
-
-
+        texto2.startAnimation(myAnimation);
+        texto3.setText(tD);
+        texto3.startAnimation(myAnimation);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,19 +135,9 @@ public class juego_show_level extends ActionBarActivity {
 
         texto=(TextView)findViewById(R.id.text);
         texto2=(TextView)findViewById(R.id.text2);
-        /*
-        //Si es la primera vez qu ese entra nos e recibirán datos desde juego y por tanto será el nivel 1.
-        if(getIntent().getIntExtra("nivel",0)==0) {
-            nivel = 1;
-            texto.setText("Level "+nivel);
-            texto2.setText("Ready to learn?");
+        texto3=(TextView)findViewById(R.id.text3);
 
-        }else{
-            nivel=getIntent().getIntExtra("nivel",0);
-            texto.setText("Level "+nivel);
-            texto2.setText("You are a master!");
-        }
-        */
+        //Configuramos el texto en pantalla según los datos (recibidos por la actividad que nos lanza) en el parámetro nivel:
         configuradorMensajePantalla(getIntent().getIntExtra("nivel",0));
 
 
@@ -118,25 +158,5 @@ public class juego_show_level extends ActionBarActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_juego_show_level, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
