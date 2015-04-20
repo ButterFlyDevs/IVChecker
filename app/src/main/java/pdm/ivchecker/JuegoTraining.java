@@ -78,7 +78,9 @@ public class JuegoTraining extends ActionBarActivity {
                         if(numPartida==numero_verbos) {
                             acabarPartida();
                         }
-                        jugar();
+                        else{
+                            jugar();
+                        }
 
 
                     }
@@ -237,7 +239,7 @@ public class JuegoTraining extends ActionBarActivity {
         }
         else{
             //Usuario ha fallado
-            if(this.verbos_fallados==null)  //Si es el primer fallo, creamos la lista
+            if(this.verbos_fallados==null)  //Si es el primer fallo, creamos la lista de fallos
                 this.verbos_fallados = new ArrayList();
 
             //Añadimos el indice del verbo fallado
@@ -253,17 +255,15 @@ public class JuegoTraining extends ActionBarActivity {
         this.salvar_puntuacion_local();
 
         //Creamos el intent:
-        Intent intent = new Intent(JuegoTraining.this, Resultados.class);
+        Intent intent = new Intent(JuegoTraining.this, ResultadosTraining.class);
 
         //Creamos la información a pasar entre actividades: puntuación obtenida, numero verbos_preguntados y acertados.
-        Bundle b = new Bundle();
-        b.putString("PUNTOS", String.valueOf(puntuacionJugada));
-        b.putString("NUMERO_VERBOS_PREGUNTADOS",String.valueOf(this.numero_verbos));
-        b.putString("NUMERO_VERBOS_ACERTADOS", String.valueOf(this.verbos_acertados));
 
-
-        //Añadimos la información al intent:
-        intent.putExtras(b);
+        intent.putExtra("PUNTOS", puntuacionJugada);
+        intent.putExtra("NUMERO_VERBOS_PREGUNTADOS",numero_verbos);
+        intent.putExtra("NUMERO_VERBOS_ACERTADOS", verbos_acertados);
+        intent.putExtra("LISTA",lista_a_preguntar);
+        intent.putExtra("nivel",nivel);
 
         //Nos vamos al activity resultados:
         startActivity(intent);

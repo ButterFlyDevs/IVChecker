@@ -56,6 +56,10 @@
             android:name=".juego_show_level"
             android:label="@string/title_activity_juego_show_level" >
         </activity>
+        <activity
+            android:name=".ResultadosTraining"
+            android:label="@string/title_activity_resultados_training" >
+        </activity>
     </application>
 
 </manifest>

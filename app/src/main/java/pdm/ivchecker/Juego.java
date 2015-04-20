@@ -1156,7 +1156,7 @@ public class Juego extends ActionBarActivity {
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
 
-            Intent intent = new Intent(Juego.this, Resultados.class);
+            Intent intent = new Intent(Juego.this, ResultadosTraining.class);
             startActivity(intent);
 
         }
