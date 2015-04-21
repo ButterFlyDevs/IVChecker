@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -31,11 +33,16 @@ public class ResultadosTraining extends ActionBarActivity {
     TextView total_fallados;
     TextView tipo_lista;
     TextView nivel_preguntado;
+    TextView verbos_fallados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados_training);
+        //Para que no se muestre la ActionBar.
+        getSupportActionBar().hide();
+        //Para que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Primero, obtenemos el intent con los datos importantes, y configuramos el juego
         intent = getIntent();
@@ -47,6 +54,7 @@ public class ResultadosTraining extends ActionBarActivity {
         total_acertados = (TextView) findViewById(R.id.etiqueta_verbos_acertados);
         tipo_lista = (TextView) findViewById(R.id.tipo_lista);
         nivel_preguntado = (TextView) findViewById(R.id.nivel_entrenamiento);
+        verbos_fallados = (TextView) findViewById(R.id.lista_verbos_fallados);
 
         //Texto lista
         switch(intent.getIntExtra("LISTA",0)){
@@ -62,6 +70,8 @@ public class ResultadosTraining extends ActionBarActivity {
                 - intent.getIntExtra("NUMERO_VERBOS_ACERTADOS",0)));
         total_acertados.setText("Hits: "+intent.getIntExtra("NUMERO_VERBOS_ACERTADOS",0));
 
+        //Lista verbos fallados
+        verbos_fallados.setText("Failed verbs: " + intent.getStringExtra("LISTA_VERBOS_FALLADOS"));
         //Grafico
 
         segmento_aciertos = new Segment("hits", intent.getIntExtra("NUMERO_VERBOS_ACERTADOS",0));

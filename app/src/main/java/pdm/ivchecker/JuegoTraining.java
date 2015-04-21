@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,11 +30,14 @@ public class JuegoTraining extends ActionBarActivity {
     //Lista de indices de los verbos fallados
     ArrayList<Integer> verbos_fallados = null;
 
+    //String de todos los verbos fallados (se le pasa como estadística a mostrar en los resultados)
+    String lista_verbos_fallados="";
+
     //Botón de siguiente verbo
     private Button btnNext;
     private EditText txtVerbo;
 
-    private TextView infinitivo, pasado, participio;
+    private TextView infinitivo, pasado, participio, etiqueta_progreso;
 
     private int puntuacionJugada=0, verbos_acertados=0;
     private int numPartida=0;
@@ -48,11 +52,18 @@ public class JuegoTraining extends ActionBarActivity {
     //Variables de control del entrenamiento
     private int nivel=0, lista_a_preguntar=0,numero_verbos=0;
 
+
     @Override
     //Método llamada cuando se crea por primera vez la actividad
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego_training);
+
+        //Para que no se muestre la ActionBar.
+        getSupportActionBar().hide();
+        //Para que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         //Primero, obtenemos el intent con los datos importantes, y configuramos el juego
         intent = getIntent();
@@ -64,6 +75,7 @@ public class JuegoTraining extends ActionBarActivity {
         infinitivo=(TextView)findViewById(R.id.infinitivoTraining);
         pasado=(TextView)findViewById(R.id.pasadoTraining);
         participio=(TextView)findViewById(R.id.participioTraining);
+        etiqueta_progreso=(TextView) findViewById(R.id.etiqueta_progreso);
 
         //Implementamos el evento click del botón next:
         btnNext.setOnClickListener(
@@ -80,6 +92,7 @@ public class JuegoTraining extends ActionBarActivity {
                         }
                         else{
                             jugar();
+                            actualizarProgreso();
                         }
 
 
@@ -91,6 +104,7 @@ public class JuegoTraining extends ActionBarActivity {
         prepararJuego();
         leerVerbos();
         jugar();
+        actualizarProgreso();
 
 
     }
@@ -225,6 +239,15 @@ public class JuegoTraining extends ActionBarActivity {
     }
 
     /*
+    Función utilizada para actualizar la etiqueta que se muestra en la pantalla
+    sobre el número de verbos totales que se deben preguntar, y los que se han preguntado ya
+    La sintaxis es de la forma:
+    Verb: verbos_Contestados / verbos_a_contestar
+     */
+    private void actualizarProgreso(){
+        etiqueta_progreso.setText("Verb: "+(numPartida+1)+"/"+(numero_verbos));
+    }
+    /*
     Funcion de comprobar verbo introducido.
     En esta variante de Training, la App debe guardar los verbos en los que se falla
      */
@@ -244,6 +267,7 @@ public class JuegoTraining extends ActionBarActivity {
 
             //Añadimos el indice del verbo fallado
             this.verbos_fallados.add(this.numVerbo);
+            this.lista_verbos_fallados = this.lista_verbos_fallados +verbos[numVerbo][0] + ", ";
         }
 
 
@@ -263,6 +287,7 @@ public class JuegoTraining extends ActionBarActivity {
         intent.putExtra("NUMERO_VERBOS_PREGUNTADOS",numero_verbos);
         intent.putExtra("NUMERO_VERBOS_ACERTADOS", verbos_acertados);
         intent.putExtra("LISTA",lista_a_preguntar);
+        intent.putExtra("LISTA_VERBOS_FALLADOS",this.lista_verbos_fallados);
         intent.putExtra("nivel",nivel);
 
         //Nos vamos al activity resultados:
