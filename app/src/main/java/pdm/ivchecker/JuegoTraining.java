@@ -27,8 +27,10 @@ public class JuegoTraining extends ActionBarActivity {
     //Flujo de entrada para la lectura de fichero CSV:
     private InputStream inputStream;
 
-    //Lista de indices de los verbos fallados
+    //Lista de indices de los verbos fallados durante el juego actual
     ArrayList<Integer> verbos_fallados = null;
+    //Lista de indices de los verbos que el usuario ha fallado en entrenamientos pasados (leídos del csv)
+    ArrayList<ArrayList<Integer>> fallos_juegos_anteriores = null;
 
     //String de todos los verbos fallados (se le pasa como estadística a mostrar en los resultados)
     String lista_verbos_fallados="";
@@ -174,7 +176,7 @@ public class JuegoTraining extends ActionBarActivity {
 
         try {
             //Abrimos el fichero
-            this.flujo_fichero = openFileOutput(fichero, MODE_APPEND);
+            this.flujo_fichero = openFileOutput(fichero, MODE_APPEND); //MODE_APPEND abre el fichero en modo de "escritura a continuación", es decir, sin machacar los datos que ya se encuentren
             /*
             Formato de la linea a guardar:
             Puntuacion, Lista preguntada, Nivel,{Lista de verbos fallados}
@@ -194,6 +196,62 @@ public class JuegoTraining extends ActionBarActivity {
             System.out.println("ERROR: No ha sido posible escribir en el fichero de puntuaciones");
         }
     }
+
+    /*
+    Función que lee el fichero csv de fallos del usuario, para preguntar los verbos que más falla
+    dicho usuario.
+
+    Lee las últimas líneas del fichero csv (hasta las últimas 5 líneas) y comprueba los verbos
+    que más ha fallado el usuario.
+     */
+    private void topFallosVerbos(){
+        //Variable temporal para almacenar el contenido del fichero
+        ArrayList<String> datos_puntuaciones = new ArrayList<>();
+        String line;    //Linea leída
+        String[] RowData;   //Datos de línea separados en columnas
+
+        //Leer el fichero puntuaciones.csv en busca de las últimas líneas
+        try {
+            //Apertura del fichero
+            String fichero = "puntuaciones.csv";
+            InputStream inputStream = openFileInput(fichero);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            while (true) {
+                line = reader.readLine();
+                if (line == null) break;
+                datos_puntuaciones.add(line);
+                String[] RowData = line.split(",");
+                System.out.println(RowData[0]);
+
+            }
+            inputStream.close();
+        }
+        catch (IOException ioe){
+            ioe.printStackTrace();
+            System.out.println("ERROR: No ha sido posible abrir el fichero de puntuaciones");
+        }
+
+
+        //Fichero leído. Comprobando las últimas líneas (hasta 5)
+
+        if(datos_puntuaciones.size() > 5){  //Hay mas de 5 líneas. Nos quedamos con las últimas 5
+
+            line = datos_puntuaciones.get(datos_puntuaciones.size()-1); //Última línea
+            RowData = line.split(","); //Separamos por comas
+            if(RowData.length >3){  //La línea leída tiene indices de verbos fallados
+                int numero_fallos = RowData.length -3;
+                for(int i=3; i<numero_fallos;i++{
+
+                }
+            }
+        }else{                              //No hay mas de 5 líneas. Se toman todos los datos leídos
+
+        }
+
+    }
+
+
     public void jugar(){
 
         //Para la generación de números:
