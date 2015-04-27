@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 
 public class TrainingAreaInicio extends ActionBarActivity {
 
@@ -86,6 +90,18 @@ public class TrainingAreaInicio extends ActionBarActivity {
                 intent = new Intent(TrainingAreaInicio.this, Resultados.class);
                 startActivity(intent);
                 return true;
+
+            case R.id.Menu_Tr_Opc3:
+                String fichero= "puntuaciones.csv";
+                FileOutputStream flujo_fichero;
+                try {
+                    flujo_fichero = openFileOutput(fichero, MODE_PRIVATE);
+                    flujo_fichero.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             default:
                 return super.onOptionsItemSelected(item);
