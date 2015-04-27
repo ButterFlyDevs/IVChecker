@@ -108,6 +108,7 @@ public class JuegoTraining extends ActionBarActivity {
 
         prepararJuego();
         leerVerbos();
+        topFallosVerbos();
         jugar();
         actualizarProgreso();
 
@@ -217,7 +218,7 @@ public class JuegoTraining extends ActionBarActivity {
         HashSet<Integer> indices_encontrados_no_repetidos_hash; //Copia el ArrayList de indices_encontrados sin repetidos
         ArrayList<Integer> indices_encontrados_no_repetidos = new ArrayList<>();
         //Variable temporal para ordenar los verbos
-        ArrayList<VerbosFallados> verbosfallados = new ArrayList<>();
+        ArrayList<VerbosFallados> verbosfallados = null;
 
         //Leer el fichero puntuaciones.csv en busca de las últimas líneas
         try {
@@ -294,6 +295,8 @@ public class JuegoTraining extends ActionBarActivity {
         });
 
         //La lista ya está ordenada. Solo queda pasarlo al array de la clase JuegoTraining
+        if(verbosfallados.size()>0)
+            fallos_juegos_anteriores= new ArrayList<>();
         for(int i=0; i<verbosfallados.size();i++)
             this.fallos_juegos_anteriores.add(verbosfallados.get(i).indice_verbo);
     }
@@ -305,7 +308,7 @@ public class JuegoTraining extends ActionBarActivity {
         Random rnd = new Random();
 
         //Se preguntaran los verbos más fallados mientras haya verbos en esa lista. Si se acaba la lista, se preguntará aleatorio.
-        if(this.numPartida <= this.fallos_juegos_anteriores.size())
+        if(this.numPartida <= this.fallos_juegos_anteriores.size() && fallos_juegos_anteriores!=null)
             numVerbo = fallos_juegos_anteriores.get(numPartida);
         else
             //Generamos el verbo a mostrar (en función del tamaño de lista)
