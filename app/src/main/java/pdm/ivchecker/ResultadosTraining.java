@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -32,13 +34,17 @@ public class ResultadosTraining extends ActionBarActivity {
     TextView total_acertados;
     TextView total_fallados;
     TextView tipo_lista;
-    TextView nivel_preguntado;
     TextView verbos_fallados;
 
+    private LinearLayout layout;
+    private ScrollView scroll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados_training);
+
+        layout = (LinearLayout) findViewById(R.id.layoutPrincipalResultadosTraining);
+        scroll = (ScrollView) findViewById(R.id.scrollLayout);
         //Para que no se muestre la ActionBar.
         getSupportActionBar().hide();
         //Para que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
@@ -53,7 +59,6 @@ public class ResultadosTraining extends ActionBarActivity {
         total_fallados = (TextView) findViewById(R.id.etiqueta_verbos_fallados);
         total_acertados = (TextView) findViewById(R.id.etiqueta_verbos_acertados);
         tipo_lista = (TextView) findViewById(R.id.tipo_lista);
-        nivel_preguntado = (TextView) findViewById(R.id.nivel_entrenamiento);
         verbos_fallados = (TextView) findViewById(R.id.lista_verbos_fallados);
 
         //Texto lista
@@ -62,8 +67,7 @@ public class ResultadosTraining extends ActionBarActivity {
             case 2: tipo_lista.setText("List: Medium List"); break;
             default: tipo_lista.setText("List: Hard List"); break;
         }
-        //Texto nivel
-        nivel_preguntado.setText("Level: "+intent.getIntExtra("nivel", 0));
+
         //Texto verbos
         total_verbos.setText("Total verbs: "+intent.getIntExtra("NUMERO_VERBOS_PREGUNTADOS",0));
         total_fallados.setText("Misses: "+(intent.getIntExtra("NUMERO_VERBOS_PREGUNTADOS",0)
@@ -105,6 +109,12 @@ public class ResultadosTraining extends ActionBarActivity {
 
         grafico.getBorderPaint().setColor(Color.TRANSPARENT);
         grafico.getBackgroundPaint().setColor(Color.TRANSPARENT);
+
+        layout.invalidate();
+        scroll.invalidate();
+        layout.requestLayout();
+        scroll.requestLayout();
+
     }
 
 
