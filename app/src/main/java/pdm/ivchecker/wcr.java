@@ -31,7 +31,7 @@ public class wcr extends ActionBarActivity {
         rankingUsuarios=(TextView)findViewById(R.id.rankingUsuarios);
         rankingUsuarios.append("\n\n\n\n\n");
 
-        System.out.println("Antes");
+        System.out.println("Antes"); 
 
 
 
