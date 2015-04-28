@@ -2,39 +2,46 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\JOSE ANTONIO\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="C:\Users\JOSE ANTONIO\Documents\PDM\IVChecker\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-52a4129acb78ce62e2bc126ca7fab883b5e60d81.jar" />
-    </item>
-    <item
-        jar="C:\Users\JOSE ANTONIO\Documents\PDM\IVChecker\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="C:\Users\JOSE ANTONIO\Documents\PDM\IVChecker\app\build\intermediates\pre-dexed\debug\classes-8f232a912b9a3c9daf8364f9cddff51e1e775e44.jar" />
-    </item>
-    <item
-        jar="C:\Users\JOSE ANTONIO\Documents\PDM\IVChecker\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="C:\Users\JOSE ANTONIO\Documents\PDM\IVChecker\app\build\intermediates\pre-dexed\debug\classes-81534527eb176c6bbe96a31a8884fddb19e13df3.jar" />
-    </item>
-    <item
-        jar="C:\Users\JOSE ANTONIO\.gradle\caches\modules-2\files-2.1\com.androidplot\androidplot-core\0.6.1\3db0daea52375b26bfa61c59b8df93950bdefbbc\androidplot-core-0.6.1.jar"
+        jar="/home/juan/.gradle/caches/modules-2/files-2.1/com.androidplot/androidplot-core/0.6.1/3db0daea52375b26bfa61c59b8df93950bdefbbc/androidplot-core-0.6.1.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="3db0daea52375b26bfa61c59b8df93950bdefbbc">
-        <dex dex="C:\Users\JOSE ANTONIO\Documents\PDM\IVChecker\app\build\intermediates\pre-dexed\debug\androidplot-core-0.6.1-749acfb2144d0d7f4314365131a79597c8a21328.jar" />
+        <dex dex="/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/pre-dexed/debug/androidplot-core-0.6.1-3f1a7e8d91eb1d1f603bc7e1375af5ce572cc451.jar" />
     </item>
     <item
-        jar="C:\Users\JOSE ANTONIO\Documents\PDM\IVChecker\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jar="/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/libs/postgresql-9.4-1201.jdbc4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b46544ef0eaf0405504089dcc71f36e3f190ef09">
+        <dex dex="/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/pre-dexed/debug/postgresql-9.4-1201.jdbc4-9001546355c8eb4f74bb477d7e90654575b43e10.jar" />
+    </item>
+    <item
+        jar="/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/pre-dexed/debug/classes-dea9c73e64242bc529f35bf8b744de6117f956e9.jar" />
+    </item>
+    <item
+        jar="/home/juan/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-67bf039e529c2d8dce40571fd7fbb6d5eb4da028.jar" />
+    </item>
+    <item
+        jar="/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="C:\Users\JOSE ANTONIO\Documents\PDM\IVChecker\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-5ca157affe716c8415e69bd4450e7669272d9f3c.jar" />
+        <dex dex="/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-b57794f8242f3d1b05516b51e0ff0e0fd899d0f2.jar" />
+    </item>
+    <item
+        jar="/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/home/juan/Documentos/SegundoCuatrimestre1415/PDM/IVChecker/app/build/intermediates/pre-dexed/debug/classes-30dc8f765a438cf6b40871cb0ff538da0275f37b.jar" />
     </item>
 
 </items>

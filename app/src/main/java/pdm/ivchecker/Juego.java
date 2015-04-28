@@ -43,7 +43,7 @@ public class Juego extends ActionBarActivity {
     private Button btnNext;
     private EditText campoVerboIntroducidoA, campoVerboIntroducidoB;
 
-    private TextView infinitivo, pasado, participio, puntos;
+    private TextView infinitivo, pasado, participio, puntos, textNivel;
     private ImageView vida1, vida2, vida3; // vida4, vida5;
 
 
@@ -259,7 +259,10 @@ public class Juego extends ActionBarActivity {
 
         //Recibido desde otra actividad
         intent = getIntent();
-        nivel=intent.getIntExtra("nivel", 0); //El nivel que nos dice la aplicación anterior.
+
+        nivel=intent.getIntExtra("nivel", 0); //El nivel que nos dice la activity anterior.
+
+
         System.out.println("Nivel recibido en Juego: "+nivel);
 
         /* ## Referencias a los elementos del layout (vista) ## */
@@ -290,6 +293,14 @@ public class Juego extends ActionBarActivity {
 
         //Al campo de los puntos
         puntos=(TextView)findViewById(R.id.viewPuntos);
+
+        //El texto del nivel:
+        textNivel=(TextView)findViewById(R.id.textLevel);
+
+
+        //Setemos el textView de nivel para que aparezca el nivel en el que estamos jugando:
+        textNivel.setText("Level "+nivel);
+
        // puntos.setText(Integer.toString(0));
 
         //A las imágenes de las vidas:
@@ -446,7 +457,7 @@ public class Juego extends ActionBarActivity {
                         //Si se han completado todos los niveles (se ha acabado el juego) vamos a una pantalla de resultados:.
                         else if (nivel > 15) {
                             //Creamos el intent:
-                            Intent intent = new Intent(Juego.this, Resultados.class);
+                            Intent intent = new Intent(Juego.this, Resultado.class);
 
                             //Creamos la información a pasar entre actividades:
                             Bundle b = new Bundle();
@@ -1156,7 +1167,8 @@ public class Juego extends ActionBarActivity {
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
 
-            Intent intent = new Intent(Juego.this, ResultadosTraining.class);
+            //Vamos a la clase Resultados.class
+            Intent intent = new Intent(Juego.this, Resultado.class);
             startActivity(intent);
 
         }

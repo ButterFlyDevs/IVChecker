@@ -56,6 +56,18 @@
                 android:src="@drawable/corazonvivo" />
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="textLevel"
+            android:id="@+id/textLevel"
+            android:layout_alignBottom="@+id/viewPuntos"
+            android:layout_toRightOf="@+id/viewPuntos"
+            android:layout_toEndOf="@+id/viewPuntos"
+            android:layout_marginLeft="61dp"
+            android:layout_marginStart="61dp" />
+
     </RelativeLayout>
 
     <TextView

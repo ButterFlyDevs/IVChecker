@@ -221,8 +221,8 @@ public class JuegoTraining extends ActionBarActivity {
                 line = reader.readLine();
                 if (line == null) break;
                 datos_puntuaciones.add(line);
-                String[] RowData = line.split(",");
-                System.out.println(RowData[0]);
+                String[] RowData2 = line.split(",");
+                System.out.println(RowData2[0]);
 
             }
             inputStream.close();
@@ -241,7 +241,7 @@ public class JuegoTraining extends ActionBarActivity {
             RowData = line.split(","); //Separamos por comas
             if(RowData.length >3){  //La línea leída tiene indices de verbos fallados
                 int numero_fallos = RowData.length -3;
-                for(int i=3; i<numero_fallos;i++{
+                for(int i=3; i<numero_fallos;i++){
 
                 }
             }

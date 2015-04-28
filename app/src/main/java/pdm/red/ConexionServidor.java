@@ -1,99 +1,203 @@
 package pdm.red;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.Socket;
+import android.content.Context;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 
 public class ConexionServidor {
 
-    private String host;
-    private int puerto;
+    private List<String>ranking;
+    private int puntuacionJugadorTMP;
+    private String nombreJugadorTMP;
 
     public ConexionServidor(){
         System.out.println("START CLIENT");
-        this.host="130.206.82.231";
-        this.puerto=1234;
+        this.puntuacionJugadorTMP=0;
+        this.nombreJugadorTMP="";
+        this.ranking=new ArrayList();
+    }
+
+    private void setPuntuacionJugador(int puntuacion){
+        puntuacionJugadorTMP=puntuacion;
+    }
+    private int getPuntuacionJugador(){
+        return puntuacionJugadorTMP;
+    }
+    private void setNombreJugadorTMP(String nombre){
+        nombreJugadorTMP=nombre;
+    }
+    private String getNombreJugadorTMP(){
+        return nombreJugadorTMP;
+    }
+
+
+    public String recorteNombre(String nombre){
+        //Esto siempre dependerá de nuestra base de datos.
+        if(nombre.length()>10) {
+            return nombre.substring(0, 9);
+
+        }else{
+            return nombre;
+        }
+
     }
 
     public void enviaPuntuacion(String alias, int puntos){
-        try{
-            //Se intenta realizar la conexión con el socket a la dirección dada por el puerto dado.
-            Socket socket = new Socket (host, puerto);
-            //Creamos dos buffer de datos, uno de entrada desde el socket y otro de salida por el socket.
-            //Con el de entrada recibimos los datos
-            BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            //Con el de salida envaimos los datos.
-            PrintWriter salida = new PrintWriter( new OutputStreamWriter(socket.getOutputStream()),true);
 
-            //ENVIAMOS nuestros datos al servidor
-            salida.println(alias+" "+puntos);
+        /*
+        El campo nombre de nuestra base de datos tiene una limitación (10char) por lo que podremos permitir que los nombres tenan mayor longitud,
+        para asegurarnos de esto llamaremos siempre a la función recorteNombre que en el caso de que excedan eliminará los carácteres necesarios.
+         */
+        alias=recorteNombre(alias);
 
-            //Recibimos la respuesta
-            String respuesta=entrada.readLine();
 
-                /*Si la respuesta del servidor es OK */
-            if(respuesta.equals("OK")){
-                System.out.println("Datos enviados.");
-            }
-            //Cerramos la conexión con el servidor y cerramos el socket.
-            socket.close();
+        setNombreJugadorTMP(alias);
+        setPuntuacionJugador(puntos);
 
-        } catch(IOException e){
-
+        sqlThreadintroducirPuntuacion.start();
+        //Forzamos a que la ejecución de la hebra termine antes de continuar:
+        try {
+            sqlThreadintroducirPuntuacion.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
+
     }
 
     public List<String> pedirRanking(){
 
-        List<String>ranking=new ArrayList();
+        //Lanzamos la conexión a la base de datos y la petición de los datos en una hebra (debe de ser así para que funcione):
+        sqlThreadpedirRanking.start();
 
-        Vector<String> result = new Vector<String>();
-        String respuesta="";
-
+        //Forzamos a que la ejecución de la hebra termine antes de continuar:
         try {
-            //Conexion al servidor
-            Socket sk = new Socket(host, puerto);
-
-
-            BufferedReader entrada =   new BufferedReader(new InputStreamReader(sk.getInputStream()));
-            PrintWriter salida = new PrintWriter(new OutputStreamWriter(sk.getOutputStream()),true);
-
-            //Le pedimos al servidor la lista de puntuaciones enviándole el string PUNTUACIONES
-            salida.println("PUNTUACIONES");
-            //Número de datos rescatados de la entrada.
-            int n = 0;
-            //Declaramos un string donde almacenar partes de la respuesta que vendrá por "entrada"
-
-
-            // Extracción de los datos "linea a linea".
-            do {
-                respuesta = entrada.readLine();
-                if (respuesta != null) { ranking.add(respuesta);/*result.add(respuesta);*/ n++; }
-
-                //Mientras no se encuentre con una linea vacía se repite el proceso.
-            } while ( respuesta != null);
-
-            //Se cierra el proceso de conexión con el servidor.
-            sk.close();
-
-        } catch (Exception e) {
-            //Si la conexión falla se muestra este mensaje
-            System.out.println("Fallo en la conexión al servidor: Fail"+e);
-            return null;
+            sqlThreadpedirRanking.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-
-              /*
-              System.out.println(result.size());
-              for(int i=0; i<result.size(); i++) System.out.println(result.get(i));
-              */
+        //Devolvemos el ranking que es una variable pribada de clase
         return ranking;
 
     }
+
+
+
+    Thread sqlThreadpedirRanking = new Thread() {
+        public void run() {
+
+
+            try{
+                Context mContext;
+                //  mContext.getResources().getClass()
+                //Registramos el driver:
+
+                System.out.println(Class.forName("org.postgresql.Driver"));
+
+                System.out.println("Cargado driver de la base de datos!!");
+            }
+            catch(java.lang.ClassNotFoundException e){
+                System.err.println("Imposible encontrar driver del motor: ");
+                e.printStackTrace();
+            }
+
+            String url="jdbc:postgresql://horton.elephantsql.com:5432/idviomlw";
+            String username = "idviomlw";
+            String password = "CiOKqiaqBk6FXQzDAVbEUbP-Kj5Oeopb";
+            // jdbc:postgresql://host:port/database";
+            try{
+
+                System.out.println("Ejecutando la conexión");
+                //Establecemos la conexión:
+                Connection db = DriverManager.getConnection(url, username, password);
+                Statement st = db.createStatement();
+
+                //Creamos la tabla
+                //String orden="CREATE TABLE puntuaciones (nombre varchar(10), puntuacion integer)";
+                //Introducimos datos
+                //ResultSet rs = st.executeQuery("INSERT INTO puntuaciones VALUES ( 'pepe', 47857)");
+
+
+                ResultSet rs = st.executeQuery("SELECT * FROM puntuaciones");
+
+                while (rs.next()) {
+                    System.out.print("Nombre: ");
+                    System.out.println(rs.getString(1));
+                    System.out.print("Puntuación: ");
+                    System.out.println(rs.getString(2));
+                    //Cargamos los datos que obtenemos en la variable ranking propia del objeto que luego devolveremos:
+                    ranking.add(rs.getString(1)+" "+rs.getString(2));
+
+                }
+                System.out.println("añadidos "+ranking.size()+" elementos a ranking");
+
+
+                rs.close();
+                st.close();
+                db.close();
+
+                System.out.println("Conexión terminada");
+
+
+            }catch (java.sql.SQLException e) {
+                System.out.println(e.getMessage()+e.getErrorCode()+e);
+            }
+        }
+    };
+
+    Thread sqlThreadintroducirPuntuacion = new Thread() {
+        public void run() {
+
+
+            try{
+
+                //Registramos el driver:
+                System.out.println(Class.forName("org.postgresql.Driver"));
+
+                System.out.println("Cargado driver de la base de datos!!");
+            }
+            catch(java.lang.ClassNotFoundException e){
+                System.err.println("Imposible encontrar driver del motor: ");
+                e.printStackTrace();
+            }
+
+            String url="jdbc:postgresql://horton.elephantsql.com:5432/idviomlw";
+            String username = "idviomlw";
+            String password = "CiOKqiaqBk6FXQzDAVbEUbP-Kj5Oeopb";
+            // jdbc:postgresql://host:port/database";
+            try{
+
+                System.out.println("Ejecutando la conexión");
+                //Establecemos la conexión:
+                Connection db = DriverManager.getConnection(url, username, password);
+                Statement st = db.createStatement();
+
+                System.out.println(ranking.size()+" elementos en ranking. ANTES");
+
+                String query="INSERT INTO puntuaciones VALUES ( '"+getNombreJugadorTMP()+"', "+getPuntuacionJugador()+")";
+
+                //Introducimos datos
+                ResultSet rs = st.executeQuery(query);
+
+                System.out.println(ranking.size()+" elementos en ranking. DESPUÉS");
+
+
+                rs.close();
+                st.close();
+                db.close();
+
+                System.out.println("Conexión terminada");
+
+
+            }catch (java.sql.SQLException e) {
+                System.out.println(e.getMessage()+e.getErrorCode()+e);
+            }
+        }
+    };
+
 }

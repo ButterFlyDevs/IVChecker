@@ -31,7 +31,23 @@ public class wcr extends ActionBarActivity {
         rankingUsuarios=(TextView)findViewById(R.id.rankingUsuarios);
         rankingUsuarios.append("\n\n\n\n\n");
 
+        System.out.println("Antes");
+
+
+
+        //Introducción de datos de prueba:
+        // ######### BORRAME ##############
+        miConexion.enviaPuntuacion("superprueba",20000000);
+        // ######### BORRAME ##############
+
+
+        //Petición a la función pedirRanking de la clase ConexionServidor.java
         ranking=miConexion.pedirRanking();
+
+        System.out.println("Despues");
+
+        System.out.println("Recibidos "+ranking.size()+" elementos");
+
         if(ranking!=null) {
 
             int n = 1;
