@@ -13,7 +13,7 @@
         android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-    />
+        android:textStyle="bold" />
 
     <ImageView
         android:layout_width="364dp"
@@ -26,5 +26,61 @@
         android:layout_marginBottom="62dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:id="@+id/tabla"
+        android:layout_below="@+id/rankingUsuarios"
+        android:layout_toRightOf="@+id/rankingUsuarios"
+        android:layout_toEndOf="@+id/rankingUsuarios"
+        android:layout_marginTop="100dp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Pos"
+                android:id="@+id/columnaPosicion"
+                android:layout_column="0"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nombre"
+                android:id="@+id/columnaNombre"
+                android:layout_column="1"
+                android:layout_marginLeft="30dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Puntos"
+                android:id="@+id/columnaPuntos"
+                android:layout_column="2"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Pais"
+                android:id="@+id/columnaPais"
+                android:layout_column="3"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold" />
+        </TableRow>
+    </TableLayout>
 
 </RelativeLayout>

@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -58,6 +59,8 @@ public class Juego extends ActionBarActivity {
     private RelativeLayout layoutInfinitivo, layoutPasado, layoutParticipio;
 
     private Random rnd;
+
+    private boolean finPartida=false;
 
     //Número de verbos de las listas
     private int numVerbosListaSoft, numVerbosListaMedium, numVerbosListaHard;
@@ -263,6 +266,11 @@ public class Juego extends ActionBarActivity {
         nivel=intent.getIntExtra("nivel", 0); //El nivel que nos dice la activity anterior.
 
 
+
+
+
+
+
         System.out.println("Nivel recibido en Juego: "+nivel);
 
         /* ## Referencias a los elementos del layout (vista) ## */
@@ -280,6 +288,9 @@ public class Juego extends ActionBarActivity {
         //Referencias a los layouts de las cajas de texto EditText:
         layoutCampoVerboIntroducidoA=(LinearLayout)findViewById(R.id.LinearLayoutA);
         layoutCampoVerboIntroducidoB=(LinearLayout)findViewById(R.id.LinearLayoutB);
+
+
+
 
 
 
@@ -307,13 +318,7 @@ public class Juego extends ActionBarActivity {
         vida1=(ImageView)findViewById(R.id.vida1);
         vida2=(ImageView)findViewById(R.id.vida2);
         vida3=(ImageView)findViewById(R.id.vida3);
-      //  vida4=(ImageView)findViewById(R.id.vida4);
-      //  vida5=(ImageView)findViewById(R.id.vida5);
 
-
-        //Sólo se verán en un principio las primeras tres.
-      //  vida4.setVisibility(ImageView.INVISIBLE);
-        //    vida5.setVisibility(ImageView.VISIBLE);
 
 
         /* Fin de las referencias*/
@@ -328,6 +333,8 @@ public class Juego extends ActionBarActivity {
         //Almacenamos en la variable global el valor de la puntuación que teníamos:
         puntuacionPartida=prefe.getInt("puntos",0); //Los puntos de la partida
         nVidas=prefe.getInt("vidas",3); //El número de vidas de la partida. Si no devuelve nada es que acaba de empezar y es 3.
+
+
         //Insteramos esta puntuación en TextViewPuntos:
         puntos.setText(Integer.toString(puntuacionPartida));
 
@@ -408,75 +415,71 @@ public class Juego extends ActionBarActivity {
                     //Implementamos la acción del click sobre el botón next.
                     public void onClick(View v) {
 
+                        System.out.println("finPartida: "+finPartida);
+                        if (!finPartida) {
 
-                        //Comprobamos el verbo:
-                        comprobarVerbo();
+                            //Comprobamos el verbo:
+                            comprobarVerbo();
 
-                        //Limpiamos el contenido de los editText aunque dependiendo del nivel no se verán los dos:
-                        campoVerboIntroducidoA.setText("");
-                        campoVerboIntroducidoB.setText("");
+                            //Limpiamos el contenido de los editText aunque dependiendo del nivel no se verán los dos:
+                            campoVerboIntroducidoA.setText("");
+                            campoVerboIntroducidoB.setText("");
 
-                        //Aumentamos el número de la jugada en el nivel (10 verbos por nivel)
-                        jugadaEnNivel++;
+                            //Aumentamos el número de la jugada en el nivel (10 verbos por nivel)
+                            jugadaEnNivel++;
 
                         /*
                         10 jugadas por nivel!
                          */
-                        if(jugadaEnNivel>2) { //Si hemos completado las diez jugadas por nivel pasamos de nivel.
-                            nivel++; //Pasamos de nivel
-                            jugadaEnNivel=1; //Reiniciamos.
-                            //Nos vamos a la actividad que muestra el nivel:
-                            Intent intent = new Intent(Juego.this, juego_show_level.class);
 
-                            System.out.println("Vamos a show_level pasando nivel  "+nivel);
-                            //Vamos a la activity juego con el nivel 1
-                            intent.putExtra("nivel",nivel);
+                            //Si hemos completado las diez jugadas por nivel pasamos de nivel.
+                            if (jugadaEnNivel > 2) {
+                                nivel++; //Pasamos de nivel
+                                jugadaEnNivel = 1; //Reiniciamos.
+                                //Nos vamos a la actividad que muestra el nivel:
+                                Intent intent = new Intent(Juego.this, juego_show_level.class);
 
-                            //Antes de pasar de actividad guardamos los datos para que al volver a la actividad los tengamos disponibles:
-                            SharedPreferences.Editor editor=prefe.edit();
-                            editor.putInt("puntos",puntuacionPartida); //La puntuación de la partida
-                            editor.putInt("vidas",nVidas); //El número de vidas
-                            editor.commit();
+                                System.out.println("Vamos a show_level pasando nivel  " + nivel);
+                                //Vamos a la activity juego con el nivel 1
+                                intent.putExtra("nivel", nivel);
 
-                            System.out.println("Grabamos nivel: "+nivel+" y vidas: "+nVidas);
+                                //Antes de pasar de actividad guardamos los datos para que al volver a la actividad los tengamos disponibles:
+                                SharedPreferences.Editor editor = prefe.edit();
+                                editor.putInt("puntos", puntuacionPartida); //La puntuación de la partida
+                                editor.putInt("vidas", nVidas); //El número de vidas
+                                editor.commit();
+
+                                System.out.println("Grabamos nivel: " + nivel + " y vidas: " + nVidas);
 
 
-                            startActivity(intent);
+                                startActivity(intent);
+                            }
+
+                            //Si se han completado todos los niveles (se ha acabado el juego) vamos a una pantalla de resultados:.
+                            else if (nivel > 15) {
+                                //Creamos el intent:
+                                Intent intent = new Intent(Juego.this, Resultado.class);
+
+                                //Creamos la información a pasar entre actividades:
+                                Bundle b = new Bundle();
+                                b.putString("PUNTOS", String.valueOf(puntuacionPartida));
+
+                                //Añadimos la información al intent:
+                                intent.putExtras(b);
+
+                                //Nos vamos al activity resultados:
+                                startActivity(intent);
+                            }
+                            //Si no se han completado seguimos jugando!
+                            else
+                                //Si no estuviera dentro de la estructura else nos crearía una jugada antes de pasar de nivel.
+                                crearJugada();
+
+
                         }
-
-
-                        /*
-                        Hay que cambiar el flujo de ejecución...
-                        La implementación del botón no debería ser la que controlase el fin de la partida
-                        sino la lógica del juego.
-                        EL botón solo debe de llamar a jugar y que sea en jugar donde se desarrolle
-                        la lógica del juego.
-                         */
-
-
-                        //Si se han completado todos los niveles (se ha acabado el juego) vamos a una pantalla de resultados:.
-                        else if (nivel > 15) {
-                            //Creamos el intent:
-                            Intent intent = new Intent(Juego.this, Resultado.class);
-
-                            //Creamos la información a pasar entre actividades:
-                            Bundle b = new Bundle();
-                            b.putString("PUNTOS", String.valueOf(puntuacionPartida));
-
-                            //Añadimos la información al intent:
-                            intent.putExtras(b);
-
-                            //Nos vamos al activity resultados:
-                            startActivity(intent);
-                        }
-                        //Si no se han completado seguimos jugando!
-                        else
-                            //Si no estuviera dentro de la estructura else nos crearía una jugada antes de pasar de nivel.
-                            crearJugada();
-
-
                     }
                 }
+
         ); //Fin del manejador del botón next.
 
         this.cargarVerbos();
@@ -487,6 +490,7 @@ public class Juego extends ActionBarActivity {
 
 
     }
+
 
 
     @Override
@@ -1159,17 +1163,31 @@ public class Juego extends ActionBarActivity {
         //Si no le queda ninguna vida:
         else if(this.nVidas==0) {
 
+            System.out.println("Entrando en NVIDAS==0");
+            finPartida=true;
+
+
+            //Si no nos quedan vidas se acabó el juego y vamos a la sección de resultados.
+
+
+            //Vamos a la clase Resultados.class
+            Intent intent = new Intent(Juego.this, Resultado.class);
+
+            //Enviamos la puntuación:
+            intent.putExtra("puntos",this.puntuacionPartida);
+
+            startActivity(intent);
+            this.onStop();
+
             //Mostramos un mensaje toast! YOU ARE DEAD!
+
             Context context = getApplicationContext();
             CharSequence text = "YOU ARE DEAD!";
-            int duration = Toast.LENGTH_SHORT;
+            int duration = Toast.LENGTH_LONG;
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
 
-            //Vamos a la clase Resultados.class
-            Intent intent = new Intent(Juego.this, Resultado.class);
-            startActivity(intent);
 
         }
 

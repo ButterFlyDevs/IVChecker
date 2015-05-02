@@ -29,10 +29,6 @@
             android:label="@string/title_activity_juego" >
         </activity>
         <activity
-            android:name=".Resultados"
-            android:label="@string/title_activity_resultados" >
-        </activity>
-        <activity
             android:name=".About"
             android:label="@string/title_activity_about" >
         </activity>
@@ -50,7 +46,8 @@
         </activity>
         <activity
             android:name=".wcr"
-            android:label="@string/title_activity_wcr" >
+            android:label="@string/title_activity_wcr"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".juego_show_level"
@@ -63,6 +60,10 @@
         <activity
             android:name=".Resultado"
             android:label="@string/title_activity_resultado" >
+        </activity>
+        <activity
+            android:name=".ELIMINAME"
+            android:label="@string/title_activity_eliminame" >
         </activity>
     </application>
 

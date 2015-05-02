@@ -9,30 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
+
 public class ConexionServidor {
 
     private List<String>ranking;
-    private int puntuacionJugadorTMP;
-    private String nombreJugadorTMP;
+
+    private List<Jugador>rankingJugadores;
+
+    //Lo usamos como paliativo a no poder enviar datos a las hebras
+    private Jugador jugadorTMP = new Jugador();
 
     public ConexionServidor(){
         System.out.println("START CLIENT");
-        this.puntuacionJugadorTMP=0;
-        this.nombreJugadorTMP="";
         this.ranking=new ArrayList();
-    }
-
-    private void setPuntuacionJugador(int puntuacion){
-        puntuacionJugadorTMP=puntuacion;
-    }
-    private int getPuntuacionJugador(){
-        return puntuacionJugadorTMP;
-    }
-    private void setNombreJugadorTMP(String nombre){
-        nombreJugadorTMP=nombre;
-    }
-    private String getNombreJugadorTMP(){
-        return nombreJugadorTMP;
+        this.rankingJugadores=new ArrayList();
     }
 
 
@@ -47,7 +38,9 @@ public class ConexionServidor {
 
     }
 
-    public void enviaPuntuacion(String alias, int puntos){
+    public void enviaPuntuacion(String alias, int puntos, String pais){
+
+
 
         /*
         El campo nombre de nuestra base de datos tiene una limitación (10char) por lo que podremos permitir que los nombres tenan mayor longitud,
@@ -55,9 +48,11 @@ public class ConexionServidor {
          */
         alias=recorteNombre(alias);
 
+        jugadorTMP.setNombre(alias);
+        jugadorTMP.setPuntuacion(puntos);
+        jugadorTMP.setPais(pais);
 
-        setNombreJugadorTMP(alias);
-        setPuntuacionJugador(puntos);
+
 
         sqlThreadintroducirPuntuacion.start();
         //Forzamos a que la ejecución de la hebra termine antes de continuar:
@@ -84,6 +79,20 @@ public class ConexionServidor {
         //Devolvemos el ranking que es una variable pribada de clase
         return ranking;
 
+    }
+
+    public List<Jugador> pedirRankingNueva(){
+        //Lanzamos la conexión a la base de datos y la petición de los datos en una hebra (debe de ser así para que funcione):
+        sqlThreadpedirRanking.start();
+
+        //Forzamos a que la ejecución de la hebra termine antes de continuar:
+        try {
+            sqlThreadpedirRanking.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //Devolvemos el ranking que es una variable privada de clase
+        return rankingJugadores;
     }
 
 
@@ -123,7 +132,7 @@ public class ConexionServidor {
                 //ResultSet rs = st.executeQuery("INSERT INTO puntuaciones VALUES ( 'pepe', 47857)");
 
 
-                ResultSet rs = st.executeQuery("SELECT * FROM puntuaciones");
+                ResultSet rs = st.executeQuery("SELECT * FROM puntuaciones ORDER BY puntuacion DESC");
 
                 while (rs.next()) {
                     System.out.print("Nombre: ");
@@ -131,7 +140,9 @@ public class ConexionServidor {
                     System.out.print("Puntuación: ");
                     System.out.println(rs.getString(2));
                     //Cargamos los datos que obtenemos en la variable ranking propia del objeto que luego devolveremos:
-                    ranking.add(rs.getString(1)+" "+rs.getString(2));
+                   // ranking.add(rs.getString(1)+" "+rs.getString(2));
+                    //Probamos una nueva forma
+                    rankingJugadores.add(new Jugador(rs.getString(1), rs.getInt(2), rs.getString(3)));
 
                 }
                 System.out.println("añadidos "+ranking.size()+" elementos a ranking");
@@ -179,8 +190,8 @@ public class ConexionServidor {
 
                 System.out.println(ranking.size()+" elementos en ranking. ANTES");
 
-                String query="INSERT INTO puntuaciones VALUES ( '"+getNombreJugadorTMP()+"', "+getPuntuacionJugador()+")";
-
+                String query="INSERT INTO puntuaciones VALUES ('"+jugadorTMP.getNombre()+"',"+jugadorTMP.getPuntuacion()+",'"+jugadorTMP.getPais()+"')";
+                System.out.println(query);
                 //Introducimos datos
                 ResultSet rs = st.executeQuery(query);
 

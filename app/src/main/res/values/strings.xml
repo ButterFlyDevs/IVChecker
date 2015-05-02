@@ -21,5 +21,6 @@
     <string name="title_activity_juego_show_level">juego_show_level</string>
     <string name="title_activity_resultados_training">ResultadosTraining</string>
     <string name="title_activity_resultado">Resultado</string>
+    <string name="title_activity_eliminame">ELIMINAME</string>
 
 </resources>

@@ -1,32 +1,35 @@
 package pdm.ivchecker;
-
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-
-//Para las pantalla completa:
 import android.view.WindowManager;
-
 import android.widget.TextView;
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+
+
+/*
+¡¡¡¡¡¡
+Cuando añadimos anidado el horizontalScrollView ya no podemos centrar los datos en la pantalla
+como cuando no lo teníamos esto tiene que poder resolverse de alguna manera. !!!
+ */
+
 
 
 public class ListaVerbos extends ActionBarActivity {
 
 
     //Variable de texto donde se alamcenan los verbos para mostrarlos posteriormente:
-    private TextView txtVerbos;
+    private TextView textNombreLista, textNumero, textInfinitivo, textPasado, textParticipio;
+
+
+
     //Flujo de entrada para la lectura de fichero CSV
     private InputStream inputStream;
     BufferedReader reader;
@@ -50,28 +53,49 @@ public class ListaVerbos extends ActionBarActivity {
 
         //Abrimos el flujo con un buffer.
         reader = new BufferedReader(new InputStreamReader(inputStream));
+
         //Asociamos el textView del diseño con la variable aquí:
-        txtVerbos=(TextView)findViewById(R.id.TxtVerbos);
+        textNombreLista=(TextView)findViewById(R.id.textNombreLista);
+        textNumero=(TextView)findViewById(R.id.textNumero);
+        textInfinitivo=(TextView)findViewById(R.id.textInfinitivo);
+        textPasado=(TextView)findViewById(R.id.textPasado);
+        textParticipio=(TextView)findViewById(R.id.textParticipio);
 
 
         //Construimos la lista de verbos irregulares:
 
-        String infinitivo="";
-        String pasado="";
-        String participio="";
+        //Reseteamos los campos (para no tener los valores usados de muestra en la vista del diseño):
+        textNombreLista.setText("");
+        textNumero.setText("");
+        textInfinitivo.setText("");
+        textPasado.setText("");
+        textParticipio.setText("");
+
+
         int numero=1;
+
         try {
             String line;
-            txtVerbos.append(" ----- "+lista+" list ----- \n");
+            textNombreLista.append(lista+" list");
+            //Sacamos el número
+            line=reader.readLine();
+
             while(true){
+
                 line=reader.readLine();
                 if (line == null) break;
                 String[] RowData = line.split(",");
+                textNumero.append(numero+"\n");
+                textInfinitivo.append(RowData[0]+"\n");
+                textPasado.append(RowData[1]+"\n");
+                textParticipio.append(RowData[2]+"\n");
+                /*
                 infinitivo = RowData[0];
                 pasado = RowData[1];
                 participio = RowData[2];
                 //System.out.println(numero+"  "+infinitivo+" | "+pasado+" | "+participio+"\n");
                 txtVerbos.append(numero+"  "+infinitivo+" | "+pasado+" | "+participio+"\n");
+                */
                 numero++;
             }
             inputStream.close();

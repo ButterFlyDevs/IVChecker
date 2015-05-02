@@ -81,7 +81,7 @@ public class ActividadPrincipal extends ActionBarActivity {
 
             //Para ir al la actividad About
             case R.id.About:
-                intent = new Intent(ActividadPrincipal.this, About.class);
+                intent = new Intent(ActividadPrincipal.this, Resultado.class);
                 startActivity(intent);
                 return true;
 
