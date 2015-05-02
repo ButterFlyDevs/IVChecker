@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 
@@ -27,6 +29,13 @@ public class ActividadPrincipal extends ActionBarActivity {
 
         //Obtenemos una referencia a los controles de la interfaz.
         btnJugar=(Button)findViewById(R.id.BtnJugar);
+
+        //Cargamos la animacion desde R.anim folder
+        Animation animacion = AnimationUtils.loadAnimation(this, R.anim.animacionbotonplay);
+
+        //Lanzamos la animacion:
+        btnJugar.startAnimation(animacion);
+
 
 
         //Implementamos el evento click del botón btnJugar:
