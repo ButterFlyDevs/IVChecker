@@ -181,7 +181,6 @@
     <ViewStub
         android:id="@+id/viewStub"
         android:inflatedId="@+id/details"
-        android:layout="@layout/details"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 

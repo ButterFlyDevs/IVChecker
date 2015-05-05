@@ -87,7 +87,7 @@ public class TrainingAreaInicio extends ActionBarActivity {
 
             //Para ir a las estadisticas
             case R.id.Menu_Tr_Opc2:
-                intent = new Intent(TrainingAreaInicio.this, ResultadosTraining.class);
+                intent = new Intent(TrainingAreaInicio.this, HistorialPuntuacionTraining.class);
                 startActivity(intent);
                 return true;
 

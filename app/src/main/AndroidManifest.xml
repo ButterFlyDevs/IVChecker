@@ -65,6 +65,10 @@
             android:name=".ELIMINAME"
             android:label="@string/title_activity_eliminame" >
         </activity>
+        <activity
+            android:name=".HistorialPuntuacionTraining"
+            android:label="@string/title_activity_historial_puntuacion_training" >
+        </activity>
     </application>
 
 </manifest>
