@@ -1,11 +1,13 @@
 package pdm.ivchecker;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,7 +29,7 @@ public class ListaVerbos extends ActionBarActivity {
 
     //Variable de texto donde se alamcenan los verbos para mostrarlos posteriormente:
     private TextView textNombreLista, textNumero, textInfinitivo, textPasado, textParticipio;
-
+    private ScrollView scrollView;
 
 
     //Flujo de entrada para la lectura de fichero CSV
@@ -38,29 +40,25 @@ public class ListaVerbos extends ActionBarActivity {
     private void mostrarVerbos(String lista){
 
 
-        //Dependiendo de la elección se abre un fichero u otro:
+
+
+        //Dependiendo de la elección se abre un fichero u otro y cambiamos el color del fondo:
         if(lista.equals("soft")) {
             //Abrimos el flujo del fichero almacenado en la carpeta denro de res llamada raw con el nombre ivsoft
             inputStream = getResources().openRawResource(R.raw.ivsoft);
+            scrollView.setBackgroundColor(Color.rgb(255,228,169));
         }
         if(lista.equals("medium")){
             inputStream=getResources().openRawResource(R.raw.ivmedium);
+            scrollView.setBackgroundColor(Color.rgb(255,197,125));
         }
         if(lista.equals("hard")){
             inputStream=getResources().openRawResource(R.raw.ivhard);
+            scrollView.setBackgroundColor(Color.rgb(255,183,93));
         }
-
 
         //Abrimos el flujo con un buffer.
         reader = new BufferedReader(new InputStreamReader(inputStream));
-
-        //Asociamos el textView del diseño con la variable aquí:
-        textNombreLista=(TextView)findViewById(R.id.textNombreLista);
-        textNumero=(TextView)findViewById(R.id.textNumero);
-        textInfinitivo=(TextView)findViewById(R.id.textInfinitivo);
-        textPasado=(TextView)findViewById(R.id.textPasado);
-        textParticipio=(TextView)findViewById(R.id.textParticipio);
-
 
         //Construimos la lista de verbos irregulares:
 
@@ -116,6 +114,17 @@ public class ListaVerbos extends ActionBarActivity {
 
         //Lo primero que se hace es recoger los datos enviados a esta actividad.
         Bundle extras = getIntent().getExtras();
+
+
+        //Asociamos el textView del diseño con la variable aquí:
+        textNombreLista=(TextView)findViewById(R.id.textNombreLista);
+        textNumero=(TextView)findViewById(R.id.textNumero);
+        textInfinitivo=(TextView)findViewById(R.id.textInfinitivo);
+        textPasado=(TextView)findViewById(R.id.textPasado);
+        textParticipio=(TextView)findViewById(R.id.textParticipio);
+
+        scrollView=(ScrollView)findViewById(R.id.scrollView);
+
 
         /*
         Si no se han recibido datos porque es la primera vez que se abre el activity se muestra la lista

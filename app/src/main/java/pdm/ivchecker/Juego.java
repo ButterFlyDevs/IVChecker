@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -58,9 +60,11 @@ public class Juego extends ActionBarActivity {
 
     private RelativeLayout layoutInfinitivo, layoutPasado, layoutParticipio;
 
+    private ViewStub viewStub;
+
     private Random rnd;
 
-    private boolean finPartida=false;
+
 
     //Número de verbos de las listas
     private int numVerbosListaSoft, numVerbosListaMedium, numVerbosListaHard;
@@ -93,6 +97,7 @@ public class Juego extends ActionBarActivity {
         formaMisteriosa="";
         puntuacionPartida=0;
         nVidas=3;
+
         nivel=1;
 
         int defecto=0;
@@ -248,31 +253,7 @@ public class Juego extends ActionBarActivity {
     }
 
 
-
-    @Override
-    //Método llamada cuando se crea por primera vez la actividad
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_juego);
-
-        //Para que no se muestre la ActionBar.
-        getSupportActionBar().hide();
-        //Para que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        //Recibido desde otra actividad
-        intent = getIntent();
-
-        nivel=intent.getIntExtra("nivel", 0); //El nivel que nos dice la activity anterior.
-
-
-
-
-
-
-
-        System.out.println("Nivel recibido en Juego: "+nivel);
-
+    private void referenciaObjetosDeLaVista(){
         /* ## Referencias a los elementos del layout (vista) ## */
 
         //Obtenemos la referencia al botón de la vista "Next"
@@ -302,6 +283,7 @@ public class Juego extends ActionBarActivity {
 
 
 
+
         //Al campo de los puntos
         puntos=(TextView)findViewById(R.id.viewPuntos);
 
@@ -312,7 +294,7 @@ public class Juego extends ActionBarActivity {
         //Setemos el textView de nivel para que aparezca el nivel en el que estamos jugando:
         textNivel.setText("Level "+nivel);
 
-       // puntos.setText(Integer.toString(0));
+        // puntos.setText(Integer.toString(0));
 
         //A las imágenes de las vidas:
         vida1=(ImageView)findViewById(R.id.vida1);
@@ -322,20 +304,53 @@ public class Juego extends ActionBarActivity {
 
 
         /* Fin de las referencias*/
+    }
 
 
-        //Recuperación de datos almacenados:
+    @Override
+    //Método llamada cuando se crea por primera vez la actividad
+    protected void onCreate(Bundle savedInstanceState) {
+        //Llamamos al constructor del padre:
+            super.onCreate(savedInstanceState);
 
-        //Recuperación de datos almacenados:
-        prefe=getSharedPreferences("datos", Context.MODE_PRIVATE);
+        //Relacionamos esta actividad con el layout (vista) correspondiente:
+            setContentView(R.layout.activity_juego);
+
+        //Ajustamos la caracteristicas visuales de esta actividad
+            //Para que no se muestre la ActionBar.
+            getSupportActionBar().hide();
+            //Para que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        //Recibimos los datos de la actividad que nos invoca
+
+            intent = getIntent();
+            //Vamos a jugar en el nivel que nos dice la actividad que nos llama
+            nivel=intent.getIntExtra("nivel", 0);
+            System.out.println("Nivel recibido en Juego : "+nivel);
+
+        //Referenciamos todos los objetos de la vista para poder controlarlos:
+            referenciaObjetosDeLaVista();
+
+
+        /*
+        Si no es la primera vez que se arranca esta actividad puede que se hayan guardado datos
+         */
+            prefe=getSharedPreferences("datos", Context.MODE_PRIVATE);
 
         System.out.println("Recibido del Prefe getInt: "+prefe.getInt("puntos",0));
+
         //Almacenamos en la variable global el valor de la puntuación que teníamos:
         puntuacionPartida=prefe.getInt("puntos",0); //Los puntos de la partida
+
         nVidas=prefe.getInt("vidas",3); //El número de vidas de la partida. Si no devuelve nada es que acaba de empezar y es 3.
 
 
-        //Insteramos esta puntuación en TextViewPuntos:
+
+
+
+
+            //Insteramos esta puntuación en TextViewPuntos:
         puntos.setText(Integer.toString(puntuacionPartida));
 
         System.out.println("Recibido del Prefe getInt: "+puntuacionPartida+" puntos "+nVidas+" vidas");
@@ -415,8 +430,7 @@ public class Juego extends ActionBarActivity {
                     //Implementamos la acción del click sobre el botón next.
                     public void onClick(View v) {
 
-                        System.out.println("finPartida: "+finPartida);
-                        if (!finPartida) {
+
 
                             //Comprobamos el verbo:
                             comprobarVerbo();
@@ -439,6 +453,8 @@ public class Juego extends ActionBarActivity {
                                 //Nos vamos a la actividad que muestra el nivel:
                                 Intent intent = new Intent(Juego.this, juego_show_level.class);
 
+
+
                                 System.out.println("Vamos a show_level pasando nivel  " + nivel);
                                 //Vamos a la activity juego con el nivel 1
                                 intent.putExtra("nivel", nivel);
@@ -453,6 +469,8 @@ public class Juego extends ActionBarActivity {
 
 
                                 startActivity(intent);
+
+
                             }
 
                             //Si se han completado todos los niveles (se ha acabado el juego) vamos a una pantalla de resultados:.
@@ -476,7 +494,7 @@ public class Juego extends ActionBarActivity {
                                 crearJugada();
 
 
-                        }
+
                     }
                 }
 
@@ -485,12 +503,24 @@ public class Juego extends ActionBarActivity {
         this.cargarVerbos();
 
 
-        //Después de cargar los datos comienza el juego:
-        this.crearJugada();
+        this.crearJugada(); //Después de cargar los datos comienza el juego:
+
 
 
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("La actividad ha sido resumida");
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        System.out.println("La actividad ha sido restarted");
+    }
 
 
     @Override
@@ -1161,34 +1191,56 @@ public class Juego extends ActionBarActivity {
             nVidas--;
         }
         //Si no le queda ninguna vida:
-        else if(this.nVidas==0) {
-
-            System.out.println("Entrando en NVIDAS==0");
-            finPartida=true;
+        else {
+            if (this.nVidas == 0) {
 
 
-            //Si no nos quedan vidas se acabó el juego y vamos a la sección de resultados.
 
 
-            //Vamos a la clase Resultados.class
-            Intent intent = new Intent(Juego.this, Resultado.class);
 
-            //Enviamos la puntuación:
-            intent.putExtra("puntos",this.puntuacionPartida);
-
-            startActivity(intent);
-            this.onStop();
-
-            //Mostramos un mensaje toast! YOU ARE DEAD!
-
-            Context context = getApplicationContext();
-            CharSequence text = "YOU ARE DEAD!";
-            int duration = Toast.LENGTH_LONG;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
+                System.out.println("Entrando en sección de fin de partida");
 
 
+
+
+                //Si no nos quedan vidas se acabó el juego y vamos a la sección de resultados.
+
+
+                //Vamos a la clase Resultados.class
+                Intent intent = new Intent(Juego.this, Resultado.class);
+
+                //Enviamos la puntuación:
+                intent.putExtra("puntos", this.puntuacionPartida);
+
+                startActivity(intent);
+
+                //  SystemClock.sleep(5000);
+
+                //Mostramos un mensaje toast! YOU ARE DEAD!
+                Context context = getApplicationContext();
+                CharSequence text = "YOU ARE DEAD! FIN de PARTIDA";
+                int duration = Toast.LENGTH_LONG;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+
+
+                //finish();
+                //onDestroy();
+
+                /*
+                LinearLayout principal = (LinearLayout)findViewById(R.id.layoutPrincipal);
+                principal.setVisibility(View.INVISIBLE);
+
+                viewStub=(ViewStub)findViewById(R.id.viewStub);
+                //ViewStub viewInflated = (ViewStub) (findViewById(R.id.viewStub));
+                //viewInflated.inflate();
+                View viewInflated = viewStub.inflate();
+                SystemClock.sleep(5000);
+                */
+
+            }
         }
 
 
@@ -1324,6 +1376,8 @@ public class Juego extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_juego, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

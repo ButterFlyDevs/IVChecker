@@ -151,6 +151,9 @@ public class juego_show_level extends ActionBarActivity {
                 intent.putExtra("nivel", nivel);
 
                 startActivity(intent);
+
+                //Aplicacion de transicion animada entre activities:
+                overridePendingTransition(R.anim.zoom_back_out, R.anim.zoom_back_in);
             }
         }, 1500);
 
