@@ -319,8 +319,10 @@ public class JuegoTraining extends ActionBarActivity {
 
         //Se preguntaran los verbos más fallados mientras haya verbos en esa lista. Si se acaba la lista, se preguntará aleatorio.
         if(this.fallos_juegos_anteriores!=null) {
-            if (this.numPartida <= this.fallos_juegos_anteriores.size())
+            if (this.numPartida < this.fallos_juegos_anteriores.size())
                 numVerbo = fallos_juegos_anteriores.get(numPartida);
+            else
+                numVerbo = rnd.nextInt(this.total_verbos_lista);
         }
         else
             //Generamos el verbo a mostrar (en función del tamaño de lista)

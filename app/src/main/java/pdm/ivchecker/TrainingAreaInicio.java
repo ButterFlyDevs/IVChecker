@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -97,6 +98,7 @@ public class TrainingAreaInicio extends ActionBarActivity {
                 try {
                     flujo_fichero = openFileOutput(fichero, MODE_PRIVATE);
                     flujo_fichero.close();
+                    Toast.makeText(getApplicationContext(), "Archivo de puntuaciones borrado", Toast.LENGTH_SHORT).show();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
