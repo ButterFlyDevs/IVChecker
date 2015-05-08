@@ -55,7 +55,8 @@ public class JuegoTraining extends ActionBarActivity {
     //Variable Intent con los datos que TrainingAreaInicio ha pasado
     Intent intent;
     //Variables de control del entrenamiento
-    private int nivel=0, lista_a_preguntar=0,numero_verbos=0;
+    private int  lista_a_preguntar=0,numero_verbos=0;
+    boolean smartVerb=true;
 
 
     @Override
@@ -121,14 +122,18 @@ public class JuegoTraining extends ActionBarActivity {
      */
     private void prepararJuego(){
         Random rnd = new Random();
+        int respuesta_smartVerb;
         //Obtencion de valores
-        this.nivel=intent.getIntExtra("nivel",0);
+        respuesta_smartVerb=intent.getIntExtra("smartVerb",0);
+        if(respuesta_smartVerb==0)
+            this.smartVerb=true;
+        else
+            this.smartVerb=false;
+
         this.lista_a_preguntar = intent.getIntExtra("lista",0);
         this.numero_verbos = intent.getIntExtra("numero_verbos",0);
 
         //Si los valores son 0, generamos los aleatorios:
-        if(nivel ==0)
-            nivel = rnd.nextInt(16);    //Genera unn numero entre 0 (inbluido) y 15 (16 excluido)
         if(lista_a_preguntar==0)
             lista_a_preguntar = rnd.nextInt(3) +1;
         if(numero_verbos==0)
@@ -186,7 +191,7 @@ public class JuegoTraining extends ActionBarActivity {
             Puntuacion, Lista preguntada, Nivel,{Lista de verbos fallados}
              */
             String linea;
-            linea = String.valueOf(this.puntuacionJugada)+","+String.valueOf(this.lista_a_preguntar)+","+String.valueOf(this.nivel);
+            linea = String.valueOf(this.puntuacionJugada)+","+String.valueOf(this.lista_a_preguntar)+","+String.valueOf(0);
             if(this.verbos_fallados!=null){
                 for(int i=0; i<verbos_fallados.size();i++)
                     linea = linea+","+verbos_fallados.get(i);
@@ -209,104 +214,110 @@ public class JuegoTraining extends ActionBarActivity {
     que más ha fallado el usuario.
      */
     private void topFallosVerbos(){
-        //Variable temporal para almacenar el contenido del fichero
-        ArrayList<String> datos_puntuaciones = new ArrayList<>();
-        String line;    //Linea leída
-        String[] RowData;   //Datos de línea separados en columnas
-        ArrayList<Integer> indices_encontrados = new ArrayList<>(); //Vector con todos los indices de verbos encontrados (es temporal)
-        //Variables usadas para crear un ArrayList SIN repetidos
-        HashSet<Integer> indices_encontrados_no_repetidos_hash; //Copia el ArrayList de indices_encontrados sin repetidos
-        ArrayList<Integer> indices_encontrados_no_repetidos = new ArrayList<>();
-        //Variable temporal para ordenar los verbos
-        ArrayList<VerbosFallados> verbosfallados = new ArrayList<>();
+        if(this.smartVerb)
+            System.out.println("SMARTVERB ACTIVADO!");
+        else
+            System.out.println("SMARTVERB DESACTIVADO!");
 
-        //Leer el fichero puntuaciones.csv en busca de las últimas líneas
-        try {
-            //Apertura del fichero
-            String fichero = "puntuaciones.csv";
-            InputStream inputStream = openFileInput(fichero);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        if(this.smartVerb) {
+            //Variable temporal para almacenar el contenido del fichero
+            ArrayList<String> datos_puntuaciones = new ArrayList<>();
+            String line;    //Linea leída
+            String[] RowData;   //Datos de línea separados en columnas
+            ArrayList<Integer> indices_encontrados = new ArrayList<>(); //Vector con todos los indices de verbos encontrados (es temporal)
+            //Variables usadas para crear un ArrayList SIN repetidos
+            HashSet<Integer> indices_encontrados_no_repetidos_hash; //Copia el ArrayList de indices_encontrados sin repetidos
+            ArrayList<Integer> indices_encontrados_no_repetidos = new ArrayList<>();
+            //Variable temporal para ordenar los verbos
+            ArrayList<VerbosFallados> verbosfallados = new ArrayList<>();
 
-            while (true) {
-                line = reader.readLine();
-                if (line == null) break;
-                datos_puntuaciones.add(line);
-                System.out.println("Liinea"+line);
-            }
-            inputStream.close();
-        }
-        catch (IOException ioe){
-            ioe.printStackTrace();
-            System.out.println("ERROR: No ha sido posible abrir el fichero de puntuaciones");
-        }
+            //Leer el fichero puntuaciones.csv en busca de las últimas líneas
+            try {
+                //Apertura del fichero
+                String fichero = "puntuaciones.csv";
+                InputStream inputStream = openFileInput(fichero);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-
-        //Fichero leído. Comprobando las últimas líneas (hasta 5)
-        if(datos_puntuaciones.size()>0) {    //Ha leido al menos una línea....
-            if (datos_puntuaciones.size() > 5) {  //Hay mas de 5 líneas. Nos quedamos con las últimas 5
-                for (int i = 1; i <= 5; i++) {
-                    line = datos_puntuaciones.get(datos_puntuaciones.size() - i); //i-ésima última línea
-                    RowData = line.split(","); //Separamos por comas
-                    if (RowData.length > 3) {  //La línea leída tiene indices de verbos fallados
-                        if(Integer.parseInt(RowData[1]) == this.lista_a_preguntar ) {       //Si la linea contiene fallos de la misma lista...
-                            int numero_fallos = RowData.length - 3;
-                            for (int j = 0; j < numero_fallos; j++)
-                                indices_encontrados.add(Integer.parseInt(RowData[3 + j]));
-                        }
-
-                    }
+                while (true) {
+                    line = reader.readLine();
+                    if (line == null) break;
+                    datos_puntuaciones.add(line);
+                    System.out.println("Liinea" + line);
                 }
-
-            } else {                              //No hay mas de 5 líneas. Se toman todos los datos leídos
-                System.out.println("ENTRANDO AL ELSE");
-                for (int i = 0; i < datos_puntuaciones.size(); i++) {
-                    line = datos_puntuaciones.get(i); //
-                    RowData = line.split(","); //Separamos por comas
-                    if (RowData.length > 3) {  //La línea leída tiene indices de verbos fallados
-                        if(Integer.parseInt(RowData[1]) == this.lista_a_preguntar ) {       //Si la linea contiene fallos de la misma lista...
-                            int numero_fallos = RowData.length - 3;
-                            System.out.println("NUMERO DE FALLOS: " + numero_fallos);
-                            for (int j = 0; j < numero_fallos; j++)
-                                indices_encontrados.add(Integer.parseInt(RowData[3 + j]));
-                        }
-
-                    }
-                }
+                inputStream.close();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+                System.out.println("ERROR: No ha sido posible abrir el fichero de puntuaciones");
             }
 
-            if(indices_encontrados.size()>0) {  //HAY AL MENOS 1 VERBO QUE SE DEBE AÑADIR A LA LISTA DE FALLADOS
 
-                //Todos los indices (incluyendo repetidos) se encuentran en indices_encontrados
-                //Ahora toca crear la lista sin repetidos y ordenarla
+            //Fichero leído. Comprobando las últimas líneas (hasta 5)
+            if (datos_puntuaciones.size() > 0) {    //Ha leido al menos una línea....
+                if (datos_puntuaciones.size() > 5) {  //Hay mas de 5 líneas. Nos quedamos con las últimas 5
+                    for (int i = 1; i <= 5; i++) {
+                        line = datos_puntuaciones.get(datos_puntuaciones.size() - i); //i-ésima última línea
+                        RowData = line.split(","); //Separamos por comas
+                        if (RowData.length > 3) {  //La línea leída tiene indices de verbos fallados
+                            if (Integer.parseInt(RowData[1]) == this.lista_a_preguntar) {       //Si la linea contiene fallos de la misma lista...
+                                int numero_fallos = RowData.length - 3;
+                                for (int j = 0; j < numero_fallos; j++)
+                                    indices_encontrados.add(Integer.parseInt(RowData[3 + j]));
+                            }
 
-                //Creacion de la lista de indices fallados SIN repetidos
-                indices_encontrados_no_repetidos_hash = new HashSet<Integer>(indices_encontrados);
-                indices_encontrados_no_repetidos.addAll(indices_encontrados_no_repetidos_hash);
+                        }
+                    }
 
-                //Conocer cuantas veces se ha fallado un verbo dado
-                for (int i = 0; i < indices_encontrados_no_repetidos.size(); i++) {
-                    int veces_fallado = 0;
-                    int verbo_dado = indices_encontrados_no_repetidos.get(i);
-                    for (int j = 0; j < indices_encontrados.size(); j++)
-                        if (indices_encontrados.get(j) == verbo_dado)
-                            veces_fallado++;
-                    verbosfallados.add(new VerbosFallados(verbo_dado, veces_fallado));
+                } else {                              //No hay mas de 5 líneas. Se toman todos los datos leídos
+                    System.out.println("ENTRANDO AL ELSE");
+                    for (int i = 0; i < datos_puntuaciones.size(); i++) {
+                        line = datos_puntuaciones.get(i); //
+                        RowData = line.split(","); //Separamos por comas
+                        if (RowData.length > 3) {  //La línea leída tiene indices de verbos fallados
+                            if (Integer.parseInt(RowData[1]) == this.lista_a_preguntar) {       //Si la linea contiene fallos de la misma lista...
+                                int numero_fallos = RowData.length - 3;
+                                System.out.println("NUMERO DE FALLOS: " + numero_fallos);
+                                for (int j = 0; j < numero_fallos; j++)
+                                    indices_encontrados.add(Integer.parseInt(RowData[3 + j]));
+                            }
 
+                        }
+                    }
                 }
 
-                //Ordenar la lista de verbos fallados por orden de mas fallos a menos fallos
-                Collections.sort(verbosfallados, new Comparator<VerbosFallados>() {
-                    @Override
-                    public int compare(VerbosFallados vf1, VerbosFallados vf2) {
-                        return new Integer(vf2.veces_fallado).compareTo(new Integer(vf1.veces_fallado));
+                if (indices_encontrados.size() > 0) {  //HAY AL MENOS 1 VERBO QUE SE DEBE AÑADIR A LA LISTA DE FALLADOS
+
+                    //Todos los indices (incluyendo repetidos) se encuentran en indices_encontrados
+                    //Ahora toca crear la lista sin repetidos y ordenarla
+
+                    //Creacion de la lista de indices fallados SIN repetidos
+                    indices_encontrados_no_repetidos_hash = new HashSet<Integer>(indices_encontrados);
+                    indices_encontrados_no_repetidos.addAll(indices_encontrados_no_repetidos_hash);
+
+                    //Conocer cuantas veces se ha fallado un verbo dado
+                    for (int i = 0; i < indices_encontrados_no_repetidos.size(); i++) {
+                        int veces_fallado = 0;
+                        int verbo_dado = indices_encontrados_no_repetidos.get(i);
+                        for (int j = 0; j < indices_encontrados.size(); j++)
+                            if (indices_encontrados.get(j) == verbo_dado)
+                                veces_fallado++;
+                        verbosfallados.add(new VerbosFallados(verbo_dado, veces_fallado));
+
                     }
-                });
 
-                //La lista ya está ordenada. Solo queda pasarlo al array de la clase JuegoTraining
+                    //Ordenar la lista de verbos fallados por orden de mas fallos a menos fallos
+                    Collections.sort(verbosfallados, new Comparator<VerbosFallados>() {
+                        @Override
+                        public int compare(VerbosFallados vf1, VerbosFallados vf2) {
+                            return new Integer(vf2.veces_fallado).compareTo(new Integer(vf1.veces_fallado));
+                        }
+                    });
 
-                fallos_juegos_anteriores = new ArrayList<>();
-                for (int i = 0; i < verbosfallados.size(); i++)
-                    this.fallos_juegos_anteriores.add(verbosfallados.get(i).indice_verbo);
+                    //La lista ya está ordenada. Solo queda pasarlo al array de la clase JuegoTraining
+
+                    fallos_juegos_anteriores = new ArrayList<>();
+                    for (int i = 0; i < verbosfallados.size(); i++)
+                        this.fallos_juegos_anteriores.add(verbosfallados.get(i).indice_verbo);
+                }
             }
         }
     }
@@ -415,7 +426,7 @@ public class JuegoTraining extends ActionBarActivity {
         intent.putExtra("NUMERO_VERBOS_ACERTADOS", verbos_acertados);
         intent.putExtra("LISTA",lista_a_preguntar);
         intent.putExtra("LISTA_VERBOS_FALLADOS",this.lista_verbos_fallados);
-        intent.putExtra("nivel",nivel);
+
 
         //Nos vamos al activity resultados:
         startActivity(intent);

@@ -25,11 +25,11 @@ public class TrainingAreaInicio extends ActionBarActivity {
 
     /*
         Variables para controlar el entrenamiento:
-        Nivel: de 1 a 15, configurable por el usuario. El valor 0 equivale a aleatorio.
+        smartVerb: . El valor 0 equivale a SI.
         Lista_a_preguntar: Es la lista que el usuario quiere que se le pregunte: soft, medium y hard (valores 1,2 y 3 respectivamente). El valor 0 equivale a aleatorio
         numero_verbos: El número de verbos que el usuario quiere que se le pregunte. 0 equivale a aleatoriol.
      */
-    private int nivel=0, lista_a_preguntar=0,numero_verbos=0;
+    private int smartVerb=0, lista_a_preguntar=0,numero_verbos=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +54,7 @@ public class TrainingAreaInicio extends ActionBarActivity {
                         Intent intent = new Intent(TrainingAreaInicio.this, JuegoTraining.class);
                         //Iniciamos la nueva actividad
                         intent.putExtra("lista",lista_a_preguntar);
-                        intent.putExtra("nivel",nivel);
+                        intent.putExtra("smartVerb",smartVerb);
                         intent.putExtra("numero_verbos",numero_verbos);
                         startActivity(intent);
                     }
@@ -126,19 +126,19 @@ public class TrainingAreaInicio extends ActionBarActivity {
             //Comprobar que la petición fue correcta
             if(codigo_resultado == RESULT_OK){
                 //DATOS CORRECTOS! Se cambian las variables de esta Actividad a las descritas por el usuario en la configuracion
-                System.out.println("Nivel: "+nivel);
+                System.out.println("smartVerb: "+smartVerb);
                 System.out.println("Lista verbos: "+lista_a_preguntar);
                 System.out.println("Numero verbos: "+numero_verbos);
-                this.nivel = datos.getIntExtra("nivel",0);
+                this.smartVerb = datos.getIntExtra("smartVerb",0);
                 this.lista_a_preguntar = datos.getIntExtra("lista",0);
                 this.numero_verbos = datos.getIntExtra("numero_verbos",0);
-                System.out.println("Nivel: "+nivel);
+                System.out.println("smartVerb: "+smartVerb);
                 System.out.println("Lista verbos: "+lista_a_preguntar);
                 System.out.println("Numero verbos: "+numero_verbos);
             }
             if(codigo_resultado == RESULT_CANCELED){
                 //DATOS INCORRECTOS! Las variables vuelven a sus valores por defecto (0)
-                this.nivel=0;
+                this.smartVerb=0;
                 this.lista_a_preguntar=0;
                 this.numero_verbos=0;
             }

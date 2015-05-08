@@ -1,66 +1,72 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="pdm.ivchecker.Configuracion"
-    style="@style/LinearLayout"
-    android:orientation="vertical"
-    android:weightSum="1">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollLayout"
+    android:layout_width="fill_parent"
 
-    <RadioGroup
-        android:id="@+id/tipoLista"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+    android:layout_height="fill_parent" >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="pdm.ivchecker.Configuracion"
+        style="@style/LinearLayout"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-        <RadioButton
-            android:id="@+id/radioSoft"
+        <RadioGroup
+            android:id="@+id/tipoLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/radioSoft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Soft List"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/radioMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medium List" />
+
+            <RadioButton
+                android:id="@+id/radioHard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hard List" />
+
+        </RadioGroup>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Soft List"
-            android:checked="true" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Smart Verb"
+            android:id="@+id/textLevel" />
 
-        <RadioButton
-            android:id="@+id/radioMedium"
+        <Spinner
+            android:layout_width="119dp"
+            android:layout_height="47dp"
+            android:id="@+id/spinnerSmartVerb" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medium List" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Number of verbs to ask"
+            android:id="@+id/textoVerbos" />
 
-        <RadioButton
-            android:id="@+id/radioHard"
+        <Spinner
+            android:layout_width="119dp"
+            android:layout_height="47dp"
+            android:id="@+id/spinnerVerbos" />
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hard List" />
-
-    </RadioGroup>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Level"
-        android:id="@+id/textLevel" />
-
-    <Spinner
-        android:layout_width="119dp"
-        android:layout_height="47dp"
-        android:id="@+id/spinnerNivel" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Number of verbs to ask"
-        android:id="@+id/textoVerbos" />
-
-    <Spinner
-        android:layout_width="119dp"
-        android:layout_height="47dp"
-        android:id="@+id/spinnerVerbos" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="OK"
-        android:id="@+id/botonConfirmarCconfiguracion" />
+            android:text="OK"
+            android:id="@+id/botonConfirmarCconfiguracion" />
 
 
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

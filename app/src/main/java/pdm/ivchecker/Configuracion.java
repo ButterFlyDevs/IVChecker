@@ -18,12 +18,12 @@ import java.util.List;
 
 public class Configuracion extends ActionBarActivity {
 
-    private Spinner spinner_nivel, spinner_num_verbos;
+    private Spinner spinner_smartVerb, spinner_num_verbos;
     private Button botonOK;
     private RadioGroup tipoLista;
     private RadioButton boton_soft, boton_medium, boton_hard;
 
-    private int nivel=0, lista_a_preguntar=0,numero_verbos=0;
+    private int smartVerb=0, lista_a_preguntar=0,numero_verbos=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +38,7 @@ public class Configuracion extends ActionBarActivity {
 
         //Rellenamos los spinner
         rellenar_spinner_NumVerbos();
-        rellenar_spinner_Nivel();
-
+        rellenar_smartVerb();
         //Comprobamos los datos introducidos
         botonOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,14 +52,21 @@ public class Configuracion extends ActionBarActivity {
                     lista_a_preguntar = 2;
                 if(ID_lista == boton_hard.getId())
                     lista_a_preguntar = 3;
-                //Comprobamos el nivel (sumamos 1 por que la lista va del nivel 1 al 15, pero sus indices son del 0 al 14, además de que 0 significa aleatorio)
-                nivel = Integer.parseInt( String.valueOf (spinner_nivel.getSelectedItem() ) );
+
+                //Comprobamos SmartVerb
+                String respuesta_smartVerb = String.valueOf(spinner_smartVerb.getSelectedItem() );
+                System.out.println(respuesta_smartVerb);
+                if(respuesta_smartVerb == "Yes")
+                    smartVerb=0;
+                else
+                    smartVerb=1;
+
                 //Comprobamos el numero de verbos
                 numero_verbos = Integer.parseInt( String.valueOf (spinner_num_verbos.getSelectedItem() ) );
                 //Devolvemos los datos a la Actividad TrainigAreaInicio (que llamó a esta actividad Configuracion)
                 Intent intent = new Intent();
                 intent.putExtra("lista",lista_a_preguntar);
-                intent.putExtra("nivel",nivel);
+                intent.putExtra("smartVerb",smartVerb);
                 intent.putExtra("numero_verbos",numero_verbos);
                 setResult(RESULT_OK,intent);
                 /*
@@ -97,31 +103,16 @@ public class Configuracion extends ActionBarActivity {
         spinner_num_verbos.setAdapter(dataAdapter);
     }
 
-    //Funcion para rellenar el spinner de Nivel
-
-    private void rellenar_spinner_Nivel() {
-
-        spinner_nivel= (Spinner) findViewById(R.id.spinnerNivel);
+    private void rellenar_smartVerb(){
+        spinner_smartVerb= (Spinner) findViewById(R.id.spinnerSmartVerb);
         List<String> list = new ArrayList<String>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        list.add("5");
-        list.add("6");
-        list.add("7");
-        list.add("8");
-        list.add("9");
-        list.add("10");
-        list.add("11");
-        list.add("12");
-        list.add("13");
-        list.add("14");
-        list.add("15");
+        list.add("Yes");
+        list.add("No");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
+
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_nivel.setAdapter(dataAdapter);
+        spinner_smartVerb.setAdapter(dataAdapter);
     }
 
     @Override
