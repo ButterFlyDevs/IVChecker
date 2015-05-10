@@ -22,6 +22,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -38,6 +39,7 @@ import java.io.InputStreamReader;
 import java.util.Random;
 
 import com.google.android.gms.ads.*;
+
 
 
 public class Juego extends ActionBarActivity {
@@ -120,6 +122,8 @@ public class Juego extends ActionBarActivity {
 
     // Fin variables globales de partida.
 
+
+    private Chronometer cronometro;
 
 
     SharedPreferences prefe;
@@ -353,6 +357,7 @@ public class Juego extends ActionBarActivity {
         vida3=(ImageView)findViewById(R.id.vida3);
 
 
+        cronometro = (Chronometer)findViewById(R.id.cronometro);
 
         /* Fin de las referencias*/
     }
@@ -694,7 +699,7 @@ public class Juego extends ActionBarActivity {
         //Cuando el proceso se crear se llama a jugar y se empieza a jugar.
         this.jugar();
 
-
+        cronometro.start();
     }
 
     private void runFragment(int level) {
