@@ -11,10 +11,14 @@
     <string name="title_activity_resultados">resultados</string>
 
 
-    <string name="menuPrincipal1">Training area</string>
-    <string name="menuPrincipal2">Show Verb Lists</string>
-    <string name="menuPrincipal3">Show World Challenge Results</string>
-    <string name="menuPrincipal4">About</string>
+    <string name="menuPrincipal1">Area entrenamiento</string>
+    <string name="menuPrincipal2">Lista de Verbos</string>
+    <string name="menuPrincipal3">Ranking Mundial</string>
+    <string name="menuPrincipal4">Ayuda</string>
+
+    <string name="nivel">Nivel</string>
+    <string name="tM1">¿Estás preparado?</string>
+    <string name="tD1">Conoces el tamaño del verbo</string>
 
 
     <string name="title_activity_about">About</string>

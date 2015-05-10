@@ -1,6 +1,7 @@
 package pdm.ivchecker;
 
 import android.app.ActionBar;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -36,6 +39,24 @@ import java.util.Random;
 
 
 public class Juego extends ActionBarActivity {
+
+
+
+    //Variables del fragment:
+
+    String id = "IdQueNecesitaMyFragment";
+//    MyDialogFragment frag;
+
+
+
+    Bundle arguments = new Bundle();
+
+
+
+
+
+    //private juego_show_level showerLevels;
+
 
     //Matrices donde se almacenan los verbos:
     private String [][] verbosSoft;
@@ -81,7 +102,12 @@ public class Juego extends ActionBarActivity {
     private String formaMisteriosa; //Forma que el usuario debe introducir.
     private int nivel; //Nivel por el que el usuario va.
     private int jugadaEnNivel; //Jugada (de 10) por la que va dentro del nivel.
-    Intent intent;
+
+
+    private boolean finPartida=false;
+
+
+    //Intent intentShowerLevels;
 
 
     // Fin variables globales de partida.
@@ -92,12 +118,23 @@ public class Juego extends ActionBarActivity {
 
     //Constructor:
     public Juego(){
+
+
+      //  showerLevels=new juego_show_level();
+        //intentShowerLevels = new Intent(Juego.this, juego_show_level.class);
+//        showerLevels.setVisible(true);
+        //startActivity(intent);
+
+
         System.out.println("Constructor de JUEGO");
         numVerbosListaSoft=numVerbosListaMedium=numVerbosListaHard=0;
         formaMisteriosa="";
+        //La partida comienza con la puntación a 0
         puntuacionPartida=0;
+        //La partida comienza con tres vidas
         nVidas=3;
 
+        //La partida comienza en el nivel 1
         nivel=1;
 
         int defecto=0;
@@ -307,9 +344,29 @@ public class Juego extends ActionBarActivity {
     }
 
 
+    private void ajustarVista(){
+        if(nivel!=4 && nivel!=5 && nivel!=9 && nivel!=10 && nivel!=14 && nivel!=15) {
+            campoVerboIntroducidoB.setVisibility(TextView.INVISIBLE);
+            layoutCampoVerboIntroducidoB.setVisibility(LinearLayout.INVISIBLE);
+            layoutCampoVerboIntroducidoA.setBackgroundColor(Color.TRANSPARENT);
+
+        }else{
+
+            System.out.println("Ajustando vista");
+
+            //Si estamos en los verbos, 4, 5, 9, 10. 14 o 15:
+
+            layoutCampoVerboIntroducidoA.setBackgroundColor(Color.rgb(49,193,255));
+
+            campoVerboIntroducidoB.setVisibility(TextView.VISIBLE);
+            layoutCampoVerboIntroducidoB.setVisibility(LinearLayout.VISIBLE);
+        }
+    }
+
     @Override
-    //Método llamada cuando se crea por primera vez la actividad
+    //Método llamada cuando se crea por primera vez la actividad.
     protected void onCreate(Bundle savedInstanceState) {
+
         //Llamamos al constructor del padre:
             super.onCreate(savedInstanceState);
 
@@ -323,19 +380,30 @@ public class Juego extends ActionBarActivity {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Recibimos los datos de la actividad que nos invoca
-
+        /*
             intent = getIntent();
             //Vamos a jugar en el nivel que nos dice la actividad que nos llama
             nivel=intent.getIntExtra("nivel", 0);
             System.out.println("Nivel recibido en Juego : "+nivel);
+        */
 
         //Referenciamos todos los objetos de la vista para poder controlarlos:
             referenciaObjetosDeLaVista();
 
 
+        //Inicializamos la vista, con 3 vidas y con la puntuación a cero.
+            ajustarVidas(nVidas);
+        //Insteramos esta puntuación en TextViewPuntos:
+        puntos.setText(Integer.toString(puntuacionPartida));
+
+        //Cargamos los verbos desde los ficheros csv
+
+            cargarVerbos();
+
+
         /*
         Si no es la primera vez que se arranca esta actividad puede que se hayan guardado datos
-         */
+
             prefe=getSharedPreferences("datos", Context.MODE_PRIVATE);
 
         System.out.println("Recibido del Prefe getInt: "+prefe.getInt("puntos",0));
@@ -344,12 +412,14 @@ public class Juego extends ActionBarActivity {
         puntuacionPartida=prefe.getInt("puntos",0); //Los puntos de la partida
 
         nVidas=prefe.getInt("vidas",3); //El número de vidas de la partida. Si no devuelve nada es que acaba de empezar y es 3.
+        */
+
+        //Cuando se llega al nivel 4 y 9 se gana una vida.
+        if(nivel==4 || nivel==9 )
+            ganarVida();
 
 
-
-
-
-
+        /*
             //Insteramos esta puntuación en TextViewPuntos:
         puntos.setText(Integer.toString(puntuacionPartida));
 
@@ -360,28 +430,17 @@ public class Juego extends ActionBarActivity {
             ganarVida();
 
         ajustarVidas(nVidas);
-
+        */
 
         //Ajustamos los elmentos de la vista según el nivel:
+           // this.ajustarVista();
 
-         if(nivel!=4 && nivel!=5 && nivel!=9 && nivel!=10 && nivel!=14 && nivel!=15) {
-             campoVerboIntroducidoB.setVisibility(TextView.INVISIBLE);
-             layoutCampoVerboIntroducidoB.setVisibility(LinearLayout.INVISIBLE);
-             layoutCampoVerboIntroducidoA.setBackgroundColor(Color.TRANSPARENT);
-
-         }else{
-             layoutCampoVerboIntroducidoA.setBackgroundColor(Color.rgb(49,193,255));
-
-             campoVerboIntroducidoB.setVisibility(TextView.VISIBLE);
-             layoutCampoVerboIntroducidoB.setVisibility(LinearLayout.VISIBLE);
-         }
+        /*
+        El ajustar vistas ya no se hace aquí sino al ocnfigurar el nivel.
+         */
 
 
-
-
-
-
-        //Esta clase mola.
+        // ### GESTIÓN DE COMPORTAMIENTO ### ///
 
         // Para cerrar el teclado al pulsar intro
         campoVerboIntroducidoA.setOnKeyListener(new View.OnKeyListener() {
@@ -432,8 +491,19 @@ public class Juego extends ActionBarActivity {
 
 
 
-                            //Comprobamos el verbo:
+                            //Lo primero que hacemos al pulsar sobre next es comprobar el/los verbos introducidos
                             comprobarVerbo();
+                            /*
+                            Ojo si el verbo falla y estamos en un punto crítico podemo salir del juego porque hayamos
+                            perdido todas las vidas.
+
+
+                            Quizás habría que añadir un condicionar para ver la salida de comprobarVerbo() y en caso
+                            de que fuera positiva continuar y en caso de ser negativa no hacer nada más.
+
+                             */
+
+
 
                             //Limpiamos el contenido de los editText aunque dependiendo del nivel no se verán los dos:
                             campoVerboIntroducidoA.setText("");
@@ -447,29 +517,42 @@ public class Juego extends ActionBarActivity {
                          */
 
                             //Si hemos completado las diez jugadas por nivel pasamos de nivel.
+                        //CAMBIAR EL 2 A 10
                             if (jugadaEnNivel > 2) {
                                 nivel++; //Pasamos de nivel
                                 jugadaEnNivel = 1; //Reiniciamos.
+
+
+                                //CAMBIO POR FRAGMENT
                                 //Nos vamos a la actividad que muestra el nivel:
-                                Intent intent = new Intent(Juego.this, juego_show_level.class);
+                               // Intent intent = new Intent(Juego.this, juego_show_level.class);
 
 
 
                                 System.out.println("Vamos a show_level pasando nivel  " + nivel);
+
+                                //CAMBIO POR FRAGMENT
                                 //Vamos a la activity juego con el nivel 1
-                                intent.putExtra("nivel", nivel);
+                               // intent.putExtra("nivel", nivel);
 
+                                //YA NO VAMOS A CAMBIAR DE ACTIVIDAD, NO HACE FALTA GUARDAR NADA
                                 //Antes de pasar de actividad guardamos los datos para que al volver a la actividad los tengamos disponibles:
-                                SharedPreferences.Editor editor = prefe.edit();
-                                editor.putInt("puntos", puntuacionPartida); //La puntuación de la partida
-                                editor.putInt("vidas", nVidas); //El número de vidas
-                                editor.commit();
-
-                                System.out.println("Grabamos nivel: " + nivel + " y vidas: " + nVidas);
+                               // SharedPreferences.Editor editor = prefe.edit();
+                                //editor.putInt("puntos", puntuacionPartida); //La puntuación de la partida
+                                //editor.putInt("vidas", nVidas); //El número de vidas
+                                //editor.commit();
 
 
-                                startActivity(intent);
 
+                               // System.out.println("Grabamos nivel: " + nivel + " y vidas: " + nVidas);
+
+
+                               // startActivity(intent);
+                                if(!finPartida)
+                                    runFragment(nivel);
+
+
+                                jugar();
 
                             }
 
@@ -491,7 +574,7 @@ public class Juego extends ActionBarActivity {
                             //Si no se han completado seguimos jugando!
                             else
                                 //Si no estuviera dentro de la estructura else nos crearía una jugada antes de pasar de nivel.
-                                crearJugada();
+                                jugar(); //COmo llamar a crearJugada()
 
 
 
@@ -500,15 +583,76 @@ public class Juego extends ActionBarActivity {
 
         ); //Fin del manejador del botón next.
 
-        this.cargarVerbos();
+        //this.cargarVerbos();
 
 
-        this.crearJugada(); //Después de cargar los datos comienza el juego:
+        //this.crearJugada(); //Después de cargar los datos comienza el juego:
 
+
+        runFragment(1);
+
+        //Cuando el proceso se crear se llama a jugar y se empieza a jugar.
+        this.jugar();
 
 
     }
 
+    private void runFragment(int level) {
+
+
+        System.out.println("LLAMADA A FRAGMENT");
+
+        arguments.putString("id", Integer.toString(level));
+
+
+        //Declaramos una nueva hebra
+        new Thread() {
+            //Le decimos lo que queremos que haga:
+            public void run() {
+
+                MyDialogFragment frag;
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+
+
+
+                //Añadimos animación
+            //    ft.setCustomAnimations(R.anim.zoom_back_in, R.anim.zoom_back_out);
+
+
+
+                frag = MyDialogFragment.newInstance(arguments);
+                frag.show(ft, "txn_tag");
+
+
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                frag.dismiss();
+
+            }
+        }.start();
+    }
+
+    private void jugar(){
+
+
+
+        //Lanzamos el fragment que muestra el nivel:
+        //runFragment(3);
+
+
+        //Ajustamos nivel:
+        this.textNivel.setText("Level "+Integer.toString(nivel));
+
+
+
+        this.crearJugada(); //Después de cargar los datos comienza el juego:
+    }
 
     @Override
     protected void onResume() {
@@ -529,13 +673,13 @@ public class Juego extends ActionBarActivity {
         //Si pulsamos el botón back nos devuelve a la pantalla principal perdiendo todos los puntos.
         if(keyCode==KeyEvent.KEYCODE_BACK){
             System.out.println("pulsado boton back");
-            SharedPreferences.Editor editor=prefe.edit();
+            //SharedPreferences.Editor editor=prefe.edit();
             //Escribimos 0 en puntos
-            editor.putInt("puntos",0);
-            editor.putInt("vidas",3); //El número de vidas
+            //editor.putInt("puntos",0);
+            //editor.putInt("vidas",3); //El número de vidas
             //Realizamos la escritura
-            editor.commit();
-            finish();
+            //editor.commit();
+            //finish();
 
 
             Intent intent = new Intent(Juego.this, ActividadPrincipal.class);
@@ -559,51 +703,6 @@ public class Juego extends ActionBarActivity {
     }
 
 
-
-
-
-/*
-    //Metodo utilizado para guardar la puntuacion en un fichero local
-    private void salvar_puntuacion_local(){
-
-        String fichero= "puntuaciones.csv";
-
-            try {
-
-                     //Apertura del fichero.
-                              ######################## COMO BORRAR EL FICHERO DE PUNTUACIONES:
-
-                             this.flujo_fichero = openFileOutput(fichero, MODE_PRIVATE);
-                             flujo_fichero.close();
-
-
-
-            //    this.flujo_fichero = openFileOutput(fichero, MODE_APPEND);
-            //    String prueba = "ESTO_ES_UNA_PRUEBA\n";
-            //    flujo_fichero.write(prueba.getBytes());
-            //    flujo_fichero.close();
-
-             //   inputStream = openFileInput(fichero);
-              //  BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                while(true) {
-
-                    String line;
-                    System.out.println("Lectura");
-               //     line = reader.readLine();
-         //           if (line == null) break;
-                 //   String[] RowData = line.split(",");
-                  //  System.out.println(RowData[0]);
-
-                }
-              //  inputStream.close();
-            }
-         catch (IOException ioe){
-             ioe.printStackTrace();
-             System.out.println("ERROR: No ha sido posible abrir el fichero de puntuaciones");
-             }
-         }
-*/
-
     // ## LÓGICA DEL JUEGO ## //
     public void crearJugada(){
 
@@ -619,6 +718,8 @@ public class Juego extends ActionBarActivity {
         pasado.setBackgroundColor(Color.TRANSPARENT);
         participio.setBackgroundColor(Color.TRANSPARENT);
 
+        //Ajustamos la vista al tipo de nivel:
+        this.ajustarVista();
 
        // infinitivo.setLayoutParams(ActionBar.LayoutParams.MATCH_PARENT);
 
@@ -1111,7 +1212,7 @@ public class Juego extends ActionBarActivity {
 
 
             }
-        }
+        } //Fin de crearJugada();
 
 
     public void ganarVida(){
@@ -1170,6 +1271,23 @@ public class Juego extends ActionBarActivity {
 
     public void perderVida(){
 
+
+
+        //Configuramos el mensaje de vida ganada:
+        Context context = getApplicationContext();
+        CharSequence text = "Loosed one live!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+
+
+        toast.show();
+
+
+
+
+
+
         if(this.nVidas==3) {
             //Se rompe el corazón 3:
             vida3.setImageResource(R.drawable.corazonmuerto);
@@ -1201,9 +1319,11 @@ public class Juego extends ActionBarActivity {
                 System.out.println("Entrando en sección de fin de partida");
 
 
-
+                finPartida=true;
 
                 //Si no nos quedan vidas se acabó el juego y vamos a la sección de resultados.
+
+
 
 
                 //Vamos a la clase Resultados.class
@@ -1217,14 +1337,18 @@ public class Juego extends ActionBarActivity {
                 //  SystemClock.sleep(5000);
 
                 //Mostramos un mensaje toast! YOU ARE DEAD!
-                Context context = getApplicationContext();
-                CharSequence text = "YOU ARE DEAD! FIN de PARTIDA";
-                int duration = Toast.LENGTH_LONG;
+                context = getApplicationContext();
+                text = "## GAME OVER ##";
+                duration = Toast.LENGTH_LONG;
 
-                Toast toast = Toast.makeText(context, text, duration);
+                toast = Toast.makeText(context, text, duration);
                 toast.show();
 
+                //Finalizamos la hebra que ejecuta esta actividad:
+                this.finish();
 
+                Thread.interrupted();
+                //super.onDestroy();
 
                 //finish();
                 //onDestroy();
@@ -1254,6 +1378,9 @@ public class Juego extends ActionBarActivity {
         if(nivel!=4 && nivel!=5 && nivel!=9 && nivel!=10 && nivel!=14 && nivel!=15)
             System.out.println("Verbo introducido: "+campoVerboIntroducidoA.getText());
         else{
+
+            //Estamos en los niveles 4, 5, 9, 10, 14 o 15
+
             System.out.println("Verbo Introducido azul: "+campoVerboIntroducidoA.getText());
             System.out.println("Verbo Introducido verde: "+campoVerboIntroducidoB.getText());
         }

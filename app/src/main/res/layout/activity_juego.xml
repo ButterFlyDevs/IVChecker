@@ -29,7 +29,8 @@
                 android:id="@+id/viewPuntos"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:textSize="30dp" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -42,22 +43,22 @@
 
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:id="@+id/vida3"
                     android:layout_gravity="bottom"
                     android:src="@drawable/corazonvivo" />
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:id="@+id/vida2"
                     android:layout_gravity="bottom"
                     android:src="@drawable/corazonvivo" />
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:id="@+id/vida1"
                     android:layout_gravity="bottom"
                     android:src="@drawable/corazonvivo" />
@@ -69,11 +70,8 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="textLevel"
                 android:id="@+id/textLevel"
-                android:layout_alignBottom="@+id/viewPuntos"
-                android:layout_toRightOf="@+id/viewPuntos"
-                android:layout_toEndOf="@+id/viewPuntos"
-                android:layout_marginLeft="61dp"
-                android:layout_marginStart="61dp" />
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
 
@@ -81,7 +79,7 @@
             android:id="@+id/infinitivo"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="20px"
+            android:textSize="30px"
             android:text="infinitivo"
             android:layout_x="82dp"
             android:layout_y="4dp"
@@ -95,7 +93,7 @@
             android:id="@+id/pasado"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="20px"
+            android:textSize="30px"
             android:text="pasado"
             android:layout_x="85dp"
             android:layout_y="52dp"
@@ -109,7 +107,7 @@
             android:id="@+id/participio"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="20px"
+            android:textSize="30px"
             android:text="participio"
             android:layout_x="66dp"
             android:layout_y="97dp"
@@ -133,14 +131,15 @@
 
             <EditText
                 android:id="@+id/formaMisteriosaA"
-                android:layout_width="245dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:layout_x="22dp"
                 android:layout_y="142dp"
                 android:layout_above="@+id/nextButton"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:gravity="center" />
 
         </LinearLayout>
 
@@ -161,7 +160,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/formaMisteriosaB"
-                android:layout_weight="0.70" />
+                android:layout_weight="0.70"
+                android:gravity="center" />
         </LinearLayout>
 
         <Button
@@ -177,13 +177,6 @@
             android:gravity="center"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
-
-    <ViewStub
-        android:id="@+id/viewStub"
-        android:inflatedId="@+id/details"
-        android:layout="@layout/details"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
 
 
 </RelativeLayout>

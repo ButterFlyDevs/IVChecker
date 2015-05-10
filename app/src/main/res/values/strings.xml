@@ -16,6 +16,11 @@
     <string name="menuPrincipal3">Show World Challenge Results</string>
     <string name="menuPrincipal4">About</string>
 
+    <string name="nivel">Level</string>
+
+    <!-- Strings del fragment -->
+    <string name="tM1">Are you ready?</string>
+    <string name="tD1">MMM</string>
 
     <string name="title_activity_about">About</string>
     <string name="title_activity_training_area_inicio">TrainingAreaInicio</string>

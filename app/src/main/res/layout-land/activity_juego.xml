@@ -29,7 +29,8 @@
                 android:id="@+id/viewPuntos"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:textSize="40dp" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -69,11 +70,8 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="textLevel"
                 android:id="@+id/textLevel"
-                android:layout_alignBottom="@+id/viewPuntos"
-                android:layout_toRightOf="@+id/viewPuntos"
-                android:layout_toEndOf="@+id/viewPuntos"
-                android:layout_marginLeft="61dp"
-                android:layout_marginStart="61dp" />
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
 
@@ -177,12 +175,6 @@
             android:gravity="center"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
-
-    <ViewStub
-        android:id="@+id/viewStub"
-        android:inflatedId="@+id/details"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
 
 
 </RelativeLayout>

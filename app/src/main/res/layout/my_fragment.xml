@@ -4,11 +4,32 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/label"
-        android:layout_centerInParent="true"
+        android:id="@+id/textNivel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello Full Screen Dialog Fragment"
-    />
+        android:text="level"
+        android:textSize="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="95dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="motivacion"
+        android:id="@+id/textMotivacion"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Descripcion"
+        android:id="@+id/textDescripcion"
+        android:layout_marginTop="38dp"
+        android:layout_below="@+id/textMotivacion"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
