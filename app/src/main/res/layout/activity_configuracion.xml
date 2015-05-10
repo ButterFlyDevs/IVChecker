@@ -19,20 +19,20 @@
                 android:id="@+id/radioSoft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Soft List"
+                android:text="@string/listaSimple"
                 android:checked="true" />
 
             <RadioButton
                 android:id="@+id/radioMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Medium List" />
+                android:text="@string/listaMedia" />
 
             <RadioButton
                 android:id="@+id/radioHard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hard List" />
+                android:text="@string/listaDificil" />
 
         </RadioGroup>
 
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Smart Verb"
+            android:text="Smart training"
             android:id="@+id/textLevel" />
 
         <Spinner

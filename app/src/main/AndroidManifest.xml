@@ -3,6 +3,13 @@
     package="pdm.ivchecker" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+
+
 
     <application
         android:allowBackup="true"
@@ -61,14 +68,14 @@
             android:name=".Resultado"
             android:label="@string/title_activity_resultado" >
         </activity>
-        <activity
-            android:name=".ELIMINAME"
-            android:label="@string/title_activity_eliminame" >
-        </activity>
+
         <activity
             android:name=".HistorialPuntuacionTraining"
             android:label="@string/title_activity_historial_puntuacion_training" >
         </activity>
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
     </application>
 
 </manifest>

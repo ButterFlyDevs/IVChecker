@@ -37,6 +37,8 @@ import java.io.InputStreamReader;
 
 import java.util.Random;
 
+import com.google.android.gms.ads.*;
+
 
 public class Juego extends ActionBarActivity {
 
@@ -80,6 +82,7 @@ public class Juego extends ActionBarActivity {
     private LinearLayout layoutCampoVerboIntroducidoA, layoutCampoVerboIntroducidoB;
 
     private RelativeLayout layoutInfinitivo, layoutPasado, layoutParticipio;
+    private LinearLayout layoutPrincipal;
 
     private ViewStub viewStub;
 
@@ -106,6 +109,10 @@ public class Juego extends ActionBarActivity {
 
     private boolean finPartida=false;
 
+
+
+    //Publicidad:
+    private AdView adView;
 
     //Intent intentShowerLevels;
 
@@ -308,7 +315,7 @@ public class Juego extends ActionBarActivity {
         layoutCampoVerboIntroducidoB=(LinearLayout)findViewById(R.id.LinearLayoutB);
 
 
-
+        layoutPrincipal = (LinearLayout)findViewById(R.id.layoutPrincipal);
 
 
 
@@ -373,6 +380,10 @@ public class Juego extends ActionBarActivity {
         //Relacionamos esta actividad con el layout (vista) correspondiente:
             setContentView(R.layout.activity_juego);
 
+
+
+
+
         //Ajustamos la caracteristicas visuales de esta actividad
             //Para que no se muestre la ActionBar.
             getSupportActionBar().hide();
@@ -389,6 +400,40 @@ public class Juego extends ActionBarActivity {
 
         //Referenciamos todos los objetos de la vista para poder controlarlos:
             referenciaObjetosDeLaVista();
+
+            //Publicidad:  AdSense
+
+            /*
+                //Instanciamos el objeto
+                adView=new AdView(this);
+                //Asociamos el identificador que nos dan en la web de AdSense para este anuncio.
+                adView.setAdUnitId("ca-app-pub-5502625112104069/3950415634");
+                //Especificamos el tamaño del banner
+                adView.setAdSize(AdSize.BANNER);
+
+                //AÑadimos el banner al layout:
+              //  layoutPrincipal.addView(adView);
+
+                //Iniciamos la solicitud:
+                AdRequest adRequest = new AdRequest.Builder()
+                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) //Cualquier emulador
+                        .addTestDevice("9011F9E7CEC921EF1BB8A17A36B24813") //El telefono de Juan
+                        .build();
+
+                //Cargamos la adView con la respuesta de la solicitud
+                adView.loadAd(adRequest);
+*/
+
+                // Buscar AdView como recurso y cargar una solicitud.
+                AdView adView = (AdView)this.findViewById(R.id.adView);
+                AdRequest adRequest = new AdRequest.Builder()
+                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) //Cualquier emulador
+                        .addTestDevice("9011F9E7CEC921EF1BB8A17A36B24813") //El telefono de Juan
+                        .build();
+                adView.loadAd(adRequest);
+
+
+            //Fin publicidad
 
 
         //Inicializamos la vista, con 3 vidas y con la puntuación a cero.
