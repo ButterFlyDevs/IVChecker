@@ -37,8 +37,9 @@
         <string name="numVerbosAPreguntar">Num verbs to ask</string>
 
 
-
-
+    <!-- String de la actividad JUEGO -->
+        <string name="mensajeVidaPerdida">You lost a life!</string>
+        <string name="mensajeMuerte">## Game Over ##</string>
 
 
     <string name="title_activity_about">About</string>

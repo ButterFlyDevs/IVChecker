@@ -108,6 +108,7 @@ public class Juego extends ActionBarActivity {
 
 
     private boolean finPartida=false;
+    private boolean restauracion=false;
 
 
 
@@ -133,23 +134,29 @@ public class Juego extends ActionBarActivity {
         //startActivity(intent);
 
 
-        System.out.println("Constructor de JUEGO");
-        numVerbosListaSoft=numVerbosListaMedium=numVerbosListaHard=0;
-        formaMisteriosa="";
-        //La partida comienza con la puntación a 0
-        puntuacionPartida=0;
-        //La partida comienza con tres vidas
-        nVidas=3;
 
-        //La partida comienza en el nivel 1
-        nivel=1;
+        if(!restauracion) {
+            System.out.println("Constructor de JUEGO");
+            numVerbosListaSoft = numVerbosListaMedium = numVerbosListaHard = 0;
+            formaMisteriosa = "";
+            //La partida comienza con la puntación a 0
+            puntuacionPartida = 0;
+            //La partida comienza con tres vidas
+            nVidas = 3;
 
-        int defecto=0;
+            //La partida comienza en el nivel 1
+            nivel = 1;
 
-//        nivel=Integer.parseInt(getIntent().getStringExtra("nivel"));
-        jugadaEnNivel=1;
-        //Inicializamos  el objeto de tipo Random().
-        rnd = new Random();
+            int defecto = 0;
+
+            //        nivel=Integer.parseInt(getIntent().getStringExtra("nivel"));
+            jugadaEnNivel = 1;
+            //Inicializamos  el objeto de tipo Random().
+            rnd = new Random();
+            numVerbo=0;
+            numFormaA=0;
+            numFormaB=0;
+        }
     }
 
 
@@ -336,7 +343,7 @@ public class Juego extends ActionBarActivity {
 
 
         //Setemos el textView de nivel para que aparezca el nivel en el que estamos jugando:
-        textNivel.setText("Level "+nivel);
+        textNivel.setText(R.string.nivel+" "+nivel);
 
         // puntos.setText(Integer.toString(0));
 
@@ -351,7 +358,24 @@ public class Juego extends ActionBarActivity {
     }
 
 
+    /**
+     * Para ajustar los elementos de la vista.
+     */
     private void ajustarVista(){
+
+
+        //Ajustamos los elementos de la vista (útil cuando giramos la pantalla)
+
+        //Ajustamos el número de vidas
+        this.ajustarVidas(nVidas);
+
+        this.textNivel.setText("Nivel "+Integer.toString(this.nivel));
+        this.puntos.setText(Integer.toString(this.puntuacionPartida));
+
+
+
+        //Si pasamos del nivel
+
         if(nivel!=4 && nivel!=5 && nivel!=9 && nivel!=10 && nivel!=14 && nivel!=15) {
             campoVerboIntroducidoB.setVisibility(TextView.INVISIBLE);
             layoutCampoVerboIntroducidoB.setVisibility(LinearLayout.INVISIBLE);
@@ -370,18 +394,17 @@ public class Juego extends ActionBarActivity {
         }
     }
 
+
     @Override
     //Método llamada cuando se crea por primera vez la actividad.
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle inState) {
+        System.out.println("Llamando a onCreate");
 
         //Llamamos al constructor del padre:
-            super.onCreate(savedInstanceState);
+            super.onCreate(inState);
 
         //Relacionamos esta actividad con el layout (vista) correspondiente:
             setContentView(R.layout.activity_juego);
-
-
-
 
 
         //Ajustamos la caracteristicas visuales de esta actividad
@@ -389,6 +412,32 @@ public class Juego extends ActionBarActivity {
             getSupportActionBar().hide();
             //Para que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+
+
+        if(inState!=null) {
+
+            //Recuperamos el estado de la actividad en el caso de que este existiera y pasase el condicional
+
+            this.puntuacionPartida = inState.getInt("puntos");
+            this.nivel = inState.getInt("nivel");
+            this.nVidas = inState.getInt("nVidas");
+            this.numVerbo=inState.getInt("numVerbo");
+            this.numFormaA=inState.getInt("numFormaA");
+            this.numFormaB=inState.getInt("numFormaB");
+
+
+            System.out.println("onRestore: puntos: "+puntuacionPartida+" "+nVidas+" + nVidas");
+
+            //Llamamos a ajustarVista para que coloque las cosas bien.
+            //this.ajustarVista();
+
+        }else{
+            //Sólo cuando no se recupere ningún estado significará que empieza el juego desde el principio y que no se ha rotado la pantalla al
+            // no haber recursos guardados en el Bundle
+            runFragment(1);
+        }
 
         //Recibimos los datos de la actividad que nos invoca
         /*
@@ -400,6 +449,8 @@ public class Juego extends ActionBarActivity {
 
         //Referenciamos todos los objetos de la vista para poder controlarlos:
             referenciaObjetosDeLaVista();
+
+            ajustarVista();
 
             //Publicidad:  AdSense
 
@@ -436,10 +487,12 @@ public class Juego extends ActionBarActivity {
             //Fin publicidad
 
 
+
+
         //Inicializamos la vista, con 3 vidas y con la puntuación a cero.
-            ajustarVidas(nVidas);
+            //ajustarVidas(nVidas);
         //Insteramos esta puntuación en TextViewPuntos:
-        puntos.setText(Integer.toString(puntuacionPartida));
+       // puntos.setText(Integer.toString(puntuacionPartida));
 
         //Cargamos los verbos desde los ficheros csv
 
@@ -557,6 +610,8 @@ public class Juego extends ActionBarActivity {
                             //Aumentamos el número de la jugada en el nivel (10 verbos por nivel)
                             jugadaEnNivel++;
 
+                            numVerbo=0;
+
                         /*
                         10 jugadas por nivel!
                          */
@@ -634,7 +689,7 @@ public class Juego extends ActionBarActivity {
         //this.crearJugada(); //Después de cargar los datos comienza el juego:
 
 
-        runFragment(1);
+       // runFragment(1);
 
         //Cuando el proceso se crear se llama a jugar y se empieza a jugar.
         this.jugar();
@@ -712,6 +767,53 @@ public class Juego extends ActionBarActivity {
     }
 
 
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        //Salvamos la puntuación de la partida
+        outState.putInt("puntos",this.puntuacionPartida);
+        //Salvamos el nivel de la partida:
+        outState.putInt("nivel",this.nivel);
+        //Salvamos el número de vidas de la partida:
+        outState.putInt("nVidas",this.nVidas);
+
+        //Salvamos el verbo elegido en la jugada
+        outState.putInt("numVerbo",this.numVerbo);
+
+        //Salvamos las formas verbales también;
+        outState.putInt("numFormaA",this.numFormaA);
+        outState.putInt("numFormaB",this.numFormaB);
+
+    }
+
+    /*
+    @Override
+    protected void onRestoreInstanceState(Bundle inState){
+        super.onRestoreInstanceState(inState);
+        //Recuperamos el estadosde las variables:
+
+        System.out.println("onRestore con null bundle");
+
+       if(inState!=null) {
+           this.puntuacionPartida = inState.getInt("puntos");
+           this.nivel = inState.getInt("nivel");
+           this.nVidas = inState.getInt("nVidas");
+           this.numVerbo=inState.getInt("numVerbo");
+
+
+           System.out.println("onRestore: puntos: "+puntuacionPartida+" "+nVidas+" + nVidas");
+
+           //Llamamos a ajustarVista para que coloque las cosas bien.
+           this.ajustarVista();
+
+       }
+
+    }
+
+    */
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
 
@@ -752,6 +854,11 @@ public class Juego extends ActionBarActivity {
     public void crearJugada(){
 
 
+
+
+        System.out.println("#################### Vidas: "+nVidas+" puntuacion "+puntuacionPartida+"verboElegido: "+numVerbo);
+
+
         String verboInfinitivo="";
         String verboPasado="";
         String verboParticipio="";
@@ -788,7 +895,15 @@ public class Juego extends ActionBarActivity {
             System.out.println("Elegimos verbo de la lista SOFT");
 
             //Elegimos el verbo de forma aleatoria:
-            numVerbo = (int) (rnd.nextDouble() * numVerbosListaSoft + 0);
+
+            /*
+            Si numVerbo==0 querrá decir que ha sido el valor proporcionado por el constructor y no por una restauración de un actividad anterior.
+             */
+            System.out.println("VERRRRRBO"+numVerbo);
+            if(numVerbo==0)
+                numVerbo = (int) (rnd.nextDouble() * numVerbosListaSoft + 0);
+            //Si no es así querra'decir que se usa el num de verbo guardado.
+
             //Cargamos el verbo en las variables locales:
             verboInfinitivo=verbosSoft[numVerbo][0];
             verboPasado=verbosSoft[numVerbo][1];
@@ -798,7 +913,8 @@ public class Juego extends ActionBarActivity {
             if(nivel>=6 && nivel<=10) { //Si estamos en los niveles 6-10
 
                 //Elegimos el verbo de forma aleatoria:
-                numVerbo = (int) (rnd.nextDouble() * numVerbosListaMedium + 0);
+                if(numVerbo==0)
+                    numVerbo = (int) (rnd.nextDouble() * numVerbosListaMedium + 0);
                 //Cargamos el verbo en las variables locales:
                 verboInfinitivo=verbosMedium[numVerbo][0];
                 verboPasado=verbosMedium[numVerbo][1];
@@ -809,7 +925,8 @@ public class Juego extends ActionBarActivity {
         } if(nivel>=11 && nivel<=15) { //Si estamos en los niveles 6-10
 
             //Elegimos el verbo de forma aleatoria:
-            numVerbo = (int) (rnd.nextDouble() * numVerbosListaHard + 0);
+            if(numVerbo==0)
+                numVerbo = (int) (rnd.nextDouble() * numVerbosListaHard + 0);
             //Cargamos el verbo en las variables locales:
             verboInfinitivo=verbosHard[numVerbo][0];
             verboPasado=verbosHard[numVerbo][1];
@@ -829,28 +946,35 @@ public class Juego extends ActionBarActivity {
 
         //2º GENERAMOS LA FORMA O FORMAS dependiendo del nivel que no aparecerán (por la que preguntaremos)
 
-        if( (nivel>=1 && nivel<=3) || (nivel>=6 && nivel<=8) || (nivel>=11 && nivel<=13) )
-         //Elegimos una forma a preguntar.
-         numFormaA=(int)(rnd.nextDouble() * 3 + 0);
-        else if( (nivel>=4 && nivel<=5) || (nivel>=9 && nivel<=10) || (nivel>=14 && nivel<=15)    ) {
-            //Elegimos dos formas a preguntar que no podrán ser nunca la misma.
-            numFormaA=(int)(rnd.nextDouble() * 3 + 0);
-            if( (int)(rnd.nextDouble() *2 +0) ==0 )
-                numFormaB=(numFormaA+1)%3;
-            else{
-                numFormaB=(numFormaA-1)%3;
-                if (numFormaB<0)
-                    numFormaB+=3;
+        if(numVerbo==0){
+        /*
+        Sólo generaremos las formas cuando no vengan dadas por ninǵun Bundle estate (lo que significaría que ya se han dado antes de entrar
+        en la actividad. Por eso comprobamos para formarlas nosotros que sean iguales a 0, el valor que les setea nuestro constructor.
+         */
+
+            if ((nivel >= 1 && nivel <= 3) || (nivel >= 6 && nivel <= 8) || (nivel >= 11 && nivel <= 13))
+                //Elegimos una forma a preguntar.
+                numFormaA = (int) (rnd.nextDouble() * 3 + 0);
+            else if ((nivel >= 4 && nivel <= 5) || (nivel >= 9 && nivel <= 10) || (nivel >= 14 && nivel <= 15)) {
+                //Elegimos dos formas a preguntar que no podrán ser nunca la misma.
+
+                numFormaA = (int) (rnd.nextDouble() * 3 + 0);
+                if ((int) (rnd.nextDouble() * 2 + 0) == 0)
+                    numFormaB = (numFormaA + 1) % 3;
+                else {
+                    numFormaB = (numFormaA - 1) % 3;
+                    if (numFormaB < 0)
+                        numFormaB += 3;
+                }
             }
-        }
 
-        if((nivel>=1 && nivel<=3) || (nivel>=6 && nivel<=8) || (nivel>=11 && nivel<=13))
-            System.out.println("Forma elegida: "+numFormaA);
-        else if((nivel>=4 && nivel<=5) || (nivel>=9 && nivel<=10) || (nivel>=14 && nivel<=15))
-            System.out.println("Formas elegidas: "+numFormaA+" y "+numFormaB);
-
+            if ((nivel >= 1 && nivel <= 3) || (nivel >= 6 && nivel <= 8) || (nivel >= 11 && nivel <= 13))
+                System.out.println("Forma elegida: " + numFormaA);
+            else if ((nivel >= 4 && nivel <= 5) || (nivel >= 9 && nivel <= 10) || (nivel >= 14 && nivel <= 15))
+                System.out.println("Formas elegidas: " + numFormaA + " y " + numFormaB);
 
 
+         }
 
         //3º Construimos la forma misteriosa para los niveles 1, 6 y 11,
 
@@ -1257,6 +1381,9 @@ public class Juego extends ActionBarActivity {
 
 
             }
+
+
+        //numVerbo=1;
         } //Fin de crearJugada();
 
 
@@ -1314,10 +1441,21 @@ public class Juego extends ActionBarActivity {
     }
 
 
+    public void toast(String mensaje){
+        //Configuramos el mensaje de vida ganada:
+        Context context = getApplicationContext();
+        CharSequence text = mensaje;
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+
+
+        toast.show();
+    }
+
     public void perderVida(){
 
-
-
+        /*
         //Configuramos el mensaje de vida ganada:
         Context context = getApplicationContext();
         CharSequence text = "Loosed one live!";
@@ -1327,9 +1465,7 @@ public class Juego extends ActionBarActivity {
 
 
         toast.show();
-
-
-
+        */
 
 
 
@@ -1338,6 +1474,8 @@ public class Juego extends ActionBarActivity {
             vida3.setImageResource(R.drawable.corazonmuerto);
             //Se le resta una:
             nVidas--;
+            //Llamamos a toast con el mensaje guardad eon strings.xml
+            toast(this.getString(R.string.mensajeVidaPerdida));
         }
         //Si le quedan 2 vidas:
         else if(this.nVidas==2) {
@@ -1345,6 +1483,7 @@ public class Juego extends ActionBarActivity {
             vida2.setImageResource(R.drawable.corazonmuerto);
             //Se le resta una:
             nVidas--;
+            toast(this.getString(R.string.mensajeVidaPerdida));
         }
         //Si le queda 1 vidas:
         else if(this.nVidas==1) {
@@ -1352,13 +1491,11 @@ public class Juego extends ActionBarActivity {
             vida1.setImageResource(R.drawable.corazonmuerto);
             //Se le resta una:
             nVidas--;
+            toast(this.getString(R.string.mensajeVidaPerdida));
         }
         //Si no le queda ninguna vida:
         else {
             if (this.nVidas == 0) {
-
-
-
 
 
                 System.out.println("Entrando en sección de fin de partida");
@@ -1382,12 +1519,7 @@ public class Juego extends ActionBarActivity {
                 //  SystemClock.sleep(5000);
 
                 //Mostramos un mensaje toast! YOU ARE DEAD!
-                context = getApplicationContext();
-                text = "## GAME OVER ##";
-                duration = Toast.LENGTH_LONG;
-
-                toast = Toast.makeText(context, text, duration);
-                toast.show();
+                toast(this.getString(R.string.mensajeMuerte));
 
                 //Finalizamos la hebra que ejecuta esta actividad:
                 this.finish();
