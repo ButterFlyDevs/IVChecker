@@ -31,5 +31,6 @@
     <string name="title_activity_resultados_training">ResultadosTraining</string>
     <string name="title_activity_resultado">Resultado</string>
     <string name="title_activity_eliminame">ELIMINAME</string>
+    <string name="title_activity_historial_puntuacion_training">HistorialPuntuacionTraining</string>
 
 </resources>
