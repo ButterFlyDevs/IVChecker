@@ -40,20 +40,28 @@ public class ListaVerbos extends ActionBarActivity {
     private void mostrarVerbos(String lista){
 
 
-
+        //Reseteamos los campos (para no tener los valores usados de muestra en la vista del diseño):
+            textNombreLista.setText("");
+            textNumero.setText("");
+            textInfinitivo.setText("");
+            textPasado.setText("");
+            textParticipio.setText("");
 
         //Dependiendo de la elección se abre un fichero u otro y cambiamos el color del fondo:
         if(lista.equals("soft")) {
             //Abrimos el flujo del fichero almacenado en la carpeta denro de res llamada raw con el nombre ivsoft
             inputStream = getResources().openRawResource(R.raw.ivsoft);
+            textNombreLista.append(getString(R.string.listaSimple));
             scrollView.setBackgroundColor(Color.rgb(255,228,169));
         }
         if(lista.equals("medium")){
             inputStream=getResources().openRawResource(R.raw.ivmedium);
+            textNombreLista.append(getString(R.string.listaMedia));
             scrollView.setBackgroundColor(Color.rgb(255,197,125));
         }
         if(lista.equals("hard")){
             inputStream=getResources().openRawResource(R.raw.ivhard);
+            textNombreLista.append(getString(R.string.listaDificil));
             scrollView.setBackgroundColor(Color.rgb(255,183,93));
         }
 
@@ -62,19 +70,13 @@ public class ListaVerbos extends ActionBarActivity {
 
         //Construimos la lista de verbos irregulares:
 
-        //Reseteamos los campos (para no tener los valores usados de muestra en la vista del diseño):
-        textNombreLista.setText("");
-        textNumero.setText("");
-        textInfinitivo.setText("");
-        textPasado.setText("");
-        textParticipio.setText("");
+
 
 
         int numero=1;
 
         try {
             String line;
-            textNombreLista.append(lista+" list");
             //Sacamos el número
             line=reader.readLine();
 

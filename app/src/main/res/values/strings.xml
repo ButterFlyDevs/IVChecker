@@ -42,6 +42,9 @@
         <string name="mensajeMuerte">## Game Over ##</string>
 
 
+
+
+
     <string name="title_activity_about">About</string>
     <string name="title_activity_training_area_inicio">TrainingAreaInicio</string>
     <string name="title_activity_juego_training">JuegoTraining</string>
