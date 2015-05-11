@@ -115,9 +115,9 @@ public class Juego extends ActionBarActivity {
 
 
 
-    //Publicidad:
-    private AdView adView;
 
+
+    //Intent intentShowerLevels;
     //Intent intentShowerLevels;
 
 
