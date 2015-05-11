@@ -82,7 +82,6 @@
             android:text="Smart Training"
             android:id="@+id/switch_smartVerb"
             android:layout_gravity="center_horizontal"
-            android:checked="true"
             android:textSize="20dp" />
 
         <Spinner

@@ -22,7 +22,7 @@ import java.util.List;
 public class Configuracion extends ActionBarActivity {
 
     private Spinner spinner_num_verbos;
-    private Switch smartVerb_switch;
+    private Switch smartVerb_switch=null;
     private Button botonOK;
     private RadioGroup tipoLista;
     private RadioButton boton_soft, boton_medium, boton_hard;
@@ -44,10 +44,12 @@ public class Configuracion extends ActionBarActivity {
         boton_soft = (RadioButton) findViewById(R.id.radioSoft);
         boton_medium = (RadioButton) findViewById(R.id.radioMedium);
         boton_hard = (RadioButton) findViewById(R.id.radioHard);
+
+
+        //Rellenamos el spinner y preparamos el Switch
+        rellenar_spinner_NumVerbos();
         smartVerb_switch = (Switch) findViewById(R.id.switch_smartVerb);
 
-        //Rellenamos los spinner
-        rellenar_spinner_NumVerbos();
         //Comprobamos los datos introducidos
         botonOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,27 +57,27 @@ public class Configuracion extends ActionBarActivity {
 
                 //Comprobamos la lista pedida comparando con cada uno de los botones
                 int ID_lista = tipoLista.getCheckedRadioButtonId();
-                if(ID_lista == boton_soft.getId())
+                if (ID_lista == boton_soft.getId())
                     lista_a_preguntar = 1;
-                if(ID_lista == boton_medium.getId())
+                if (ID_lista == boton_medium.getId())
                     lista_a_preguntar = 2;
-                if(ID_lista == boton_hard.getId())
+                if (ID_lista == boton_hard.getId())
                     lista_a_preguntar = 3;
 
                 //Comprobamos SmartVerb
-                if(smartVerb_switch.isChecked())
-                    smartVerb=0;
+                if (smartVerb_switch.isChecked())
+                    smartVerb = 0;
                 else
-                    smartVerb=1;
+                    smartVerb = 1;
 
                 //Comprobamos el numero de verbos
-                numero_verbos = Integer.parseInt( String.valueOf (spinner_num_verbos.getSelectedItem() ) );
+                numero_verbos = Integer.parseInt(String.valueOf(spinner_num_verbos.getSelectedItem()));
                 //Devolvemos los datos a la Actividad TrainigAreaInicio (que llamó a esta actividad Configuracion)
                 Intent intent = new Intent();
-                intent.putExtra("lista",lista_a_preguntar);
-                intent.putExtra("smartVerb",smartVerb);
-                intent.putExtra("numero_verbos",numero_verbos);
-                setResult(RESULT_OK,intent);
+                intent.putExtra("lista", lista_a_preguntar);
+                intent.putExtra("smartVerb", smartVerb);
+                intent.putExtra("numero_verbos", numero_verbos);
+                setResult(RESULT_OK, intent);
                 /*
                     Si quisieramos cancelar los datos y ponerlos a valores por defecto (programar otro boton Cancelar):
                     Intent returnIntent = new Intent();
@@ -94,22 +96,21 @@ public class Configuracion extends ActionBarActivity {
 
         spinner_num_verbos= (Spinner) findViewById(R.id.spinnerVerbos);
         List<String> list = new ArrayList<String>();
-        list.add("1");
-        list.add("2");
         list.add("3");
-        list.add("4");
-        list.add("5");
         list.add("6");
-        list.add("7");
-        list.add("8");
         list.add("9");
-        list.add("10");
+        list.add("12");
+        list.add("15");
+        list.add("18");
+        list.add("21");
+        list.add("24");
+        list.add("27");
+        list.add("30");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_num_verbos.setAdapter(dataAdapter);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

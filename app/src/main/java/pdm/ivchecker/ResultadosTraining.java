@@ -34,7 +34,7 @@ public class ResultadosTraining extends ActionBarActivity {
     TextView total_acertados;
     TextView total_fallados;
     TextView tipo_lista;
-    TextView verbos_fallados;
+    TextView verbos_fallados_infinitivo, verbos_fallados_pasado, verbos_fallados_participio;
 
     private LinearLayout layout;
     private ScrollView scroll;
@@ -59,7 +59,9 @@ public class ResultadosTraining extends ActionBarActivity {
         total_fallados = (TextView) findViewById(R.id.etiqueta_verbos_fallados);
         total_acertados = (TextView) findViewById(R.id.etiqueta_verbos_acertados);
         tipo_lista = (TextView) findViewById(R.id.tipo_lista);
-        verbos_fallados = (TextView) findViewById(R.id.lista_verbos_fallados);
+        verbos_fallados_infinitivo = (TextView) findViewById(R.id.infinitivoResultado);
+        verbos_fallados_pasado = (TextView) findViewById(R.id.pasadoResultado);
+        verbos_fallados_participio = (TextView) findViewById(R.id.participioResultado);
 
         //Texto lista
         switch(intent.getIntExtra("LISTA",0)){
@@ -75,7 +77,17 @@ public class ResultadosTraining extends ActionBarActivity {
         total_acertados.setText("Hits: "+intent.getIntExtra("NUMERO_VERBOS_ACERTADOS",0));
 
         //Lista verbos fallados
-        verbos_fallados.setText("Failed verbs: " + intent.getStringExtra("LISTA_VERBOS_FALLADOS"));
+        String string_verbos_fallados = intent.getStringExtra("LISTA_VERBOS_FALLADOS");
+        String lineas_verbos_fallados[] = string_verbos_fallados.split("\n");
+        if(lineas_verbos_fallados.length>1) {   //Ha de ser mayor que 1 y el for empieza en 1 por que el primer String guardado es la cadena de inicialización de la variable en la otra activity, es decir: ""
+            for (int i = 1; i < lineas_verbos_fallados.length; i++) {
+                String[] RowData = lineas_verbos_fallados[i].split(",");
+                verbos_fallados_infinitivo.append(RowData[0] + "\n");
+                verbos_fallados_pasado.append(RowData[1] + "\n");
+                verbos_fallados_participio.append(RowData[2] + "\n");
+            }
+        }
+        //verbos_fallados.setText("Failed verbs: " + intent.getStringExtra("LISTA_VERBOS_FALLADOS"));
         //Grafico
 
         segmento_aciertos = new Segment("hits", intent.getIntExtra("NUMERO_VERBOS_ACERTADOS",0));
