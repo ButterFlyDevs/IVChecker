@@ -80,9 +80,9 @@
             android:layout_width="234dp"
             android:layout_height="wrap_content"
             android:text="Smart Training"
-            android:id="@+id/switch1"
+            android:id="@+id/switch_smartVerb"
             android:layout_gravity="center_horizontal"
-            android:checked="false"
+            android:checked="true"
             android:textSize="20dp" />
 
         <Spinner

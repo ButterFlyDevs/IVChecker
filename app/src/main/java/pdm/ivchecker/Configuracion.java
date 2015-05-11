@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,8 @@ import java.util.List;
 
 public class Configuracion extends ActionBarActivity {
 
-    private Spinner spinner_smartVerb, spinner_num_verbos;
+    private Spinner spinner_num_verbos;
+    private Switch smartVerb_switch;
     private Button botonOK;
     private RadioGroup tipoLista;
     private RadioButton boton_soft, boton_medium, boton_hard;
@@ -41,10 +44,10 @@ public class Configuracion extends ActionBarActivity {
         boton_soft = (RadioButton) findViewById(R.id.radioSoft);
         boton_medium = (RadioButton) findViewById(R.id.radioMedium);
         boton_hard = (RadioButton) findViewById(R.id.radioHard);
+        smartVerb_switch = (Switch) findViewById(R.id.switch_smartVerb);
 
         //Rellenamos los spinner
         rellenar_spinner_NumVerbos();
-        rellenar_smartVerb();
         //Comprobamos los datos introducidos
         botonOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,9 +63,7 @@ public class Configuracion extends ActionBarActivity {
                     lista_a_preguntar = 3;
 
                 //Comprobamos SmartVerb
-                String respuesta_smartVerb = String.valueOf(spinner_smartVerb.getSelectedItem() );
-                System.out.println(respuesta_smartVerb);
-                if(respuesta_smartVerb == "Yes")
+                if(smartVerb_switch.isChecked())
                     smartVerb=0;
                 else
                     smartVerb=1;
@@ -109,17 +110,6 @@ public class Configuracion extends ActionBarActivity {
         spinner_num_verbos.setAdapter(dataAdapter);
     }
 
-    private void rellenar_smartVerb(){
-        spinner_smartVerb= (Spinner) findViewById(R.id.spinnerSmartVerb);
-        List<String> list = new ArrayList<String>();
-        list.add("Yes");
-        list.add("No");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
-
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_smartVerb.setAdapter(dataAdapter);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
