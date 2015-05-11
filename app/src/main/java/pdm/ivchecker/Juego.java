@@ -410,6 +410,44 @@ public class Juego extends ActionBarActivity {
     }
 
 
+    private boolean comprueba(String introducido, String original){
+
+        /*Esta función comprueba que el verbo introducido corresponda con el original.
+        Construimos esta función poque el verbo original puede ser que esté compuesto por dos partes,
+        la forma para el singular y para el plural por eso si se da este caso tenemos que separar el contenido
+        y comprobar que coincida con uno de los dos.
+         */
+
+        String descompuestoA="", descompuestoB="";
+
+
+        if(original.contains("/")){ //Se trata de un verbo compuesto.
+
+            //1º. Se descompone el verbo.
+
+            int posBarra = original.indexOf("/");
+            descompuestoA=original.substring(0, posBarra);
+            System.out.println("PrimeraSeccion: "+descompuestoA);
+            descompuestoB=original.substring(posBarra+1, original.length());
+            System.out.println("SegundaSeccion: "+descompuestoB);
+
+
+            //2º. Se comprueba con cada una de las formas
+
+            if(introducido.equals(descompuestoA) || introducido.equals(descompuestoB))
+                return true;
+            else
+                return false;
+
+        }else{//No se trata de un verbo compuest
+            if(introducido.equals(original))
+                return true;
+            else
+                return false;
+        }
+
+    }
+
     @Override
     //Método llamada cuando se crea por primera vez la actividad.
     protected void onCreate(Bundle inState) {
@@ -629,45 +667,17 @@ public class Juego extends ActionBarActivity {
 
                             numVerbo=0;
 
-                        /*
-                        10 jugadas por nivel!
-                         */
 
-                            //Si hemos completado las diez jugadas por nivel pasamos de nivel.
-                        //CAMBIAR EL 2 A 10
-                            if (jugadaEnNivel > 2) {
+                            //Si hemos completado las quince jugadas por nivel pasamos de nivel.
+
+                            if (jugadaEnNivel > 15) {
                                 nivel++; //Pasamos de nivel
                                 jugadaEnNivel = 1; //Reiniciamos.
 
-
-                                //CAMBIO POR FRAGMENT
-                                //Nos vamos a la actividad que muestra el nivel:
-                               // Intent intent = new Intent(Juego.this, juego_show_level.class);
-
-
-
                                 System.out.println("Vamos a show_level pasando nivel  " + nivel);
 
-                                //CAMBIO POR FRAGMENT
-                                //Vamos a la activity juego con el nivel 1
-                               // intent.putExtra("nivel", nivel);
-
-                                //YA NO VAMOS A CAMBIAR DE ACTIVIDAD, NO HACE FALTA GUARDAR NADA
-                                //Antes de pasar de actividad guardamos los datos para que al volver a la actividad los tengamos disponibles:
-                               // SharedPreferences.Editor editor = prefe.edit();
-                                //editor.putInt("puntos", puntuacionPartida); //La puntuación de la partida
-                                //editor.putInt("vidas", nVidas); //El número de vidas
-                                //editor.commit();
-
-
-
-                               // System.out.println("Grabamos nivel: " + nivel + " y vidas: " + nVidas);
-
-
-                               // startActivity(intent);
                                 if(!finPartida)
                                     runFragment(nivel);
-
 
                                 jugar();
 
@@ -905,8 +915,12 @@ public class Juego extends ActionBarActivity {
     // ## LÓGICA DEL JUEGO ## //
     public void crearJugada(){
 
+        boolean pasa;
 
-
+        if(numVerbo==0)
+            pasa=true;
+        else
+            pasa=false;
 
         System.out.println("#################### Vidas: "+nVidas+" puntuacion "+puntuacionPartida+"verboElegido: "+numVerbo);
 
@@ -956,13 +970,16 @@ public class Juego extends ActionBarActivity {
                 numVerbo = (int) (rnd.nextDouble() * numVerbosListaSoft + 0);
             //Si no es así querra'decir que se usa el num de verbo guardado.
 
+
+            //numVerbo=1; //ELIMINAME
+
+
             //Cargamos el verbo en las variables locales:
             verboInfinitivo=verbosSoft[numVerbo][0];
             verboPasado=verbosSoft[numVerbo][1];
             verboParticipio=verbosSoft[numVerbo][2];
 
-        }else
-            if(nivel>=6 && nivel<=10) { //Si estamos en los niveles 6-10
+        }else if(nivel>=6 && nivel<=10) { //Si estamos en los niveles 6-10
 
                 //Elegimos el verbo de forma aleatoria:
                 if(numVerbo==0)
@@ -974,7 +991,7 @@ public class Juego extends ActionBarActivity {
 
                 System.out.println("Elegimos verbo de la lista MEDIUM");
 
-        } if(nivel>=11 && nivel<=15) { //Si estamos en los niveles 6-10
+        } else if(nivel>=11 && nivel<=15) { //Si estamos en los niveles 6-10
 
             //Elegimos el verbo de forma aleatoria:
             if(numVerbo==0)
@@ -998,16 +1015,19 @@ public class Juego extends ActionBarActivity {
 
         //2º GENERAMOS LA FORMA O FORMAS dependiendo del nivel que no aparecerán (por la que preguntaremos)
 
-        if(numVerbo==0){
+        if(pasa){
+
+            System.out.println("Eligiendo verbo");
         /*
         Sólo generaremos las formas cuando no vengan dadas por ninǵun Bundle estate (lo que significaría que ya se han dado antes de entrar
         en la actividad. Por eso comprobamos para formarlas nosotros que sean iguales a 0, el valor que les setea nuestro constructor.
          */
 
-            if ((nivel >= 1 && nivel <= 3) || (nivel >= 6 && nivel <= 8) || (nivel >= 11 && nivel <= 13))
+            if ((nivel >= 1 && nivel <= 3) || (nivel >= 6 && nivel <= 8) || (nivel >= 11 && nivel <= 13)) {
                 //Elegimos una forma a preguntar.
                 numFormaA = (int) (rnd.nextDouble() * 3 + 0);
-            else if ((nivel >= 4 && nivel <= 5) || (nivel >= 9 && nivel <= 10) || (nivel >= 14 && nivel <= 15)) {
+
+            }else if ((nivel >= 4 && nivel <= 5) || (nivel >= 9 && nivel <= 10) || (nivel >= 14 && nivel <= 15)) {
                 //Elegimos dos formas a preguntar que no podrán ser nunca la misma.
 
                 numFormaA = (int) (rnd.nextDouble() * 3 + 0);
@@ -1631,12 +1651,15 @@ public class Juego extends ActionBarActivity {
 
         int seg=Integer.parseInt(timer.getText().toString());
 
-        //Comprobación de verbos:
+        //  Comprobación de verbos:
 
         if(nivel>=1 && nivel<=5) {
 
             if(nivel==1 || nivel==2 || nivel==3) {
-                if (campoVerboIntroducidoA.getText().toString().equals(verbosSoft[numVerbo][numFormaA])) {
+
+              //  if (campoVerboIntroducidoA.getText().toString().equals(verbosSoft[numVerbo][numFormaA])) {
+                //Nueva forma de cormprobar:
+                if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosSoft[numVerbo][numFormaA] )){
                     /*
                     En el nivel 1 cada acierto suma 1 en el nivel 2 suma 2 y así con el resto de niveles
                      */
@@ -1650,11 +1673,11 @@ public class Juego extends ActionBarActivity {
             else{
 
                 if(nivel==4 || nivel==5) {
-                    if (campoVerboIntroducidoA.getText().toString().equals(verbosSoft[numVerbo][numFormaA]))
+                    if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosSoft[numVerbo][numFormaA]))
                         puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
-                    if (campoVerboIntroducidoB.getText().toString().equals(verbosSoft[numVerbo][numFormaB]))
+                    if (comprueba(campoVerboIntroducidoB.getText().toString(),verbosSoft[numVerbo][numFormaB]))
                         puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
@@ -1662,10 +1685,10 @@ public class Juego extends ActionBarActivity {
 
             }
         }
-        else if(nivel>=6 && nivel<=10) {
+        else if(nivel>=6 && nivel<=10) { //Lista Medium
 
             if(nivel==6 || nivel==7 || nivel==8) {
-                if (campoVerboIntroducidoA.getText().toString().equals(verbosMedium[numVerbo][numFormaA])) {
+                if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosMedium[numVerbo][numFormaA])) {
                     puntuacionPartida=puntuacionPartida+(nivel*seg);
 
                 } else {
@@ -1676,11 +1699,11 @@ public class Juego extends ActionBarActivity {
             else{
 
                 if(nivel==9 || nivel==10) {
-                    if (campoVerboIntroducidoA.getText().toString().equals(verbosMedium[numVerbo][numFormaA]))
+                    if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosMedium[numVerbo][numFormaA]))
                         puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
-                    if (campoVerboIntroducidoB.getText().toString().equals(verbosMedium[numVerbo][numFormaB]))
+                    if (comprueba(campoVerboIntroducidoB.getText().toString(),verbosMedium[numVerbo][numFormaB]))
                         puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
@@ -1688,11 +1711,11 @@ public class Juego extends ActionBarActivity {
 
             }
 
-        }else if(nivel>=11 && nivel<=15) {
+        }else if(nivel>=11 && nivel<=15) {//Lista Hard
 
 
             if(nivel==11 || nivel==12 || nivel==13) {
-                if (campoVerboIntroducidoA.getText().toString().equals(verbosHard[numVerbo][numFormaA])) {
+                if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosHard[numVerbo][numFormaA])) {
                     puntuacionPartida=puntuacionPartida+(nivel*seg);
 
                 } else {
@@ -1703,11 +1726,11 @@ public class Juego extends ActionBarActivity {
             else{
 
                 if(nivel==14 || nivel==15) {
-                    if (campoVerboIntroducidoA.getText().toString().equals(verbosHard[numVerbo][numFormaA]))
+                    if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosHard[numVerbo][numFormaA]))
                         puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
-                    if (campoVerboIntroducidoB.getText().toString().equals(verbosHard[numVerbo][numFormaB]))
+                    if (comprueba(campoVerboIntroducidoB.getText().toString(),verbosHard[numVerbo][numFormaB]))
                         puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
@@ -1728,7 +1751,7 @@ public class Juego extends ActionBarActivity {
         System.out.println("Puntucion: " +puntuacionPartida);
 
         puntos.setText(Integer.toString(puntuacionPartida));
-    }
+    } //fin comprobarVerbo()
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
