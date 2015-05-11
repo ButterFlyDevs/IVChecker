@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -123,7 +124,16 @@ public class Juego extends ActionBarActivity {
     // Fin variables globales de partida.
 
 
-    private Chronometer cronometro;
+
+    private TextView timer;
+    private int time;
+
+
+    //private final long startTime=25000;
+    //private final long interval= 1;
+    //private MalibuCountDownTimer countDownTimer;
+    private CountDownTimer countDownTimer;
+    //private long timeElapsed;
 
 
     SharedPreferences prefe;
@@ -137,7 +147,7 @@ public class Juego extends ActionBarActivity {
 //        showerLevels.setVisible(true);
         //startActivity(intent);
 
-
+        time=30;
 
         if(!restauracion) {
             System.out.println("Constructor de JUEGO");
@@ -357,7 +367,7 @@ public class Juego extends ActionBarActivity {
         vida3=(ImageView)findViewById(R.id.vida3);
 
 
-        cronometro = (Chronometer)findViewById(R.id.cronometro);
+        timer=(TextView)findViewById(R.id.timer);
 
         /* Fin de las referencias*/
     }
@@ -421,6 +431,7 @@ public class Juego extends ActionBarActivity {
 
 
 
+
         if(inState!=null) {
 
             //Recuperamos el estado de la actividad en el caso de que este existiera y pasase el condicional
@@ -431,6 +442,7 @@ public class Juego extends ActionBarActivity {
             this.numVerbo=inState.getInt("numVerbo");
             this.numFormaA=inState.getInt("numFormaA");
             this.numFormaB=inState.getInt("numFormaB");
+            this.time=inState.getInt("time");
 
 
             System.out.println("onRestore: puntos: "+puntuacionPartida+" "+nVidas+" + nVidas");
@@ -681,10 +693,30 @@ public class Juego extends ActionBarActivity {
                                 //Si no estuviera dentro de la estructura else nos crearía una jugada antes de pasar de nivel.
                                 jugar(); //COmo llamar a crearJugada()
 
+                        //Al hacer click se reinicia el countDownTimer
+                        time=30;
 
 
+                        countDownTimer.cancel();
+                        countDownTimer = new CountDownTimer(time*1000, 1000) {
+
+                            public void onTick(long millisUntilFinished) {
+                                timer.setText("" + millisUntilFinished / 1000);
+                            }
+
+                            public void onFinish() {
+                                //Al colocar un 0 si el jugador agota el timepo pero acierta no suma puntos pero tampoco pierde vida.
+                                timer.setText("0");
+                            }
+                        };
+                        countDownTimer.start();
+                        //*/
+
+                        //countDownTimer.start();
                     }
                 }
+
+
 
         ); //Fin del manejador del botón next.
 
@@ -698,9 +730,21 @@ public class Juego extends ActionBarActivity {
 
         //Cuando el proceso se crear se llama a jugar y se empieza a jugar.
         this.jugar();
+        //countDownTimer = new MalibuCountDownTimer(startTime, interval);
 
-        cronometro.start();
-    }
+        //Al crear la actividad se crear el objeto de tipo CountDownTimer
+        countDownTimer = new CountDownTimer(time*1000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timer.setText("" + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                timer.setText("0");
+            }
+        }.start();
+
+    } //Fin de onCreate
 
     private void runFragment(int level) {
 
@@ -789,6 +833,9 @@ public class Juego extends ActionBarActivity {
         //Salvamos las formas verbales también;
         outState.putInt("numFormaA",this.numFormaA);
         outState.putInt("numFormaB",this.numFormaB);
+
+        //Salvamos el tiempo por si al jugador le da por cambiar la orientación de la pantalla mientras juega
+        outState.putInt("time",Integer.parseInt(timer.getText().toString()));
 
     }
 
@@ -1582,6 +1629,8 @@ public class Juego extends ActionBarActivity {
 
 
 
+        int seg=Integer.parseInt(timer.getText().toString());
+
         //Comprobación de verbos:
 
         if(nivel>=1 && nivel<=5) {
@@ -1591,7 +1640,7 @@ public class Juego extends ActionBarActivity {
                     /*
                     En el nivel 1 cada acierto suma 1 en el nivel 2 suma 2 y así con el resto de niveles
                      */
-                    puntuacionPartida=puntuacionPartida+nivel;
+                    puntuacionPartida=puntuacionPartida+(nivel*seg);
 
                 } else {
                     //Pierde una vida: ohhh!!
@@ -1602,11 +1651,11 @@ public class Juego extends ActionBarActivity {
 
                 if(nivel==4 || nivel==5) {
                     if (campoVerboIntroducidoA.getText().toString().equals(verbosSoft[numVerbo][numFormaA]))
-                        puntuacionPartida=puntuacionPartida+nivel;
+                        puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
                     if (campoVerboIntroducidoB.getText().toString().equals(verbosSoft[numVerbo][numFormaB]))
-                        puntuacionPartida=puntuacionPartida+nivel;
+                        puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
                 }
@@ -1617,7 +1666,7 @@ public class Juego extends ActionBarActivity {
 
             if(nivel==6 || nivel==7 || nivel==8) {
                 if (campoVerboIntroducidoA.getText().toString().equals(verbosMedium[numVerbo][numFormaA])) {
-                    puntuacionPartida=puntuacionPartida+nivel;
+                    puntuacionPartida=puntuacionPartida+(nivel*seg);
 
                 } else {
                     //Pierde una vida: ohhh!!
@@ -1628,11 +1677,11 @@ public class Juego extends ActionBarActivity {
 
                 if(nivel==9 || nivel==10) {
                     if (campoVerboIntroducidoA.getText().toString().equals(verbosMedium[numVerbo][numFormaA]))
-                        puntuacionPartida=puntuacionPartida+nivel;
+                        puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
                     if (campoVerboIntroducidoB.getText().toString().equals(verbosMedium[numVerbo][numFormaB]))
-                        puntuacionPartida=puntuacionPartida+nivel;
+                        puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
                 }
@@ -1644,7 +1693,7 @@ public class Juego extends ActionBarActivity {
 
             if(nivel==11 || nivel==12 || nivel==13) {
                 if (campoVerboIntroducidoA.getText().toString().equals(verbosHard[numVerbo][numFormaA])) {
-                    puntuacionPartida=puntuacionPartida+nivel;
+                    puntuacionPartida=puntuacionPartida+(nivel*seg);
 
                 } else {
                     //Pierde una vida: ohhh!!
@@ -1655,11 +1704,11 @@ public class Juego extends ActionBarActivity {
 
                 if(nivel==14 || nivel==15) {
                     if (campoVerboIntroducidoA.getText().toString().equals(verbosHard[numVerbo][numFormaA]))
-                        puntuacionPartida=puntuacionPartida+nivel;
+                        puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
                     if (campoVerboIntroducidoB.getText().toString().equals(verbosHard[numVerbo][numFormaB]))
-                        puntuacionPartida=puntuacionPartida+nivel;
+                        puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
                 }
@@ -1670,6 +1719,8 @@ public class Juego extends ActionBarActivity {
         }
 
 
+        //Ajustamos la puntuación según el tiempo, multiplicandola por los segunods que quedan, así
+        //cuando menmos tiempo gaste el usuario más segundos le quedarán y el resultado será mayor.
 
 
 
@@ -1702,4 +1753,35 @@ public class Juego extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+/*
+    // CountDownTimer class
+    public class MalibuCountDownTimer extends CountDownTimer
+    {
+
+        public MalibuCountDownTimer(long startTime, long interval)
+        {
+            super(startTime, interval);
+        }
+
+        @Override
+        public void onFinish()
+        {
+            timer.setText("Time's up!");
+            //timeElapsedView.setText("Time Elapsed: " + String.valueOf(startTime));
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished)
+        {
+            //Pasamos el tiempo a segundos y lo mostramos.
+            timer.setText(" "+millisUntilFinished/1000);
+            //timeElapsed = startTime - millisUntilFinished;
+           // timeElapsedView.setText("Time Elapsed: " + String.valueOf(timeElapsed));
+        }
+    }*/
 }
+
+
+

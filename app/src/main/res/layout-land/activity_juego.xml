@@ -45,29 +45,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true">
+                android:layout_alignParentEnd="true"
+                android:id="@+id/linearLayout2">
 
-
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:id="@+id/vida3"
-                    android:layout_gravity="bottom"
-                    android:src="@drawable/corazonvivo" />
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:id="@+id/vida2"
-                    android:layout_gravity="bottom"
-                    android:src="@drawable/corazonvivo" />
 
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:id="@+id/vida1"
-                    android:layout_gravity="bottom"
                     android:src="@drawable/corazonvivo" />
             </LinearLayout>
 
@@ -77,9 +62,46 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="textLevel"
                 android:id="@+id/textLevel"
+                android:textSize="25dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/viewPuntos"
+                android:layout_toEndOf="@+id/viewPuntos"
+                android:layout_marginLeft="95dp"
+                android:layout_marginStart="95dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="n"
+                android:id="@+id/timer"
+                android:layout_gravity="center_horizontal"
+                android:textSize="30dp"
+                android:layout_marginLeft="85dp"
+                android:layout_marginStart="85dp"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:textSize="25dp" />
+                android:layout_toRightOf="@+id/textLevel"
+                android:layout_toEndOf="@+id/textLevel" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/vida3"
+                android:layout_gravity="bottom"
+                android:src="@drawable/corazonvivo"
+                android:layout_alignBottom="@+id/textLevel"
+                android:layout_toLeftOf="@+id/linearLayout2"
+                android:layout_toStartOf="@+id/linearLayout2" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/vida2"
+                android:layout_gravity="bottom"
+                android:src="@drawable/corazonvivo"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/vida3"
+                android:layout_toStartOf="@+id/vida3" />
 
         </RelativeLayout>
 
@@ -204,12 +226,6 @@
                     android:gravity="center"
                     android:width="150dp"
                     android:height="70dp" />
-                <Chronometer
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cronometro"
-                    android:layout_gravity="center_horizontal"
-                    />
             </RelativeLayout>
 
         </LinearLayout>
