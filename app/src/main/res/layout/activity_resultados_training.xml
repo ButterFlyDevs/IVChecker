@@ -4,17 +4,20 @@
     android:id="@+id/scrollLayout"
     android:layout_width="fill_parent"
     android:background="#58D3F7"
+    android:layout_gravity="center_vertical"
     android:layout_height="fill_parent" >
     <HorizontalScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/horizontalScrollViewTraining"
+
         xmlns:android="http://schemas.android.com/apk/res/android" >
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/layoutPrincipalResultadosTraining"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
+            android:layout_gravity="center_vertical"
             android:orientation="vertical">
 
             <LinearLayout

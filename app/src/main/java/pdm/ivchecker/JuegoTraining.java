@@ -70,7 +70,17 @@ public class JuegoTraining extends ActionBarActivity {
         //Para que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        /*
+        ############ RECUPERAR LA INSTANCIA DEL JUEGOTRAINING ANTERIOR, EN CASO DE EXISTIR
+        Esto ocurrirá cuando se gire la pantalla mientras se juega (se creará una nueva
+        instancia de JuegoTraining, la cual debe cargar el estado de partida tal cual
+        estaba antes de girar la pantalla.
 
+        Null si es la primera ejecucion. Distinto a null si viene de una ejecución previa
+         */
+        if(savedInstanceState !=null) {
+
+        }
         //Primero, obtenemos el intent con los datos importantes, y configuramos el juego
         intent = getIntent();
 
@@ -137,7 +147,7 @@ public class JuegoTraining extends ActionBarActivity {
         if(lista_a_preguntar==0)
             lista_a_preguntar = rnd.nextInt(3) +1;
         if(numero_verbos==0)
-            numero_verbos = 10 + rnd.nextInt(31); //Genera un numero entre 10 y 40.
+            numero_verbos = 3 + rnd.nextInt(22); //Genera un numero entre 10 y 24.
 
     }
     private void leerVerbos(){
@@ -451,5 +461,35 @@ public class JuegoTraining extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        //Salvamos los indices de verbos fallados
+        if(verbos_fallados!=null) {
+            outState.putInt("TOTAL_FALLADOS_TRAINING",verbos_fallados.size());
+            for (int i = 0; i < this.verbos_fallados.size(); i++) {
+                outState.putInt("VerboFallado" + i, (int) this.verbos_fallados.get(i));
+            }
+        }
+        else
+            outState.putInt("TOTAL_FALLADOS_TRAINING",0);
+
+        //Salvamos la cadena de verbos fallados
+        outState.putString("STRING_FALLADOS_TRAINING",this.lista_verbos_fallados);
+        //Salvamos la puntuacion
+        outState.putInt("PUNTUACION_TRAINING",this.puntuacionJugada);
+
+        //Salvamos el verbo elegido en la jugada
+        outState.putInt("numVerbo",this.numVerbo);
+
+        //Salvamos las formas verbales también;
+        outState.putInt("numFormaA",this.numFormaA);
+        outState.putInt("numFormaB",this.numFormaB);
+
+        //Salvamos el tiempo por si al jugador le da por cambiar la orientación de la pantalla mientras juega
+        outState.putInt("time",Integer.parseInt(timer.getText().toString()));
+
     }
 }
