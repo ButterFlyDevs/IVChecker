@@ -15,7 +15,8 @@ import android.widget.Button;
 public class ActividadPrincipal extends ActionBarActivity {
 
     //Necesitamos dos variables para tener referenciados a los botones.
-    private Button btnJugar;
+    private Button botonJugar, botonAreaEntrenamiento, botonListaVerbos, botonRankingMundial, botonAyuda;
+
 
 
     @Override
@@ -28,18 +29,24 @@ public class ActividadPrincipal extends ActionBarActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Obtenemos una referencia a los controles de la interfaz.
-        btnJugar=(Button)findViewById(R.id.BtnJugar);
+        botonJugar=(Button)findViewById(R.id.botonJugar);
+        botonAreaEntrenamiento=(Button)findViewById(R.id.botonAreaEntrenamiento);
+        botonListaVerbos=(Button)findViewById(R.id.botonListaVerbos);
+        botonRankingMundial=(Button)findViewById(R.id.botonRankingMundial);
+        botonAyuda=(Button)findViewById(R.id.botonAyuda);
+
+
 
         //Cargamos la animacion desde R.anim folder
         Animation animacion = AnimationUtils.loadAnimation(this, R.anim.animacionbotonplay);
-
         //Lanzamos la animacion:
-        btnJugar.startAnimation(animacion);
+        botonJugar.startAnimation(animacion);
 
 
+        // ### Implementación de los eventos de botones: ###
 
         //Implementamos el evento click del botón btnJugar:
-        btnJugar.setOnClickListener(
+        botonJugar.setOnClickListener(
 
                 new View.OnClickListener() {
                     @Override
@@ -51,6 +58,57 @@ public class ActividadPrincipal extends ActionBarActivity {
                     }
                 }
         );
+        botonAreaEntrenamiento.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Creamos el Intent
+                        Intent intent = new Intent(ActividadPrincipal.this, TrainingAreaInicio.class);
+                        //Iniciamos la nueva actividad
+                        startActivity(intent);
+                    }
+                }
+        );
+
+        botonListaVerbos.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Creamos el Intent
+                        Intent intent = new Intent(ActividadPrincipal.this, ListaVerbos.class);
+                        //Iniciamos la nueva actividad
+                        startActivity(intent);
+                    }
+                }
+        );
+        botonRankingMundial.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Creamos el Intent
+                        Intent intent = new Intent(ActividadPrincipal.this, wcr.class);
+                        //Iniciamos la nueva actividad
+                        startActivity(intent);
+                    }
+                }
+        );
+        botonAyuda.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Creamos el Intent
+                        Intent intent = new Intent(ActividadPrincipal.this, About.class);
+                        //Iniciamos la nueva actividad
+                        startActivity(intent);
+                    }
+                }
+        );
+
+
 
     }
 

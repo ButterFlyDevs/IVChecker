@@ -1,27 +1,129 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/LytContenedorTraining"
-    android:background="@drawable/uk"
+    android:background="#ff8b85a2"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:id="@+id/imageView2"
         android:layout_x="2dp"
         android:layout_y="157dp"
-        android:layout_gravity="left"
-        android:layout_weight="100"
-        android:src="@drawable/trainingarea" />
+        android:src="@drawable/trainningarea"
+        android:layout_gravity="center_horizontal" />
 
     <Button android:id="@+id/botonGO"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/go"
-        android:layout_marginLeft="100dp" />
+        android:layout_width="200dp"
+        android:layout_height="75dp"
+        android:background="@drawable/playtrainning"
+        android:layout_gravity="center_horizontal" />
 
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:gravity="bottom"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp">
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/layoutAjustes"
+            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <Button
+                android:id="@+id/botonAjustes"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/settingsicon"
+                android:layout_below="@+id/textEliminar"
+                android:layout_toRightOf="@+id/layoutAjustes"
+                android:layout_toEndOf="@+id/layoutAjustes" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Ajustes"
+                android:id="@+id/textAJustes"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/botonAjustes"
+                android:layout_alignLeft="@+id/botonAjustes"
+                android:layout_alignStart="@+id/botonAjustes" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout3"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
+
+            <Button
+                android:id="@+id/botonEstadisticas"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/statistics"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignTop="@+id/botonEliminarEstadisticas"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Estadísticas"
+                android:id="@+id/textEstadisticas"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/botonEstadisticas"
+                android:layout_centerHorizontal="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout4"
+            android:layout_marginLeft="36dp"
+            android:layout_marginStart="36dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/linearLayout3"
+            android:layout_toEndOf="@+id/linearLayout3">
+
+            <Button
+                android:id="@+id/botonEliminarEstadisticas"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/trash"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignTop="@+id/linearLayout4"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Eliminar"
+                android:id="@+id/textEliminar"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@+id/botonEliminarEstadisticas"
+                android:layout_alignRight="@+id/botonEliminarEstadisticas"
+                android:layout_alignEnd="@+id/botonEliminarEstadisticas" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
 
 </LinearLayout>

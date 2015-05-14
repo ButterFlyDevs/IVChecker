@@ -1,30 +1,103 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/LytContenedor"
-    android:background="@drawable/uk"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-    <Button android:id="@+id/BtnJugar"
-        android:layout_width="160dp"
-        android:layout_height="75dp"
-        android:background="@drawable/play"
-        android:layout_x="122dp"
-        android:layout_y="268dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    android:orientation="vertical"
+    android:background="#ff8b85a2">
 
     <ImageView
-        android:layout_width="364dp"
+        android:layout_width="330dp"
         android:layout_height="80dp"
         android:id="@+id/imageView"
         android:layout_x="30dp"
         android:layout_y="121dp"
-        android:src="@drawable/ivchecker"
-        android:layout_above="@+id/BtnJugar"
+        android:src="@drawable/titulo"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="62dp" />
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center" />
+
+    <Button android:id="@+id/botonJugar"
+        android:layout_width="160dp"
+        android:layout_height="145dp"
+        android:background="@drawable/game"
+        android:layout_x="122dp"
+        android:layout_y="268dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_above="@+id/botonListaVerbos"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="121dp"
+        android:layout_marginTop="60dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="93dp"
+            android:layout_gravity="bottom">
+
+            <Button
+                android:id="@+id/botonAreaEntrenamiento"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="@drawable/muscle"
+                android:layout_x="122dp"
+                android:layout_y="268dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@+id/botonJugar"
+                android:layout_toStartOf="@+id/botonJugar"
+                android:layout_marginLeft="200dp"
+                android:layout_gravity="center" />
+
+            <Button
+                android:id="@+id/botonListaVerbos"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="@drawable/list"
+                android:layout_x="122dp"
+                android:layout_y="268dp"
+                android:layout_gravity="center"
+                android:layout_alignTop="@+id/botonAreaEntrenamiento"
+                android:layout_alignLeft="@+id/botonJugar"
+                android:layout_alignStart="@+id/botonJugar"
+                android:layout_marginLeft="20dp" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <Button
+            android:id="@+id/botonRankingMundial"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/ranking"
+            android:layout_x="122dp"
+            android:layout_y="268dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignTop="@+id/botonListaVerbos"
+            android:layout_alignRight="@+id/botonJugar"
+            android:layout_alignEnd="@+id/botonJugar"
+            android:layout_marginLeft="200dp" />
+
+        <Button
+            android:id="@+id/botonAyuda"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/question"
+            android:layout_x="122dp"
+            android:layout_y="268dp"
+            android:layout_alignTop="@+id/botonRankingMundial"
+            android:layout_toRightOf="@+id/botonRankingMundial"
+            android:layout_toEndOf="@+id/botonRankingMundial"
+            android:layout_marginLeft="20dp" />
+    </LinearLayout>
 
 
-</RelativeLayout>
+</LinearLayout>

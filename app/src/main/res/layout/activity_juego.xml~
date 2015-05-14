@@ -1,0 +1,191 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@drawable/game"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="pdm.ivchecker.Juego"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="visible"
+        android:id="@+id/layoutPrincipal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="points"
+                android:id="@+id/viewPuntos"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="30dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/vida3"
+                    android:layout_gravity="bottom"
+                    android:src="@drawable/corazonvivo" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/vida2"
+                    android:layout_gravity="bottom"
+                    android:src="@drawable/corazonvivo" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/vida1"
+                    android:layout_gravity="bottom"
+                    android:src="@drawable/corazonvivo" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="textLevel"
+                android:id="@+id/textLevel"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/infinitivo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30px"
+            android:text="infinitivo"
+            android:layout_x="82dp"
+            android:layout_y="4dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="31dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/pasado"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30px"
+            android:text="pasado"
+            android:layout_x="85dp"
+            android:layout_y="52dp"
+            android:layout_marginTop="32dp"
+            android:layout_below="@+id/participio"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/participio"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30px"
+            android:text="participio"
+            android:layout_x="66dp"
+            android:layout_y="97dp"
+            android:layout_marginTop="26dp"
+            android:layout_below="@+id/infinitivo"
+            android:layout_alignRight="@+id/infinitivo"
+            android:layout_alignEnd="@+id/infinitivo"
+            android:gravity="center" />
+
+        <Space
+            android:layout_width="287dp"
+            android:layout_height="22dp" />
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutA"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:background="#ff31c1ff">
+
+            <EditText
+                android:id="@+id/formaMisteriosaA"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_x="22dp"
+                android:layout_y="142dp"
+                android:layout_above="@+id/nextButton"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="287dp"
+            android:layout_height="15dp"
+            android:layout_gravity="right" />
+
+        <LinearLayout
+            android:id="@+id/LinearLayoutB"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="#ff30ffad">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/formaMisteriosaB"
+                android:layout_weight="0.70"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/nextButton"
+            android:text="Next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="104dp"
+            android:layout_y="236dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/infinitivo"
+            android:layout_toEndOf="@+id/infinitivo"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+<<<<<<< HEAD
+=======
+    <ViewStub
+        android:id="@+id/viewStub"
+        android:inflatedId="@+id/details"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+>>>>>>> a228532c8c9875a5307a4a6f3fd85ccf752d1c89
+
+</RelativeLayout>

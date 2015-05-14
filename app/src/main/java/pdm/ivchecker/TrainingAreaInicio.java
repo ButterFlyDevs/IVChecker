@@ -21,7 +21,7 @@ public class TrainingAreaInicio extends ActionBarActivity {
     //con el cuál se identificarán los resultados devueltos por la Activity lanzada, en este caso, Configuracion.
     static final int CODIGO_PETICION_CONFIGURACION = 1;
 
-    private Button boton_empezar;
+    private Button boton_empezar, botonAjustes, botonEstadisticas, botonEliminar;
 
     /*
         Variables para controlar el entrenamiento:
@@ -42,6 +42,10 @@ public class TrainingAreaInicio extends ActionBarActivity {
 
         //Obtenemos una referencia a los controles de la interfaz.
         boton_empezar=(Button)findViewById(R.id.botonGO);
+        botonAjustes=(Button)findViewById(R.id.botonAjustes);
+        botonEstadisticas=(Button)findViewById(R.id.botonEstadisticas);
+        botonEliminar=(Button)findViewById(R.id.botonEliminarEstadisticas);
+
 
 
         //Implementamos el evento click del botón boton_empezar:
@@ -60,6 +64,54 @@ public class TrainingAreaInicio extends ActionBarActivity {
                     }
                 }
         );
+
+        botonAjustes.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent  = new Intent(TrainingAreaInicio.this, Configuracion.class);
+                        //Iniciamos la nueva actividad
+                        startActivityForResult(intent, CODIGO_PETICION_CONFIGURACION);
+                    }
+                }
+        );
+        botonEstadisticas.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Creamos el Intent
+                        Intent intent = new Intent(TrainingAreaInicio.this, HistorialPuntuacionTraining.class);
+                        startActivity(intent);
+                    }
+                }
+        );
+
+        botonEliminar.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String fichero= "puntuaciones.csv";
+                        FileOutputStream flujo_fichero;
+                        try {
+                            flujo_fichero = openFileOutput(fichero, MODE_PRIVATE);
+                            flujo_fichero.close();
+                            Toast.makeText(getApplicationContext(), "Archivo de puntuaciones borrado", Toast.LENGTH_SHORT).show();
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+        );
+
+
+
+
+
     }
 
 
@@ -70,45 +122,7 @@ public class TrainingAreaInicio extends ActionBarActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        Intent intent;
-        switch(item.getItemId()){
-            //Usamos los identificadores de menu_training_area_inicio.xml (@+id) para definirles una acción.
 
-            //Para ir a la configuracion
-            case R.id.Menu_Tr_Opc1:
-                intent  = new Intent(TrainingAreaInicio.this, Configuracion.class);
-                //Iniciamos la nueva actividad
-                startActivityForResult(intent, CODIGO_PETICION_CONFIGURACION);
-                return true;
-
-            //Para ir a las estadisticas
-            case R.id.Menu_Tr_Opc2:
-                intent = new Intent(TrainingAreaInicio.this, HistorialPuntuacionTraining.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.Menu_Tr_Opc3:
-                String fichero= "puntuaciones.csv";
-                FileOutputStream flujo_fichero;
-                try {
-                    flujo_fichero = openFileOutput(fichero, MODE_PRIVATE);
-                    flujo_fichero.close();
-                    Toast.makeText(getApplicationContext(), "Archivo de puntuaciones borrado", Toast.LENGTH_SHORT).show();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
     /*
 
         Funcion onActivityResult: Esta funcion es llamada automáticamente por el sistema cuando la actividad creada
