@@ -57,7 +57,9 @@ public class JuegoTraining extends ActionBarActivity {
     //Variables de control del entrenamiento
     private int  lista_a_preguntar=0,numero_verbos=0;
     boolean smartVerb=true;
-
+    //Variable booleana para controlar si los datos de la partida actual han sido cargados de una instancia anterior
+    //(se ha rotado la pantalla)
+    boolean ocurridaRotacion = false;
 
     @Override
     //Método llamada cuando se crea por primera vez la actividad
@@ -70,7 +72,28 @@ public class JuegoTraining extends ActionBarActivity {
         //Para que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        /*
+        ############ RECUPERAR LA INSTANCIA DEL JUEGOTRAINING ANTERIOR, EN CASO DE EXISTIR
+        Esto ocurrirá cuando se gire la pantalla mientras se juega (se creará una nueva
+        instancia de JuegoTraining, la cual debe cargar el estado de partida tal cual
+        estaba antes de girar la pantalla.
 
+        Null si es la primera ejecucion. Distinto a null si viene de una ejecución previa
+         */
+        if(savedInstanceState !=null) {
+
+            this.verbos_fallados = savedInstanceState.getIntegerArrayList("LISTA_FALLADOS_TRAINING");
+            this.lista_verbos_fallados = savedInstanceState.getString("STRING_FALLADOS_TRAINING");
+            this.puntuacionJugada = savedInstanceState.getInt("PUNTUACION_TRAINING");
+            this.verbos_acertados = savedInstanceState.getInt("VERBOS_ACERTADOS_TRAINING");
+            this.numPartida = savedInstanceState.getInt("NUM_PARTIDA_TRAINING");
+            this.numVerbo = savedInstanceState.getInt("NUM_VERBO_TRAINING");
+            this.numForma = savedInstanceState.getInt("NUM_FORMA_TRAINING");
+            this.lista_a_preguntar = savedInstanceState.getInt("LISTA_A_PREGUNTAR_TRAINING");
+            this.numero_verbos = savedInstanceState.getInt("NUMERO_VERBOS_TRAINING");
+            this.smartVerb = savedInstanceState.getBoolean("STMARTVERB_TRAINING");
+            this.ocurridaRotacion=true;
+        }
         //Primero, obtenemos el intent con los datos importantes, y configuramos el juego
         intent = getIntent();
 
@@ -106,14 +129,14 @@ public class JuegoTraining extends ActionBarActivity {
                 }
         );
 
-
-        prepararJuego();
+        if(savedInstanceState==null)
+            prepararJuego();
         leerVerbos();
         topFallosVerbos();
         jugar();
         actualizarProgreso();
-
-
+        //Ponemos de nuevo ocurridaRotacion a false para que pueda seguir modificando los datos cuando sea necesario
+        this.ocurridaRotacion=false;
     }
 
     /*
@@ -137,7 +160,7 @@ public class JuegoTraining extends ActionBarActivity {
         if(lista_a_preguntar==0)
             lista_a_preguntar = rnd.nextInt(3) +1;
         if(numero_verbos==0)
-            numero_verbos = 10 + rnd.nextInt(31); //Genera un numero entre 10 y 40.
+            numero_verbos = 3 + rnd.nextInt(22); //Genera un numero entre 10 y 24.
 
     }
     private void leerVerbos(){
@@ -329,20 +352,21 @@ public class JuegoTraining extends ActionBarActivity {
         Random rnd = new Random();
 
         //Se preguntaran los verbos más fallados mientras haya verbos en esa lista. Si se acaba la lista, se preguntará aleatorio.
-        if(this.fallos_juegos_anteriores!=null) {
-            if (this.numPartida < this.fallos_juegos_anteriores.size())
-                numVerbo = fallos_juegos_anteriores.get(numPartida);
-            else
-                numVerbo = rnd.nextInt(this.total_verbos_lista);
+        if(!this.ocurridaRotacion) {    //Si ha ocurrido rotacion, no se debe elegir de nuevo el verbo
+            if (this.fallos_juegos_anteriores != null) {
+                if (this.numPartida < this.fallos_juegos_anteriores.size())
+                    numVerbo = fallos_juegos_anteriores.get(numPartida);
+                else
+                    numVerbo = rnd.nextInt(this.total_verbos_lista);
+            } else
+                //Generamos el verbo a mostrar (en función del tamaño de lista)
+                numVerbo = rnd.nextInt(this.total_verbos_lista);    //Genera un aleatorio desde 0 hasta el máximo de verbos almacenados
         }
-        else
-            //Generamos el verbo a mostrar (en función del tamaño de lista)
-            numVerbo = rnd.nextInt(this.total_verbos_lista);    //Genera un aleatorio desde 0 hasta el máximo de verbos almacenados
-
         System.out.println("Verbo elegido: "+numVerbo);
 
         //Generamos la forma que no aparecerá
-        numForma= rnd.nextInt(3);
+        if(!this.ocurridaRotacion)
+            numForma= rnd.nextInt(3);
 
         System.out.println("Forma elegida: "+numForma);
 
@@ -451,5 +475,47 @@ public class JuegoTraining extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        //Salvamos los indices de verbos fallados
+      /*  if(verbos_fallados!=null) {
+            outState.putInt("TOTAL_FALLADOS_TRAINING",verbos_fallados.size());
+            for (int i = 0; i < this.verbos_fallados.size(); i++) {
+                outState.putInt("VerboFallado" + i, (int) this.verbos_fallados.get(i));
+            }
+        }
+        else
+            outState.putInt("TOTAL_FALLADOS_TRAINING",0);*/
+        outState.putIntegerArrayList("LISTA_FALLADOS_TRAINING",this.verbos_fallados);
+
+        //Salvamos la cadena de verbos fallados
+        outState.putString("STRING_FALLADOS_TRAINING",this.lista_verbos_fallados);
+
+        //Salvamos la puntuacion
+        outState.putInt("PUNTUACION_TRAINING",this.puntuacionJugada);
+
+        //Salvamos los verbos acertados hasta el momento
+        outState.putInt("VERBOS_ACERTADOS_TRAINING",this.verbos_acertados);
+
+        //Salvamos el indice de verbos contestados hasta el momento
+        outState.putInt("NUM_PARTIDA_TRAINING",this.numPartida);
+
+        //Salvamos el verbo elegido en la jugada
+        outState.putInt("NUM_VERBO_TRAINING",this.numVerbo);
+
+        //Salvamos la forma elegida para el verbo a preguntar
+        outState.putInt("NUM_FORMA_TRAINING",this.numForma);
+
+        //Salvamos la lista a preguntar
+        outState.putInt("LISTA_A_PREGUNTAR_TRAINING",this.lista_a_preguntar);
+
+        //Salvamos el numero de verbos a preguntar
+        outState.putInt("NUMERO_VERBOS_TRAINING",this.numero_verbos);
+
+        //Salvamos si está activada la característica smartVerb
+        outState.putBoolean("STMARTVERB_TRAINING",this.smartVerb);
     }
 }

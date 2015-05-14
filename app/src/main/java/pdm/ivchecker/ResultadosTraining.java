@@ -3,6 +3,7 @@ package pdm.ivchecker;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.EmbossMaskFilter;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -63,6 +64,8 @@ public class ResultadosTraining extends ActionBarActivity {
         verbos_fallados_pasado = (TextView) findViewById(R.id.pasadoResultado);
         verbos_fallados_participio = (TextView) findViewById(R.id.participioResultado);
 
+
+
         //Texto lista
         switch(intent.getIntExtra("LISTA",0)){
             case 1: tipo_lista.setText("List: Soft List"); break;
@@ -75,6 +78,13 @@ public class ResultadosTraining extends ActionBarActivity {
         total_fallados.setText("Misses: "+(intent.getIntExtra("NUMERO_VERBOS_PREGUNTADOS",0)
                 - intent.getIntExtra("NUMERO_VERBOS_ACERTADOS",0)));
         total_acertados.setText("Hits: "+intent.getIntExtra("NUMERO_VERBOS_ACERTADOS",0));
+
+        //`Poniendo el texto en la fuente deseada
+        Typeface fuente = Typeface.createFromAsset(getAssets(), "KAREH___.TTF");
+        total_verbos.setTypeface(fuente);
+        total_fallados.setTypeface(fuente);
+        total_acertados.setTypeface(fuente);
+        tipo_lista.setTypeface(fuente);
 
         //Lista verbos fallados
         String string_verbos_fallados = intent.getStringExtra("LISTA_VERBOS_FALLADOS");
