@@ -1,0 +1,17 @@
+Para el diseño de la GUI de la aplicación se ha usado
+
+Kuler para ver colores y paletas de colores que casen bien entre ellos y que nos gusten, en concreto definimos la nuestra propia:
+
+Color de fondo: VIOLETA HEX: 8B85A2  RGB: 139 133 162
+Color del texto: BLANCO ROTO HEX: fbfbfb RGB: 251 251 251
+Color de iconos: c8c8c8
+Color de negro: 0C0B0C
+
+Obtención del gris a partir del negro puro:
+Colores->Niveles-> Con nivel de salida a 200
+
+Para los iconos (base) usamos la fuente de iconos: thenounproject.com
+Algunos necesitan reconocimiento y tendremos que dárselo en los créditos.
+
+Para las fuentes podemos usar dafont.com para conseguir fuentes.
+

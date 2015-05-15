@@ -3,10 +3,13 @@ package pdm.ivchecker;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -106,13 +109,19 @@ public class JuegoTraining extends ActionBarActivity {
         participio=(TextView)findViewById(R.id.participioTraining);
         etiqueta_progreso=(TextView) findViewById(R.id.etiqueta_progreso);
 
+        final Animation animacionBotonSiguiente = AnimationUtils.loadAnimation(this, R.anim.myanimation);
+
         //Implementamos el evento click del botón next:
         btnNext.setOnClickListener(
+
+
 
                 new View.OnClickListener() {
                     @Override
                     //Implementamos la acción del click sobre el botón next.
                     public void onClick(View v) {
+
+                        v.startAnimation(animacionBotonSiguiente);
 
                         comprobarVerbo();
                         numPartida++;
@@ -127,7 +136,14 @@ public class JuegoTraining extends ActionBarActivity {
 
                     }
                 }
+
+
         );
+
+
+
+
+
 
         if(savedInstanceState==null)
             prepararJuego();
@@ -460,6 +476,24 @@ public class JuegoTraining extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_juego_training, menu);
         return true;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+
+        //Si pulsamos el botón back nos devuelve a la pantalla principal del area de entranamiento..
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+
+            Intent intent = new Intent(JuegoTraining.this, TrainingAreaInicio.class);
+            startActivity(intent);
+            //Aplicacion de transicion animada entre activities:
+            overridePendingTransition(R.anim.zoom_back_in2, R.anim.zoom_back_out2);
+
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+
     }
 
     @Override

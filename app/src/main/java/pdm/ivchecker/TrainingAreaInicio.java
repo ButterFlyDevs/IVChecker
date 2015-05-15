@@ -3,6 +3,7 @@ package pdm.ivchecker;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,6 +62,10 @@ public class TrainingAreaInicio extends ActionBarActivity {
                         intent.putExtra("smartVerb",smartVerb);
                         intent.putExtra("numero_verbos",numero_verbos);
                         startActivity(intent);
+
+
+                        //Aplicacion de transicion animada entre activities:
+                        overridePendingTransition(R.anim.zoom_back_in, R.anim.zoom_back_out);
                     }
                 }
         );
@@ -114,6 +119,24 @@ public class TrainingAreaInicio extends ActionBarActivity {
 
     }
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+
+        //Si pulsamos el botón back nos devuelve a la pantalla principal!
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+
+            Intent intent = new Intent(TrainingAreaInicio.this, ActividadPrincipal.class);
+            startActivity(intent);
+            //Aplicacion de transicion animada entre activities:
+            overridePendingTransition(R.anim.zoom_back_in2, R.anim.zoom_back_out2);
+
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

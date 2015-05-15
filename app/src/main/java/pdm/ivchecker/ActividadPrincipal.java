@@ -38,9 +38,19 @@ public class ActividadPrincipal extends ActionBarActivity {
 
 
         //Cargamos la animacion desde R.anim folder
-        Animation animacion = AnimationUtils.loadAnimation(this, R.anim.animacionbotonplay);
+        Animation animacionEntrada = AnimationUtils.loadAnimation(this, R.anim.animacionbotonplay);
+        Animation animacionSalida = AnimationUtils.loadAnimation(this, R.anim.animacionbotonplay2);
         //Lanzamos la animacion:
-        botonJugar.startAnimation(animacion);
+        //animacion.setRepeatCount(Animation.INFINITE);
+
+        //
+        animacionEntrada.setRepeatCount(Animation.INFINITE);
+        botonJugar.startAnimation(animacionEntrada);
+        //botonJugar.startAnimation(animacionSalida);
+
+       // animacionSalida.setStartOffset(1200+animacionEntrada.getStartOffset()+1200);
+        //animacionEntrada.setRepeatMode(2);
+
 
 
         // ### Implementación de los eventos de botones: ###
