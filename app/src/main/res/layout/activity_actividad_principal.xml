@@ -35,9 +35,8 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="93dp"
-            android:layout_gravity="bottom">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/botonAreaEntrenamiento"
@@ -49,8 +48,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_toLeftOf="@+id/botonJugar"
                 android:layout_toStartOf="@+id/botonJugar"
-                android:layout_marginLeft="200dp"
-                android:layout_gravity="center" />
+                android:layout_marginLeft="10dp" />
 
             <Button
                 android:id="@+id/botonListaVerbos"
@@ -65,39 +63,33 @@
                 android:layout_alignStart="@+id/botonJugar"
                 android:layout_marginLeft="20dp" />
 
+            <Button
+                android:id="@+id/botonRankingMundial"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="@drawable/ranking"
+                android:layout_x="122dp"
+                android:layout_y="268dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignTop="@+id/botonListaVerbos"
+                android:layout_alignRight="@+id/botonJugar"
+                android:layout_alignEnd="@+id/botonJugar"
+                android:layout_marginLeft="20dp" />
+
+            <Button
+                android:id="@+id/botonAyuda"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="@drawable/question"
+                android:layout_x="122dp"
+                android:layout_y="268dp"
+                android:layout_alignTop="@+id/botonRankingMundial"
+                android:layout_toRightOf="@+id/botonRankingMundial"
+                android:layout_toEndOf="@+id/botonRankingMundial"
+                android:layout_marginLeft="20dp" />
+
         </LinearLayout>
     </FrameLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-        <Button
-            android:id="@+id/botonRankingMundial"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:background="@drawable/ranking"
-            android:layout_x="122dp"
-            android:layout_y="268dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_alignTop="@+id/botonListaVerbos"
-            android:layout_alignRight="@+id/botonJugar"
-            android:layout_alignEnd="@+id/botonJugar"
-            android:layout_marginLeft="200dp" />
-
-        <Button
-            android:id="@+id/botonAyuda"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:background="@drawable/question"
-            android:layout_x="122dp"
-            android:layout_y="268dp"
-            android:layout_alignTop="@+id/botonRankingMundial"
-            android:layout_toRightOf="@+id/botonRankingMundial"
-            android:layout_toEndOf="@+id/botonRankingMundial"
-            android:layout_marginLeft="20dp" />
-    </LinearLayout>
 
 
 </LinearLayout>

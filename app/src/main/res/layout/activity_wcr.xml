@@ -13,25 +13,14 @@
     android:weightSum="1">
 
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_x="30dp"
-        android:layout_y="121dp"
-        android:src="@drawable/wcr"
-        android:layout_above="@+id/rankingUsuarios"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:id="@+id/scrollView2"
         android:layout_gravity="top|bottom"
         android:foregroundGravity="top"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="130dp">
 
         <TableLayout
             android:layout_width="fill_parent"
@@ -50,7 +39,8 @@
                     android:id="@+id/columnaPosicion"
                     android:layout_column="0"
                     android:layout_marginLeft="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#fffff2fc" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -60,7 +50,8 @@
                     android:id="@+id/columnaNombre"
                     android:layout_column="1"
                     android:layout_marginLeft="30dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#ffffffff" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -70,7 +61,8 @@
                     android:id="@+id/columnaPuntos"
                     android:layout_column="2"
                     android:layout_marginLeft="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#ffffffff" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -80,7 +72,8 @@
                     android:id="@+id/columnaPais"
                     android:layout_column="3"
                     android:layout_marginLeft="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#ffffffff" />
             </TableRow>
         </TableLayout>
     </ScrollView>
