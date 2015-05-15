@@ -2,13 +2,10 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/scrollView"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#ff8b85a2">
 
-    <HorizontalScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/horizontalScrollView"
-        xmlns:android="http://schemas.android.com/apk/res/android" >
+
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
@@ -20,14 +17,45 @@
             android:weightSum="1"
             >
 
-            <TextView
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/textNombreLista"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center" />
+                android:layout_height="fill_parent"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:id="@+id/textNombreLista"
+                    android:gravity="center"
+                    android:textColor="#ffececec"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/button"
+                    android:background="@drawable/soft"
+                    android:enabled="true" />
+
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/button2"
+                    android:background="@drawable/medium"
+                    android:enabled="true"
+                    android:layout_marginLeft="10dp" />
+
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/button3"
+                    android:background="@drawable/hard"
+                    android:enabled="true"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
 
             <TableLayout
                 android:layout_width="fill_parent"
@@ -46,9 +74,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="numero"
+                        android:text="n"
                         android:id="@+id/textNumero"
-                        android:layout_column="0" />
+                        android:layout_column="0"
+                        android:textColor="#ffececec"
+                        android:textSize="20dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -57,7 +87,9 @@
                         android:text="infinitivo"
                         android:id="@+id/textInfinitivo"
                         android:layout_column="1"
-                        android:layout_marginLeft="20dp" />
+                        android:layout_marginLeft="20dp"
+                        android:textColor="#ffececec"
+                        android:textSize="20dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -66,7 +98,8 @@
                         android:text="pasado"
                         android:id="@+id/textPasado"
                         android:layout_column="2"
-                        android:layout_marginLeft="20dp" />
+                        android:layout_marginLeft="20dp"
+                        android:textColor="#ffffffff" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -75,10 +108,11 @@
                         android:text="participio"
                         android:id="@+id/textParticipio"
                         android:layout_column="3"
-                        android:layout_marginLeft="20dp" />
+                        android:layout_marginLeft="20dp"
+                        android:textColor="#ffffffff" />
                 </TableRow>
             </TableLayout>
 
         </LinearLayout>
-    </HorizontalScrollView>
+
 </ScrollView>

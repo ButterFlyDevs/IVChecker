@@ -7,6 +7,9 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import java.io.BufferedReader;
@@ -30,6 +33,7 @@ public class ListaVerbos extends ActionBarActivity {
     //Variable de texto donde se alamcenan los verbos para mostrarlos posteriormente:
     private TextView textNombreLista, textNumero, textInfinitivo, textPasado, textParticipio;
     private ScrollView scrollView;
+    private Button botonSoft, botonMedium, botonHard;
 
 
     //Flujo de entrada para la lectura de fichero CSV
@@ -52,17 +56,17 @@ public class ListaVerbos extends ActionBarActivity {
             //Abrimos el flujo del fichero almacenado en la carpeta denro de res llamada raw con el nombre ivsoft
             inputStream = getResources().openRawResource(R.raw.ivsoft);
             textNombreLista.append(getString(R.string.listaSimple));
-            scrollView.setBackgroundColor(Color.rgb(255,228,169));
+           // scrollView.setBackgroundColor(Color.rgb(255,228,169));
         }
         if(lista.equals("medium")){
             inputStream=getResources().openRawResource(R.raw.ivmedium);
             textNombreLista.append(getString(R.string.listaMedia));
-            scrollView.setBackgroundColor(Color.rgb(255,197,125));
+            //scrollView.setBackgroundColor(Color.rgb(255,197,125));
         }
         if(lista.equals("hard")){
             inputStream=getResources().openRawResource(R.raw.ivhard);
             textNombreLista.append(getString(R.string.listaDificil));
-            scrollView.setBackgroundColor(Color.rgb(255,183,93));
+            //scrollView.setBackgroundColor(Color.rgb(255,183,93));
         }
 
         //Abrimos el flujo con un buffer.
@@ -85,10 +89,15 @@ public class ListaVerbos extends ActionBarActivity {
                 line=reader.readLine();
                 if (line == null) break;
                 String[] RowData = line.split(",");
-                textNumero.append(numero+"\n");
-                textInfinitivo.append(RowData[0]+"\n");
-                textPasado.append(RowData[1]+"\n");
-                textParticipio.append(RowData[2]+"\n");
+                textNumero.append(numero+"\n\n\n\n");
+                textInfinitivo.append(RowData[0]+"\n"+RowData[1]+"\n"+RowData[2]+"\n\n");
+
+
+                // textPasado.append(RowData[1]+"\n");
+                //textParticipio.append(RowData[2]+"\n");
+
+
+
                 /*
                 infinitivo = RowData[0];
                 pasado = RowData[1];
@@ -127,6 +136,15 @@ public class ListaVerbos extends ActionBarActivity {
 
         scrollView=(ScrollView)findViewById(R.id.scrollView);
 
+        botonSoft=(Button)findViewById(R.id.button);
+        botonMedium=(Button)findViewById(R.id.button2);
+        botonHard=(Button)findViewById(R.id.button3);
+
+
+        Animation animacionEntrada = AnimationUtils.loadAnimation(this, R.anim.animacionbotonplay);
+        botonSoft.startAnimation(animacionEntrada);
+        botonMedium.startAnimation(animacionEntrada);
+        botonHard.startAnimation(animacionEntrada);
 
         /*
         Si no se han recibido datos porque es la primera vez que se abre el activity se muestra la lista
