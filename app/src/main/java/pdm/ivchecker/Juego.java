@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import java.lang.reflect.Field;
 import java.util.Random;
 
 import com.google.android.gms.ads.*;
@@ -75,19 +76,11 @@ public class Juego extends ActionBarActivity {
     private TextView infinitivo, pasado, participio, puntos, textNivel;
     private ImageView vida1, vida2, vida3; // vida4, vida5;
 
-
-    //Botones de niveles superiores
-    private CheckBox botonInfinitivoAzul, botonInfinitivoVerde;
-    private CheckBox botonPasadoAzul, botonPasadoVerde;
-    private CheckBox botonParticipioAzul, botonParticipioVerde;
-
     //Layouts:
     private LinearLayout layoutCampoVerboIntroducidoA, layoutCampoVerboIntroducidoB;
 
-    private RelativeLayout layoutInfinitivo, layoutPasado, layoutParticipio;
-    private LinearLayout layoutPrincipal;
 
-    private ViewStub viewStub;
+    private RelativeLayout layoutPrincipal;
 
     private Random rnd;
 
@@ -336,7 +329,7 @@ public class Juego extends ActionBarActivity {
         layoutCampoVerboIntroducidoB=(LinearLayout)findViewById(R.id.LinearLayoutB);
 
 
-        layoutPrincipal = (LinearLayout)findViewById(R.id.layoutPrincipal);
+        layoutPrincipal = (RelativeLayout) findViewById(R.id.layoutActivity);
 
 
 
@@ -387,6 +380,19 @@ public class Juego extends ActionBarActivity {
         this.textNivel.setText("Nivel "+Integer.toString(this.nivel));
         this.puntos.setText(Integer.toString(this.puntuacionPartida));
 
+
+        //Ajuste de fondo:
+
+        try {
+            Field field = R.drawable.class.getField("juegofondo"+nivel);
+            try {
+                layoutPrincipal.setBackgroundResource(field.getInt(null));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
 
 
         //Si pasamos del nivel
@@ -633,6 +639,8 @@ public class Juego extends ActionBarActivity {
             }
         });
 
+        //ANimación del botón
+        final Animation animacionBotonSiguiente = AnimationUtils.loadAnimation(this, R.anim.myanimation);
 
         //Implementamos el evento click del botón next:
         btnNext.setOnClickListener(
@@ -643,7 +651,7 @@ public class Juego extends ActionBarActivity {
                     public void onClick(View v) {
 
 
-
+                            v.startAnimation(animacionBotonSiguiente);
                             //Lo primero que hacemos al pulsar sobre next es comprobar el/los verbos introducidos
                             comprobarVerbo();
                             /*
@@ -1752,30 +1760,6 @@ public class Juego extends ActionBarActivity {
 
         puntos.setText(Integer.toString(puntuacionPartida));
     } //fin comprobarVerbo()
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_juego, menu);
-        return true;
-    }
-
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
 /*

@@ -36,25 +36,25 @@
                 <Button
                     android:layout_width="60dp"
                     android:layout_height="50dp"
-                    android:id="@+id/button"
+                    android:id="@+id/botonSoft"
                     android:background="@drawable/soft"
                     android:enabled="true" />
 
                 <Button
                     android:layout_width="60dp"
                     android:layout_height="50dp"
-                    android:id="@+id/button2"
+                    android:id="@+id/botonMedium"
                     android:background="@drawable/medium"
                     android:enabled="true"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="5dp" />
 
                 <Button
                     android:layout_width="60dp"
                     android:layout_height="50dp"
-                    android:id="@+id/button3"
+                    android:id="@+id/botonHard"
                     android:background="@drawable/hard"
                     android:enabled="true"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="5dp" />
             </LinearLayout>
 
             <TableLayout

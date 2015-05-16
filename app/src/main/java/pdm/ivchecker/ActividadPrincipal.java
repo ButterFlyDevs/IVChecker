@@ -118,53 +118,5 @@ public class ActividadPrincipal extends ActionBarActivity {
                 }
         );
 
-
-
-    }
-
-
-    /*
-     Esta función crea el meńu de la actividad, es decir el que aparece cuando pulsamos menú
-      en nuestro terminal. Su configuración la tenemos en res/menu/menu_actividad_principal.
-    */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflamos el menú:
-
-        getMenuInflater().inflate(R.menu.menu_actividad_principal, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent;
-        switch (item.getItemId()) {
-            //Usamos los identificadores de menu_actividad_principal.xml (@+id) para definirles una acción.
-
-            case R.id.TrainingArea:
-                intent = new Intent(ActividadPrincipal.this, TrainingAreaInicio.class);
-                startActivity(intent);
-                return true;
-
-            case R.id.ShowVerbLists:
-                intent = new Intent(ActividadPrincipal.this, ListaVerbos.class);
-                //Iniciamos la nueva actividad
-                startActivity(intent);
-                return true;
-
-            case R.id.ShowWorldChallenge:
-                intent = new Intent(ActividadPrincipal.this, wcr.class);
-                startActivity(intent);
-                return true;
-
-            //Para ir al la actividad About
-            case R.id.About:
-                intent = new Intent(ActividadPrincipal.this, About.class);
-                startActivity(intent);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

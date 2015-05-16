@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -136,15 +137,46 @@ public class ListaVerbos extends ActionBarActivity {
 
         scrollView=(ScrollView)findViewById(R.id.scrollView);
 
-        botonSoft=(Button)findViewById(R.id.button);
-        botonMedium=(Button)findViewById(R.id.button2);
-        botonHard=(Button)findViewById(R.id.button3);
+        botonSoft=(Button)findViewById(R.id.botonSoft);
+        botonMedium=(Button)findViewById(R.id.botonMedium);
+        botonHard=(Button)findViewById(R.id.botonHard);
 
 
         Animation animacionEntrada = AnimationUtils.loadAnimation(this, R.anim.animacionbotonplay);
         botonSoft.startAnimation(animacionEntrada);
         botonMedium.startAnimation(animacionEntrada);
         botonHard.startAnimation(animacionEntrada);
+
+
+        botonSoft.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mostrarVerbos("soft");
+                    }
+                }
+        );
+
+        botonMedium.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mostrarVerbos("medium");
+                    }
+                }
+        );
+
+        botonHard.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mostrarVerbos("hard");
+                    }
+                }
+        );
 
         /*
         Si no se han recibido datos porque es la primera vez que se abre el activity se muestra la lista
@@ -175,47 +207,5 @@ public class ListaVerbos extends ActionBarActivity {
 
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_lista_verbos, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        //Declaramos el camino desde esta activity a la misma activity.
-        Intent intent = new Intent(ListaVerbos.this, ListaVerbos.class);
-
-        switch (item.getItemId()) {
-
-            //Acción del menú para ver la lista de verbos soft.
-            case R.id.soft:
-
-                //Enviamos a la actividad el string "soft" en la variable "lista" para que este mismo intent lo coja.
-                intent.putExtra("lista","soft");
-                //Iniciamos la nueva actividad, que es la misma donde estamos.
-                startActivity(intent);
-                return true;
-
-            //Lista medium
-            case R.id.medium:
-
-                intent.putExtra("lista","medium");
-                startActivity(intent);
-                return true;
-
-            //Lista medium
-            case R.id.hard:
-                intent.putExtra("lista","hard");
-                startActivity(intent);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

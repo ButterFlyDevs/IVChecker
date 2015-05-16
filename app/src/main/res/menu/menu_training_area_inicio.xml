@@ -1,5 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/Menu_Tr_Opc1" android:title="Settings"></item>
-    <item android:id="@+id/Menu_Tr_Opc2" android:title="Statistics"></item>
-    <item android:id="@+id/Menu_Tr_Opc3" android:title="Delete Statics"></item>
-</menu>

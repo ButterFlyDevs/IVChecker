@@ -80,11 +80,11 @@ public class ResultadosTraining extends ActionBarActivity {
         total_acertados.setText("Hits: "+intent.getIntExtra("NUMERO_VERBOS_ACERTADOS",0));
 
         //`Poniendo el texto en la fuente deseada
-        Typeface fuente = Typeface.createFromAsset(getAssets(), "KAREH___.TTF");
-        total_verbos.setTypeface(fuente);
-        total_fallados.setTypeface(fuente);
-        total_acertados.setTypeface(fuente);
-        tipo_lista.setTypeface(fuente);
+//        Typeface fuente = Typeface.createFromAsset(getAssets(), "KAREH___.TTF");
+//        total_verbos.setTypeface(fuente);
+//        total_fallados.setTypeface(fuente);
+//        total_acertados.setTypeface(fuente);
+//        tipo_lista.setTypeface(fuente);
 
         //Lista verbos fallados
         String string_verbos_fallados = intent.getStringExtra("LISTA_VERBOS_FALLADOS");

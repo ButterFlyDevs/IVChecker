@@ -61,7 +61,7 @@
                 android:layout_alignTop="@+id/botonAreaEntrenamiento"
                 android:layout_alignLeft="@+id/botonJugar"
                 android:layout_alignStart="@+id/botonJugar"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginLeft="10dp" />
 
             <Button
                 android:id="@+id/botonRankingMundial"
@@ -74,7 +74,7 @@
                 android:layout_alignTop="@+id/botonListaVerbos"
                 android:layout_alignRight="@+id/botonJugar"
                 android:layout_alignEnd="@+id/botonJugar"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginLeft="10dp" />
 
             <Button
                 android:id="@+id/botonAyuda"
@@ -86,7 +86,7 @@
                 android:layout_alignTop="@+id/botonRankingMundial"
                 android:layout_toRightOf="@+id/botonRankingMundial"
                 android:layout_toEndOf="@+id/botonRankingMundial"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginLeft="10dp" />
 
         </LinearLayout>
     </FrameLayout>
