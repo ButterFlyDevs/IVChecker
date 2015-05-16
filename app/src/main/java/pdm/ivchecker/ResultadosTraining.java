@@ -6,6 +6,7 @@ import android.graphics.EmbossMaskFilter;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -160,5 +161,22 @@ public class ResultadosTraining extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+
+        //Si pulsamos el botón back nos devuelve a la pantalla principal!.
+        if(keyCode== KeyEvent.KEYCODE_BACK){
+
+
+            Intent intent = new Intent(ResultadosTraining.this, TrainingAreaInicio.class);
+            startActivity(intent);
+
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+
     }
 }
