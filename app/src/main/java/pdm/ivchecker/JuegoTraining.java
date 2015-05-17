@@ -1,5 +1,7 @@
 package pdm.ivchecker;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
@@ -160,6 +163,12 @@ public class JuegoTraining extends ActionBarActivity {
     Activity anterior (TrainingAreaInicio). Recordamos que el valor 0 es aleatorio.
      */
     private void prepararJuego(){
+        //Alertas al usuario sobre el modo escogido
+        if(numero_verbos==0 && lista_a_preguntar==0){   // TODO ALEATORIO
+            Toast.makeText(getApplicationContext(), "The game has not been configurated. " +
+                    "It will have a random list and a random number of verbs to ask", Toast.LENGTH_LONG).show();
+        }
+
         Random rnd = new Random();
         int respuesta_smartVerb;
         //Obtencion de valores
@@ -177,6 +186,41 @@ public class JuegoTraining extends ActionBarActivity {
             lista_a_preguntar = rnd.nextInt(3) +1;
         if(numero_verbos==0)
             numero_verbos = 3 + rnd.nextInt(22); //Genera un numero entre 10 y 24.
+
+        /*
+        Alert dialog para informar al usuario del estado de la partida
+         */
+
+        String informacion;
+
+        if(smartVerb){
+            switch (lista_a_preguntar) {
+                case 1:
+                    informacion = "Smart Training is activated!\n" + "List: Soft List\n" + "Verbs: " + numero_verbos;
+                case 2:
+                    informacion = "Smart Training is activated!\n" + "List: Soft List\n" + "Verbs: " + numero_verbos;
+                default:
+                    informacion = "Smart Training is activated!\n" + "List: Soft List\n" + "Verbs: " + numero_verbos;
+            }
+        }
+        else{
+            switch (lista_a_preguntar){
+                case 1: informacion="Smart Training is NOT activated!\n"+"List: Soft List\n"+"Verbs: " +numero_verbos;
+                case 2: informacion="Smart Training is NOT activated!\n"+"List: Soft List\n"+"Verbs: " +numero_verbos;
+                default: informacion="Smart Training is NOT activated!\n"+"List: Soft List\n"+"Verbs: " +numero_verbos;
+            }
+        }
+
+        new AlertDialog.Builder(this)
+                .setTitle("Training Mode")
+                .setMessage(informacion)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
 
     }
     private void leerVerbos(){
