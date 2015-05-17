@@ -5,12 +5,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
+import com.androidplot.xy.XYStepMode;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,6 +31,11 @@ public class HistorialPuntuacionTraining extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historial_puntuacion_training);
 
+        //Para que no se muestre la ActionBar.
+        getSupportActionBar().hide();
+        //Para que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         // Inicializamos el objeto XYPlot búscandolo desde el layout:
         grafico = (XYPlot) findViewById(R.id.grafico);
 
@@ -45,7 +52,7 @@ public class HistorialPuntuacionTraining extends ActionBarActivity {
         XYSeries serie_linea = new SimpleXYSeries(
                 Arrays.asList(serie_puntuaciones),  //Array de datos que pasamos al gráfico (los números)
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, //Los datos son valores verticales solamente
-                "Nombre serie 1");  //Nombre de la serie
+                "Score");  //Nombre de la serie
 
         //Modificamos colores de las series
         /*
@@ -60,8 +67,14 @@ public class HistorialPuntuacionTraining extends ActionBarActivity {
                     Color.rgb(0, 100, 100),
                     Color.rgb(150,190,0),
                     PointLabelFormatter.class.newInstance());
+
+            grafico.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1);  //Aumenta de 1 en 1 el valor de la X
+            serie_formato.enableShadows();  //Añade una sombra a la línea
+
             //Una vez definida la serie (datos y estilo) la añadimos al panel:
+
             grafico.addSeries(serie_linea,serie_formato);
+
 
         } catch (InstantiationException e) {
             e.printStackTrace();
