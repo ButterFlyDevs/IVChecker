@@ -46,10 +46,9 @@ public class ActividadPrincipal extends ActionBarActivity {
         //
         animacionEntrada.setRepeatCount(Animation.INFINITE);
         botonJugar.startAnimation(animacionEntrada);
-        //botonJugar.startAnimation(animacionSalida);
 
-       // animacionSalida.setStartOffset(1200+animacionEntrada.getStartOffset()+1200);
-        //animacionEntrada.setRepeatMode(2);
+
+        final Animation animacionBotones = AnimationUtils.loadAnimation(this,R.anim.myanimation);
 
 
 
@@ -73,6 +72,8 @@ public class ActividadPrincipal extends ActionBarActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        v.startAnimation(animacionBotones);
                         //Creamos el Intent
                         Intent intent = new Intent(ActividadPrincipal.this, TrainingAreaInicio.class);
                         //Iniciamos la nueva actividad
@@ -86,6 +87,7 @@ public class ActividadPrincipal extends ActionBarActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        v.startAnimation(animacionBotones);
                         //Creamos el Intent
                         Intent intent = new Intent(ActividadPrincipal.this, ListaVerbos.class);
                         //Iniciamos la nueva actividad
