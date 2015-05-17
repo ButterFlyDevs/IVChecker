@@ -1,14 +1,23 @@
 package pdm.ivchecker;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -28,6 +37,8 @@ public class wcr extends ActionBarActivity {
 
     List<Jugador>rankingJugadores;
 
+
+    PopupWindow popUp;
 
     //Publicidad
     private AdView adView;
@@ -52,12 +63,13 @@ public class wcr extends ActionBarActivity {
         columnaPuntos.setText("");
         columnaPais.setText("");
 
-
+        //Llamada clave de la clase
         rankingJugadores = miConexion.pedirRankingNueva();
 
-        System.out.println("Recibidos "+rankingJugadores.size()+" elementos");
+
 
         if(rankingJugadores!=null) {
+            System.out.println("Recibidos "+rankingJugadores.size()+" elementos");
 
             int n = 1;
 
@@ -68,6 +80,10 @@ public class wcr extends ActionBarActivity {
                 columnaPais.append(jugador.getPais() + "\n");
                 n++;
             }
+        }else{
+            //Mostramos una ventana emergenente avisando de que ha ocurrido un error y que se revise la conexión a la red:
+            popUpFalloInternet();
+
         }
 
 
@@ -80,6 +96,91 @@ public class wcr extends ActionBarActivity {
         adView.loadAd(adRequest);
 
     }//Fin onCreate
+
+
+    private void popUpFalloInternet(){
+
+
+        try{
+
+
+            Context context = wcr.this;
+            String title = "Error de red";
+            String message = "Parece que hay algun problema con tu conexion. Revisala e intentalo de nuevo.";
+            String button1String = "Ok";
+            String button2String = "Recargar";
+
+            AlertDialog.Builder ad = new AlertDialog.Builder(context);
+            ad.setTitle(title);
+            ad.setMessage(message);
+            ad.setCancelable(false);
+
+            ad.setPositiveButton(
+                    button1String,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int arg1) {
+                            Intent intent = new Intent(wcr.this, ActividadPrincipal.class);
+                            startActivity(intent);
+                        }
+                    }
+            );
+
+            ad.setNegativeButton(
+                    button2String,
+                    new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog, int arg1) {
+                            Intent intent = new Intent(wcr.this, wcr.class);
+                            startActivity(intent);
+                        }
+                    }
+            );
+
+            //
+            ad.show();
+
+
+
+
+            /*
+
+            // Created a new Dialog
+            Dialog dialog = new Dialog(wcr.this);
+
+// Set the title
+           // dialog.setTitle("Dialog Title");
+
+// inflate the layout
+            dialog.setContentView(R.layout.popup);
+
+// Set the dialog text -- this is better done in the XML
+            //TextView text = (TextView)dialog.findViewById(R.id.dialog_text_view);
+            //text.setText("This is the text that does in the dialog box");
+
+// Display the dialog
+            dialog.show();
+            /*
+            System.out.println("abriendo popup");
+            LayoutInflater inflater = (LayoutInflater)wcr.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            PopupWindow pw = new PopupWindow(
+                    inflater.inflate(R.layout.popup, null, false),
+                    100,
+                    100,
+                    true);
+            // The code below assumes that the root container has an id called 'main'
+            pw.showAtLocation(this.findViewById(R.id.main), Gravity.CENTER, 0, 0);
+            */
+            /*
+            View layout = inflater.inflate(R.layout.popup,(ViewGroup)findViewById(R.id.fragment_container));
+
+            popUp = new PopupWindow(layout, 300,300, true);
+            popUp.showAtLocation(layout, Gravity.CENTER,0,0);
+            */
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){

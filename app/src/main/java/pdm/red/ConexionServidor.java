@@ -92,7 +92,10 @@ public class ConexionServidor {
             e.printStackTrace();
         }
         //Devolvemos el ranking que es una variable privada de clase
-        return rankingJugadores;
+        if(rankingJugadores.isEmpty())
+            return null;
+        else
+            return rankingJugadores;
     }
 
 
