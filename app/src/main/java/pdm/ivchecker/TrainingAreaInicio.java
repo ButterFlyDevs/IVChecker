@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -47,6 +49,8 @@ public class TrainingAreaInicio extends ActionBarActivity {
         botonEstadisticas=(Button)findViewById(R.id.botonEstadisticas);
         botonEliminar=(Button)findViewById(R.id.botonEliminarEstadisticas);
 
+        Animation loopParpadeante = AnimationUtils.loadAnimation(this, R.anim.animacionbotonplay);
+        boton_empezar.startAnimation(loopParpadeante);
 
 
         //Implementamos el evento click del botón boton_empezar:
@@ -103,7 +107,7 @@ public class TrainingAreaInicio extends ActionBarActivity {
                         try {
                             flujo_fichero = openFileOutput(fichero, MODE_PRIVATE);
                             flujo_fichero.close();
-                            Toast.makeText(getApplicationContext(), "Archivo de puntuaciones borrado", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.ficheroBorrado), Toast.LENGTH_SHORT).show();
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         } catch (IOException e) {

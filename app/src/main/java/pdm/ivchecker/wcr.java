@@ -82,7 +82,7 @@ public class wcr extends ActionBarActivity {
             }
         }else{
             //Mostramos una ventana emergenente avisando de que ha ocurrido un error y que se revise la conexión a la red:
-            popUpFalloInternet();
+            alertaFalloInternet();
 
         }
 
@@ -98,17 +98,17 @@ public class wcr extends ActionBarActivity {
     }//Fin onCreate
 
 
-    private void popUpFalloInternet(){
+    private void alertaFalloInternet(){
 
 
         try{
 
 
             Context context = wcr.this;
-            String title = "Error de red";
-            String message = "Parece que hay algun problema con tu conexion. Revisala e intentalo de nuevo.";
-            String button1String = "Ok";
-            String button2String = "Recargar";
+            String title = "@string/tituloAlerta";
+            String message = "@string/mensajeAlerta";
+            String button1String = "@string/boton1Alerta";
+            String button2String = "@string/boton2Alerta";
 
             AlertDialog.Builder ad = new AlertDialog.Builder(context);
             ad.setTitle(title);
@@ -135,47 +135,7 @@ public class wcr extends ActionBarActivity {
                     }
             );
 
-            //
             ad.show();
-
-
-
-
-            /*
-
-            // Created a new Dialog
-            Dialog dialog = new Dialog(wcr.this);
-
-// Set the title
-           // dialog.setTitle("Dialog Title");
-
-// inflate the layout
-            dialog.setContentView(R.layout.popup);
-
-// Set the dialog text -- this is better done in the XML
-            //TextView text = (TextView)dialog.findViewById(R.id.dialog_text_view);
-            //text.setText("This is the text that does in the dialog box");
-
-// Display the dialog
-            dialog.show();
-            /*
-            System.out.println("abriendo popup");
-            LayoutInflater inflater = (LayoutInflater)wcr.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            PopupWindow pw = new PopupWindow(
-                    inflater.inflate(R.layout.popup, null, false),
-                    100,
-                    100,
-                    true);
-            // The code below assumes that the root container has an id called 'main'
-            pw.showAtLocation(this.findViewById(R.id.main), Gravity.CENTER, 0, 0);
-            */
-            /*
-            View layout = inflater.inflate(R.layout.popup,(ViewGroup)findViewById(R.id.fragment_container));
-
-            popUp = new PopupWindow(layout, 300,300, true);
-            popUp.showAtLocation(layout, Gravity.CENTER,0,0);
-            */
 
         }catch(Exception e){
             e.printStackTrace();
@@ -190,6 +150,9 @@ public class wcr extends ActionBarActivity {
 
             Intent intent = new Intent(wcr.this, ActividadPrincipal.class);
             startActivity(intent);
+
+            //Aplicacion de transicion animada entre activities:
+            overridePendingTransition(R.anim.entrada_abajo2, R.anim.salida_abajo2);
 
             return true;
         }

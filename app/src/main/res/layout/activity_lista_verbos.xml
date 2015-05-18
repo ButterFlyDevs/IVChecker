@@ -62,13 +62,14 @@
                 android:layout_height="fill_parent"
                 android:layout_marginTop="30dp"
                 android:id="@+id/tablaVerbos"
-                android:gravity="center_horizontal"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center_horizontal"
+                android:gravity="left">
 
                 <TableRow
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:gravity="center_horizontal">
+                    android:layout_gravity="left"
+                    android:gravity="left">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -78,7 +79,8 @@
                         android:id="@+id/textNumero"
                         android:layout_column="0"
                         android:textColor="#ffececec"
-                        android:textSize="20dp" />
+                        android:textSize="25dp"
+                        android:layout_gravity="left" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -89,7 +91,7 @@
                         android:layout_column="1"
                         android:layout_marginLeft="20dp"
                         android:textColor="#ffececec"
-                        android:textSize="20dp" />
+                        android:textSize="25dp" />
 
                     <TextView
                         android:layout_width="wrap_content"

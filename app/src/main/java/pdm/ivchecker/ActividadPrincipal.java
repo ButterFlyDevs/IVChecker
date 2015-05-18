@@ -3,8 +3,6 @@ package pdm.ivchecker;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -38,14 +36,14 @@ public class ActividadPrincipal extends ActionBarActivity {
 
 
         //Cargamos la animacion desde R.anim folder
-        Animation animacionEntrada = AnimationUtils.loadAnimation(this, R.anim.animacionbotonplay);
+        Animation loopParpadeante = AnimationUtils.loadAnimation(this, R.anim.animacionbotonplay);
         Animation animacionSalida = AnimationUtils.loadAnimation(this, R.anim.animacionbotonplay2);
         //Lanzamos la animacion:
         //animacion.setRepeatCount(Animation.INFINITE);
 
         //
-        animacionEntrada.setRepeatCount(Animation.INFINITE);
-        botonJugar.startAnimation(animacionEntrada);
+       // animacionEntrada.setRepeatCount(Animation.INFINITE);
+        botonJugar.startAnimation(loopParpadeante);
 
 
         final Animation animacionBotones = AnimationUtils.loadAnimation(this,R.anim.myanimation);
@@ -116,6 +114,10 @@ public class ActividadPrincipal extends ActionBarActivity {
                         Intent intent = new Intent(ActividadPrincipal.this, About.class);
                         //Iniciamos la nueva actividad
                         startActivity(intent);
+
+                        //Aplicacion de transicion animada entre activities:
+                        overridePendingTransition(R.anim.entrada_abajo, R.anim.salida_abajo);
+
                     }
                 }
         );

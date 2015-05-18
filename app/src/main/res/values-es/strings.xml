@@ -1,26 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- NO TRADUCIR -->
     <string name="app_name">IVChecker</string>
-    <string name="hello_world">Level 1</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_lista_verbos">ListaVerbos</string>
-    <string name="title_activity_juego">Juego</string>
-    <string name="listarVerbos">Show verbs</string>
-    <string name="jugar">play</string>
-    <string name="title_activity_resultados">resultados</string>
 
-
-    <string name="menuPrincipal1">Area entrenamiento</string>
-    <string name="menuPrincipal2">Lista de Verbos</string>
-    <string name="menuPrincipal3">Ranking Mundial</string>
-    <string name="menuPrincipal4">Ayuda</string>
+    <!-- fragment de niveles-->
 
     <string name="nivel">Nivel</string>
+
     <string name="tM1">¿Estás preparado?</string>
     <string name="tD1">Conoces el tamaño del verbo</string>
 
+    <string name="tM2">¿Sigues vivo?</string>
+    <string name="tD2">Ahora no conoces el tamaño del verbo</string>
 
+    <string name="tM3">Las cosas se complican</string>
+    <string name="tD3">El orden de los verbos no es el correcto</string>
+
+    <string name="tM4">¡Lo estás consiguiendo!</string>
+    <string name="tD4">Ahora faltan dos formas</string>
+
+    <string name="tM5">¿Aún te quedan vidas?</string>
+    <string name="tD5">Faltan dos formas y están desordenadas</string>
+
+    <string name="tM6">A ver lo que sabes hacer</string>
+    <string name="tD6">Verbos de nivel medio</string>
+
+    <string name="tM7">Lo estas haciendo genial</string>
+    <string name="tD7">Verbos de nivel medio</string>
+
+    <string name="tM8">Concentrate</string>
+    <string name="tD8">Verbos de nivel medio</string>
+
+    <string name="tM9">Vas a hacer historia</string>
+    <string name="tD9">Verbos de nivel medio</string>
+
+    <string name="tM10">Lo estas consiguiendo</string>
+    <string name="tD10">Verbos de nivel medio</string>
+
+    <string name="tM11">Eres casi un genio.</string>
+    <string name="tD11">Los verbos mas difíciles</string>
+
+    <string name="tM12">Estás a punto de conseguirlo</string>
+    <string name="tD12">Piensa las respuestas</string>
+
+    <string name="tM13">Eres un genio</string>
+    <string name="tD13">Manten la concentración</string>
+
+    <string name="tM14">Casi has acabado</string>
+    <string name="tD14">Estás a punto de llegar al final</string>
+
+    <string name="tM15">La batalla final</string>
+    <string name="tD15">El último paso hacia la gloria</string>
+
+
+    <!-- configuración -->
+
+    <string name="ajustes">Ajustes</string>
+
+    <string name="dificultad">Elegir dificultad</string>
+
+    <string name="listaSimple">Lista simple</string>
+    <string name="listaMedia">Lista media</string>
+    <string name="listaDificil">Lista difícil</string>
+
+    <string name="entrenamientoInteligente">Entrenamiento inteligente</string>
+    <string name="numVerbosAPreguntar">Número de verbos a preguntar</string>
+
+
+    <!-- resultado Juego-->
+    <string name="hasconseguido">Has conseguido</string>
+    <string name="puntos">PUNTOS</string>
+    <string name="genio">Eres un genio!</string>
+    <string name="wrc">Tu posición en WCR:</string>
+    <string name="pregunta">Quieres subir tu puntuación a WorldChallengeResult?</string>
+    <string name="nombre">nick aquí</string>
+    <string name="send">Enviar!</string>
+
+
+    <!-- juego -->
+    <string name="mensajeVidaPerdida">Has perdido una vida.</string>
+    <string name="mensajeMuerte">## Fin del juego ##</string>
+
+
+    <!-- trainning area -->
+    <!-- Para ajustes se usa la ya definida arriba -->
+    <string name="estadisticas">Estadisticas</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="ficheroBorrado">Archivo de puntuaciones borrado</string>
+
+
+    <!-- wrc -->
+    <string name="tituloAlerta">Error de red</string>
+    <string name="mensajeAlerta">Parece que hay algún problema con tu conexion. Revisala e intentalo de nuevo.</string>
+    <string name="botonAAlerta">OK</string>
+    <string name="boton2Alerta">Recargar</string>
+
+
+    <!-- About -->
+    <string name="texto1">¿Te sabes ya los verbos irregulares?</string>
+    <string name="texto2">Ahora podrás aprender los más usados del inglés de una forma sencilla y rápida.</string>
+    <string name="texto3">Más de 200 verbos organizados en tres niveles de dificultad y uso con los que dominarás el inglés.</string>
+        <string name="texto4">En la sección de entrenamiento podrás practicar tantas veces como quieras, dejando que IVChecker
+                              seleccione los verbos al azar o eligiendo su dificultad tu. Además podrás dejar que te pregunte
+                              los verbos que sabe que más te cuestan con su opción "Entrenamiento Inteligente".</string>
+        <string name="texto5">En el juego principal podras poner a prueba tus conocimientos a traves de 15 niveles de dificultad.
+                               ¿Hasta donde seras capaz de llegar?</string>
+        <string name="texto6">Si quieres podras subir tu puntuacion al World Challenge Results donde podrás alcanzar el podio con
+                              jugdores de todo el mundo.</string>
+    <string name="texto7">Privacidad y datos personales:</string>
+        <string name="texto8">IVChecker no utiliza ninguno de tus datos personales. Solo necesita un nick para guardar tus datos
+        en su servidor. Los datos son totalmente anonimos y no guardan relacion directa con algún jugador o dispositivo. IVChecker
+        solo necesita internet para poder consultar los datos del ranking y subir los tuyos.</string>
+
+    <!-- NO TRADUCIR -->
+    <string name="developers">Inventarium Devs @ 2015</string>
+
+    <!-- NO TRADUCIR -->
+    <!-- Titulos de las actividades, obligatorios pero no usados -->
     <string name="title_activity_about">About</string>
     <string name="title_activity_training_area_inicio">TrainingAreaInicio</string>
     <string name="title_activity_juego_training">JuegoTraining</string>
@@ -30,5 +127,13 @@
     <string name="title_activity_resultados_training">ResultadosTraining</string>
     <string name="title_activity_resultado">Resultado</string>
     <string name="title_activity_eliminame">ELIMINAME</string>
+    <string name="title_activity_historial_puntuacion_training">HistorialPuntuacionTraining</string>
+    <string name="title_activity_lista_verbos">ListaVerbos</string>
+    <string name="title_activity_juego">Juego</string>
+    <string name="title_activity_resultados">resultados</string>
+
+
+
+
 
 </resources>
