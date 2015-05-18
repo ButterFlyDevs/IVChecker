@@ -8,9 +8,16 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         title="Historial Puntuacion Training"
-        fillPaint.color="#00000000"
+        android:layout_marginTop="0px"
+        android:layout_marginLeft="0px"
+        android:layout_marginRight="0px"
 
-    />
+        androidPlot.legendWidget.heightMetric.value="25dp"
+        androidPlot.legendWidget.iconSizeMetrics.heightMetric.value="15dp"
+        androidPlot.legendWidget.iconSizeMetrics.widthMetric.value="15dp"
+        androidPlot.legendWidget.positionMetrics.anchor="right_bottom"
+        androidPlot.legendWidget.textPaint.textSize="10dp"
+        />
 
 
 </RelativeLayout>
