@@ -69,13 +69,13 @@
 
 
     <!-- resultado Juego-->
-    <string name="hasconseguido">you got</string>
-    <string name="puntos">POINTS</string>
-    <string name="genio">you are a genius!</string>
-    <string name="wrc">Your WCR position:</string>
-    <string name="pregunta">Do you want submit your points to WorldChallengeResult?</string>
-    <string name="nombre">nick here</string>
-    <string name="send">Send!</string>
+    <string name="hasconseguido">T'y as réussi</string>
+    <string name="puntos">Points</string>
+    <string name="genio">Tu es un génie !</string>
+    <string name="wrc">Ton WCR classement:</string>
+    <string name="pregunta">Tu veux mettre ton classement sur WorldChallengeResult ?</string>
+    <string name="nombre">Pseudo ici</string>
+    <string name="send">Envoyé !</string>
 
 
     <!-- juego -->

@@ -96,6 +96,14 @@
         <string name="ficheroBorrado">Score\'s file is deleted</string>
 
 
+    <!-- juego training -->
+        <string name="toastA">The game has not been configurated.
+                    It will have a random list and a random number of verbs to ask</string>
+        <string name="modoEntranamiento">Training Mode</string>
+        <string name="juegoInteligente">Smart Training is activated!</string>
+        <string name="smartDesactivado">Smart Training is NOT activated!</string>
+
+
     <!-- wrc -->
         <string name="tituloAlerta">Network failure</string>
         <string name="mensajeAlerta">Maybe there are a problem with your conexion. Check it and come back here..</string>

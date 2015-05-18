@@ -165,8 +165,7 @@ public class JuegoTraining extends ActionBarActivity {
     private void prepararJuego(){
         //Alertas al usuario sobre el modo escogido
         if(numero_verbos==0 && lista_a_preguntar==0){   // TODO ALEATORIO
-            Toast.makeText(getApplicationContext(), "The game has not been configurated. " +
-                    "It will have a random list and a random number of verbs to ask", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.toastA), Toast.LENGTH_LONG).show();
         }
 
         Random rnd = new Random();
@@ -196,23 +195,23 @@ public class JuegoTraining extends ActionBarActivity {
         if(smartVerb){
             switch (lista_a_preguntar) {
                 case 1:
-                    informacion = "Smart Training is activated!\n" + "List: Soft List\n" + "Verbs: " + numero_verbos;
+                    informacion = getString(R.string.entrenamientoInteligente)+"\n" + "List: "+getString(R.string.listaSimple)+"\n" + "Verbs: " + numero_verbos;
                 case 2:
-                    informacion = "Smart Training is activated!\n" + "List: Soft List\n" + "Verbs: " + numero_verbos;
+                    informacion = getString(R.string.entrenamientoInteligente)+"\n" + "List: "+getString(R.string.listaMedia)+"\n" + "Verbs: " + numero_verbos;
                 default:
-                    informacion = "Smart Training is activated!\n" + "List: Soft List\n" + "Verbs: " + numero_verbos;
+                    informacion = getString(R.string.entrenamientoInteligente)+"\n" + "List: "+getString(R.string.listaDificil)+"\n" + "Verbs: " + numero_verbos;
             }
         }
         else{
             switch (lista_a_preguntar){
-                case 1: informacion="Smart Training is NOT activated!\n"+"List: Soft List\n"+"Verbs: " +numero_verbos;
-                case 2: informacion="Smart Training is NOT activated!\n"+"List: Soft List\n"+"Verbs: " +numero_verbos;
-                default: informacion="Smart Training is NOT activated!\n"+"List: Soft List\n"+"Verbs: " +numero_verbos;
+                case 1: informacion=getString(R.string.smartDesactivado)+ "List: "+getString(R.string.listaSimple)+"\n"+"Verbs: " +numero_verbos;
+                case 2: informacion=getString(R.string.smartDesactivado)+ "List: "+getString(R.string.listaMedia)+"\n"+"Verbs: " +numero_verbos;
+                default: informacion=getString(R.string.smartDesactivado)+ "List: "+getString(R.string.listaDificil)+"\n"+"Verbs: " +numero_verbos;
             }
         }
 
         new AlertDialog.Builder(this)
-                .setTitle("Training Mode")
+                .setTitle(getString(R.string.modoEntranamiento))
                 .setMessage(informacion)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
