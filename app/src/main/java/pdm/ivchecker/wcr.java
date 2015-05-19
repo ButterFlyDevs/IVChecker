@@ -91,7 +91,7 @@ public class wcr extends ActionBarActivity {
         AdView adView = (AdView)this.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) //Cualquier emulador
-                .addTestDevice("9011F9E7CEC921EF1BB8A17A36B24813") //El telefono de Juan
+                // .addTestDevice("xxx") //El telefono de desarrollo
                 .build();
         adView.loadAd(adRequest);
 

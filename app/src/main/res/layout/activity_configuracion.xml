@@ -75,27 +75,24 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/entrenamientoInteligente"
-            android:id="@+id/textLevel" />
+            android:id="@+id/textLevel"
+            android:layout_marginTop="20dp" />
 
         <Switch
-            android:layout_width="234dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Smart Training"
             android:id="@+id/switch_smartVerb"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20dp" />
-
-        <Spinner
-            android:layout_width="119dp"
-            android:layout_height="47dp"
-            android:id="@+id/spinnerSmartVerb" />
+            android:layout_gravity="left|center_horizontal"
+            android:textSize="20dp"
+            android:checked="false" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/numVerbosAPreguntar"
-            android:id="@+id/textoVerbos" />
+            android:id="@+id/textoVerbos"
+            android:layout_marginTop="20dp" />
 
         <Spinner
             android:layout_width="119dp"

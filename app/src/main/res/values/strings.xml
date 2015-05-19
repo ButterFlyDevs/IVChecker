@@ -9,57 +9,57 @@
    <!-- NO TRADUCIR -->
     <string name="app_name">IVChecker</string>
 
-    <!-- fragment de niveles-->
+    <!-- 1. fragment de niveles-->
 
-    <string name="nivel">Level</string>
+        <string name="nivel">Level</string>
 
-    <string name="tM1">Are you ready?</string>
-    <string name="tD1">You know the length of verb</string>
+        <string name="tM1">Are you ready?</string>
+        <string name="tD1">You know the length of verb</string>
 
-    <string name="tM2">Are you alive?</string>
-    <string name="tD2">Now you do not know the length of verb</string>
+        <string name="tM2">Are you alive?</string>
+        <string name="tD2">Now you do not know the length of verb</string>
 
-    <string name="tM3">The things are complicated</string>
-    <string name="tD3">The verbs are not  ordered correctly</string>
+        <string name="tM3">The things are complicated</string>
+        <string name="tD3">The verbs are not  ordered correctly</string>
 
-    <string name="tM4">You are succeeding!</string>
-    <string name="tD4">Now two forms are missing</string>
+        <string name="tM4">You are succeeding!</string>
+        <string name="tD4">Now two forms are missing</string>
 
-    <string name="tM5">Do you have lives yet?</string>
-    <string name="tD5">Two forms are missing and they are untidy</string>
+        <string name="tM5">Do you have lives yet?</string>
+        <string name="tD5">Two forms are missing and they are untidy</string>
 
-    <string name="tM6">Show me that you know doing</string>
-    <string name="tD6">Medium level verbs</string>
+        <string name="tM6">Show me that you know doing</string>
+        <string name="tD6">Medium level verbs</string>
 
-    <string name="tM7">You arere doing great</string>
-    <string name="tD7">Medium level verbs</string>
+        <string name="tM7">You arere doing great</string>
+        <string name="tD7">Medium level verbs</string>
 
-    <string name="tM8">You have to concentrate</string>
-    <string name="tD8">Medium level verbs</string>
+        <string name="tM8">You have to concentrate</string>
+        <string name="tD8">Medium level verbs</string>
 
-    <string name="tM9">You will doing history</string>
-    <string name="tD9">Medium level verbs</string>
+        <string name="tM9">You will doing history</string>
+        <string name="tD9">Medium level verbs</string>
 
-    <string name="tM10">The finish is coming</string>
-    <string name="tD10">Medium level verbs</string>
+        <string name="tM10">The finish is coming</string>
+        <string name="tD10">Medium level verbs</string>
 
-    <string name="tM11">You are a almost genius</string>
-    <string name="tD11">More difficult verbs</string>
+        <string name="tM11">You are a almost genius</string>
+        <string name="tD11">More difficult verbs</string>
 
-    <string name="tM12">You are about to success</string>
-    <string name="tD12">Think before the answer</string>
+        <string name="tM12">You are about to success</string>
+        <string name="tD12">Think before the answer</string>
 
-    <string name="tM13">You are a genius</string>
-    <string name="tD13">Keep the concentration</string>
+        <string name="tM13">You are a genius</string>
+        <string name="tD13">Keep the concentration</string>
 
-    <string name="tM14">The finish is coming</string>
-    <string name="tD14">You are about to arrive</string>
+        <string name="tM14">The finish is coming</string>
+        <string name="tD14">You are about to arrive</string>
 
-    <string name="tM15">The final battle !!</string>
-    <string name="tD15">The last step to glory</string>
+        <string name="tM15">The final battle !!</string>
+        <string name="tD15">The last step to glory</string>
 
 
-    <!-- configuración -->
+    <!--2.  Configuración -->
 
         <string name="ajustes">Settings</string>
 
@@ -73,7 +73,7 @@
         <string name="numVerbosAPreguntar">Number of verbs to ask </string>
 
 
-    <!-- resultado Juego-->
+    <!--3. resultado Juego-->
         <string name="hasconseguido">you got</string>
         <string name="puntos">POINTS</string>
         <string name="genio">you are a genius!</string>
@@ -84,19 +84,19 @@
 
 
 
-    <!-- juego -->
+    <!--4. juego -->
         <string name="mensajeVidaPerdida">You have lost a life.</string>
         <string name="mensajeMuerte">## GAME OVER ##</string>
 
 
-    <!-- training area -->
+    <!-- 5. training area -->
         <!-- Para ajustes se usa la ya definida arriba -->
         <string name="estadisticas">Statistics</string>
         <string name="eliminar">Delete</string>
         <string name="ficheroBorrado">Score\'s file is deleted</string>
 
 
-    <!-- juego training -->
+    <!-- 6. juego training -->
         <string name="toastA">The game has not been configurated.
                     It will have a random list and a random number of verbs to ask</string>
         <string name="modoEntranamiento">Training Mode</string>
@@ -104,14 +104,15 @@
         <string name="smartDesactivado">Smart Training is NOT activated!</string>
 
 
-    <!-- wrc -->
+
+    <!--7. wrc -->
         <string name="tituloAlerta">Network failure</string>
         <string name="mensajeAlerta">Maybe there are a problem with your conexion. Check it and come back here..</string>
         <string name="botonAAlerta">OK</string>
         <string name="boton2Alerta">Recharge</string>
 
 
-    <!-- About -->
+    <!--8. About -->
         <string name="texto1">Do you know all irregular verbs yet?</string>
         <string name="texto2">Now, you can learn the most used of english, easy and quickly.</string>
         <string name="texto3">More of 200 verbs organized on three levels of difficulty.</string>
@@ -124,6 +125,8 @@
         <string name="texto7">Privacy and personal data:</string>
         <string name="texto8">IV Checker do not use none of your personal data. We only need a nick to save your score in a server.
             The data are anonymous and we do not saving data of you or your device.</string>
+
+
 
         <!-- NO TRADUCIR -->
         <string name="developers">Inventarium Devs @ 2015</string>

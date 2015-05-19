@@ -4,114 +4,133 @@
     <!-- NO TRADUCIR -->
     <string name="app_name">IVChecker</string>
 
-    <!-- fragment de niveles-->
+    <!-- 1. fragment de niveles-->
 
-    <string name="nivel">Niveau</string>
+        <string name="nivel">Niveau</string>
 
-    <string name="tM1">Tu es prêt ?</string>
-    <string name="tD1">Tu connais la longueur du verbe</string>
+        <string name="tM1">Tu es prêt ?</string>
+        <string name="tD1">Tu connais la longueur du verbe</string>
 
-    <string name="tM2">Tu es encore vivant ?</string>
-    <string name="tD2">Maintenant tu ne connais pas la longueur du verbe</string>
+        <string name="tM2">Tu es encore vivant ?</string>
+        <string name="tD2">Maintenant tu ne connais pas la longueur du verbe</string>
 
-    <string name="tM3">Les choses deviennent plus difficiles</string>
-    <string name="tD3">L/ordre des verbes n/est pas correct </string>
+        <string name="tM3">Les choses deviennent plus difficiles</string>
+        <string name="tD3">L\'ordre des verbes n\'est pas correct </string>
 
-    <string name="tM4">T/y réussis!</string>
-    <string name="tD4">Maintenant il manque deux formes</string>
+        <string name="tM4">T\'y réussis!</string>
+        <string name="tD4">Maintenant il manque deux formes</string>
 
-    <string name="tM5">Il reste enconre des vies ?</string>
-    <string name="tD5">Il manque deux formes et ces ne sont pas en ordre</string>
+        <string name="tM5">Il reste enconre des vies ?</string>
+        <string name="tD5">Il manque deux formes et ces ne sont pas en ordre</string>
 
-    <string name="tM6">On va voir ce que tu sais faire</string>
-    <string name="tD6">Verbes de niveau intermédiaire</string>
+        <string name="tM6">On va voir ce que tu sais faire</string>
+        <string name="tD6">Verbes de niveau intermédiaire</string>
 
-    <string name="tM7">Bon travail !</string>
-    <string name="tD7">Verbes de niveau intermédiaire</string>
+        <string name="tM7">Bon travail !</string>
+        <string name="tD7">Verbes de niveau intermédiaire</string>
 
-    <string name="tM8">Concentre-toi</string>
-    <string name="tD8">Verbes de niveau intermédiaire</string>
+        <string name="tM8">Concentre-toi</string>
+        <string name="tD8">Verbes de niveau intermédiaire</string>
 
-    <string name="tM9">Tu vas entrer dans l/histoire</string>
-    <string name="tD9">Verbe de niveau intermédiaire</string>
+        <string name="tM9">Tu vas entrer dans l\'histoire</string>
+        <string name="tD9">Verbe de niveau intermédiaire</string>
 
-    <string name="tM10">T/y réussis</string>
-    <string name="tD10">Verbes de niveau intermédiaire</string>
+        <string name="tM10">T\'y réussis</string>
+        <string name="tD10">Verbes de niveau intermédiaire</string>
 
-    <string name="tM11">Tu es presque un génie.</string>
-    <string name="tD11">Les verbes les plus difficiles</string>
+        <string name="tM11">Tu es presque un génie.</string>
+        <string name="tD11">Les verbes les plus difficiles</string>
 
-    <string name="tM12">Tu vas y réussir</string>
-    <string name="tD12">Pense les réponses</string>
+        <string name="tM12">Tu vas y réussir</string>
+        <string name="tD12">Pense les réponses</string>
 
-    <string name="tM13">Tu es un génie</string>
-    <string name="tD13">Reste concentré</string>
+        <string name="tM13">Tu es un génie</string>
+        <string name="tD13">Reste concentré</string>
 
-    <string name="tM14">Tu as presque fini</string>
-    <string name="tD14">Tu es sur le point d/arriver au bout</string>
+        <string name="tM14">Tu as presque fini</string>
+        <string name="tD14">Tu es sur le point d/arriver au bout</string>
 
-    <string name="tM15">La bataille finale</string>
-    <string name="tD15">Le dernier mouvement jusqu/à la victoire</string>
-
-
-    <!-- configuración -->
-
-    <string name="ajustes">Réglages</string>
-
-    <string name="dificultad">Choisir la difficulté</string>
-
-    <string name="listaSimple">Liste simple</string>
-    <string name="listaMedia">Liste intermédiaire</string>
-    <string name="listaDificil">Liste difficile</string>
-
-    <string name="entrenamientoInteligente">Entraînement intelligent</string>
-    <string name="numVerbosAPreguntar">Nombre des verbes à demander</string>
+        <string name="tM15">La bataille finale</string>
+        <string name="tD15">Le dernier mouvement jusqu\'à la victoire</string>
 
 
-    <!-- resultado Juego-->
-    <string name="hasconseguido">T'y as réussi</string>
-    <string name="puntos">Points</string>
-    <string name="genio">Tu es un génie !</string>
-    <string name="wrc">Ton WCR classement:</string>
-    <string name="pregunta">Tu veux mettre ton classement sur WorldChallengeResult ?</string>
-    <string name="nombre">Pseudo ici</string>
-    <string name="send">Envoyé !</string>
+    <!-- 2. configuración -->
+
+        <string name="ajustes">Réglages</string>
+
+        <string name="dificultad">Choisir la difficulté</string>
+
+        <string name="listaSimple">Liste simple</string>
+        <string name="listaMedia">Liste intermédiaire</string>
+        <string name="listaDificil">Liste difficile</string>
+
+        <string name="entrenamientoInteligente">Entraînement intelligent</string>
+        <string name="numVerbosAPreguntar">Nombre des verbes à demander</string>
 
 
-    <!-- juego -->
-    <string name="mensajeVidaPerdida">Tu as perdu une vie.</string>
-    <string name="mensajeMuerte">## Fin du jeu ##</string>
+    <!-- 3. resultado Juego-->
+        <string name="hasconseguido">T\'y as réussi</string>
+        <string name="puntos">Points</string>
+        <string name="genio">Tu es un génie !</string>
+        <string name="wrc">Ton WCR classement:</string>
+        <string name="pregunta">Tu veux mettre ton classement sur WorldChallengeResult ?</string>
+        <string name="nombre">Pseudo ici</string>
+        <string name="send">Envoyé !</string>
+
+
+    <!--4.  juego -->
+        <string name="mensajeVidaPerdida">Tu as perdu une vie.</string>
+        <string name="mensajeMuerte">## Fin du jeu ##</string>
 
 
 
-    <!-- trainning area -->
+    <!--5.  trainning area -->
     <!-- Para ajustes se usa la ya definida arriba -->
     <string name="estadisticas">Classement</string>
     <string name="eliminar">Supprimer</string>
     <string name="ficheroBorrado">Fichier du classement supprimé</string>
 
 
+    <!-- 6. juego training -->
+        <string name="toastA">Le jeu n\'a pas été configuré.
+                    Le nombre de verbes et la liste utilisée seront choisis de façon aléatoire.</string>
+    <string name="modeEntraînement">Entraînement</string>
+    <string name="jeuIntelligent">Entraînement Intelligent activé</string>
+    <string name="intelligentDésactivé">Entraînement Intelligent désactivé</string>
 
-    <!-- wrc -->
+
+
+    <!--7. wrc -->
     <string name="tituloAlerta">Érreur réseau</string>
     <string name="mensajeAlerta">Il vous faut une connexion de données pour executer cette action. Vérifie-la et essayer à nouveau.</string>
     <string name="botonAAlerta">OK</string>
     <string name="boton2Alerta">Recharger</string>
 
 
-    <!-- About -->
+    <!-- 8. About -->
     <string name="texto1">Tu connais déjà les verbes irréguliers ?</string>
-    <string name="texto2">Maintenant tu pourras apprendre les plus courants en anglais d/une manière simple et rapide.</string>
-    <string name="texto3">Plus de 200 verbes classés en trois niveaux de difficulté et d/usage grâce auxquels tu maîtriseras l/anglais.</string>
-    <string name="texto4">Tu pourras entraîner autant de fois que tu le souhaites avec l/option entraînement, tu peux laisser IVChecker 			      	      choisir les verbes au hasard ou tu peux choisir toi-même leur difficulté. En plus, tu pourras laisser te demander 			      les verbes grâce à l/option "Entraînement intelligent.</string>
-        <string name="texto5">Dans le jeux principal tu pourras mettre à l/épreuve tes connaissances avec les 15 niveaux de difficulté.
-                              Jusqu/à où tu seras capable d/arriver ?</string>
-    <string name="texto6">Si tu le souhaites tu pourras mettre en ligne ton classement sur le World Challenge Results où tu pourras arriver 			      au podium à côté de jouers de tout le monde.</string>
+    <string name="texto2">Maintenant tu pourras apprendre les plus courants en anglais d\'une manière simple et rapide.</string>
+    <string name="texto3">Plus de 200 verbes classés en trois niveaux de difficulté et d\'usage grâce auxquels tu maîtriseras l\'anglais.</string>
+    <string name="texto4">Tu pourras entraîner autant de fois que tu le souhaites avec l\'option entraînement, tu peux laisser IVChecker
+        choisir les verbes au hasard ou tu peux choisir toi-même leur difficulté. En plus, tu pourras laisser te demander
+        les verbes grâce à l\'option "Entraînement intelligent.</string>
+        <string name="texto5">Dans le jeux principal tu pourras mettre à l\épreuve tes connaissances avec les 15 niveaux de difficulté.
+                              Jusqu\'à où tu seras capable d\'arriver ?</string>
+    <string name="texto6">Si tu le souhaites tu pourras mettre en ligne ton classement sur le World Challenge Results où tu pourras arriver
+        au podium à côté de jouers de tout le monde.</string>
     <string name="texto7">Confidentialité et coordonnées :</string>
-    <string name="texto8">IVChecker n/utilise pas acune de tes coordonnées. Il a besoin uniquement d/un pseudo pour enregistrer tes 			      coordonnées sur le serveur. Ces données sont totalement anonymes et ils ne sont pas directement liés aux joueurs 				      ou au dispositif. IVChecker n/utilise qu/une connexion Internet pour pouvoir vérifier les données du classement 				      et envoyer les tiennes.</string>
+    <string name="texto8">IVChecker n\'utilise pas acune de tes coordonnées. Il a besoin uniquement d\'un pseudo pour enregistrer tes
+        coordonnées sur le serveur. Ces données sont totalement anonymes et ils ne sont pas directement liés aux joueurs
+        ou au dispositif. IVChecker n\'utilise qu\'une connexion Internet pour pouvoir vérifier les données du classement
+        et envoyer les tiennes.</string>
+
+
+
+
+
 
     <!-- NO TRADUCIR -->
-    <string name="developers">Inventarium Devs @ 2015</string>
+    <string name="developers">ButterFly Devs @ 2015</string>
 
     <!-- NO TRADUCIR -->
     <!-- Titulos de las actividades, obligatorios pero no usados -->

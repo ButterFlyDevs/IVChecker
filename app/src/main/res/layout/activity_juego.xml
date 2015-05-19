@@ -22,7 +22,7 @@
         android:id="@+id/layoutPrincipal"
         android:weightSum="1">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -40,43 +40,9 @@
                 android:textColor="#ffececec"
                 android:gravity="center_vertical|center_horizontal" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/linearLayout"
-                android:gravity="center_vertical|center_horizontal">
-
-
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:id="@+id/vida3"
-                    android:layout_gravity="bottom"
-                    android:src="@drawable/corazonvivo" />
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:id="@+id/vida2"
-                    android:layout_gravity="bottom"
-                    android:src="@drawable/corazonvivo" />
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:id="@+id/vida1"
-                    android:layout_gravity="bottom"
-                    android:src="@drawable/corazonvivo" />
-            </LinearLayout>
-
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="textLevel"
                 android:id="@+id/textLevel"
@@ -90,7 +56,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="n"
                 android:id="@+id/timer"
@@ -103,7 +69,49 @@
                 android:layout_toEndOf="@+id/textLevel"
                 android:gravity="center_vertical|center_horizontal" />
 
-        </RelativeLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/linearLayout"
+                android:gravity="center_horizontal|right">
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="right"
+                    android:gravity="right">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:id="@+id/vida3"
+                        android:src="@drawable/corazonvivo"
+                        android:layout_gravity="center" />
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:id="@+id/vida2"
+                        android:layout_gravity="center"
+                        android:src="@drawable/corazonvivo" />
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:id="@+id/vida1"
+                        android:src="@drawable/corazonvivo"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/infinitivo"
@@ -223,7 +231,7 @@
             <com.google.android.gms.ads.AdView android:id="@+id/adView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                ads:adUnitId="ca-app-pub-5502625112104069/3950415634"
+                ads:adUnitId="ca-app-pub-3487755442892203/2101251573"
                 ads:adSize="BANNER"
             />
 

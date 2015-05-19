@@ -37,7 +37,8 @@
         </activity>
         <activity
             android:name=".About"
-            android:label="@string/title_activity_about" >
+            android:label="@string/title_activity_about"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".TrainingAreaInicio"
@@ -55,10 +56,6 @@
             android:name=".wcr"
             android:label="@string/title_activity_wcr"
             android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".juego_show_level"
-            android:label="@string/title_activity_juego_show_level" >
         </activity>
         <activity
             android:name=".ResultadosTraining"

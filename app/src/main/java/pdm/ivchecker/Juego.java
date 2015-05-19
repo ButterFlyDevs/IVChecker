@@ -1,68 +1,43 @@
 package pdm.ivchecker;
 
-import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewStub;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.Chronometer;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
 import java.lang.reflect.Field;
 import java.util.Random;
-
 import com.google.android.gms.ads.*;
-
-
 
 public class Juego extends ActionBarActivity {
 
 
-
-    //Variables del fragment:
-
+    //Variable del fragment:
     String id = "IdQueNecesitaMyFragment";
-//    MyDialogFragment frag;
 
-
-
+    //Variable necesaria para el paso de datos al fragment (necesario que sea global)
     Bundle arguments = new Bundle();
-
-
-
-
-
-    //private juego_show_level showerLevels;
-
 
     //Matrices donde se almacenan los verbos:
     private String [][] verbosSoft;
@@ -72,25 +47,18 @@ public class Juego extends ActionBarActivity {
     //Elementos de la vista:
     private Button btnNext;
     private EditText campoVerboIntroducidoA, campoVerboIntroducidoB;
-
     private TextView infinitivo, pasado, participio, puntos, textNivel;
     private ImageView vida1, vida2, vida3; // vida4, vida5;
 
     //Layouts:
     private LinearLayout layoutCampoVerboIntroducidoA, layoutCampoVerboIntroducidoB;
-
-
     private RelativeLayout layoutPrincipal;
 
+    //Para la aleatoreidad de las preguntas:
     private Random rnd;
-
-
 
     //Número de verbos de las listas
     private int numVerbosListaSoft, numVerbosListaMedium, numVerbosListaHard;
-
-
-    // ## VARIABLES GLOBALES DE PARTIDA que van modificandose conforme avanza esta y que todas las funciones necesitan. ## //
 
     //Respecto a los datos del jugador:
     private int nVidas; //Número de vidas del jugador.
@@ -102,48 +70,20 @@ public class Juego extends ActionBarActivity {
     private int nivel; //Nivel por el que el usuario va.
     private int jugadaEnNivel; //Jugada (de 10) por la que va dentro del nivel.
 
-
     private boolean finPartida=false;
     private boolean restauracion=false;
 
-
-
-
-
-    //Intent intentShowerLevels;
-    //Intent intentShowerLevels;
-
-
-    // Fin variables globales de partida.
-
-
-
+    //Variables Utiles para el temporizador
     private TextView timer;
     private int time;
-
-
-    //private final long startTime=25000;
-    //private final long interval= 1;
-    //private MalibuCountDownTimer countDownTimer;
     private CountDownTimer countDownTimer;
-    //private long timeElapsed;
-
-
-    SharedPreferences prefe;
 
     //Constructor:
     public Juego(){
 
-
-      //  showerLevels=new juego_show_level();
-        //intentShowerLevels = new Intent(Juego.this, juego_show_level.class);
-//        showerLevels.setVisible(true);
-        //startActivity(intent);
-
         time=30;
 
         if(!restauracion) {
-            System.out.println("Constructor de JUEGO");
             numVerbosListaSoft = numVerbosListaMedium = numVerbosListaHard = 0;
             formaMisteriosa = "";
             //La partida comienza con la puntación a 0
@@ -156,7 +96,6 @@ public class Juego extends ActionBarActivity {
 
             int defecto = 0;
 
-            //        nivel=Integer.parseInt(getIntent().getStringExtra("nivel"));
             jugadaEnNivel = 1;
             //Inicializamos  el objeto de tipo Random().
             rnd = new Random();
@@ -167,8 +106,9 @@ public class Juego extends ActionBarActivity {
     }
 
 
-
-    //Función para cargar en las matrices los verbos desde los .csv
+    /**
+     * Función para cargar en las matrices los verbos desde los .csv
+     */
     private void cargarVerbos(){
 
 
@@ -192,7 +132,6 @@ public class Juego extends ActionBarActivity {
             el programa. Es uso de try-catch es obligatorio.
              */
             line=reader.readLine();
-            System.out.println("El fichero ivsoft contiene " + line + " verbos.");
             numVerbosListaSoft=Integer.parseInt(line);
         } catch (IOException e) {
             //Para que no falle el programa si no se cargase el número lo ponemos nosotros.
@@ -235,7 +174,6 @@ public class Juego extends ActionBarActivity {
             el programa. Es uso de try-catch es obligatorio.
              */
             line=reader.readLine();
-            System.out.println("El fichero ivmedium contiene " + line + " verbos.");
             numVerbosListaMedium=Integer.parseInt(line);
         } catch (IOException e) {
             //Para que no falle el programa si no se cargase el número lo ponemos nosotros.
@@ -278,7 +216,6 @@ public class Juego extends ActionBarActivity {
             el programa. Es uso de try-catch es obligatorio.
              */
             line=reader.readLine();
-            System.out.println("El fichero ivmedium contiene " + line + " verbos.");
             numVerbosListaHard=Integer.parseInt(line);
         } catch (IOException e) {
             //Para que no falle el programa si no se cargase el número lo ponemos nosotros.
@@ -350,7 +287,7 @@ public class Juego extends ActionBarActivity {
 
 
         //Setemos el textView de nivel para que aparezca el nivel en el que estamos jugando:
-        textNivel.setText(R.string.nivel+" "+nivel);
+        textNivel.setText(getString(R.string.nivel)+" "+nivel);
 
         // puntos.setText(Integer.toString(0));
 
@@ -371,20 +308,23 @@ public class Juego extends ActionBarActivity {
      */
     private void ajustarVista(){
 
-
-        //Ajustamos los elementos de la vista (útil cuando giramos la pantalla)
+        //Ajustamos los elementos de la vista (útil también cuando giramos la pantalla)
 
         //Ajustamos el número de vidas
         this.ajustarVidas(nVidas);
 
-        this.textNivel.setText("Nivel "+Integer.toString(this.nivel));
+        this.textNivel.setText(getString(R.string.nivel)+" "+Integer.toString(this.nivel));
         this.puntos.setText(Integer.toString(this.puntuacionPartida));
 
 
         //Ajuste de fondo:
-
+        String juegoFondo="juegofondo";
+        if(this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            //Cuando la pantalla se gira cargamos un backgroud que se ajuste más:
+            juegoFondo+="landscape";
+        }
         try {
-            Field field = R.drawable.class.getField("juegofondo"+nivel);
+            Field field = R.drawable.class.getField(juegoFondo+nivel);
             try {
                 layoutPrincipal.setBackgroundResource(field.getInt(null));
             } catch (IllegalAccessException e) {
@@ -401,21 +341,21 @@ public class Juego extends ActionBarActivity {
             campoVerboIntroducidoB.setVisibility(TextView.INVISIBLE);
             layoutCampoVerboIntroducidoB.setVisibility(LinearLayout.INVISIBLE);
             layoutCampoVerboIntroducidoA.setBackgroundColor(Color.TRANSPARENT);
-
         }else{
-
-            System.out.println("Ajustando vista");
-
             //Si estamos en los verbos, 4, 5, 9, 10. 14 o 15:
-
             layoutCampoVerboIntroducidoA.setBackgroundColor(Color.rgb(49,193,255));
-
             campoVerboIntroducidoB.setVisibility(TextView.VISIBLE);
             layoutCampoVerboIntroducidoB.setVisibility(LinearLayout.VISIBLE);
         }
     }
 
-
+    /**
+     * Comprobación del texto introducido comprobando coincidencias entre el verbo correspondiente,
+     * útil sobretodo cuando el verbo es compuesto, pues se descompone el verbo y se comprueba con los dos.
+     * @param introducido Verbo introducido por el usuario.
+     * @param original Verbo original que puede ser compuesto (dividido entre "/") o no.
+     * @return
+     */
     private boolean comprueba(String introducido, String original){
 
         /*Esta función comprueba que el verbo introducido corresponda con el original.
@@ -430,22 +370,17 @@ public class Juego extends ActionBarActivity {
         if(original.contains("/")){ //Se trata de un verbo compuesto.
 
             //1º. Se descompone el verbo.
-
             int posBarra = original.indexOf("/");
             descompuestoA=original.substring(0, posBarra);
-            System.out.println("PrimeraSeccion: "+descompuestoA);
             descompuestoB=original.substring(posBarra+1, original.length());
-            System.out.println("SegundaSeccion: "+descompuestoB);
-
 
             //2º. Se comprueba con cada una de las formas
-
             if(introducido.equals(descompuestoA) || introducido.equals(descompuestoB))
                 return true;
             else
                 return false;
 
-        }else{//No se trata de un verbo compuest
+        }else{//No se trata de un verbo compuesto
             if(introducido.equals(original))
                 return true;
             else
@@ -457,8 +392,6 @@ public class Juego extends ActionBarActivity {
     @Override
     //Método llamada cuando se crea por primera vez la actividad.
     protected void onCreate(Bundle inState) {
-        System.out.println("Llamando a onCreate");
-
         //Llamamos al constructor del padre:
             super.onCreate(inState);
 
@@ -473,9 +406,6 @@ public class Juego extends ActionBarActivity {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-
-
-
         if(inState!=null) {
 
             //Recuperamos el estado de la actividad en el caso de que este existiera y pasase el condicional
@@ -488,25 +418,11 @@ public class Juego extends ActionBarActivity {
             this.numFormaB=inState.getInt("numFormaB");
             this.time=inState.getInt("time");
 
-
-            System.out.println("onRestore: puntos: "+puntuacionPartida+" "+nVidas+" + nVidas");
-
-            //Llamamos a ajustarVista para que coloque las cosas bien.
-            //this.ajustarVista();
-
         }else{
             //Sólo cuando no se recupere ningún estado significará que empieza el juego desde el principio y que no se ha rotado la pantalla al
             // no haber recursos guardados en el Bundle
             runFragment(1);
         }
-
-        //Recibimos los datos de la actividad que nos invoca
-        /*
-            intent = getIntent();
-            //Vamos a jugar en el nivel que nos dice la actividad que nos llama
-            nivel=intent.getIntExtra("nivel", 0);
-            System.out.println("Nivel recibido en Juego : "+nivel);
-        */
 
         //Referenciamos todos los objetos de la vista para poder controlarlos:
             referenciaObjetosDeLaVista();
@@ -515,88 +431,23 @@ public class Juego extends ActionBarActivity {
 
             //Publicidad:  AdSense
 
-            /*
-                //Instanciamos el objeto
-                adView=new AdView(this);
-                //Asociamos el identificador que nos dan en la web de AdSense para este anuncio.
-                adView.setAdUnitId("ca-app-pub-5502625112104069/3950415634");
-                //Especificamos el tamaño del banner
-                adView.setAdSize(AdSize.BANNER);
-
-                //AÑadimos el banner al layout:
-              //  layoutPrincipal.addView(adView);
-
-                //Iniciamos la solicitud:
-                AdRequest adRequest = new AdRequest.Builder()
-                        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) //Cualquier emulador
-                        .addTestDevice("9011F9E7CEC921EF1BB8A17A36B24813") //El telefono de Juan
-                        .build();
-
-                //Cargamos la adView con la respuesta de la solicitud
-                adView.loadAd(adRequest);
-*/
-
-                // Buscar AdView como recurso y cargar una solicitud.
+                // Buscamos el  AdView como recurso y cargamos la  solicitud.
                 AdView adView = (AdView)this.findViewById(R.id.adView);
                 AdRequest adRequest = new AdRequest.Builder()
                         .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) //Cualquier emulador
-                        .addTestDevice("9011F9E7CEC921EF1BB8A17A36B24813") //El telefono de Juan
+                        //.addTestDevice("xxx") //El telefono de desarrollo
                         .build();
                 adView.loadAd(adRequest);
 
-
             //Fin publicidad
-
-
-
-
-        //Inicializamos la vista, con 3 vidas y con la puntuación a cero.
-            //ajustarVidas(nVidas);
-        //Insteramos esta puntuación en TextViewPuntos:
-       // puntos.setText(Integer.toString(puntuacionPartida));
 
         //Cargamos los verbos desde los ficheros csv
 
             cargarVerbos();
 
-
-        /*
-        Si no es la primera vez que se arranca esta actividad puede que se hayan guardado datos
-
-            prefe=getSharedPreferences("datos", Context.MODE_PRIVATE);
-
-        System.out.println("Recibido del Prefe getInt: "+prefe.getInt("puntos",0));
-
-        //Almacenamos en la variable global el valor de la puntuación que teníamos:
-        puntuacionPartida=prefe.getInt("puntos",0); //Los puntos de la partida
-
-        nVidas=prefe.getInt("vidas",3); //El número de vidas de la partida. Si no devuelve nada es que acaba de empezar y es 3.
-        */
-
         //Cuando se llega al nivel 4 y 9 se gana una vida.
         if(nivel==4 || nivel==9 )
             ganarVida();
-
-
-        /*
-            //Insteramos esta puntuación en TextViewPuntos:
-        puntos.setText(Integer.toString(puntuacionPartida));
-
-        System.out.println("Recibido del Prefe getInt: "+puntuacionPartida+" puntos "+nVidas+" vidas");
-
-        //Cuando se llega al nivel 4 y 9 se gana una vida.
-        if(nivel==4 || nivel==9 )
-            ganarVida();
-
-        ajustarVidas(nVidas);
-        */
-
-        //Ajustamos los elmentos de la vista según el nivel:
-           // this.ajustarVista();
-
-        /*
-        El ajustar vistas ya no se hace aquí sino al ocnfigurar el nivel.
-         */
 
 
         // ### GESTIÓN DE COMPORTAMIENTO ### ///
@@ -664,8 +515,6 @@ public class Juego extends ActionBarActivity {
 
                              */
 
-
-
                             //Limpiamos el contenido de los editText aunque dependiendo del nivel no se verán los dos:
                             campoVerboIntroducidoA.setText("");
                             campoVerboIntroducidoB.setText("");
@@ -681,8 +530,6 @@ public class Juego extends ActionBarActivity {
                             if (jugadaEnNivel > 15) {
                                 nivel++; //Pasamos de nivel
                                 jugadaEnNivel = 1; //Reiniciamos.
-
-                                System.out.println("Vamos a show_level pasando nivel  " + nivel);
 
                                 if(!finPartida)
                                     runFragment(nivel);
@@ -728,9 +575,7 @@ public class Juego extends ActionBarActivity {
                             }
                         };
                         countDownTimer.start();
-                        //*/
 
-                        //countDownTimer.start();
                     }
                 }
 
@@ -738,13 +583,6 @@ public class Juego extends ActionBarActivity {
 
         ); //Fin del manejador del botón next.
 
-        //this.cargarVerbos();
-
-
-        //this.crearJugada(); //Después de cargar los datos comienza el juego:
-
-
-       // runFragment(1);
 
         //Cuando el proceso se crear se llama a jugar y se empieza a jugar.
         this.jugar();
@@ -764,13 +602,15 @@ public class Juego extends ActionBarActivity {
 
     } //Fin de onCreate
 
+
+    /**
+     * Lanza un fragmen en una hebra concurrente que muestra el nivel por el que el usuario va.
+     * @param level Nivel que necesita el fragment para configurar los tres mensajes mostrados.
+     */
     private void runFragment(int level) {
 
-
-        System.out.println("LLAMADA A FRAGMENT");
-
+        //Enviamos los datos al fragment a trabés de un objeto Bundle
         arguments.putString("id", Integer.toString(level));
-
 
         //Declaramos una nueva hebra
         new Thread() {
@@ -781,17 +621,8 @@ public class Juego extends ActionBarActivity {
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
 
-
-
-
-                //Añadimos animación
-            //    ft.setCustomAnimations(R.anim.zoom_back_in, R.anim.zoom_back_out);
-
-
-
                 frag = MyDialogFragment.newInstance(arguments);
                 frag.show(ft, "txn_tag");
-
 
                 try {
                     Thread.sleep(2000);
@@ -805,34 +636,16 @@ public class Juego extends ActionBarActivity {
         }.start();
     }
 
+    /**
+     * Función que crea la jugada
+     */
     private void jugar(){
 
-
-
-        //Lanzamos el fragment que muestra el nivel:
-        //runFragment(3);
-
-
         //Ajustamos nivel:
-        this.textNivel.setText("Level "+Integer.toString(nivel));
-
-
+        this.textNivel.setText(getString(R.string.nivel)+Integer.toString(nivel));
 
         this.crearJugada(); //Después de cargar los datos comienza el juego:
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        System.out.println("La actividad ha sido resumida");
-    }
-
-    @Override
-    protected void onRestart(){
-        super.onRestart();
-        System.out.println("La actividad ha sido restarted");
-    }
-
 
 
     @Override
@@ -857,70 +670,26 @@ public class Juego extends ActionBarActivity {
 
     }
 
-    /*
-    @Override
-    protected void onRestoreInstanceState(Bundle inState){
-        super.onRestoreInstanceState(inState);
-        //Recuperamos el estadosde las variables:
-
-        System.out.println("onRestore con null bundle");
-
-       if(inState!=null) {
-           this.puntuacionPartida = inState.getInt("puntos");
-           this.nivel = inState.getInt("nivel");
-           this.nVidas = inState.getInt("nVidas");
-           this.numVerbo=inState.getInt("numVerbo");
-
-
-           System.out.println("onRestore: puntos: "+puntuacionPartida+" "+nVidas+" + nVidas");
-
-           //Llamamos a ajustarVista para que coloque las cosas bien.
-           this.ajustarVista();
-
-       }
-
-    }
-
-    */
-
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
 
         //Si pulsamos el botón back nos devuelve a la pantalla principal perdiendo todos los puntos.
         if(keyCode==KeyEvent.KEYCODE_BACK){
-            System.out.println("pulsado boton back");
-            //SharedPreferences.Editor editor=prefe.edit();
-            //Escribimos 0 en puntos
-            //editor.putInt("puntos",0);
-            //editor.putInt("vidas",3); //El número de vidas
-            //Realizamos la escritura
-            //editor.commit();
-            //finish();
 
-
+            //Al pulsar el botón back en el juego volvemos a la actividad principal (pantalla principal de la app)
             Intent intent = new Intent(Juego.this, ActividadPrincipal.class);
             startActivity(intent);
 
             return true;
         }
 
-        /*
-        switch(keyCode){
-            case KeyEvent.KEYCODE_BACK:
-                System.out.println("pulsado boton back");
-                Toast.makeText(this, "Abandonas cobarde",Toast.LENGTH_SHORT);
-                SharedPreferences.Editor editor=prefe.edit();
-                editor.putInt("puntos",0);
-                editor.commit();
-                return true;
-        }*/
         return super.onKeyDown(keyCode, event);
 
     }
 
-
-    // ## LÓGICA DEL JUEGO ## //
+    /**
+     * Lógica del juego: función que crea la jugada al completo, inclusive la modificación del aspecto.
+     */
     public void crearJugada(){
 
         boolean pasa;
@@ -929,9 +698,6 @@ public class Juego extends ActionBarActivity {
             pasa=true;
         else
             pasa=false;
-
-        System.out.println("#################### Vidas: "+nVidas+" puntuacion "+puntuacionPartida+"verboElegido: "+numVerbo);
-
 
         String verboInfinitivo="";
         String verboPasado="";
@@ -947,14 +713,6 @@ public class Juego extends ActionBarActivity {
         //Ajustamos la vista al tipo de nivel:
         this.ajustarVista();
 
-       // infinitivo.setLayoutParams(ActionBar.LayoutParams.MATCH_PARENT);
-
-
-
-
-
-        System.out.println("### Creando jugada "+this.jugadaEnNivel+" en nivel "+nivel+" ###");
-
         /* 1º
            GENERAMOS EL VERBO A PREGUNTAR según lo que mida la lista de verbos que dependerá del nivel en el que estemos.:
            el número "numVerbosLista" se coge desde el propio fichero que se carga.
@@ -966,20 +724,14 @@ public class Juego extends ActionBarActivity {
 
         if(nivel>=1 && nivel<=5) { //Si estamos en los niveles 1-5
 
-            System.out.println("Elegimos verbo de la lista SOFT");
-
             //Elegimos el verbo de forma aleatoria:
 
             /*
             Si numVerbo==0 querrá decir que ha sido el valor proporcionado por el constructor y no por una restauración de un actividad anterior.
              */
-            System.out.println("VERRRRRBO"+numVerbo);
             if(numVerbo==0)
                 numVerbo = (int) (rnd.nextDouble() * numVerbosListaSoft + 0);
             //Si no es así querra'decir que se usa el num de verbo guardado.
-
-
-            //numVerbo=1; //ELIMINAME
 
 
             //Cargamos el verbo en las variables locales:
@@ -997,8 +749,6 @@ public class Juego extends ActionBarActivity {
                 verboPasado=verbosMedium[numVerbo][1];
                 verboParticipio=verbosMedium[numVerbo][2];
 
-                System.out.println("Elegimos verbo de la lista MEDIUM");
-
         } else if(nivel>=11 && nivel<=15) { //Si estamos en los niveles 6-10
 
             //Elegimos el verbo de forma aleatoria:
@@ -1009,13 +759,11 @@ public class Juego extends ActionBarActivity {
             verboPasado=verbosHard[numVerbo][1];
             verboParticipio=verbosHard[numVerbo][2];
 
-            System.out.println("Elegimos verbo de la lista HARD");
 
         }
 
 
-        System.out.println("Verbo elegido nº: "+numVerbo+"\nInfinitivo: "+verboInfinitivo+" Pasado: "+verboPasado+" Participio: "+verboParticipio);
-
+        //Grabamos los verbos seleccionados en un vector para su mejor manejo
         String verbos[]={verboInfinitivo,verboPasado,verboParticipio};
 
 
@@ -1025,7 +773,6 @@ public class Juego extends ActionBarActivity {
 
         if(pasa){
 
-            System.out.println("Eligiendo verbo");
         /*
         Sólo generaremos las formas cuando no vengan dadas por ninǵun Bundle estate (lo que significaría que ya se han dado antes de entrar
         en la actividad. Por eso comprobamos para formarlas nosotros que sean iguales a 0, el valor que les setea nuestro constructor.
@@ -1047,12 +794,12 @@ public class Juego extends ActionBarActivity {
                         numFormaB += 3;
                 }
             }
-
+            /*
             if ((nivel >= 1 && nivel <= 3) || (nivel >= 6 && nivel <= 8) || (nivel >= 11 && nivel <= 13))
                 System.out.println("Forma elegida: " + numFormaA);
             else if ((nivel >= 4 && nivel <= 5) || (nivel >= 9 && nivel <= 10) || (nivel >= 14 && nivel <= 15))
                 System.out.println("Formas elegidas: " + numFormaA + " y " + numFormaB);
-
+            */
 
          }
 
@@ -1128,27 +875,13 @@ public class Juego extends ActionBarActivity {
 
                     //Quedan dos huecos:
 
-                    /*
-                    El número de la fomra misteriosa era la fomra elegida: numFormaA
-                     */
-
-
                     if( (int)(rnd.nextDouble()*2+0) == 0  ) { //Cara o cruz:
                         //Cara
                         pasado.setText(verbos[(numFormaA+1)%3]);
                         participio.setText(verbos[(numFormaA+2)%3]);
-                        /*
-                        pasado.setText(verboPasado);
-                        participio.setText(verboParticipio);
-                        */
                     }else {
                         participio.setText(verbos[(numFormaA+1)%3]);
                         pasado.setText(verbos[(numFormaA+2)%3]);
-
-                        /*
-                        pasado.setText(verboParticipio);
-                        participio.setText(verboPasado);
-                        */
                     }
 
 
@@ -1165,18 +898,9 @@ public class Juego extends ActionBarActivity {
                         //Cara
                         infinitivo.setText(verbos[(numFormaA+1)%3]);
                         participio.setText(verbos[(numFormaA+2)%3]);
-
-                        /*
-                        infinitivo.setText(verboPasado);
-                        participio.setText(verboParticipio);
-                        */
                     }else {
                         participio.setText(verbos[(numFormaA+1)%3]);
                         infinitivo.setText(verbos[(numFormaA+2)%3]);
-                        /*
-                        participio.setText(verboPasado);
-                        infinitivo.setText(verboParticipio);
-                        */
                     }
 
                 }
@@ -1187,33 +911,18 @@ public class Juego extends ActionBarActivity {
 
                     //Quedan dos huecos;
                     if( (int)(rnd.nextDouble()*2+0) == 0  ) {
-
                         //Cara
                         infinitivo.setText(verbos[(numFormaA+1)%3]);
                         pasado.setText(verbos[(numFormaA + 2) % 3]);
 
-                        /*
-                        infinitivo.setText(verboPasado);
-                        pasado.setText(verboParticipio);
-                        */
                     }else {
-                        //Cara
+                        //Cruz
                         pasado.setText(verbos[(numFormaA+1)%3]);
                         infinitivo.setText(verbos[(numFormaA+2)%3]);
-                        /*
-                        participio.setText(verboPasado);
-                        infinitivo.setText(verboParticipio);
-                        */
                     }
 
                 }
-
-
-
-
             }else{
-                System.out.println("Resto de niveles");
-
                 /*
                 Si se trata del nivel 4 se marcar de colores los cuadros donde irán las formas y no se introduce nada:
                  */
@@ -1223,9 +932,6 @@ public class Juego extends ActionBarActivity {
                     infinitivo.setText(verboInfinitivo);
                     pasado.setText(verboPasado);
                     participio.setText(verboParticipio);
-
-
-                    System.out.println("Configurando nivel 4, 9 o 14");
 
                     //Pintamos de azul el verbo que corresponda la forma A
                     if(numFormaA==0) {
@@ -1253,14 +959,10 @@ public class Juego extends ActionBarActivity {
 
                 }else if(nivel==5 || nivel==10 || nivel==15){
 
-                    System.out.println("Config nivel 5. ");
-
                     int formaVisible=3-(numFormaA+numFormaB);
-
 
                     //El lugar donde poner la forma visible
                     int lugar = (int) (rnd.nextDouble() * 3 + 0); //(0 - 1- 2)
-                    System.out.println("Lugar de la forma visible: "+lugar+" Forma visible: "+formaVisible);
 
                     if(lugar==0){ //Si la forma visible se coloca en hueco del infinitivo
 
@@ -1466,7 +1168,9 @@ public class Juego extends ActionBarActivity {
         //numVerbo=1;
         } //Fin de crearJugada();
 
-
+    /**
+     * Implementa el aumento de una vida para el jugador.
+     */
     public void ganarVida(){
 
         //Configuramos el mensaje de vida ganada:
@@ -1488,11 +1192,12 @@ public class Juego extends ActionBarActivity {
             nVidas++;
         }
         toast.show();
-
-
-
     }
 
+    /**
+     * Ajusta los icónos de los corazones en la vista según el número de vidas
+     * @param numero Número de vidas que el usuario tiene y que se usa para ajustar los iconos.
+     */
     public void ajustarVidas(int numero){
         if(numero==3) {
             vida3.setImageResource(R.drawable.corazonvivo);
@@ -1520,7 +1225,10 @@ public class Juego extends ActionBarActivity {
 
     }
 
-
+    /**
+     * Para simplificar el mostrado de mensajes de tipo toast.
+     * @param mensaje String a mosrar en el toast.
+     */
     public void toast(String mensaje){
         //Configuramos el mensaje de vida ganada:
         Context context = getApplicationContext();
@@ -1533,21 +1241,10 @@ public class Juego extends ActionBarActivity {
         toast.show();
     }
 
+    /**
+     * Implementa la pérdida de una vida por parte del usuario
+     */
     public void perderVida(){
-
-        /*
-        //Configuramos el mensaje de vida ganada:
-        Context context = getApplicationContext();
-        CharSequence text = "Loosed one live!";
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-
-
-        toast.show();
-        */
-
-
 
         if(this.nVidas==3) {
             //Se rompe el corazón 3:
@@ -1577,16 +1274,9 @@ public class Juego extends ActionBarActivity {
         else {
             if (this.nVidas == 0) {
 
-
-                System.out.println("Entrando en sección de fin de partida");
-
-
                 finPartida=true;
 
                 //Si no nos quedan vidas se acabó el juego y vamos a la sección de resultados.
-
-
-
 
                 //Vamos a la clase Resultados.class
                 Intent intent = new Intent(Juego.this, Resultado.class);
@@ -1605,21 +1295,6 @@ public class Juego extends ActionBarActivity {
                 this.finish();
 
                 Thread.interrupted();
-                //super.onDestroy();
-
-                //finish();
-                //onDestroy();
-
-                /*
-                LinearLayout principal = (LinearLayout)findViewById(R.id.layoutPrincipal);
-                principal.setVisibility(View.INVISIBLE);
-
-                viewStub=(ViewStub)findViewById(R.id.viewStub);
-                //ViewStub viewInflated = (ViewStub) (findViewById(R.id.viewStub));
-                //viewInflated.inflate();
-                View viewInflated = viewStub.inflate();
-                SystemClock.sleep(5000);
-                */
 
             }
         }
@@ -1627,11 +1302,15 @@ public class Juego extends ActionBarActivity {
 
     }
 
+    /**
+     * Para realizar la comprobación del verbo
+     */
     public void comprobarVerbo(){
 
 
-        //INFO DE DEPURACIÓN:
+        //INFO DE DEPURACIÓN: no eliminar, crítica en el caso de depuración posterior.
 
+        /*
         if(nivel!=4 && nivel!=5 && nivel!=9 && nivel!=10 && nivel!=14 && nivel!=15)
             System.out.println("Verbo introducido: "+campoVerboIntroducidoA.getText());
         else{
@@ -1653,8 +1332,8 @@ public class Juego extends ActionBarActivity {
             System.out.println("Respuesta correcta: "+verbosMedium[numVerbo][numFormaA]);
         else if(nivel>=11 && nivel <=15)
             System.out.println("Respuesta correcta: "+verbosHard[numVerbo][numFormaA]);
-
-
+        */
+        //Fin de depuración
 
 
         int seg=Integer.parseInt(timer.getText().toString());
@@ -1754,41 +1433,7 @@ public class Juego extends ActionBarActivity {
         //cuando menmos tiempo gaste el usuario más segundos le quedarán y el resultado será mayor.
 
 
-
-
-        System.out.println("Puntucion: " +puntuacionPartida);
-
         puntos.setText(Integer.toString(puntuacionPartida));
     } //fin comprobarVerbo()
 
-
-/*
-    // CountDownTimer class
-    public class MalibuCountDownTimer extends CountDownTimer
-    {
-
-        public MalibuCountDownTimer(long startTime, long interval)
-        {
-            super(startTime, interval);
-        }
-
-        @Override
-        public void onFinish()
-        {
-            timer.setText("Time's up!");
-            //timeElapsedView.setText("Time Elapsed: " + String.valueOf(startTime));
-        }
-
-        @Override
-        public void onTick(long millisUntilFinished)
-        {
-            //Pasamos el tiempo a segundos y lo mostramos.
-            timer.setText(" "+millisUntilFinished/1000);
-            //timeElapsed = startTime - millisUntilFinished;
-           // timeElapsedView.setText("Time Elapsed: " + String.valueOf(timeElapsed));
-        }
-    }*/
 }
-
-
-

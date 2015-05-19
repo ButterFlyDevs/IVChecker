@@ -48,7 +48,8 @@
                 android:background="@drawable/settingsicon"
                 android:layout_below="@+id/textEliminar"
                 android:layout_toRightOf="@+id/layoutAjustes"
-                android:layout_toEndOf="@+id/layoutAjustes" />
+                android:layout_toEndOf="@+id/layoutAjustes"
+                android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:layout_width="wrap_content"
