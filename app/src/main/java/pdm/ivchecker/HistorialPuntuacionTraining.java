@@ -42,9 +42,6 @@ public class HistorialPuntuacionTraining extends ActionBarActivity {
         //Leemos los datos y rellenamos el vector con los datos leidos
         leerPuntuaciones();
 
-        for(int i=0; i<serie_puntuaciones.length;i++)
-            System.out.println("Numero leido: "+serie_puntuaciones[i] + ", iteración: "+i);
-
         //Añadimos la linea número 1
         /*
             El constructor de la clase de series (SimpleXYSeries tiene 3 argumentos:

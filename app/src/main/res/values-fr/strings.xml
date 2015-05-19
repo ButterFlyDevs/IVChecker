@@ -69,7 +69,7 @@
 
 
     <!-- resultado Juego-->
-    <string name="hasconseguido">T'y as réussi</string>
+    <string name="hasconseguido">T\'y as réussi</string>
     <string name="puntos">Points</string>
     <string name="genio">Tu es un génie !</string>
     <string name="wrc">Ton WCR classement:</string>
