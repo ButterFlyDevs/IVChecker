@@ -161,15 +161,8 @@ public class TrainingAreaInicio extends ActionBarActivity {
             //Comprobar que la petición fue correcta
             if(codigo_resultado == RESULT_OK){
                 //DATOS CORRECTOS! Se cambian las variables de esta Actividad a las descritas por el usuario en la configuracion
-                System.out.println("smartVerb: "+smartVerb);
-                System.out.println("Lista verbos: "+lista_a_preguntar);
-                System.out.println("Numero verbos: "+numero_verbos);
-                this.smartVerb = datos.getIntExtra("smartVerb",0);
                 this.lista_a_preguntar = datos.getIntExtra("lista",0);
                 this.numero_verbos = datos.getIntExtra("numero_verbos",0);
-                System.out.println("smartVerb: "+smartVerb);
-                System.out.println("Lista verbos: "+lista_a_preguntar);
-                System.out.println("Numero verbos: "+numero_verbos);
             }
             if(codigo_resultado == RESULT_CANCELED){
                 //DATOS INCORRECTOS! Las variables vuelven a sus valores por defecto (0)

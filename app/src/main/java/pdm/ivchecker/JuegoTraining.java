@@ -284,7 +284,7 @@ public class JuegoTraining extends ActionBarActivity {
         }
         catch (IOException ioe){
             ioe.printStackTrace();
-            System.out.println("ERROR: No ha sido posible escribir en el fichero de puntuaciones");
+            Toast.makeText(getApplicationContext(), getString(R.string.ErrorLecturaCSV), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -296,11 +296,6 @@ public class JuegoTraining extends ActionBarActivity {
     que más ha fallado el usuario.
      */
     private void topFallosVerbos(){
-        if(this.smartVerb)
-            System.out.println("SMARTVERB ACTIVADO!");
-        else
-            System.out.println("SMARTVERB DESACTIVADO!");
-
         if(this.smartVerb) {
             //Variable temporal para almacenar el contenido del fichero
             ArrayList<String> datos_puntuaciones = new ArrayList<>();
@@ -324,12 +319,11 @@ public class JuegoTraining extends ActionBarActivity {
                     line = reader.readLine();
                     if (line == null) break;
                     datos_puntuaciones.add(line);
-                    System.out.println("Liinea" + line);
                 }
                 inputStream.close();
             } catch (IOException ioe) {
                 ioe.printStackTrace();
-                System.out.println("ERROR: No ha sido posible abrir el fichero de puntuaciones");
+                Toast.makeText(getApplicationContext(), getString(R.string.ErrorLecturaCSV), Toast.LENGTH_LONG).show();
             }
 
 
@@ -350,14 +344,12 @@ public class JuegoTraining extends ActionBarActivity {
                     }
 
                 } else {                              //No hay mas de 5 líneas. Se toman todos los datos leídos
-                    System.out.println("ENTRANDO AL ELSE");
                     for (int i = 0; i < datos_puntuaciones.size(); i++) {
                         line = datos_puntuaciones.get(i); //
                         RowData = line.split(","); //Separamos por comas
                         if (RowData.length > 3) {  //La línea leída tiene indices de verbos fallados
                             if (Integer.parseInt(RowData[1]) == this.lista_a_preguntar) {       //Si la linea contiene fallos de la misma lista...
                                 int numero_fallos = RowData.length - 3;
-                                System.out.println("NUMERO DE FALLOS: " + numero_fallos);
                                 for (int j = 0; j < numero_fallos; j++)
                                     indices_encontrados.add(Integer.parseInt(RowData[3 + j]));
                             }
@@ -421,17 +413,13 @@ public class JuegoTraining extends ActionBarActivity {
                 //Generamos el verbo a mostrar (en función del tamaño de lista)
                 numVerbo = rnd.nextInt(this.total_verbos_lista);    //Genera un aleatorio desde 0 hasta el máximo de verbos almacenados
         }
-        System.out.println("Verbo elegido: "+numVerbo);
 
         //Generamos la forma que no aparecerá
         if(!this.ocurridaRotacion)
             numForma= rnd.nextInt(3);
 
-        System.out.println("Forma elegida: "+numForma);
-
         //Obtenermos el verbo que falta en forma de rallitas:
         numLetrasForma=verbos[numVerbo][numForma].length();
-        System.out.println("forma elegida: "+verbos[numVerbo][numForma]+ "  tam: "+numLetrasForma);
         for(int i=0; i<numLetrasForma; i++){
             misterio+=" _ ";
         }
@@ -472,9 +460,6 @@ public class JuegoTraining extends ActionBarActivity {
     En esta variante de Training, la App debe guardar los verbos en los que se falla
      */
     public void comprobarVerbo(){
-        System.out.println("Texto introducido: "+txtVerbo.getText());
-        System.out.println("Verbo a comparar: "+verbos[numVerbo][numForma]);
-
         if(txtVerbo.getText().toString().equals(verbos[numVerbo][numForma])){
             //Usuario ha acertado
             puntuacionJugada = puntuacionJugada + lista_a_preguntar;

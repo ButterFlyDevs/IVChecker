@@ -102,7 +102,7 @@
         <string name="modoEntranamiento">Training Mode</string>
         <string name="juegoInteligente">Smart Training is activated!</string>
         <string name="smartDesactivado">Smart Training is NOT activated!</string>
-
+        <string name="ErrorLecturaCSV">Error to read the score file</string>
 
 
     <!--7. wrc -->
