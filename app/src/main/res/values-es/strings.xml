@@ -121,7 +121,11 @@
         solo necesita internet para poder consultar los datos del ranking y subir los tuyos.</string>
 
 
-
+    <!-- 9. Resultados Training -->
+    <string name="verbosFallados">Errores:</string>
+    <string name="aciertos">aciertos</string>
+    <string name="errores">fallos</string>
+    <string name="verbos">verbos</string>
 
 
 

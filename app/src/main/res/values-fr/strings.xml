@@ -126,9 +126,11 @@
         ou au dispositif. IVChecker n\'utilise qu\'une connexion Internet pour pouvoir vérifier les données du classement
         et envoyer les tiennes.</string>
 
-
-
-
+    <!-- 9. Resultados Training -->
+    <string name="verbosFallados">Fautes</string>
+    <string name="aciertos"> découvertes</string>
+    <string name="errores">erreurs</string>
+    <string name="verbos">verbes</string>
 
 
     <!-- NO TRADUCIR -->

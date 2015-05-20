@@ -1,9 +1,3 @@
-<ScrollView
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:id="@+id/scrollView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#ff8b85a2">
 
 
 
@@ -15,12 +9,12 @@
             android:paddingBottom="@dimen/activity_vertical_margin" tools:context="pdm.ivchecker.ELIMINAME"
             android:orientation="vertical"
             android:weightSum="1"
-            >
+            android:background="#ff8b85a2">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:weightSum="1">
 
                 <TextView
@@ -57,64 +51,70 @@
                     android:layout_marginLeft="5dp" />
             </LinearLayout>
 
-            <TableLayout
+            <ScrollView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_marginTop="30dp"
-                android:id="@+id/tablaVerbos"
-                android:layout_gravity="center_horizontal"
-                android:gravity="left">
+                android:id="@+id/scrollView3"
+                android:layout_marginTop="20dp">
 
-                <TableRow
+                <TableLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_gravity="left"
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/tablaVerbos"
+                    android:layout_gravity="center_horizontal"
                     android:gravity="left">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="n"
-                        android:id="@+id/textNumero"
-                        android:layout_column="0"
-                        android:textColor="#ffececec"
-                        android:textSize="25dp"
-                        android:layout_gravity="left" />
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="left"
+                        android:gravity="left">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="infinitivo"
-                        android:id="@+id/textInfinitivo"
-                        android:layout_column="1"
-                        android:layout_marginLeft="20dp"
-                        android:textColor="#ffececec"
-                        android:textSize="25dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="n"
+                            android:id="@+id/textNumero"
+                            android:layout_column="0"
+                            android:textColor="#ffececec"
+                            android:textSize="25dp"
+                            android:layout_gravity="left" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="pasado"
-                        android:id="@+id/textPasado"
-                        android:layout_column="2"
-                        android:layout_marginLeft="20dp"
-                        android:textColor="#ffffffff" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="infinitivo"
+                            android:id="@+id/textInfinitivo"
+                            android:layout_column="1"
+                            android:layout_marginLeft="20dp"
+                            android:textColor="#ffececec"
+                            android:textSize="25dp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:text="participio"
-                        android:id="@+id/textParticipio"
-                        android:layout_column="3"
-                        android:layout_marginLeft="20dp"
-                        android:textColor="#ffffffff" />
-                </TableRow>
-            </TableLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="pasado"
+                            android:id="@+id/textPasado"
+                            android:layout_column="2"
+                            android:layout_marginLeft="20dp"
+                            android:textColor="#ffffffff" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="participio"
+                            android:id="@+id/textParticipio"
+                            android:layout_column="3"
+                            android:layout_marginLeft="20dp"
+                            android:textColor="#ffffffff" />
+                    </TableRow>
+                </TableLayout>
+            </ScrollView>
 
         </LinearLayout>
 
-</ScrollView>

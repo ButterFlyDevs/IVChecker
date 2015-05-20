@@ -26,12 +26,12 @@
         android:layout_gravity="center_horizontal"
         android:layout_above="@+id/botonListaVerbos"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="80dp" />
 
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="121dp"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="120dp">
 
         <LinearLayout
             android:orientation="horizontal"

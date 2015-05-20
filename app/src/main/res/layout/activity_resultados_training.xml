@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrollLayout"
-    android:layout_width="fill_parent"
-    android:background="#8b85a2"
-    android:layout_gravity="center_vertical"
-    android:layout_height="fill_parent" >
-    <HorizontalScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/horizontalScrollViewTraining"
-
-        xmlns:android="http://schemas.android.com/apk/res/android" >
-
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/layoutPrincipalResultadosTraining"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:layout_gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="vertical"
+    android:background="#ff8b85a2">
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="384dp"
                 android:layout_height="300dp">
                 <com.androidplot.pie.PieChart
                     android:id="@+id/graficoQueso"
@@ -74,62 +62,74 @@
                 android:paddingTop="3dp"
                 android:textSize="20dp"
                 android:layout_height="wrap_content"
-                />
+                android:layout_marginLeft="10dp" />
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Failed verbs:"
                 android:textSize="20dp"
                 android:textColor="#FE2E2E"
-                android:layout_gravity="center"/>
-            <TableLayout
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+
+                android:layout_marginTop="10dp"
+                android:text="@string/verbosFallados" />
+
+                <ScrollView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:id="@+id/scrollView4"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
 
-                    android:id="@+id/tablaVerbosTraining"
-                    android:gravity="center_horizontal"
-                    android:layout_gravity="center_horizontal">
-
-                    <TableRow
+                    <TableLayout
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:gravity="center_horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="#FE2E2E"
-                            android:textSize="20dp"
-                            android:textStyle="italic"
-                            android:id="@+id/infinitivoResultado"
-                            android:layout_column="1"
-                            android:layout_marginLeft="5dp" />
+                        android:id="@+id/tablaVerbosTraining"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="#FE2E2E"
-                            android:textSize="20dp"
-                            android:textStyle="italic"
-                            android:id="@+id/pasadoResultado"
-                            android:layout_column="2"
-                            android:layout_marginLeft="5dp" />
+                        <TableRow
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:gravity="left">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="#FE2E2E"
-                            android:textSize="20dp"
-                            android:textStyle="italic"
-                            android:id="@+id/participioResultado"
-                            android:layout_column="3"
-                            android:layout_marginLeft="5dp" />
-                    </TableRow>
-                </TableLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="#FE2E2E"
+                                android:textSize="20dp"
+                                android:textStyle="italic"
+                                android:id="@+id/infinitivoResultado"
+                                android:layout_column="1"
+                                android:layout_marginLeft="5dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="#FE2E2E"
+                                android:textSize="20dp"
+                                android:textStyle="italic"
+                                android:id="@+id/pasadoResultado"
+                                android:layout_column="2"
+                                android:layout_marginLeft="5dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="#FE2E2E"
+                                android:textSize="20dp"
+                                android:textStyle="italic"
+                                android:id="@+id/participioResultado"
+                                android:layout_column="3"
+                                android:layout_marginLeft="5dp" />
+                        </TableRow>
+                    </TableLayout>
+                </ScrollView>
+
             </LinearLayout>
         </LinearLayout>
-    </HorizontalScrollView>
-</ScrollView>
