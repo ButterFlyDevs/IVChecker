@@ -163,11 +163,10 @@ public class JuegoTraining extends ActionBarActivity {
     Activity anterior (TrainingAreaInicio). Recordamos que el valor 0 es aleatorio.
      */
     private void prepararJuego(){
-        //Alertas al usuario sobre el modo escogido
-        if(numero_verbos==0 && lista_a_preguntar==0){   // TODO ALEATORIO
+
+        if(intent.getIntExtra("lista",0)==0 && intent.getIntExtra("numero_verbos",0)==0){   // TODO ALEATORIO
             Toast.makeText(getApplicationContext(), getString(R.string.toastA), Toast.LENGTH_LONG).show();
         }
-
         Random rnd = new Random();
         int respuesta_smartVerb;
         //Obtencion de valores
@@ -185,6 +184,9 @@ public class JuegoTraining extends ActionBarActivity {
             lista_a_preguntar = rnd.nextInt(3) +1;
         if(numero_verbos==0)
             numero_verbos = 3 + rnd.nextInt(22); //Genera un numero entre 10 y 24.
+
+        //Alertas al usuario sobre el modo escogido
+
 
         /*
         Alert dialog para informar al usuario del estado de la partida
