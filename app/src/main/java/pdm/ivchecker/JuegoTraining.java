@@ -163,7 +163,7 @@ public class JuegoTraining extends ActionBarActivity {
     Activity anterior (TrainingAreaInicio). Recordamos que el valor 0 es aleatorio.
      */
     private void prepararJuego(){
-
+        //Alertas al usuario sobre el modo escogido
         if(intent.getIntExtra("lista",0)==0 && intent.getIntExtra("numero_verbos",0)==0){   // TODO ALEATORIO
             Toast.makeText(getApplicationContext(), getString(R.string.toastA), Toast.LENGTH_LONG).show();
         }
@@ -185,9 +185,6 @@ public class JuegoTraining extends ActionBarActivity {
         if(numero_verbos==0)
             numero_verbos = 3 + rnd.nextInt(22); //Genera un numero entre 10 y 24.
 
-        //Alertas al usuario sobre el modo escogido
-
-
         /*
         Alert dialog para informar al usuario del estado de la partida
          */
@@ -197,11 +194,11 @@ public class JuegoTraining extends ActionBarActivity {
         if(smartVerb){
             switch (lista_a_preguntar) {
                 case 1:
-                    informacion = getString(R.string.entrenamientoInteligente)+"\n" + "List: "+getString(R.string.listaSimple)+"\n" + "Verbs: " + numero_verbos;
+                    informacion = getString(R.string.juegoInteligente)+"\n" + "List: "+getString(R.string.listaSimple)+"\n" + "Verbs: " + numero_verbos;
                 case 2:
-                    informacion = getString(R.string.entrenamientoInteligente)+"\n" + "List: "+getString(R.string.listaMedia)+"\n" + "Verbs: " + numero_verbos;
+                    informacion = getString(R.string.juegoInteligente)+"\n" + "List: "+getString(R.string.listaMedia)+"\n" + "Verbs: " + numero_verbos;
                 default:
-                    informacion = getString(R.string.entrenamientoInteligente)+"\n" + "List: "+getString(R.string.listaDificil)+"\n" + "Verbs: " + numero_verbos;
+                    informacion = getString(R.string.juegoInteligente)+"\n" + "List: "+getString(R.string.listaDificil)+"\n" + "Verbs: " + numero_verbos;
             }
         }
         else{
