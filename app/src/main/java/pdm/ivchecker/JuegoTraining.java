@@ -203,9 +203,9 @@ public class JuegoTraining extends ActionBarActivity {
         }
         else{
             switch (lista_a_preguntar){
-                case 1: informacion=getString(R.string.smartDesactivado)+ "List: "+getString(R.string.listaSimple)+"\n"+"Verbs: " +numero_verbos;
-                case 2: informacion=getString(R.string.smartDesactivado)+ "List: "+getString(R.string.listaMedia)+"\n"+"Verbs: " +numero_verbos;
-                default: informacion=getString(R.string.smartDesactivado)+ "List: "+getString(R.string.listaDificil)+"\n"+"Verbs: " +numero_verbos;
+                case 1: informacion=getString(R.string.smartDesactivado)+"\n"+ "List: "+getString(R.string.listaSimple)+"\n"+"Verbs: " +numero_verbos;
+                case 2: informacion=getString(R.string.smartDesactivado)+"\n"+ "List: "+getString(R.string.listaMedia)+"\n"+"Verbs: " +numero_verbos;
+                default: informacion=getString(R.string.smartDesactivado)+"\n"+ "List: "+getString(R.string.listaDificil)+"\n"+"Verbs: " +numero_verbos;
             }
         }
 
