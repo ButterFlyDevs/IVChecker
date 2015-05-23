@@ -1,0 +1,39 @@
+#### Español ####
+
+Título (30 caracteres):
+
+IVChecker (Juego Verbos Irregulares)
+
+Descripción breve (80 caracteres) : 
+
+La aplicación perfecta para aprender los verbos irregulares en inglés.
+
+Descripción completa (4000 caracteres):
+
+Aprenderás los verbos irregulares más usados del inglés (más de 200) desde los más simples a los más complejos. Estos están distribuidos en tres listas de distinto nivel de 
+dificultad y uso, para ajustarse a tu nivel.
+Los memorizarás todos jugando una y otra vez y podrás ver tu progreso. Cuando estés seguro de que los sabes podrás jugar en el juego principal y demostrar todo lo que sabes.
+¿Cuánto tiempo tardas en recordar un verbo? ¿Cuántos crees que podrás aguantar sin fallar?
+¿Te atreves a demostrar todo lo que sabes contra jugadores de todo el mundo?
+Al final podrás subir tu puntuación al ranking mundial y ver que posición ocupas en el. ¿Serás capaz de llegar a la primera posición?
+
+¿Qué ocurre con los verbos que tienen varias formas? 
+Por ejemplo el verbo "to be" en pasado es "was" para "I" y "were" para "you". No tendrás problema, puede usar cualquiera de las dos formas, ambas son reconocidas como correctas. Esto ocurre para todos los verbos de este tipo.
+
+
+IVChecker:
+
+-Fácil aprendizaje.
+-Diseño simple y minimalista.
+-Reconocimiento de verbos en todas sus formas.
+-Ranking mundial de puntuaciones.
+-Entrenamiento inteligente
+
+
+Además cuenta con la opción de entrenamiento inteligente. La aplicación registrará tus errores y en 
+futuras partidas sólo te preguntará por los verbos que más trabajo te cuesta aprender, así te será mucho más fácil aprenderlos. 
+
+Pronto conocerás todos los verbos y aumentarás el nivel de tu inglés como nunca hubieras imaginado.
+
+
+ButterflyDevs @ 2015

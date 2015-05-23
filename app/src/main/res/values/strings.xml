@@ -65,7 +65,7 @@
 
         <string name="dificultad">Select difficulty</string>
 
-        <string name="listaSimple">Soft list</string>
+        <string name="listaSimple" translatable="false">Soft list</string>
         <string name="listaMedia">Medium list</string>
         <string name="listaDificil">Hard list</string>
 
@@ -94,7 +94,7 @@
         <string name="estadisticas">Statistics</string>
         <string name="eliminar">Delete</string>
         <string name="ficheroBorrado">Score\'s file is deleted</string>
-
+        <string name="atras">Home</string>
 
     <!-- 6. juego training -->
         <string name="toastA">The game has not been configurated.
@@ -132,6 +132,7 @@
         <string name="aciertos">hits</string>
         <string name="errores">misses</string>
         <string name="verbos">verbs</string>
+
 
 
         <!-- NO TRADUCIR -->

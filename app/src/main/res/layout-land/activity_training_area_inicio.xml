@@ -42,100 +42,114 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:gravity="bottom"
-        android:layout_marginBottom="15dp">
+        android:layout_marginTop="10dp">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
+        <TableLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/layoutAjustes"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="false">
+            android:layout_marginBottom="20dp">
 
-            <Button
-                android:id="@+id/botonAjustes"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/settingsicon"
-                android:layout_below="@+id/textEliminar"
-                android:layout_toRightOf="@+id/layoutAjustes"
-                android:layout_toEndOf="@+id/layoutAjustes" />
 
-            <TextView
+            <TableRow
+                android:id="@+id/tableRow1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Ajustes"
-                android:id="@+id/textAJustes"
-                android:layout_gravity="center_horizontal"
-                android:layout_below="@+id/botonAjustes"
-                android:layout_alignLeft="@+id/botonAjustes"
-                android:layout_alignStart="@+id/botonAjustes" />
-        </LinearLayout>
+                android:padding="5dip"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout3"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="150dp">
 
-            <Button
-                android:id="@+id/botonEstadisticas"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/statistics"
-                android:layout_gravity="center_horizontal"
-                android:layout_alignTop="@+id/botonEliminarEstadisticas"
-                android:layout_centerHorizontal="true" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/layoutAjustes"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Estadísticas"
-                android:id="@+id/textEstadisticas"
-                android:layout_gravity="center_horizontal"
-                android:layout_below="@+id/botonEstadisticas"
-                android:layout_centerHorizontal="true" />
-        </LinearLayout>
+                    <Button
+                        android:id="@+id/botonAjustes"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/settingsicon"
+                        android:layout_below="@+id/textEliminar"
+                        android:layout_toRightOf="@+id/layoutAjustes"
+                        android:layout_toEndOf="@+id/layoutAjustes"
+                        android:layout_gravity="center_horizontal" />
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout4"
-            android:layout_marginLeft="26dp"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/linearLayout3"
-            android:layout_toEndOf="@+id/linearLayout3">
+                </LinearLayout>
 
-            <Button
-                android:id="@+id/botonEliminarEstadisticas"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/trash"
-                android:layout_gravity="center_horizontal"
-                android:layout_alignTop="@+id/linearLayout4"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Eliminar"
-                android:id="@+id/textEliminar"
-                android:layout_gravity="center_horizontal"
-                android:layout_below="@+id/botonEliminarEstadisticas"
-                android:layout_alignRight="@+id/botonEliminarEstadisticas"
-                android:layout_alignEnd="@+id/botonEliminarEstadisticas" />
-        </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout3"
+                    android:layout_alignTop="@+id/layoutAjustes"
+                    android:layout_toRightOf="@+id/layoutAjustes"
+                    android:layout_toEndOf="@+id/layoutAjustes"
+                    android:layout_marginLeft="20dp">
+
+                    <Button
+                        android:id="@+id/botonEstadisticas"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/statistics"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_alignTop="@+id/botonEliminarEstadisticas"
+                        android:layout_centerHorizontal="true" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout4"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/linearLayout3"
+                    android:layout_toEndOf="@+id/linearLayout3"
+                    android:layout_marginLeft="20dp">
+
+                    <Button
+                        android:id="@+id/botonEliminarEstadisticas"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/trash"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_alignTop="@+id/linearLayout4"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout2"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/linearLayout4"
+                    android:layout_toEndOf="@+id/linearLayout4"
+                    android:layout_marginLeft="20dp">
+
+                    <Button
+                        android:id="@+id/botonGame"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/game_icon"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_alignTop="@+id/linearLayout4"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+        </TableLayout>
 
     </RelativeLayout>
 
