@@ -164,10 +164,9 @@ public class JuegoTraining extends ActionBarActivity {
      */
     private void prepararJuego(){
         //Alertas al usuario sobre el modo escogido
-        if(numero_verbos==0 && lista_a_preguntar==0){   // TODO ALEATORIO
+        if(intent.getIntExtra("lista",0)==0 && intent.getIntExtra("numero_verbos",0)==0){   // TODO ALEATORIO
             Toast.makeText(getApplicationContext(), getString(R.string.toastA), Toast.LENGTH_LONG).show();
         }
-
         Random rnd = new Random();
         int respuesta_smartVerb;
         //Obtencion de valores
@@ -195,18 +194,18 @@ public class JuegoTraining extends ActionBarActivity {
         if(smartVerb){
             switch (lista_a_preguntar) {
                 case 1:
-                    informacion = getString(R.string.entrenamientoInteligente)+"\n" + "List: "+getString(R.string.listaSimple)+"\n" + "Verbs: " + numero_verbos;
+                    informacion = getString(R.string.juegoInteligente)+"\n" + "List: "+getString(R.string.listaSimple)+"\n" + "Verbs: " + numero_verbos;
                 case 2:
-                    informacion = getString(R.string.entrenamientoInteligente)+"\n" + "List: "+getString(R.string.listaMedia)+"\n" + "Verbs: " + numero_verbos;
+                    informacion = getString(R.string.juegoInteligente)+"\n" + "List: "+getString(R.string.listaMedia)+"\n" + "Verbs: " + numero_verbos;
                 default:
-                    informacion = getString(R.string.entrenamientoInteligente)+"\n" + "List: "+getString(R.string.listaDificil)+"\n" + "Verbs: " + numero_verbos;
+                    informacion = getString(R.string.juegoInteligente)+"\n" + "List: "+getString(R.string.listaDificil)+"\n" + "Verbs: " + numero_verbos;
             }
         }
         else{
             switch (lista_a_preguntar){
-                case 1: informacion=getString(R.string.smartDesactivado)+ "List: "+getString(R.string.listaSimple)+"\n"+"Verbs: " +numero_verbos;
-                case 2: informacion=getString(R.string.smartDesactivado)+ "List: "+getString(R.string.listaMedia)+"\n"+"Verbs: " +numero_verbos;
-                default: informacion=getString(R.string.smartDesactivado)+ "List: "+getString(R.string.listaDificil)+"\n"+"Verbs: " +numero_verbos;
+                case 1: informacion=getString(R.string.smartDesactivado)+"\n"+ "List: "+getString(R.string.listaSimple)+"\n"+"Verbs: " +numero_verbos;
+                case 2: informacion=getString(R.string.smartDesactivado)+"\n"+ "List: "+getString(R.string.listaMedia)+"\n"+"Verbs: " +numero_verbos;
+                default: informacion=getString(R.string.smartDesactivado)+"\n"+ "List: "+getString(R.string.listaDificil)+"\n"+"Verbs: " +numero_verbos;
             }
         }
 
