@@ -96,9 +96,9 @@
     <!-- 6. juego training -->
         <string name="toastA">Le jeu n\'a pas été configuré.
                     Le nombre de verbes et la liste utilisée seront choisis de façon aléatoire.</string>
-    <string name="modeEntraînement">Entraînement</string>
-    <string name="jeuIntelligent">Entraînement Intelligent activé</string>
-    <string name="intelligentDésactivé">Entraînement Intelligent désactivé</string>
+    <string name="modoEntranamiento">Entraînement</string>
+    <string name="juegoInteligente">Entraînement Intelligent activé</string>
+    <string name="smartDesactivado">Entraînement Intelligent désactivé</string>
 
 
 

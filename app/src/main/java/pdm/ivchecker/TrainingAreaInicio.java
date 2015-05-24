@@ -24,7 +24,7 @@ public class TrainingAreaInicio extends ActionBarActivity {
     //con el cuál se identificarán los resultados devueltos por la Activity lanzada, en este caso, Configuracion.
     static final int CODIGO_PETICION_CONFIGURACION = 1;
 
-    private Button boton_empezar, botonAjustes, botonEstadisticas, botonEliminar, botonGame;
+    private Button boton_empezar, botonAjustes, botonEstadisticas, botonEliminar, botonGamer;
 
     /*
         Variables para controlar el entrenamiento:
@@ -48,11 +48,23 @@ public class TrainingAreaInicio extends ActionBarActivity {
         botonAjustes=(Button)findViewById(R.id.botonAjustes);
         botonEstadisticas=(Button)findViewById(R.id.botonEstadisticas);
         botonEliminar=(Button)findViewById(R.id.botonEliminarEstadisticas);
-        botonGame=(Button)findViewById(R.id.botonGame);
+        botonGamer=(Button)findViewById(R.id.botonGame);
 
         Animation loopParpadeante = AnimationUtils.loadAnimation(this, R.anim.animacionbotonplay);
         boton_empezar.startAnimation(loopParpadeante);
 
+
+        botonGamer.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent  = new Intent(TrainingAreaInicio.this, ActividadPrincipal.class);
+                        //Iniciamos la nueva actividad
+                        startActivity(intent);
+                    }
+                }
+        );
 
         //Implementamos el evento click del botón boton_empezar:
         boton_empezar.setOnClickListener(
@@ -97,17 +109,7 @@ public class TrainingAreaInicio extends ActionBarActivity {
                     }
                 }
         );
-        botonGame.setOnClickListener(
 
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Creamos el Intent
-                        Intent intent = new Intent(TrainingAreaInicio.this, ActividadPrincipal.class);
-                        startActivity(intent);
-                    }
-                }
-        );
 
         botonEliminar.setOnClickListener(
 

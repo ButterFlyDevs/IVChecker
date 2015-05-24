@@ -119,8 +119,8 @@ public class ConexionServidor {
             }
 
             String url="jdbc:postgresql://horton.elephantsql.com:5432/idviomlw";
-            String username = "idviomlw";
-            String password = "CiOKqiaqBk6FXQzDAVbEUbP-Kj5Oeopb";
+            String username = "## NOMBRE DE USUARIO DE LA BASE DE DATOS";
+            String password = "## CONTRASEÑA DE LA BASE DE DATOS";
             // jdbc:postgresql://host:port/database";
             try{
 
