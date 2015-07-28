@@ -87,7 +87,7 @@ public class ActividadPrincipal extends ActionBarActivity {
                     public void onClick(View v) {
                         v.startAnimation(animacionBotones);
                         //Creamos el Intent
-                        Intent intent = new Intent(ActividadPrincipal.this, ListaVerbos.class);
+                        Intent intent = new Intent(ActividadPrincipal.this, ListaVerbos2.class);
                         //Iniciamos la nueva actividad
                         startActivity(intent);
                     }

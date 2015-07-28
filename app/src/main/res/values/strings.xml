@@ -152,6 +152,10 @@
         <string name="title_activity_lista_verbos">ListaVerbos</string>
         <string name="title_activity_juego">Juego</string>
         <string name="title_activity_resultados">resultados</string>
+        <string name="title_activity_lista_verbos2">ListaVerbos2</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 
 

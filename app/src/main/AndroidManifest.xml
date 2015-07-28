@@ -3,7 +3,7 @@
     package="pdm.ivchecker" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <meta-data
         android:name="com.google.android.gms.version"
@@ -24,8 +24,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
         <activity
             android:name=".ListaVerbos"
@@ -38,7 +36,7 @@
         <activity
             android:name=".About"
             android:label="@string/title_activity_about"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".TrainingAreaInicio"
@@ -65,14 +63,17 @@
             android:name=".Resultado"
             android:label="@string/title_activity_resultado" >
         </activity>
-
         <activity
             android:name=".HistorialPuntuacionTraining"
             android:label="@string/title_activity_historial_puntuacion_training" >
         </activity>
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <activity
+            android:name=".ListaVerbos2"
+            android:label="@string/title_activity_lista_verbos2" >
+        </activity>
     </application>
 
 </manifest>
