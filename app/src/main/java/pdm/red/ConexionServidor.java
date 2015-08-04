@@ -118,15 +118,11 @@ public class ConexionServidor {
                 e.printStackTrace();
             }
 
-            String url="jdbc:postgresql://horton.elephantsql.com:5432/idviomlw";
-            String username = "## NOMBRE DE USUARIO DE LA BASE DE DATOS";
-            String password = "## CONTRASEÑA DE LA BASE DE DATOS";
-            // jdbc:postgresql://host:port/database";
             try{
 
                 System.out.println("Ejecutando la conexión");
                 //Establecemos la conexión:
-                Connection db = DriverManager.getConnection(url, username, password);
+                Connection db = DriverManager.getConnection(Claves.url, Claves.username, Claves.password);
                 Statement st = db.createStatement();
 
                 //Creamos la tabla

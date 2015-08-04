@@ -27,6 +27,17 @@ public class Verbo {
         public String pasado;
         public String participio;
 
+        public String getForma(int forma){
+            if(forma==0)
+                return infinitivo;
+            else if(forma==1)
+                return pasado;
+            else if(forma==2)
+                return participio;
+            else
+                return null;
+
+        }
 
     }
     public class significado{

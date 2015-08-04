@@ -22,17 +22,21 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <Button
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:text="BK"
-                android:id="@+id/buttonBack" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
 
             <Button
-                android:layout_width="46dp"
-                android:layout_height="wrap_content"
-                android:text="&lt;-"
-                android:id="@+id/buttonAtras" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/buttonAtras"
+                android:background="@drawable/backk"
+                android:gravity="left"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="55dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,31 +44,56 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="LISTA SIMPLE"
                 android:id="@+id/textLista"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp" />
+                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentEnd="false"
+                android:layout_marginLeft="120dp" />
 
             <Button
-                android:layout_width="49dp"
-                android:layout_height="wrap_content"
-                android:text="->"
-                android:id="@+id/buttonSiguiente" />
-        </LinearLayout>
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/buttonSiguiente"
+                android:background="@drawable/adelante"
+                android:layout_gravity="center_horizontal"
+                android:gravity="right"
+                android:layout_alignParentRight="true" />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/buttonBack"
+                android:background="@drawable/back"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
 
         <ListView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/listView"
             android:layout_width="wrap_content"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_weight="0.84" />
+            android:layout_weight="0.84"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp" />
 
-        <com.google.android.gms.ads.AdView android:id="@+id/adView"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="39dp"
-            ads:adUnitId="ca-app-pub-3487755442892203/2101251573"
-            ads:adSize="BANNER" />
+            android:layout_height="wrap_content"
+            android:id="@+id/backAndAdd">
+
+            <com.google.android.gms.ads.AdView android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                ads:adUnitId="ca-app-pub-3487755442892203/2101251573"
+                ads:adSize="BANNER"
+                android:layout_marginTop="20dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

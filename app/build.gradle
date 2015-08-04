@@ -25,4 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile files('libs/postgresql-9.4-1201.jdbc4.jar')
     compile 'com.google.android.gms:play-services:7.0.0'
+    compile 'org.adw.library:discrete-seekbar:1.0.0'
 }

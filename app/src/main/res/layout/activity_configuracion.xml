@@ -1,4 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scrollLayout"
     android:layout_width="fill_parent"
 
@@ -27,7 +28,9 @@
                 android:text="@string/ajustes"
                 android:id="@+id/textSettings"
                 android:textSize="40dp"
-                android:layout_weight="0.89" />
+                android:layout_weight="0.89"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp" />
 
             <ImageView
                 android:layout_width="75dp"
@@ -47,7 +50,8 @@
         <RadioGroup
             android:id="@+id/tipoLista"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
 
             <RadioButton
                 android:id="@+id/radioSoft"
@@ -84,7 +88,8 @@
             android:id="@+id/switch_smartVerb"
             android:layout_gravity="left|center_horizontal"
             android:textSize="20dp"
-            android:checked="false" />
+            android:checked="false"
+            android:layout_marginLeft="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -106,7 +111,14 @@
             android:id="@+id/botonConfirmarCconfiguracion"
             android:layout_gravity="center_horizontal" />
 
-
+        <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dsb_min="5"
+            app:dsb_max="50"
+            app:dsb_progressColor="#fffffdfd"
+            app:dsb_trackColor="#fffbf9f9"
+            />
 
     </LinearLayout>
 </ScrollView>

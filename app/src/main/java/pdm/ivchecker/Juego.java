@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Random;
 import com.google.android.gms.ads.*;
 
@@ -39,10 +40,10 @@ public class Juego extends ActionBarActivity {
     //Variable necesaria para el paso de datos al fragment (necesario que sea global)
     Bundle arguments = new Bundle();
 
-    //Matrices donde se almacenan los verbos:
-    private String [][] verbosSoft;
-    private String [][] verbosMedium;
-    private String [][] verbosHard;
+    //ArrayList donde se almacenan los verbos:
+    private ArrayList<Verbo> verbosSoft;
+    private ArrayList<Verbo> verbosMedium;
+    private ArrayList<Verbo> verbosHard;
 
     //Elementos de la vista:
     private Button btnNext;
@@ -107,142 +108,24 @@ public class Juego extends ActionBarActivity {
 
 
     /**
-     * Función para cargar en las matrices los verbos desde los .csv
+     * Función que carga en los arrays los verbos desde los .csv
      */
     private void cargarVerbos(){
 
+        InputStream inputStream;
 
-        //Abrimos el flujo necesario para leer desde los tres ficheros que estań en la carpeta raw..
-        InputStream inputStream=getResources().openRawResource(R.raw.ivsoft);
+        //Obtenemos el flujo del fichero donde se almacenan los verbos de la lista SOFT
+        inputStream=getResources().openRawResource(R.raw.ivsoft2);
+        //Extreamos todos los verbos del fichero con una función extrena y los almacenamos en nuestro array.
+        verbosSoft = ProcesadorCSVs.obtenerVerbos(inputStream);
 
+        //Idénticamente con la lista de dificultad media
+        inputStream=getResources().openRawResource(R.raw.ivmedium2);
+        verbosMedium = ProcesadorCSVs.obtenerVerbos(inputStream);
 
-        //Abrimos el flujo con un buffer.
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-        //Necesario para la lectura:
-        String line;
-
-
-        // ## SOFT ## //
-        try {
-            /*
-            Extraemos la primera linea del fichero que es la que indica el número de verbos que este
-            contiene y que nose será util para crear la matriz del tamaño exacto. Hacemos esto pensando
-            en el momento que se tenga que modifcar la lista sin tener que modificar ningún valor en
-            el programa. Es uso de try-catch es obligatorio.
-             */
-            line=reader.readLine();
-            numVerbosListaSoft=Integer.parseInt(line);
-        } catch (IOException e) {
-            //Para que no falle el programa si no se cargase el número lo ponemos nosotros.
-            numVerbosListaSoft=50;
-            e.printStackTrace();
-        }
-        this.verbosSoft = new String [numVerbosListaSoft][3];
-
-        //Cargamos los verbos en una matriz para manejarlos mejor durante el juego.
-        try {
-            int fila=0;
-            while(true){
-                line=reader.readLine();
-                if (line == null) break;
-                String[] RowData = line.split(",");
-                verbosSoft[fila][0] = RowData[0];
-                verbosSoft[fila][1] = RowData[1];
-                verbosSoft[fila][2] = RowData[2];
-                fila++;
-            }
-            inputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        // ## MEDIUM ## //
-
-        //CAmbiamos el flujo a la lista medium
-        inputStream=getResources().openRawResource(R.raw.ivmedium);
-
-        //Abrimos el nuevo flujo
-        reader = new BufferedReader(new InputStreamReader(inputStream));
-
-        try {
-            /*
-            Extraemos la primera linea del fichero que es la que indica el número de verbos que este
-            contiene y que nose será util para crear la matriz del tamaño exacto. Hacemos esto pensando
-            en el momento que se tenga que modifcar la lista sin tener que modificar ningún valor en
-            el programa. Es uso de try-catch es obligatorio.
-             */
-            line=reader.readLine();
-            numVerbosListaMedium=Integer.parseInt(line);
-        } catch (IOException e) {
-            //Para que no falle el programa si no se cargase el número lo ponemos nosotros.
-            numVerbosListaMedium=88;
-            e.printStackTrace();
-        }
-        this.verbosMedium = new String [numVerbosListaMedium][3];
-
-        //Cargamos los verbos en una matriz para manejarlos mejor durante el juego.
-        try {
-            int fila=0;
-            while(true){
-                line=reader.readLine();
-                if (line == null) break;
-                String[] RowData = line.split(",");
-                verbosMedium[fila][0] = RowData[0];
-                verbosMedium[fila][1] = RowData[1];
-                verbosMedium[fila][2] = RowData[2];
-                fila++;
-            }
-            inputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        // ## HARD ## //
-
-        //Cambiamos el flujo a la lista hard
-        inputStream=getResources().openRawResource(R.raw.ivhard);
-
-        //Abrimos el nuevo flujo
-        reader = new BufferedReader(new InputStreamReader(inputStream));
-
-        try {
-            /*
-            Extraemos la primera linea del fichero que es la que indica el número de verbos que este
-            contiene y que nose será util para crear la matriz del tamaño exacto. Hacemos esto pensando
-            en el momento que se tenga que modifcar la lista sin tener que modificar ningún valor en
-            el programa. Es uso de try-catch es obligatorio.
-             */
-            line=reader.readLine();
-            numVerbosListaHard=Integer.parseInt(line);
-        } catch (IOException e) {
-            //Para que no falle el programa si no se cargase el número lo ponemos nosotros.
-            numVerbosListaHard=182;
-            e.printStackTrace();
-        }
-        this.verbosHard = new String [numVerbosListaHard][3];
-
-        //Cargamos los verbos en una matriz para manejarlos mejor durante el juego.
-        try {
-            int fila=0;
-            while(true){
-                line=reader.readLine();
-                if (line == null) break;
-                String[] RowData = line.split(",");
-                verbosHard[fila][0] = RowData[0];
-                verbosHard[fila][1] = RowData[1];
-                verbosHard[fila][2] = RowData[2];
-                fila++;
-            }
-            inputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-
+        //Idénticamente con la lista de dificultad alta
+        inputStream=getResources().openRawResource(R.raw.ivhard2);
+        verbosHard = ProcesadorCSVs.obtenerVerbos(inputStream);
 
 
     }
@@ -730,34 +613,46 @@ public class Juego extends ActionBarActivity {
             Si numVerbo==0 querrá decir que ha sido el valor proporcionado por el constructor y no por una restauración de un actividad anterior.
              */
             if(numVerbo==0)
-                numVerbo = (int) (rnd.nextDouble() * numVerbosListaSoft + 0);
+                //numVerbo = (int) (rnd.nextDouble() * numVerbosListaSoft + 0);
+                numVerbo = (int) (rnd.nextDouble() * verbosSoft.size() + 0);
             //Si no es así querra'decir que se usa el num de verbo guardado.
 
 
             //Cargamos el verbo en las variables locales:
-            verboInfinitivo=verbosSoft[numVerbo][0];
-            verboPasado=verbosSoft[numVerbo][1];
-            verboParticipio=verbosSoft[numVerbo][2];
+            verboInfinitivo=verbosSoft.get(numVerbo).getVerbo().infinitivo;
+            //verboInfinitivo=verbosSoft[numVerbo][0];
+            verboPasado=verbosSoft.get(numVerbo).getVerbo().pasado;
+            //verboPasado=verbosSoft[numVerbo][1];
+            verboParticipio=verbosSoft.get(numVerbo).getVerbo().participio;
+            //verboParticipio=verbosSoft[numVerbo][2];
 
         }else if(nivel>=6 && nivel<=10) { //Si estamos en los niveles 6-10
 
                 //Elegimos el verbo de forma aleatoria:
                 if(numVerbo==0)
-                    numVerbo = (int) (rnd.nextDouble() * numVerbosListaMedium + 0);
+                    //numVerbo = (int) (rnd.nextDouble() * numVerbosListaMedium + 0);
+                    numVerbo = (int) (rnd.nextDouble() * verbosMedium.size() + 0);
                 //Cargamos el verbo en las variables locales:
-                verboInfinitivo=verbosMedium[numVerbo][0];
-                verboPasado=verbosMedium[numVerbo][1];
-                verboParticipio=verbosMedium[numVerbo][2];
+                verboInfinitivo=verbosMedium.get(numVerbo).getVerbo().infinitivo;
+                //verboInfinitivo=verbosMedium[numVerbo][0];
+                verboPasado=verbosMedium.get(numVerbo).getVerbo().pasado;
+                //verboPasado=verbosMedium[numVerbo][1];
+                verboParticipio=verbosMedium.get(numVerbo).getVerbo().participio;
+                //verboParticipio=verbosMedium[numVerbo][2];
 
         } else if(nivel>=11 && nivel<=15) { //Si estamos en los niveles 6-10
 
             //Elegimos el verbo de forma aleatoria:
             if(numVerbo==0)
-                numVerbo = (int) (rnd.nextDouble() * numVerbosListaHard + 0);
+                numVerbo = (int) (rnd.nextDouble() * verbosHard.size() + 0);
+                //numVerbo = (int) (rnd.nextDouble() * numVerbosListaHard + 0);
             //Cargamos el verbo en las variables locales:
-            verboInfinitivo=verbosHard[numVerbo][0];
-            verboPasado=verbosHard[numVerbo][1];
-            verboParticipio=verbosHard[numVerbo][2];
+            verboInfinitivo=verbosHard.get(numVerbo).getVerbo().infinitivo;
+           // verboInfinitivo=verbosHard[numVerbo][0];
+            verboPasado=verbosHard.get(numVerbo).getVerbo().pasado;
+            //verboPasado=verbosHard[numVerbo][1];
+            verboParticipio=verbosHard.get(numVerbo).getVerbo().participio;
+            //verboParticipio=verbosHard[numVerbo][2];
 
 
         }
@@ -1346,7 +1241,7 @@ public class Juego extends ActionBarActivity {
 
               //  if (campoVerboIntroducidoA.getText().toString().equals(verbosSoft[numVerbo][numFormaA])) {
                 //Nueva forma de cormprobar:
-                if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosSoft[numVerbo][numFormaA] )){
+                if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA) )){
                     /*
                     En el nivel 1 cada acierto suma 1 en el nivel 2 suma 2 y así con el resto de niveles
                      */
@@ -1360,11 +1255,11 @@ public class Juego extends ActionBarActivity {
             else{
 
                 if(nivel==4 || nivel==5) {
-                    if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosSoft[numVerbo][numFormaA]))
+                    if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA)))
                         puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
-                    if (comprueba(campoVerboIntroducidoB.getText().toString(),verbosSoft[numVerbo][numFormaB]))
+                    if (comprueba(campoVerboIntroducidoB.getText().toString(),verbosSoft.get(numVerbo).getVerbo().getForma(numFormaB)))
                         puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
@@ -1375,7 +1270,7 @@ public class Juego extends ActionBarActivity {
         else if(nivel>=6 && nivel<=10) { //Lista Medium
 
             if(nivel==6 || nivel==7 || nivel==8) {
-                if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosMedium[numVerbo][numFormaA])) {
+                if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosMedium.get(numVerbo).getVerbo().getForma(numFormaA))) {
                     puntuacionPartida=puntuacionPartida+(nivel*seg);
 
                 } else {
@@ -1386,11 +1281,11 @@ public class Juego extends ActionBarActivity {
             else{
 
                 if(nivel==9 || nivel==10) {
-                    if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosMedium[numVerbo][numFormaA]))
+                    if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosMedium.get(numVerbo).getVerbo().getForma(numFormaA)))
                         puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
-                    if (comprueba(campoVerboIntroducidoB.getText().toString(),verbosMedium[numVerbo][numFormaB]))
+                    if (comprueba(campoVerboIntroducidoB.getText().toString(),verbosMedium.get(numVerbo).getVerbo().getForma(numFormaB)))
                         puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
@@ -1402,7 +1297,7 @@ public class Juego extends ActionBarActivity {
 
 
             if(nivel==11 || nivel==12 || nivel==13) {
-                if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosHard[numVerbo][numFormaA])) {
+                if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosHard.get(numVerbo).getVerbo().getForma(numFormaA))) {
                     puntuacionPartida=puntuacionPartida+(nivel*seg);
 
                 } else {
@@ -1413,11 +1308,11 @@ public class Juego extends ActionBarActivity {
             else{
 
                 if(nivel==14 || nivel==15) {
-                    if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosHard[numVerbo][numFormaA]))
+                    if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosHard.get(numVerbo).getVerbo().getForma(numFormaA)))
                         puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
-                    if (comprueba(campoVerboIntroducidoB.getText().toString(),verbosHard[numVerbo][numFormaB]))
+                    if (comprueba(campoVerboIntroducidoB.getText().toString(),verbosHard.get(numVerbo).getVerbo().getForma(numFormaB)))
                         puntuacionPartida=puntuacionPartida+(nivel*seg);
                     else
                         perderVida();
