@@ -13,14 +13,15 @@
         android:layout_x="2dp"
         android:layout_y="157dp"
         android:src="@drawable/trainningarea"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp" />
 
     <Button android:id="@+id/botonGO"
         android:layout_width="200dp"
         android:layout_height="75dp"
         android:background="@drawable/playtrainning"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="40dp" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -43,14 +44,37 @@
                 android:gravity="center_horizontal">
 
 
-            <LinearLayout
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout2"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/linearLayout4"
+                    android:layout_toEndOf="@+id/linearLayout4">
+
+                    <Button
+                        android:id="@+id/botonGame"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/back"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_alignTop="@+id/linearLayout4"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="0dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/layoutAjustes"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentStart="true"
+                    android:layout_marginLeft="10dp">
 
                 <Button
                     android:id="@+id/botonAjustes"
@@ -83,50 +107,6 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_alignTop="@+id/botonEliminarEstadisticas"
                         android:layout_centerHorizontal="true" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout4"
-                    android:layout_alignParentBottom="true"
-                    android:layout_toRightOf="@+id/linearLayout3"
-                    android:layout_toEndOf="@+id/linearLayout3"
-                    android:layout_marginLeft="10dp">
-
-                    <Button
-                        android:id="@+id/botonEliminarEstadisticas"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/trash"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_alignTop="@+id/linearLayout4"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout2"
-                    android:layout_alignParentBottom="true"
-                    android:layout_toRightOf="@+id/linearLayout4"
-                    android:layout_toEndOf="@+id/linearLayout4"
-                    android:layout_marginLeft="10dp">
-
-                    <Button
-                        android:id="@+id/botonGame"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/game_icon"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_alignTop="@+id/linearLayout4"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true" />
 
                 </LinearLayout>
 

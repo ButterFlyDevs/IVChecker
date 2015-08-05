@@ -1,23 +1,55 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pdm.ivchecker.HistorialPuntuacionTraining">
+    tools:context="pdm.ivchecker.HistorialPuntuacionTraining"
+    android:background="#ff8b85a2"
+    android:orientation="vertical">
 
-    <com.androidplot.xy.XYPlot
-        android:id="@+id/grafico"
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Resultados"
+        android:id="@+id/textView18"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:id="@+id/prueba"></LinearLayout>
+
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        title="Historial Puntuacion Training"
-        android:layout_marginTop="0px"
-        android:layout_marginLeft="0px"
-        android:layout_marginRight="0px"
+        android:gravity="bottom">
 
-        androidPlot.legendWidget.heightMetric.value="25dp"
-        androidPlot.legendWidget.iconSizeMetrics.heightMetric.value="15dp"
-        androidPlot.legendWidget.iconSizeMetrics.widthMetric.value="15dp"
-        androidPlot.legendWidget.positionMetrics.anchor="right_bottom"
-        androidPlot.legendWidget.textPaint.textSize="10dp"
-        />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="20dp">
 
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:id="@+id/button"
+                android:background="@drawable/back"
+                android:layout_alignParentStart="false" />
 
-</RelativeLayout>
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/trash"
+                android:layout_alignTop="@+id/linearLayout4"
+                android:layout_alignParentEnd="false"
+                android:gravity="center"
+                android:layout_marginLeft="100dp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -47,7 +47,7 @@ public class TrainingAreaInicio extends ActionBarActivity {
         boton_empezar=(Button)findViewById(R.id.botonGO);
         botonAjustes=(Button)findViewById(R.id.botonAjustes);
         botonEstadisticas=(Button)findViewById(R.id.botonEstadisticas);
-        botonEliminar=(Button)findViewById(R.id.botonEliminarEstadisticas);
+
         botonGamer=(Button)findViewById(R.id.botonGame);
 
         Animation loopParpadeante = AnimationUtils.loadAnimation(this, R.anim.animacionbotonplay);
@@ -111,25 +111,7 @@ public class TrainingAreaInicio extends ActionBarActivity {
         );
 
 
-        botonEliminar.setOnClickListener(
 
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String fichero= "puntuaciones.csv";
-                        FileOutputStream flujo_fichero;
-                        try {
-                            flujo_fichero = openFileOutput(fichero, MODE_PRIVATE);
-                            flujo_fichero.close();
-                            Toast.makeText(getApplicationContext(), getString(R.string.ficheroBorrado), Toast.LENGTH_SHORT).show();
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-        );
 
 
 
