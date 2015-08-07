@@ -6,130 +6,119 @@
             android:layout_width="fill_parent"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
-    android:background="#ff8b85a2">
+    android:background="#ff8b85a2"
+    android:weightSum="1">
 
-            <LinearLayout
-                android:layout_width="384dp"
-                android:layout_height="300dp">
-                <com.androidplot.pie.PieChart
-                    android:id="@+id/graficoQueso"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical">
-             <LinearLayout
-                 android:layout_width="fill_parent"
-                 android:layout_height="wrap_content"
-                 android:orientation="horizontal">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Resultados"
+        android:id="@+id/textViewTitulo"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:textStyle="bold"
+        android:textSize="30dp" />
 
-                <TextView
-                    android:id="@+id/etiqueta_total_verbos"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-                    android:paddingLeft="15dp"
-                    android:layout_weight="1"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/etiqueta_verbos_acertados"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-                    android:paddingLeft="15dp"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:id="@+id/etiqueta_verbos_fallados"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
-                    android:paddingLeft="15dp"
-                    android:layout_weight="1"/>
-            </LinearLayout>
-            <TextView
-                android:id="@+id/tipo_lista"
-                android:layout_width="fill_parent"
-                android:layout_gravity="center"
-                android:textStyle="bold"
-                android:paddingTop="3dp"
-                android:textSize="20dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp" />
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textColor="#FE2E2E"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
+        <LinearLayout
+                    android:layout_width="206dp"
+                    android:layout_height="194dp"
+                    android:id="@+id/layoutGrafico"
+                    android:orientation="horizontal">
 
-                android:layout_marginTop="10dp"
-                android:text="@string/verbosFallados" />
-
-                <ScrollView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:id="@+id/scrollView4"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp">
-
-                    <TableLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-
-                        android:id="@+id/tablaVerbosTraining"
-                        android:gravity="center_horizontal"
-                        android:layout_gravity="center_horizontal">
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:gravity="left">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:textColor="#FE2E2E"
-                                android:textSize="20dp"
-                                android:textStyle="italic"
-                                android:id="@+id/infinitivoResultado"
-                                android:layout_column="1"
-                                android:layout_marginLeft="5dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:textColor="#FE2E2E"
-                                android:textSize="20dp"
-                                android:textStyle="italic"
-                                android:id="@+id/pasadoResultado"
-                                android:layout_column="2"
-                                android:layout_marginLeft="5dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:textColor="#FE2E2E"
-                                android:textSize="20dp"
-                                android:textStyle="italic"
-                                android:id="@+id/participioResultado"
-                                android:layout_column="3"
-                                android:layout_marginLeft="5dp" />
-                        </TableRow>
-                    </TableLayout>
-                </ScrollView>
-
-            </LinearLayout>
         </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/textViewAciertos"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/textViewFallos"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/textViewNumVerbos"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/textViewDificultadLista"
+                android:textSize="15dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Errores"
+        android:id="@+id/textViewErrores"
+        android:layout_marginLeft="20dp" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="133dp"
+        android:id="@+id/listViewVerbos"
+        android:layout_weight="0.74" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/LayoutBotones"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/buttonBack"
+            android:background="@drawable/back" />
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/buttonVerbos"
+            android:layout_alignLeft="@+id/buttonBack"
+            android:layout_alignStart="@+id/buttonBack"
+            android:background="@drawable/list"
+            android:layout_marginLeft="70dp" />
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/buttonEstadisticas"
+            android:layout_alignLeft="@+id/buttonVerbos"
+            android:layout_alignStart="@+id/buttonVerbos"
+            android:background="@drawable/statistics"
+            android:layout_marginLeft="70dp" />
+    </RelativeLayout>
+
+</LinearLayout>

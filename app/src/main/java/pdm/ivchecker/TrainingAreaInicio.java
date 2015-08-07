@@ -24,7 +24,7 @@ public class TrainingAreaInicio extends ActionBarActivity {
     //con el cuál se identificarán los resultados devueltos por la Activity lanzada, en este caso, Configuracion.
     static final int CODIGO_PETICION_CONFIGURACION = 1;
 
-    private Button boton_empezar, botonAjustes, botonEstadisticas, botonEliminar, botonGamer;
+    private Button boton_empezar, botonAjustes, botonEstadisticas, botonGamer;
 
     /*
         Variables para controlar el entrenamiento:

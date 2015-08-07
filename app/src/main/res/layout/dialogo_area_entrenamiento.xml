@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="#ff8b85a2"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Entrenamiento Aleatorio"
+            android:id="@+id/textViewTitulo"
+            android:textIsSelectable="false"
+            android:textSize="20dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:textColor="#fff2f0f0"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="108dp"
+                android:layout_height="103dp"
+                android:id="@+id/imageMedalla"
+                android:src="@drawable/trainningarea"
+                android:layout_marginLeft="10dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="E. Inteligente: Activado"
+                    android:id="@+id/textViewFrase1"
+                    android:textColor="#fff4f2f2"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Dificultad de los verbos: Media"
+                    android:id="@+id/textViewFrase2"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#fff4f2f2"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Nº verbos: 15"
+                    android:id="@+id/textViewFrase3"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#fff4f2f2"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonEntendido"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Empezar"
+        android:background="@color/bright_foreground_material_dark"
+        android:layout_marginTop="20dp" />
+
+</LinearLayout>

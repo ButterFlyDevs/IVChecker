@@ -1,11 +1,14 @@
 package pdm.ivchecker;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.androidplot.xy.LineAndPointFormatter;
@@ -16,6 +19,8 @@ import com.androidplot.xy.XYSeries;
 import com.androidplot.xy.XYStepMode;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,61 +28,112 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import lecho.lib.hellocharts.formatter.AxisValueFormatter;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.model.ValueShape;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.LineChartView;
+import lecho.lib.hellocharts.view.PieChartView;
 
 
 public class HistorialPuntuacionTraining extends ActionBarActivity {
 
 
-    Integer [] serie_puntuaciones;
+    Integer[] serie_puntuaciones;
 
-    Integer [] puntuaciones;
+    Integer[] puntuaciones;
+
+    private Button buttonBack, buttonEliminarHistorial;
+
+    private LinearLayout prueba, layoutPieChart1, layoutPieChart2, layoutPieChart3;
+
+    /**
+     * Funcion que puede ser llamada desde el dialogo que borra todo el fichero de puntuaciones guardado.
+     */
+    public void eliminarHistorial() {
+        //Elimina los datos del fichero de puntuaciones:
+        String fichero = "puntuaciones.csv";
+        FileOutputStream flujo_fichero;
+        try {
+            flujo_fichero = openFileOutput(fichero, MODE_PRIVATE);
+
+            flujo_fichero.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //Recargamos la actividad, para que los cambios hagan efecto.
+        finish();
+        startActivity(getIntent());
+    }
 
 
+    public void cargarGrafica() {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_historial_puntuacion_training);
+        prueba = (LinearLayout) findViewById(R.id.prueba);
+
+        //Carga de elementos desde el fichero CSV
+        //Array donde almacenar las lineas del fichero:
+        ArrayList<String> lineasFicheroPuntuaciones = new ArrayList();
+        //Variable temporal de lectura de linea individual:
+        String tmpLine;
+
+        try {
+            String fichero = "puntuaciones.csv";
+            InputStream inputStream = null;
+
+            inputStream = openFileInput(fichero);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            while (true) {
+                tmpLine = reader.readLine();
+                if (tmpLine == null) break;
+                lineasFicheroPuntuaciones.add(tmpLine);
+            }
+            inputStream.close();
 
 
-        //Para que no se muestre la ActionBar.
-        getSupportActionBar().hide();
-        //Para que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
-
-
-        LinearLayout prueba = (LinearLayout) findViewById(R.id.prueba);
-
-
-
-        //Asociamos el chart al elemento del xml
+        //Creamos un elemento LineChartView
         LineChartView chart = new LineChartView(this);
 
         prueba.addView(chart);
 
 
         List<PointValue> aciertos = new ArrayList<PointValue>();
-        aciertos.add(new PointValue(0, 2));
-        aciertos.add(new PointValue(1, 3));
-        aciertos.add(new PointValue(2, 7));
-        aciertos.add(new PointValue(3, 1));
-        aciertos.add(new PointValue(4, 6));
-
         List<PointValue> fallos = new ArrayList<PointValue>();
-        fallos.add(new PointValue(0, 1));
-        fallos.add(new PointValue(1, 2));
-        fallos.add(new PointValue(2, 3));
-        fallos.add(new PointValue(3, 4));
-        fallos.add(new PointValue(4, 5));
+
+        //Por cada linea del fichero de puntuaciones vamos a cargar el numero de aciertos en el array anterior.
+
+
+        System.out.println(lineasFicheroPuntuaciones.size() + " LINEAS CARGADAS");
+        String datosSeccionados[];
+        for (String linea : lineasFicheroPuntuaciones) {
+            System.out.println(linea);
+
+            //Seccionamos la linea.
+            datosSeccionados = linea.split(",");
+            //Sacamos los datos y los grabamos en los array que usa la grafica.
+            int numVerbos = Integer.parseInt(datosSeccionados[1]);
+            int numVerbosFallados = Integer.parseInt(datosSeccionados[2]);
+            int numVerbosAcertados = numVerbos - numVerbosFallados;
+            aciertos.add(new PointValue(lineasFicheroPuntuaciones.indexOf(linea), numVerbosAcertados));
+            fallos.add(new PointValue(lineasFicheroPuntuaciones.indexOf(linea), numVerbosFallados));
+
+        }
+
 
         Axis axisX = new Axis();
         Axis axisY = new Axis().setHasLines(true);
@@ -86,15 +142,15 @@ public class HistorialPuntuacionTraining extends ActionBarActivity {
         axisY.setName("Aciertos/Fallos");
 
         //Creamos una linea con los valors de aciertos
-        Line lineaAciertos = new Line(aciertos).setColor(Color.rgb(160,251,62)).setCubic(true);
+        Line lineaAciertos = new Line(aciertos).setColor(Color.rgb(160, 251, 62)).setCubic(true);
         lineaAciertos.setStrokeWidth(1);
         lineaAciertos.setPointRadius(3);
-        lineaAciertos.setPointColor(Color.rgb(151,253,41));
+        lineaAciertos.setPointColor(Color.rgb(151, 253, 41));
 
-        Line lineaFallos = new Line(fallos).setColor(Color.rgb(255,92,92)).setCubic(true);
+        Line lineaFallos = new Line(fallos).setColor(Color.rgb(255, 92, 92)).setCubic(true);
         lineaFallos.setStrokeWidth(1);
         lineaFallos.setPointRadius(3);
-        lineaFallos.setPointColor(Color.rgb(255,92,92));
+        lineaFallos.setPointColor(Color.rgb(255, 92, 92));
 
         List<Line> lines = new ArrayList<Line>();
         lines.add(lineaAciertos);
@@ -111,45 +167,143 @@ public class HistorialPuntuacionTraining extends ActionBarActivity {
         chart.setLineChartData(data);
 
 
-        //Leemos los datos y rellenamos el vector con los datos leidos
-        leerPuntuaciones();
+
+
+
+        // ## PIE CHARTS ## //
+
+        layoutPieChart1 = (LinearLayout) findViewById(R.id.layoutPieChart1);
+
+        PieChartView chart2 = new PieChartView(this);
+
+
+
+        //Añadimos el gráfico al layout
+        layoutPieChart1.addView(chart2);
+
+        List<SliceValue> values = new ArrayList<SliceValue>();
+
+        //SliceValue sliceValue = new SliceValue((float) 20, ChartUtils.pickColor());
+        values.add(new SliceValue((float) 20, ChartUtils.COLOR_GREEN));
+        values.add(new SliceValue((float) 30, ChartUtils.COLOR_RED));
+
+
+
+        PieChartData data2 = new PieChartData(values);
+        data2.setHasLabels(true);
+        data2.setHasLabelsOnlyForSelected(true);
+        data2.setHasLabelsOutside(true);
+        data2.setHasCenterCircle(true);
+
+        chart2.setPieChartData(data2);
+
+
+        PieChartView chart3 = new PieChartView(this);
+
+
+
+        layoutPieChart2=(LinearLayout)findViewById(R.id.layoutPieChart2);
+        //Añadimos el gráfico al layout
+        layoutPieChart2.addView(chart3);
+
+        List<SliceValue> values2 = new ArrayList<SliceValue>();
+
+        //SliceValue sliceValue = new SliceValue((float) 20, ChartUtils.pickColor());
+        values2.add(new SliceValue((float) 20, ChartUtils.COLOR_GREEN));
+        values2.add(new SliceValue((float) 30, ChartUtils.COLOR_RED));
+
+
+
+        PieChartData data3 = new PieChartData(values2);
+        data3.setHasLabels(true);
+        data3.setHasLabelsOnlyForSelected(true);
+        data3.setHasLabelsOutside(true);
+        data3.setHasCenterCircle(true);
+
+        chart3.setPieChartData(data3);
+
+
+        PieChartView chart4 = new PieChartView(this);
+
+        layoutPieChart3=(LinearLayout)findViewById(R.id.layoutPieChart3);
+        //Añadimos el gráfico al layout
+        layoutPieChart3.addView(chart4);
+
+        List<SliceValue> values3 = new ArrayList<SliceValue>();
+
+        //SliceValue sliceValue = new SliceValue((float) 20, ChartUtils.pickColor());
+        values3.add(new SliceValue((float) 20, ChartUtils.COLOR_GREEN));
+        values3.add(new SliceValue((float) 30, ChartUtils.COLOR_RED));
+
+
+
+        PieChartData data4 = new PieChartData(values3);
+        data4.setHasLabels(true);
+        data4.setHasLabelsOnlyForSelected(true);
+        data4.setHasLabelsOutside(true);
+        data4.setHasCenterCircle(true);
+
+        chart4.setPieChartData(data3);
+
+
+
+
 
     }
 
-    /*
-    Funcion que lee el historial de puntuaciones del usuario.
-    Consulta el fichero puntuaciones.csv en busca de todas las líneas.
-     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_historial_puntuacion_training);
 
-    private void leerPuntuaciones(){
-        ArrayList<Integer> puntuaciones_leidas = new ArrayList<>();
-        String line;
-        String [] RowData;
 
-        try {
-            //Apertura del fichero
-            String fichero = "puntuaciones.csv";
-            InputStream inputStream = openFileInput(fichero);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        //Para que no se muestre la ActionBar.
+        getSupportActionBar().hide();
+        //Para que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-            while (true) {
-                line = reader.readLine();
-                if (line == null) break;
-                System.out.println("LINEA LEIDA!");
-                RowData = line.split(",");
-                puntuaciones_leidas.add(Integer.parseInt(RowData[0]));
-//                puntuaciones.add(Integer.parseInt(RowData[0]));
+        //Asociamos los elementos
+        buttonBack = (Button) findViewById(R.id.buttonAtras);
+        buttonEliminarHistorial = (Button) findViewById(R.id.buttonEliminarEstadisticas);
 
-            }
-            inputStream.close();
-        }
-        catch (IOException ioe){
-            ioe.printStackTrace();
-            System.out.println("ERROR: No ha sido posible abrir el fichero de puntuaciones");
-        }
-        serie_puntuaciones = new Integer[puntuaciones_leidas.size()];
-        for(int i=0; i<puntuaciones_leidas.size();i++)
-            serie_puntuaciones[i] = (Integer) puntuaciones_leidas.get(i);
+
+        //El botón back nos lleva de nuevo al area de entrenamiento.
+        buttonBack.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Creamos el Intent
+                        Intent intent = new Intent(HistorialPuntuacionTraining.this, TrainingAreaInicio.class);
+                        startActivity(intent);
+                    }
+                }
+        );
+
+        //Declaramos el emento fuera de clickListener para poder llamar al método getParent pasandonos nosotros mismos.
+        //Además de eso debemos hacer la variable final.
+        final DialogoEliminacionDatos dialogo = new DialogoEliminacionDatos();
+        //Nos pasamos nostros mismos como padre de este fragment (podría no ser así)
+        dialogo.setPadre(this);
+        //El botón back nos abre el dialogo de confirmación de borrado.
+        buttonEliminarHistorial.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogo.show(getFragmentManager(), "");
+                        // DialogoInfoEntrenamiento dialogoInfo = new DialogoInfoEntrenamiento();
+                        // dialogoInfo.show(getFragmentManager(), "");
+                    }
+                }
+        );
+
+
+        //Cargamos la grafica
+
+        cargarGrafica();
+
     }
-
 }
+
+

@@ -122,10 +122,10 @@
 
 
     <!-- 9. Resultados Training -->
-    <string name="verbosFallados">Errores:</string>
-    <string name="aciertos">aciertos</string>
-    <string name="errores">fallos</string>
-    <string name="verbos">verbos</string>
+    <string name="verbosFallados">Errores: </string>
+    <string name="aciertos">Aciertos: </string>
+    <string name="errores">Fallos: </string>
+    <string name="verbos">Nº verbos: </string>
 
 
 

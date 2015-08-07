@@ -13,14 +13,48 @@
         android:id="@+id/textView18"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginTop="20dp" />
 
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="200dp"
-        android:id="@+id/prueba"></LinearLayout>
+        android:id="@+id/prueba"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="20dp"></LinearLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutPieCharts"
+        android:layout_gravity="center"
+        android:layout_marginRight="20dp"
+        android:layout_margin="20dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/layoutPieChart1"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/layoutPieChart2"
+            android:layout_centerHorizontal="true" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/layoutPieChart3"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -36,12 +70,12 @@
             <Button
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:id="@+id/button"
+                android:id="@+id/buttonAtras"
                 android:background="@drawable/back"
                 android:layout_alignParentStart="false" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/buttonEliminarEstadisticas"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@drawable/trash"

@@ -9,9 +9,13 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -20,32 +24,48 @@ import com.androidplot.pie.PieChart;
 import com.androidplot.pie.Segment;
 import com.androidplot.pie.SegmentFormatter;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
+import lecho.lib.hellocharts.util.ChartUtils;
+import lecho.lib.hellocharts.view.PieChartView;
+
 
 public class ResultadosTraining extends ActionBarActivity {
 
     //Variable Intent para obtener los datos de la actividad anterior
     Intent intent;
 
-    //Variables utilizadas para el gráfico
-    private PieChart grafico;
-    private Segment segmento_aciertos;
-    private Segment segmento_fallos;
+
+    //Botones:
+    private Button buttonBack, buttonListaVerbos, buttonEstadisticas;
+
 
     //Variables String para controlar los textos de la pantalla
-    TextView total_verbos;
-    TextView total_acertados;
-    TextView total_fallados;
-    TextView tipo_lista;
-    TextView verbos_fallados_infinitivo, verbos_fallados_pasado, verbos_fallados_participio;
+    TextView textViewNumVerbos, textViewVerbosAcertados, textViewVerbosFallados, textViewTipoLista, textViewErrores;
 
-    private LinearLayout layout;
+    int numVerbosFallados;
+    int numVerbos;
+
+    private LinearLayout layoutGrafico;
+
+
+    ArrayList<Verbo> listaVerbosFallados = new ArrayList();
+
+    ArrayList<Verbo> listaVerbosCargadaDesdeCSV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados_training);
 
-        layout = (LinearLayout) findViewById(R.id.layoutPrincipalResultadosTraining);
 
         //Para que no se muestre la ActionBar.
         getSupportActionBar().hide();
@@ -53,89 +73,219 @@ public class ResultadosTraining extends ActionBarActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Primero, obtenemos el intent con los datos importantes, y configuramos el juego
-        intent = getIntent();
+       // intent = getIntent();
 
         //Obtencion de las referencias de la vista XML de la actividad
-        grafico = (PieChart) findViewById(R.id.graficoQueso);
-        total_verbos = (TextView) findViewById(R.id.etiqueta_total_verbos);
-        total_fallados = (TextView) findViewById(R.id.etiqueta_verbos_fallados);
-        total_acertados = (TextView) findViewById(R.id.etiqueta_verbos_acertados);
-        tipo_lista = (TextView) findViewById(R.id.tipo_lista);
-        verbos_fallados_infinitivo = (TextView) findViewById(R.id.infinitivoResultado);
-        verbos_fallados_pasado = (TextView) findViewById(R.id.pasadoResultado);
-        verbos_fallados_participio = (TextView) findViewById(R.id.participioResultado);
+        //grafico = (PieChart) findViewById(R.id.graficoQueso);
+
+        textViewNumVerbos = (TextView) findViewById(R.id.textViewNumVerbos);
+        textViewVerbosFallados = (TextView) findViewById(R.id.textViewFallos);
+        textViewVerbosAcertados = (TextView) findViewById(R.id.textViewAciertos);
+        textViewErrores = (TextView) findViewById(R.id.textViewErrores);
+        textViewTipoLista = (TextView) findViewById(R.id.textViewDificultadLista);
+
+      //  verbos_fallados_infinitivo = (TextView) findViewById(R.id.infinitivoResultado);
+      //  verbos_fallados_pasado = (TextView) findViewById(R.id.pasadoResultado);
+      //  verbos_fallados_participio = (TextView) findViewById(R.id.participioResultado);
+
+        buttonBack = (Button) findViewById(R.id.buttonBack);
+        buttonListaVerbos = (Button) findViewById(R.id.buttonVerbos);
+        buttonEstadisticas = (Button) findViewById(R.id.buttonEstadisticas);
+
+
+        buttonBack.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Creamos el Intent
+                        Intent intent = new Intent(ResultadosTraining.this, TrainingAreaInicio.class);
+                        //Iniciamos la nueva actividad
+                        startActivity(intent);
+                    }
+                }
+        );
+
+        buttonListaVerbos.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Creamos el Intent
+                        Intent intent = new Intent(ResultadosTraining.this, ListaVerbos2.class);
+                        //Iniciamos la nueva actividad
+                        startActivity(intent);
+                    }
+                }
+        );
+        buttonEstadisticas.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Creamos el Intent
+                        Intent intent = new Intent(ResultadosTraining.this, HistorialPuntuacionTraining.class);
+                        //Iniciamos la nueva actividad
+                        startActivity(intent);
+                    }
+                }
+        );
 
 
 
-        //Texto lista
-        switch(intent.getIntExtra("LISTA",0)){
-            case 1: tipo_lista.setText(getString(R.string.listaSimple)); break;
-            case 2: tipo_lista.setText(getString(R.string.listaMedia)); break;
-            default: tipo_lista.setText(getString(R.string.listaDificil)); break;
+
+        /* ## Recuperamos todos los elementos necesarios de la última linea del CSV puntuaciones.csv ##
+        * Para eso primero cargamos el fichero y leemos todas sus lineas almacenandolas en un array.
+        * Después nos quedamos sólo con la útlima linea.
+        * Por último seccionamos la partes de la linea para extraer la información necesaria.
+        * */
+
+        //Array donde almacenar las lineas del fichero:
+        ArrayList<String> lineasFicheroPuntuaciones = new ArrayList();
+        //Variable temporal de lectura de linea individual:
+        String tmpLine;
+
+        try {
+            String fichero = "puntuaciones.csv";
+            InputStream inputStream = null;
+
+            inputStream = openFileInput(fichero);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            while (true) {
+                tmpLine = reader.readLine();
+                if (tmpLine == null) break;
+                lineasFicheroPuntuaciones.add(tmpLine);
+            }
+            inputStream.close();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        //Texto verbos
-        total_verbos.setText(getString(R.string.verbos)+" :"+intent.getIntExtra("NUMERO_VERBOS_PREGUNTADOS",0));
-        total_fallados.setText(getString(R.string.errores)+" :"+(intent.getIntExtra("NUMERO_VERBOS_PREGUNTADOS",0)
-                - intent.getIntExtra("NUMERO_VERBOS_ACERTADOS",0)));
-        total_acertados.setText(getString(R.string.aciertos)+" :"+intent.getIntExtra("NUMERO_VERBOS_ACERTADOS",0));
+        //Si se han cargado lineas:
+        if(!lineasFicheroPuntuaciones.isEmpty()) {
+            //Extraemos la última linea y seguimos usando la variable temporal tmpLine
+            tmpLine = lineasFicheroPuntuaciones.get(lineasFicheroPuntuaciones.size() - 1);
 
-        //`Poniendo el texto en la fuente deseada
-//        Typeface fuente = Typeface.createFromAsset(getAssets(), "KAREH___.TTF");
-//        total_verbos.setTypeface(fuente);
-//        total_fallados.setTypeface(fuente);
-//        total_acertados.setTypeface(fuente);
-//        tipo_lista.setTypeface(fuente);
 
-        //Lista verbos fallados
-        String string_verbos_fallados = intent.getStringExtra("LISTA_VERBOS_FALLADOS");
-        String lineas_verbos_fallados[] = string_verbos_fallados.split("\n");
-        if(lineas_verbos_fallados.length>1) {   //Ha de ser mayor que 1 y el for empieza en 1 por que el primer String guardado es la cadena de inicialización de la variable en la otra activity, es decir: ""
-            for (int i = 1; i < lineas_verbos_fallados.length; i++) {
-                String[] RowData = lineas_verbos_fallados[i].split(",");
-                verbos_fallados_infinitivo.append(" "+i+"\n\n\n\n");
-                verbos_fallados_pasado.append(" "+RowData[0]+"\n"+RowData[1]+"\n"+RowData[2]+"\n\n");
+            //Extraemos la información de la linea y la cargamos en un vector de String.
+            String[] datosSeccionados;
+            datosSeccionados = tmpLine.split(",");
+
+            //Sacamos los datos del vector de string.
+
+            //Primer elemento: Tipo de lista (además cargamos los vermos en un array)
+            String tipoLista = "Lista ";
+            switch (Integer.parseInt(datosSeccionados[0])) {
+                case 1:
+                    tipoLista+="Fácil";
+                    listaVerbosCargadaDesdeCSV = ProcesadorCSVs.obtenerVerbos(getResources().openRawResource(R.raw.ivsoft2));
+                    break;
+                case 2:
+                    tipoLista+="Media";
+                    listaVerbosCargadaDesdeCSV = ProcesadorCSVs.obtenerVerbos(getResources().openRawResource(R.raw.ivmedium2));
+                    break;
+                case 3:
+                    tipoLista+="Difícil";
+                    listaVerbosCargadaDesdeCSV = ProcesadorCSVs.obtenerVerbos(getResources().openRawResource(R.raw.ivhard2));
+                    break;
+            }
+            textViewTipoLista.setText(tipoLista);
+
+            //Segundo elemento: Número de verbos
+            textViewNumVerbos.setText(datosSeccionados[1]+" verbos");
+            numVerbos=Integer.parseInt(datosSeccionados[1]);
+
+            //Tercer elemento: Número de verbos fallados
+            textViewVerbosFallados.setText(datosSeccionados[2]+" fallos");
+            //Almacenamos el número de verbos fallados.
+            numVerbosFallados=Integer.parseInt(datosSeccionados[2]);
+
+            //Con este dato seteamos el otro textView
+            textViewVerbosAcertados.setText( Integer.toString(Integer.parseInt(datosSeccionados[1])-Integer.parseInt(datosSeccionados[2]))+" aciertos");
+
+            //Últimos elementos, lista de verbos fallados
+
+            //Extraemos de toda la lista los que hemos fallado usando los índices guardados en la última sección de la fila del csv
+
+            for(int i=3; i<datosSeccionados.length; i++){
+                listaVerbosFallados.add(listaVerbosCargadaDesdeCSV.get(Integer.parseInt(datosSeccionados[i])));
             }
         }
-        //verbos_fallados.setText("Failed verbs: " + intent.getStringExtra("LISTA_VERBOS_FALLADOS"));
-        //Grafico
 
-        segmento_aciertos = new Segment(getString(R.string.aciertos), intent.getIntExtra("NUMERO_VERBOS_ACERTADOS",0));
-        segmento_fallos = new Segment(getString(R.string.errores), intent.getIntExtra("NUMERO_VERBOS_PREGUNTADOS",0) -
-                intent.getIntExtra("NUMERO_VERBOS_ACERTADOS",0));
+        //Gráfico pieChart
 
-        EmbossMaskFilter emf = new EmbossMaskFilter(
-                new float[]{1, 1, 1}, 0.4f, 10, 8.2f);
 
-                /*
-        Creamos los formateadores de los trozos del queso. Para ello:
+        layoutGrafico = (LinearLayout) findViewById(R.id.layoutGrafico);
 
-            1. Creamos la carpeta xml dentro de res (si no existiera), y los formateadores dentro de esa carpeta (son archivos xml)
-            2. Copiamos el contenido del formateador. Básicamente tiene dos lineas: en la primera se indica el color, y en la segunda, el tamaño del texto.
-            3. En values / dimensions.xml hay que modificar el fichero diimens.xml (de bajo dpi) para incluir la variable pie_segment_label_font_size y title_font_size
+        PieChartView chart = new PieChartView(this);
 
-            Fuente: https://bitbucket.org/androidplot/androidplot/src
-         */
 
-        SegmentFormatter sf1 = new SegmentFormatter();
-        sf1.configure(getApplicationContext(),R.xml.formato_aciertos);
-        sf1.getFillPaint().setMaskFilter(emf);
 
-        SegmentFormatter sf2 = new SegmentFormatter();
-        sf2.configure(getApplicationContext(), R.xml.formato_fallos);
-        sf2.getFillPaint().setMaskFilter(emf);
+        //Añadimos el gráfico al layout
+        layoutGrafico.addView(chart);
 
-        //Añadimos los segmentos y los formatos al gráfico
-        grafico.addSeries(segmento_aciertos, sf1);
-        grafico.addSeries(segmento_fallos, sf2);
+        List<SliceValue> values = new ArrayList<SliceValue>();
 
-        grafico.getBorderPaint().setColor(Color.TRANSPARENT);
-        grafico.getBackgroundPaint().setColor(Color.TRANSPARENT);
+        //SliceValue sliceValue = new SliceValue((float) 20, ChartUtils.pickColor());
+        values.add(new SliceValue((float) numVerbos-numVerbosFallados, ChartUtils.COLOR_GREEN));
+        values.add(new SliceValue((float) numVerbosFallados, ChartUtils.COLOR_RED));
 
-        layout.invalidate();
 
-        layout.requestLayout();
 
+        PieChartData data = new PieChartData(values);
+        data.setHasLabels(true);
+        data.setHasLabelsOnlyForSelected(true);
+        data.setHasLabelsOutside(true);
+        data.setHasCenterCircle(true);
+
+        chart.setPieChartData(data);
+
+
+
+        // ## CARGA DE VERBOS FALLADOS ## //
+
+        //1º Asociamos el listview de la vista:
+        final ListView listview = (ListView) findViewById(R.id.listViewVerbos);
+
+        //2º Especificamos que la lista sólo permita selección única
+        listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+
+        //3º Iniciamos el adaptador y le pasamos la lista
+        AdaptadorListVerbos adapter = new AdaptadorListVerbos(this, listaVerbosFallados);
+
+        //4º Asociamos el adaptador definido a nuestro listView
+        listview.setAdapter(adapter);
+
+        //5º Programamos la acción al pulsar sobre un elmento:
+        //Programación del evento pulsar sobre un elementod e la lista.
+        listview.setOnItemClickListener(
+
+                new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1, int posicion, long arg3) {
+                        System.out.println("PULSADO BOTÓN DE LISTA " + Integer.toString(posicion));
+
+                        FragmentDetalleVerbo fragment1 = new FragmentDetalleVerbo();
+
+
+                        //Le enviamos al fragment el verbo del que queremos mostrar la información.
+                        fragment1.setVerbo(listaVerbosFallados.get(posicion));
+
+                        //Hacemos que se muestre el fragment
+                        fragment1.show(getFragmentManager(), "");
+
+                    }
+
+                }
+
+
+        );
 
     }
 

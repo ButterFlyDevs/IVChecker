@@ -3,17 +3,21 @@ package pdm.ivchecker;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +52,11 @@ public class JuegoTraining extends ActionBarActivity {
     private Button btnNext;
     private EditText txtVerbo;
 
-    private TextView infinitivo, pasado, participio, etiqueta_progreso;
+    private TextView  etiqueta_progreso;
+
+    //Contenedores LAYOUT que pueden tener un EditText o un TextView
+    private LinearLayout layoutInfinitivo, layoutPasado, layoutParticipio;
+
 
     private int puntuacionJugada=0, verbos_acertados=0;
     private int numPartida=0;
@@ -56,6 +64,8 @@ public class JuegoTraining extends ActionBarActivity {
     private int numVerbo, numForma, numLetrasForma, total_verbos_lista;
     private String misterio="";
     private FileOutputStream flujo_fichero;
+
+    private int tamTexto=40;
 
 
     //Variable Intent con los datos que TrainingAreaInicio ha pasado
@@ -105,12 +115,40 @@ public class JuegoTraining extends ActionBarActivity {
 
         //Obtenemos la referencia a ese botón de la vista
         btnNext=(Button)findViewById(R.id.nextButtonTraining);
-        txtVerbo=(EditText)findViewById(R.id.formaMisteriosaTraining);
 
-        infinitivo=(TextView)findViewById(R.id.infinitivoTraining);
-        pasado=(TextView)findViewById(R.id.pasadoTraining);
-        participio=(TextView)findViewById(R.id.participioTraining);
+
+        //Inicialización y ajuste del campo introducción de texto
+        txtVerbo = new EditText(this);
+        //Ajustamos el tamaño del texto:
+        txtVerbo.setTextSize(tamTexto);
+        txtVerbo.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+        txtVerbo.setBackgroundColor(Color.TRANSPARENT);
+        txtVerbo.setTextColor(Color.WHITE);
+
+        //Cuando pinchamos para escribir se borrar los guiones de ayuda.
+        txtVerbo.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    //Implementamos la acción del click sobre el botón next.
+                    public void onClick(View v) {
+
+                  txtVerbo.setText("_");
+
+                    }
+                }
+        );
+
+        //Asociación e los layout contenedores:
+        layoutInfinitivo = (LinearLayout) findViewById(R.id.layoutInfinitivo);
+        layoutPasado = (LinearLayout) findViewById(R.id.layoutPasado);
+        layoutParticipio = (LinearLayout) findViewById(R.id.layoutParticipio);
+
+
         etiqueta_progreso=(TextView) findViewById(R.id.etiqueta_progreso);
+
+        ;
+
+
 
         final Animation animacionBotonSiguiente = AnimationUtils.loadAnimation(this, R.anim.myanimation);
 
@@ -148,6 +186,7 @@ public class JuegoTraining extends ActionBarActivity {
 
 
 
+
         if(savedInstanceState==null)
             prepararJuego();
         leerVerbos();
@@ -163,10 +202,7 @@ public class JuegoTraining extends ActionBarActivity {
     Activity anterior (TrainingAreaInicio). Recordamos que el valor 0 es aleatorio.
      */
     private void prepararJuego(){
-        //Alertas al usuario sobre el modo escogido
-        if(intent.getIntExtra("lista",0)==0 && intent.getIntExtra("numero_verbos",0)==0){   // TODO ALEATORIO
-            Toast.makeText(getApplicationContext(), getString(R.string.toastA), Toast.LENGTH_LONG).show();
-        }
+
         Random rnd = new Random();
         int respuesta_smartVerb;
         //Obtencion de valores
@@ -185,40 +221,31 @@ public class JuegoTraining extends ActionBarActivity {
         if(numero_verbos==0)
             numero_verbos = 3 + rnd.nextInt(22); //Genera un numero entre 10 y 24.
 
-        /*
-        Alert dialog para informar al usuario del estado de la partida
-         */
 
-        String informacion;
+        DialogoInfoEntrenamiento dialogoInfo = new DialogoInfoEntrenamiento();
 
-        if(smartVerb){
-            switch (lista_a_preguntar) {
-                case 1:
-                    informacion = getString(R.string.juegoInteligente)+"\n" + "List: "+getString(R.string.listaSimple)+"\n" + "Verbs: " + numero_verbos;
-                case 2:
-                    informacion = getString(R.string.juegoInteligente)+"\n" + "List: "+getString(R.string.listaMedia)+"\n" + "Verbs: " + numero_verbos;
-                default:
-                    informacion = getString(R.string.juegoInteligente)+"\n" + "List: "+getString(R.string.listaDificil)+"\n" + "Verbs: " + numero_verbos;
-            }
-        }
-        else{
-            switch (lista_a_preguntar){
-                case 1: informacion=getString(R.string.smartDesactivado)+"\n"+ "List: "+getString(R.string.listaSimple)+"\n"+"Verbs: " +numero_verbos;
-                case 2: informacion=getString(R.string.smartDesactivado)+"\n"+ "List: "+getString(R.string.listaMedia)+"\n"+"Verbs: " +numero_verbos;
-                default: informacion=getString(R.string.smartDesactivado)+"\n"+ "List: "+getString(R.string.listaDificil)+"\n"+"Verbs: " +numero_verbos;
-            }
-        }
+        //Alertas al usuario sobre el modo escogido
+        if(intent.getIntExtra("lista",0)==0 && intent.getIntExtra("numero_verbos",0)==0)
+            dialogoInfo.setRestoTitulo("Aleatorio");
+        else
+            dialogoInfo.setRestoTitulo("Personalizado");
 
-        new AlertDialog.Builder(this)
-                .setTitle(getString(R.string.modoEntranamiento))
-                .setMessage(informacion)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+        if(smartVerb)
+            dialogoInfo.setEntrenamientoInteligente("Activado");
+        else
+            dialogoInfo.setEntrenamientoInteligente("Desactivado");
+
+        if(lista_a_preguntar==1)
+            dialogoInfo.setDificultadVerbos("Fácil");
+        if(lista_a_preguntar==2)
+            dialogoInfo.setDificultadVerbos("Media");
+        if(lista_a_preguntar==3)
+            dialogoInfo.setDificultadVerbos("Difícil");
+
+
+        dialogoInfo.setNumVerbos(Integer.toString(numero_verbos));
+
+        dialogoInfo.show(getFragmentManager(), "");
 
     }
     private void leerVerbos(){
@@ -262,6 +289,7 @@ public class JuegoTraining extends ActionBarActivity {
     //Metodo utilizado para guardar la puntuacion en un fichero local
     private void salvar_puntuacion_local(){
 
+        //Fichero donde se guardan las puntuaciones de las partidas.
         String fichero= "puntuaciones.csv";
 
         try {
@@ -270,13 +298,28 @@ public class JuegoTraining extends ActionBarActivity {
             /*
             Formato de la linea a guardar:
             Puntuacion, Lista preguntada, Nivel,{Lista de verbos fallados}
+
+            Nuevo formato:
+            Lista,numVerbos, nºfallos, {0,1 ... n verbos fallados}
              */
             String linea;
+
+            linea=String.valueOf(lista_a_preguntar)+","+String.valueOf(numero_verbos);
+            if(this.verbos_fallados!=null){
+                linea+=","+String.valueOf(verbos_fallados.size());
+                for(int i=0; i<verbos_fallados.size();i++)
+                    linea = linea+","+verbos_fallados.get(i);
+            }
+
+            System.out.println("Linea guardada en puntuaciones.csv"+linea);
+
+            /*
             linea = String.valueOf(this.puntuacionJugada)+","+String.valueOf(this.lista_a_preguntar)+","+String.valueOf(0);
             if(this.verbos_fallados!=null){
                 for(int i=0; i<verbos_fallados.size();i++)
                     linea = linea+","+verbos_fallados.get(i);
             }
+            */
             linea=linea+"\n";
             flujo_fichero.write(linea.getBytes());
             flujo_fichero.close();
@@ -423,21 +466,72 @@ public class JuegoTraining extends ActionBarActivity {
             misterio+=" _ ";
         }
 
+        //Limpiamos el txtVerbo esté donde esté
+        if(txtVerbo.getParent()!=null)
+            ((ViewGroup)txtVerbo.getParent()).removeView(txtVerbo);
+
+        //Limpiamos los layouts por si hubiese algún elemento de alguna ejecución anterior.
+        layoutPasado.removeAllViewsInLayout();
+        layoutParticipio.removeAllViewsInLayout();
+        layoutInfinitivo.removeAllViewsInLayout();
+
+
         //Escribimos en la pantalla:
-        if(numForma==0)
-            infinitivo.setText(misterio);
-        else
-            infinitivo.setText(verbos[numVerbo][0]);
 
-        if(numForma==1)
-            pasado.setText(misterio);
-        else
-            pasado.setText(verbos[numVerbo][1]);
+        //INFINITIVO
 
-        if(numForma==2)
-            participio.setText(misterio);
-        else
-            participio.setText(verbos[numVerbo][2]);
+            //Si ha sido elegido el como forma a preguntar
+            if(numForma==0) {
+                //Escribimos la forma en forma de misterio
+                txtVerbo.setText(misterio);
+                layoutInfinitivo.addView(txtVerbo);
+
+            //Si no ha sido elegido se ecribe el infinitivo del verbo en ese lugar
+            }else {
+
+                //Creamos un textView para imprimir el texto en la pantalla:
+                TextView texto = new TextView(this);
+                //Ajustamos el tamaño del texto:
+                texto.setTextSize(tamTexto);
+
+                //Colocamos en texto en el centro del layout
+
+
+                //Añadimos el infinitivo en el texto:
+                texto.setText(verbos[numVerbo][0]);
+                //Seteamos el color blanco al texto:
+                texto.setTextColor(Color.WHITE);
+                //Añadimos el texto al layout:
+                layoutInfinitivo.addView(texto);
+
+            }
+
+        if(numForma==1) {
+            txtVerbo.setText(misterio);
+            layoutPasado.addView(txtVerbo);
+        }else {
+
+            TextView texto = new TextView(this);
+            //Ajustamos el tamaño del texto:
+            texto.setTextSize(tamTexto);
+            texto.setText(verbos[numVerbo][1]);
+            texto.setTextColor(Color.WHITE);
+            layoutPasado.addView(texto);
+         //   pasado.setText(verbos[numVerbo][1]);
+        }
+
+        if(numForma==2) {
+            txtVerbo.setText(misterio);
+            layoutParticipio.addView(txtVerbo);
+        }else {
+            TextView texto = new TextView(this);
+            //Ajustamos el tamaño del texto:
+            texto.setTextSize(tamTexto);
+            texto.setText(verbos[numVerbo][2]);
+            texto.setTextColor(Color.WHITE);
+            layoutParticipio.addView(texto);
+            //   pasado.setText(verbos[numVerbo][1]);
+        }
 
         //Después misterio vuelve a estar vacía
         misterio="";
@@ -479,23 +573,17 @@ public class JuegoTraining extends ActionBarActivity {
         txtVerbo.setText("");
     }
 
+    /**
+     * Función que termina la partida de entrenamiento guardando los resultados obtenidos en el fichero de puntuaciones
+     * y llevándonos después a ResultadosTraining para mostrarle al usuario los resultados de la partida de entrenamiento.
+     */
     public void acabarPartida(){
-        //Partida acabada. Salvamos la puntuación del jugador.
+        //Partida acabada. Salvamos la puntuación del jugador en el fichero puntuaciones.csv
         this.salvar_puntuacion_local();
 
         //Creamos el intent:
         Intent intent = new Intent(JuegoTraining.this, ResultadosTraining.class);
-
-        //Creamos la información a pasar entre actividades: puntuación obtenida, numero verbos_preguntados y acertados.
-
-        intent.putExtra("PUNTOS", puntuacionJugada);
-        intent.putExtra("NUMERO_VERBOS_PREGUNTADOS",numero_verbos);
-        intent.putExtra("NUMERO_VERBOS_ACERTADOS", verbos_acertados);
-        intent.putExtra("LISTA",lista_a_preguntar);
-        intent.putExtra("LISTA_VERBOS_FALLADOS",this.lista_verbos_fallados);
-
-
-        //Nos vamos al activity resultados:
+        //Nos vamos al activity:
         startActivity(intent);
     }
 
