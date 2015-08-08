@@ -9,13 +9,22 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Resultados"
-        android:id="@+id/textView18"
+        android:text="Historial puntuaciones"
+        android:id="@+id/textViewTitulo"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:textStyle="bold"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:textColor="#fff4f2f2" />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Aciertos y fallos totales"
+        android:id="@+id/textView18"
+        android:layout_margin="30dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -32,28 +41,57 @@
         android:layout_height="wrap_content"
         android:id="@+id/layoutPieCharts"
         android:layout_gravity="center"
-        android:layout_marginRight="20dp"
-        android:layout_margin="20dp">
+        android:layout_margin="30dp">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/layoutPieChart1"></LinearLayout>
+            android:id="@+id/layoutPieChart1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Fáciles"
+                android:id="@+id/textView20"
+                android:layout_gravity="center"
+                android:gravity="center" />
+        </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/layoutPieChart2"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Medios"
+                android:id="@+id/textView21"
+                android:layout_gravity="center"
+                android:gravity="center" />
+        </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/layoutPieChart3"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Difíciles"
+                android:id="@+id/textView22"
+                android:layout_gravity="center"
+                android:gravity="center" />
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout

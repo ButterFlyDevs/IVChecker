@@ -40,6 +40,8 @@
                 android:layout_gravity="right" />
         </LinearLayout>
 
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,32 +49,39 @@
             android:text="@string/dificultad"
             android:id="@+id/textDificultad" />
 
-        <RadioGroup
-            android:id="@+id/tipoLista"
+        <info.hoang8f.android.segmented.SegmentedGroup
+            xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/grupoLista"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp">
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            segmentedgroup:border_width="2dp"
+            segmentedgroup:corner_radius="10dp">
 
             <RadioButton
-                android:id="@+id/radioSoft"
+                android:id="@+id/RadioButtonFacil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/listaSimple"
+                android:text="Fáciles"
+                style="@style/RadioButton"
                 android:checked="true" />
 
             <RadioButton
-                android:id="@+id/radioMedium"
+                android:id="@+id/RadioButtonMedio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/listaMedia" />
-
+                android:text="Medios"
+                style="@style/RadioButton"
+                android:checked="false" />
             <RadioButton
-                android:id="@+id/radioHard"
+                android:id="@+id/RadioButtonDificil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/listaDificil" />
-
-        </RadioGroup>
+                android:text="Difícles"
+                style="@style/RadioButton"
+                android:checked="false" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
 
         <TextView
             android:layout_width="wrap_content"
@@ -82,14 +91,32 @@
             android:id="@+id/textLevel"
             android:layout_marginTop="20dp" />
 
-        <Switch
+        <info.hoang8f.android.segmented.SegmentedGroup
+            xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/smartGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/switch_smartVerb"
-            android:layout_gravity="left|center_horizontal"
-            android:textSize="20dp"
-            android:checked="false"
-            android:layout_marginLeft="20dp" />
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            segmentedgroup:border_width="2dp"
+            segmentedgroup:corner_radius="10dp">
+
+            <RadioButton
+                android:id="@+id/smartOF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NO"
+                style="@style/RadioButton"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/smartON"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SI"
+                style="@style/RadioButton"
+                android:checked="false" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
 
         <TextView
             android:layout_width="wrap_content"
@@ -99,26 +126,41 @@
             android:id="@+id/textoVerbos"
             android:layout_marginTop="20dp" />
 
-        <Spinner
-            android:layout_width="119dp"
-            android:layout_height="47dp"
-            android:id="@+id/spinnerVerbos" />
-
-        <Button
-            android:layout_width="134dp"
-            android:layout_height="wrap_content"
-            android:text="OK"
-            android:id="@+id/botonConfirmarCconfiguracion"
-            android:layout_gravity="center_horizontal" />
-
         <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:dsb_min="5"
+            app:dsb_min="1"
             app:dsb_max="50"
             app:dsb_progressColor="#fffffdfd"
             app:dsb_trackColor="#fffbf9f9"
-            />
+            android:id="@+id/bar" />
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:focusable="true"
+            android:layout_marginTop="60dp">
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:id="@+id/buttonBack"
+                android:background="@drawable/back"
+                android:gravity="bottom|center"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:id="@+id/buttonOk"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/ok"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
 
     </LinearLayout>
 </ScrollView>

@@ -52,6 +52,8 @@ public class HistorialPuntuacionTraining extends ActionBarActivity {
 
     private LinearLayout prueba, layoutPieChart1, layoutPieChart2, layoutPieChart3;
 
+    private int aciertosLista1Acumulados=0, fallosLista1Acumulados=0, aciertosLista2Acumulados=0, fallosLista2Acumulados=0, aciertosLista3Acumulados=0, fallosLista3Acumulados =0;
+
     /**
      * Funcion que puede ser llamada desde el dialogo que borra todo el fichero de puntuaciones guardado.
      */
@@ -127,10 +129,33 @@ public class HistorialPuntuacionTraining extends ActionBarActivity {
             datosSeccionados = linea.split(",");
             //Sacamos los datos y los grabamos en los array que usa la grafica.
             int numVerbos = Integer.parseInt(datosSeccionados[1]);
-            int numVerbosFallados = Integer.parseInt(datosSeccionados[2]);
+
+            //Puede que en una partida no hayan ocurrido fallos y por eso no se pueda acceder a esas posiciones de la linea
+            //Si hay verbos fallados
+            int numVerbosFallados=0;
+            if(datosSeccionados.length>2) {
+                numVerbosFallados = Integer.parseInt(datosSeccionados[2]);
+            }
             int numVerbosAcertados = numVerbos - numVerbosFallados;
             aciertos.add(new PointValue(lineasFicheroPuntuaciones.indexOf(linea), numVerbosAcertados));
             fallos.add(new PointValue(lineasFicheroPuntuaciones.indexOf(linea), numVerbosFallados));
+
+            //Aprovechamos y guardamos las acumuladas:
+
+            //Si la linea leida es de la lista 1 (fácil)
+            if(Integer.parseInt(datosSeccionados[0])==1){
+                fallosLista1Acumulados+=numVerbosFallados;
+                aciertosLista1Acumulados+=numVerbosAcertados;
+            }
+            if(Integer.parseInt(datosSeccionados[0])==2){
+                fallosLista2Acumulados+=numVerbosFallados;
+                aciertosLista2Acumulados+=numVerbosAcertados;
+            }
+            if(Integer.parseInt(datosSeccionados[0])==3){
+                fallosLista3Acumulados+=numVerbosFallados;
+                aciertosLista3Acumulados+=numVerbosAcertados;
+            }
+
 
         }
 
@@ -184,8 +209,8 @@ public class HistorialPuntuacionTraining extends ActionBarActivity {
         List<SliceValue> values = new ArrayList<SliceValue>();
 
         //SliceValue sliceValue = new SliceValue((float) 20, ChartUtils.pickColor());
-        values.add(new SliceValue((float) 20, ChartUtils.COLOR_GREEN));
-        values.add(new SliceValue((float) 30, ChartUtils.COLOR_RED));
+        values.add(new SliceValue((float) aciertosLista1Acumulados, ChartUtils.COLOR_GREEN));
+        values.add(new SliceValue((float) fallosLista1Acumulados, ChartUtils.COLOR_RED));
 
 
 
@@ -209,8 +234,8 @@ public class HistorialPuntuacionTraining extends ActionBarActivity {
         List<SliceValue> values2 = new ArrayList<SliceValue>();
 
         //SliceValue sliceValue = new SliceValue((float) 20, ChartUtils.pickColor());
-        values2.add(new SliceValue((float) 20, ChartUtils.COLOR_GREEN));
-        values2.add(new SliceValue((float) 30, ChartUtils.COLOR_RED));
+        values2.add(new SliceValue((float) aciertosLista2Acumulados, ChartUtils.COLOR_GREEN));
+        values2.add(new SliceValue((float) fallosLista2Acumulados, ChartUtils.COLOR_RED));
 
 
 
@@ -232,8 +257,8 @@ public class HistorialPuntuacionTraining extends ActionBarActivity {
         List<SliceValue> values3 = new ArrayList<SliceValue>();
 
         //SliceValue sliceValue = new SliceValue((float) 20, ChartUtils.pickColor());
-        values3.add(new SliceValue((float) 20, ChartUtils.COLOR_GREEN));
-        values3.add(new SliceValue((float) 30, ChartUtils.COLOR_RED));
+        values3.add(new SliceValue((float) aciertosLista3Acumulados, ChartUtils.COLOR_GREEN));
+        values3.add(new SliceValue((float) fallosLista3Acumulados, ChartUtils.COLOR_RED));
 
 
 
@@ -243,7 +268,7 @@ public class HistorialPuntuacionTraining extends ActionBarActivity {
         data4.setHasLabelsOutside(true);
         data4.setHasCenterCircle(true);
 
-        chart4.setPieChartData(data3);
+        chart4.setPieChartData(data4);
 
 
 

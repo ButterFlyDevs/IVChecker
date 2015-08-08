@@ -15,17 +15,24 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import info.hoang8f.android.segmented.SegmentedGroup;
 
 
 public class Configuracion extends ActionBarActivity {
 
-    private Spinner spinner_num_verbos;
     private Switch smartVerb_switch=null;
-    private Button botonOK;
-    private RadioGroup tipoLista;
-    private RadioButton boton_soft, boton_medium, boton_hard;
+    private Button botonOK, botonBack;
+    private SegmentedGroup tipoLista;
+    private SegmentedGroup smart;
+    private RadioButton botonListaFacil, botonListaMedia, botonListaDificil;
+    private RadioButton smartOn, smartOf;
+    private DiscreteSeekBar barNumVerbos;
+
 
     private int smartVerb=0, lista_a_preguntar=0,numero_verbos=0;
 
@@ -39,16 +46,33 @@ public class Configuracion extends ActionBarActivity {
         //Con esta hacemos que la barra de estado del teléfono no se vea y la actividad sea a pantalla completa.
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        botonOK = (Button) findViewById(R.id.botonConfirmarCconfiguracion);
-        tipoLista = (RadioGroup) findViewById(R.id.tipoLista);
-        boton_soft = (RadioButton) findViewById(R.id.radioSoft);
-        boton_medium = (RadioButton) findViewById(R.id.radioMedium);
-        boton_hard = (RadioButton) findViewById(R.id.radioHard);
+        botonOK = (Button) findViewById(R.id.buttonOk);
+        botonBack = (Button) findViewById(R.id.buttonBack);
+        tipoLista = (SegmentedGroup) findViewById(R.id.grupoLista);
+        smart = (SegmentedGroup) findViewById(R.id.smartGroup);
+
+        botonListaFacil = (RadioButton) findViewById(R.id.RadioButtonFacil);
+        botonListaMedia = (RadioButton) findViewById(R.id.RadioButtonMedio);
+        botonListaDificil = (RadioButton) findViewById(R.id.RadioButtonDificil);
+
+        smartOn=(RadioButton)findViewById(R.id.smartON);
+        smartOf=(RadioButton)findViewById(R.id.smartOF);
+
+        barNumVerbos = (DiscreteSeekBar) findViewById(R.id.bar);
 
 
-        //Rellenamos el spinner y preparamos el Switch
-        rellenar_spinner_NumVerbos();
-        smartVerb_switch = (Switch) findViewById(R.id.switch_smartVerb);
+        botonBack.setOnClickListener(
+
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent  = new Intent(Configuracion.this, TrainingAreaInicio.class);
+                        //Iniciamos la nueva actividad
+                        startActivity(intent);
+                    }
+                }
+        );
+
 
         //Comprobamos los datos introducidos
         botonOK.setOnClickListener(new View.OnClickListener() {
@@ -56,22 +80,25 @@ public class Configuracion extends ActionBarActivity {
             public void onClick(View v) {
 
                 //Comprobamos la lista pedida comparando con cada uno de los botones
-                int ID_lista = tipoLista.getCheckedRadioButtonId();
-                if (ID_lista == boton_soft.getId())
+                int ID_lista1 = tipoLista.getCheckedRadioButtonId();
+                if (ID_lista1 == botonListaFacil.getId())
                     lista_a_preguntar = 1;
-                if (ID_lista == boton_medium.getId())
+                if (ID_lista1 == botonListaMedia.getId())
                     lista_a_preguntar = 2;
-                if (ID_lista == boton_hard.getId())
+                if (ID_lista1 == botonListaDificil.getId())
                     lista_a_preguntar = 3;
 
-                //Comprobamos SmartVerb
-                if (smartVerb_switch.isChecked())
+
+                int ID_lista2 = smart.getCheckedRadioButtonId();
+                if (ID_lista2 == smartOn.getId())
                     smartVerb = 0;
-                else
+                if (ID_lista2 == smartOf.getId())
                     smartVerb = 1;
 
+
                 //Comprobamos el numero de verbos
-                numero_verbos = Integer.parseInt(String.valueOf(spinner_num_verbos.getSelectedItem()));
+                numero_verbos = barNumVerbos.getProgress();
+
                 //Devolvemos los datos a la Actividad TrainigAreaInicio (que llamó a esta actividad Configuracion)
                 Intent intent = new Intent();
                 intent.putExtra("lista", lista_a_preguntar);
@@ -88,28 +115,6 @@ public class Configuracion extends ActionBarActivity {
             }
         });
 
-    }
-
-    //Funcion para rellenar el spinner de numero de verbos a preguntar
-
-    private void rellenar_spinner_NumVerbos() {
-
-        spinner_num_verbos= (Spinner) findViewById(R.id.spinnerVerbos);
-        List<String> list = new ArrayList<String>();
-        list.add("3");
-        list.add("6");
-        list.add("9");
-        list.add("12");
-        list.add("15");
-        list.add("18");
-        list.add("21");
-        list.add("24");
-        list.add("27");
-        list.add("30");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_num_verbos.setAdapter(dataAdapter);
     }
 
 }

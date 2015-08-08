@@ -199,20 +199,30 @@ public class ResultadosTraining extends ActionBarActivity {
             textViewNumVerbos.setText(datosSeccionados[1]+" verbos");
             numVerbos=Integer.parseInt(datosSeccionados[1]);
 
-            //Tercer elemento: Número de verbos fallados
-            textViewVerbosFallados.setText(datosSeccionados[2]+" fallos");
-            //Almacenamos el número de verbos fallados.
-            numVerbosFallados=Integer.parseInt(datosSeccionados[2]);
+            //Puede que no haya verbos fallados y entonces no se pueda acceder a esa posición!
+            //Si hay verbos fallados
+            if(datosSeccionados.length>2) {
 
-            //Con este dato seteamos el otro textView
-            textViewVerbosAcertados.setText( Integer.toString(Integer.parseInt(datosSeccionados[1])-Integer.parseInt(datosSeccionados[2]))+" aciertos");
+                //Tercer elemento: Número de verbos fallados
+                textViewVerbosFallados.setText(datosSeccionados[2] + " fallos");
+                //Almacenamos el número de verbos fallados.
+                numVerbosFallados = Integer.parseInt(datosSeccionados[2]);
 
-            //Últimos elementos, lista de verbos fallados
+                //Con este dato seteamos el otro textView
+                textViewVerbosAcertados.setText(Integer.toString(Integer.parseInt(datosSeccionados[1]) - Integer.parseInt(datosSeccionados[2])) + " aciertos");
 
-            //Extraemos de toda la lista los que hemos fallado usando los índices guardados en la última sección de la fila del csv
+                //Últimos elementos, lista de verbos fallados
 
-            for(int i=3; i<datosSeccionados.length; i++){
-                listaVerbosFallados.add(listaVerbosCargadaDesdeCSV.get(Integer.parseInt(datosSeccionados[i])));
+                //Extraemos de toda la lista los que hemos fallado usando los índices guardados en la última sección de la fila del csv
+
+                for (int i = 3; i < datosSeccionados.length; i++) {
+                    listaVerbosFallados.add(listaVerbosCargadaDesdeCSV.get(Integer.parseInt(datosSeccionados[i])));
+                }
+
+            //Cuando no se ha fallado ningún verbo:
+            }else{
+                textViewVerbosFallados.setText("0 fallos");
+                textViewVerbosAcertados.setText(Integer.toString(Integer.parseInt(datosSeccionados[1]))+" aciertos");
             }
         }
 
