@@ -3,6 +3,7 @@ package pdm.ivchecker;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -16,7 +17,18 @@ public class ActividadPrincipal extends ActionBarActivity {
     private Button botonJugar, botonAreaEntrenamiento, botonListaVerbos, botonRankingMundial, botonAyuda;
 
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
 
+        //Si pulsamos el botón back nos saca de la pantalla.
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+
+            finish();
+        }
+
+        return super.onKeyDown(keyCode, event);
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

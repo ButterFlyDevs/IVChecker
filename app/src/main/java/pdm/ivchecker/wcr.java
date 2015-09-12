@@ -3,6 +3,7 @@ package pdm.ivchecker;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import java.util.Collections;
 import java.util.List;
 
 import pdm.red.ConexionServidor;
@@ -42,6 +44,7 @@ public class wcr extends ActionBarActivity {
 
     //Publicidad
     private AdView adView;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,28 +66,73 @@ public class wcr extends ActionBarActivity {
         columnaPuntos.setText("");
         columnaPais.setText("");
 
-        //Llamada clave de la clase
-        rankingJugadores = miConexion.pedirRankingNueva();
 
 
 
-        if(rankingJugadores!=null) {
-            System.out.println("Recibidos "+rankingJugadores.size()+" elementos");
+        //Poner dialog a funcionar
+        progressDialog = ProgressDialog.show(wcr.this, "", "Cargando lista de jugadores...");
+        //Ejecutar la hebra para obtener los datos
 
-            int n = 1;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //Llamada clave de la clase
 
-            for (Jugador jugador : rankingJugadores) {
-                columnaPosicion.append(Integer.toString(n) + "\n");
-                columnaNombre.append(jugador.getNombre() + "\n");
-                columnaPuntos.append(Integer.toString(jugador.getPuntuacion()) + "\n");
-                columnaPais.append(jugador.getPais() + "\n");
-                n++;
+                rankingJugadores = miConexion.pedirRankingNueva();
+                if (rankingJugadores != null) {
+                    System.out.println("Recibidos " + rankingJugadores.size() + " elementos");
+
+                    int n = 1;
+                     String columnaPosicion_temporal="";
+                     String columnaNombre_temporal="";
+                     String columnaPuntos_temporal="";
+                     String columnaPais_temporal="";
+                    for (Jugador jugador : rankingJugadores) {
+                        columnaPosicion_temporal += (Integer.toString(n) + "\n");
+                        columnaNombre_temporal +=(jugador.getNombre() + "\n");
+                        columnaPuntos_temporal += (Integer.toString(jugador.getPuntuacion()) + "\n");
+                        columnaPais_temporal += (jugador.getPais() + "\n");
+
+                        n++;
+
+                    }
+                    final String columnaNombre_final = columnaNombre_temporal;
+                    final String columnaPuntos_final = columnaPuntos_temporal;
+                    final String columnaPosicion_final = columnaPosicion_temporal;
+                    final String columnaPais_final = columnaPais_temporal;
+                    columnaNombre.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            columnaNombre.setText(columnaNombre_final);
+                        }
+                    });
+                    columnaPosicion.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            columnaPosicion.setText(columnaPosicion_final);
+                        }
+                    });
+                    columnaPais.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            columnaPais.setText(columnaPais_final);
+                        }
+                    });
+                    columnaPuntos.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            columnaPuntos.setText(columnaPuntos_final);
+                        }
+                    });
+                    progressDialog.dismiss();
+                } else {
+                    //Mostramos una ventana emergenente avisando de que ha ocurrido un error y que se revise la conexión a la red:
+                    alertaFalloInternet();
+
+                }
+
             }
-        }else{
-            //Mostramos una ventana emergenente avisando de que ha ocurrido un error y que se revise la conexión a la red:
-            alertaFalloInternet();
-
-        }
+        }).start();
 
 
         //Publicidad:
