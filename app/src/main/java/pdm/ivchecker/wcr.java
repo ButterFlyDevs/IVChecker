@@ -127,7 +127,14 @@ public class wcr extends ActionBarActivity {
                     progressDialog.dismiss();
                 } else {
                     //Mostramos una ventana emergenente avisando de que ha ocurrido un error y que se revise la conexión a la red:
-                    alertaFalloInternet();
+                    progressDialog.dismiss();
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            alertaFalloInternet();
+                        }
+                    });
 
                 }
 
@@ -153,10 +160,10 @@ public class wcr extends ActionBarActivity {
 
 
             Context context = wcr.this;
-            String title = "@string/tituloAlerta";
-            String message = "@string/mensajeAlerta";
-            String button1String = "@string/boton1Alerta";
-            String button2String = "@string/boton2Alerta";
+            String title = getString(R.string.tituloAlerta);
+            String message = getString(R.string.mensajeAlerta);
+            String button1String = getString(R.string.botonAAlerta);
+            String button2String = getString(R.string.boton2Alerta);
 
             AlertDialog.Builder ad = new AlertDialog.Builder(context);
             ad.setTitle(title);
