@@ -155,9 +155,7 @@ public class wcr extends ActionBarActivity {
 
     private void alertaFalloInternet(){
 
-
         try{
-
 
             Context context = wcr.this;
             String title = getString(R.string.tituloAlerta);

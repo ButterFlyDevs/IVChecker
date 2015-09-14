@@ -6,7 +6,7 @@
             android:layout_width="fill_parent"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
-    android:background="#ff8b85a2"
+    android:background="@color/colorfondo"
     android:weightSum="1">
 
     <TextView
@@ -83,11 +83,21 @@
         android:id="@+id/textViewErrores"
         android:layout_marginLeft="20dp" />
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="133dp"
-        android:id="@+id/listViewVerbos"
-        android:layout_weight="0.74" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:id="@+id/layoutContenedorVerbos"
+        android:layout_marginLeft="20dp">
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="133dp"
+            android:id="@+id/listViewVerbos"
+            android:layout_weight="0.95"
+        />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"

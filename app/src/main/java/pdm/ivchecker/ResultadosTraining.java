@@ -14,15 +14,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.androidplot.pie.PieChart;
-import com.androidplot.pie.Segment;
-import com.androidplot.pie.SegmentFormatter;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -54,7 +52,7 @@ public class ResultadosTraining extends ActionBarActivity {
     int numVerbosFallados;
     int numVerbos;
 
-    private LinearLayout layoutGrafico;
+    private LinearLayout layoutGrafico, layoutContenedorVerbos;
 
 
     ArrayList<Verbo> listaVerbosFallados = new ArrayList();
@@ -83,6 +81,8 @@ public class ResultadosTraining extends ActionBarActivity {
         textViewVerbosAcertados = (TextView) findViewById(R.id.textViewAciertos);
         textViewErrores = (TextView) findViewById(R.id.textViewErrores);
         textViewTipoLista = (TextView) findViewById(R.id.textViewDificultadLista);
+
+        layoutContenedorVerbos = (LinearLayout)findViewById(R.id.layoutContenedorVerbos);
 
       //  verbos_fallados_infinitivo = (TextView) findViewById(R.id.infinitivoResultado);
       //  verbos_fallados_pasado = (TextView) findViewById(R.id.pasadoResultado);
@@ -255,47 +255,67 @@ public class ResultadosTraining extends ActionBarActivity {
         chart.setPieChartData(data);
 
 
+        /* Si no hubiera verbos fallados significaría que el usuario los ha acertado todos
+        y por eso vamos a cargar una imagen
+         */
+        if(listaVerbosFallados.isEmpty()){
 
-        // ## CARGA DE VERBOS FALLADOS ## //
+           //Modificamos el texto en el que dice "Errores" antes del vector:
+           textViewErrores.setText("¡Ningún error!");
 
-        //1º Asociamos el listview de la vista:
-        final ListView listview = (ListView) findViewById(R.id.listViewVerbos);
-
-        //2º Especificamos que la lista sólo permita selección única
-        listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
-
-        //3º Iniciamos el adaptador y le pasamos la lista
-        AdaptadorListVerbos adapter = new AdaptadorListVerbos(this, listaVerbosFallados);
-
-        //4º Asociamos el adaptador definido a nuestro listView
-        listview.setAdapter(adapter);
-
-        //5º Programamos la acción al pulsar sobre un elmento:
-        //Programación del evento pulsar sobre un elementod e la lista.
-        listview.setOnItemClickListener(
-
-                new AdapterView.OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(AdapterView<?> arg0, View arg1, int posicion, long arg3) {
-                        System.out.println("PULSADO BOTÓN DE LISTA " + Integer.toString(posicion));
-
-                        FragmentDetalleVerbo fragment1 = new FragmentDetalleVerbo();
+           //Creamos un visor de imágenes.
+           ImageView iv = new ImageView(this);
+           //Asociamos una imagen de la carpeta drawable al visor.
+           iv.setImageResource(R.drawable.trainningareagoodjob);
+           //Añadimos la imagen al layout que contendría los verbos si se hubieran fallado.
+           layoutContenedorVerbos.addView(iv);
 
 
-                        //Le enviamos al fragment el verbo del que queremos mostrar la información.
-                        fragment1.setVerbo(listaVerbosFallados.get(posicion));
 
-                        //Hacemos que se muestre el fragment
-                        fragment1.show(getFragmentManager(), "");
+        //Si hay verbos fallados en el vector entoces se cargan en la lista.
+        }else {
+
+            // ## CARGA DE VERBOS FALLADOS ## //
+
+            //1º Asociamos el listview de la vista:
+            final ListView listview = (ListView) findViewById(R.id.listViewVerbos);
+
+            //2º Especificamos que la lista sólo permita selección única
+            listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+
+            //3º Iniciamos el adaptador y le pasamos la lista
+            AdaptadorListVerbos adapter = new AdaptadorListVerbos(this, listaVerbosFallados);
+
+            //4º Asociamos el adaptador definido a nuestro listView
+            listview.setAdapter(adapter);
+
+            //5º Programamos la acción al pulsar sobre un elmento:
+            //Programación del evento pulsar sobre un elementod e la lista.
+            listview.setOnItemClickListener(
+
+                    new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> arg0, View arg1, int posicion, long arg3) {
+                            System.out.println("PULSADO BOTÓN DE LISTA " + Integer.toString(posicion));
+
+                            FragmentDetalleVerbo fragment1 = new FragmentDetalleVerbo();
+
+
+                            //Le enviamos al fragment el verbo del que queremos mostrar la información.
+                            fragment1.setVerbo(listaVerbosFallados.get(posicion));
+
+                            //Hacemos que se muestre el fragment
+                            fragment1.show(getFragmentManager(), "");
+
+                        }
 
                     }
 
-                }
 
-
-        );
+            );
+        }
 
     }
 

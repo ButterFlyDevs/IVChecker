@@ -4,6 +4,10 @@ LEYENDA: e: ejemplo en inglés, tee: traducción del ejemplo en ES, tef: traducc
 v,be,was/were,been
 tf,biː,wɒz/wɜː,biːn
 se,"ser o estar"
+e,What Adrian was doing was illegal.
+tee, Lo que Adrian estaba haciendo era ilegal.
+e,The facilities have been overstretched.
+tee, Las instalaciones son suficientes.
 2
 v,become,became,become
 tf,bɪˈkʌm,bɪˈkeɪm,bɪˈkʌm
@@ -15,6 +19,10 @@ v,begin,began,begun
 tf,bɪˈgɪn,bɪˈgæn,bɪˈgʌn
 se,"empezar"
 sf,"commencer"
+e,Work in that area has begun.
+tee,Se ha empezado a trabajar en ese ámbito.
+e,Construction began in 1855.
+tee,La construcción comenzó en 1855.
 4
 v,break,broke,broken
 tf,breɪk,brəʊk,ˈbrəʊkən
@@ -128,13 +136,11 @@ tee,Hemos comido tanto que no cenaremos.
 15
 v,feel,felt,felt
 tf,fiːl,fɛlt,fɛlt
-se,"caer o caerse"
-e,The kid fell down and broke his leg.
-tee,El niño se cayó y rompió la pierna.
-e,With the coming of autumn, leaves are starting to fall.
-tee,Con la llegada del otoño, las hojas están comenzando a caerse.
-e,The temperature has fallen sharply.
-tee,La temperatura ha caído bruscamente.
+se,"sentir o palpar o tocar"
+e,If you take some aspirin, you will feel better.
+tee,Si te tomas alguna aspirina, te sentirás mejor.
+e,Susan felt very sad when her cat died.
+tee,Susa se sintió muy triste cuando su gato murió.
 16
 v,find,found,found
 tf,faɪnd,faʊnd,faʊnd
@@ -158,108 +164,288 @@ tee,Las medidas deberían ser tomadas para luchar contra la pobreza.
 18
 v,fly,flew,flown
 tf,flaɪ,fluː,fləʊn
+se,"volar"
+e,We saw a plane flying over the lake.
+tee,Vimos un avión volando sobre el lago.
+e,This pilot has flown large passenger airplanes for many years.
+tee,Tese piloto ha volado grandes aviones de pasajeros durante muchos años.
 19
 v,forget,forgot,forgotten
 tf,fəˈgɛt,fəˈgɒt,fəˈgɒtn
+se,"olvidar"
+e,Before I forget what's your phone number?
+tee,Antes de que lo olvide ¿cuál es tu número de teléfono?
+e,Liza forgot her umbrella  on the bus.
+tee,Liza olvidó su paraguas en el autobus.
 20
 v,forgive,forgave,forgiven
 tf,fəˈgɪv,fəˈgeɪv,fəˈgɪvn
+se,"perdonar"
+e,I've lost your book. Pleaseforgive me!
+tee,He perdido tu libro. ¡Por favor ¡perdóname!
 21
 v,get,got,got/gotten
 tf,gɛt,gɒt,gɒt/ˈgɒtn
+se,"llegar o conseguir o recibir o ponerse"
+e,If I had just gotten there ten minutes earlier...
+tee,Si hubiese llegado diez minutos antes...
+e,I don't know how to get home from here.
+tee,No sé llegar a casa desde aquí.
 22
 v,give,gave,given
 tf,gɪv,geɪv,ˈgɪvn
+se,"dar"
+e,The Jacksons have always given food and clothes to the poor.
+tee,Los Jackson siempre daban comida y ropa a los pobres.
 23
 v,go,went,gone
 tf,gəʊ,wɛnt,gɒn
+se,"ir"
+e,We went to the cinema last night.
+tee,Fuimos al cine anoche.
+e,Mary is not at home. She has gone to the doctor's.
+tee,Mary no está en casa. Ella ha ido al doctor.
+e,Henry usually goes to work by train.
+tee,Henry normalmente va a trabajar en tren.
 24
 v,grow,grew,grown
 tf,grəʊ,gruː,grəʊn
+se,"crecero cultivar"
+e,Deserts are too arid for grass to grow.
+tee,Los desiertos son demasiado áridos para que crezca la hierba.
+e,When I was a child, we had an orchard where we grew apples.
+tee,Cuando yo era niño, teníamos un huerto donde cultivábamos manzanas.
 25
 v,hear,heard,heard
 tf,hɪə,hɜːd,hɜːd
+se,"oir"
+e,The old lady wears a hearing aid because she can't hear very well.
+tee,La anciana usa un audífono porque ella no puede oír muy bien.
+e,The dog started barking when he heard footsteps around the house.
+tee,El perro comenzó a ladrar cuando oyó pasos en la casa.
 26
 v,have,had,had
 tf,hæv,hæd,hæd
+se,"tener"
+e,The Jacksons have three small children.
+see,Los Jacksons tienen tres hijos pequeños.
+e,Emily has had a well-paid job since 2004.
+see,Emily ha tenido un trabajo bien pagado desde 2004.
 27
 v,keep,kept,kept
 tf,kiːp,kɛpt,kɛpt
+se,"mantener o guardar o continuar o criar"
+e,Waiter here's a ten dollar bill. Please keep the change.
+tee,Camarero aquí tiene un billete de diez dolares. Por favor quédese con el cambio.
+e,The old lady kept her jewels in a safe.
+tee,La anciana guardaba sus joyas en una caja fuerte.
+e,Ther farmer has kept cattle for years.
+tee,El agricultor ha criado ganado durante años.
 28
 v,know,knew,known
 tf,nəʊ,njuː,nəʊn
+se,"saber, conocer"
+e,I know very well what you mean.
+tee,Sé muy bien lo que usted quiere decir.
+e,Steve knew that he would not get any help from anybody.
+tee,Steve sabía que no recibiría ayuda de nadie.
 29
 v,leave,left,left
 tf,liːv,lɛft,lɛft
+se,"irse o dejar o marcharse"
+e,The plane leaves JFK airport at 8:00 a.m.
+tee,El avión sale del aeropuerto JFK a las 8 a.m.
+e,I'm sorry Mr. Parker's not in the office. He has already left.
+tee,Lo siento Sr. Parker no en la oficina. Ya se ha marchado.
 30
 v,let,let,let
 tf,lɛt,lɛt,lɛt
+se,"dejar o permitir"
+e,Let me just finish this and I'll help you.
+tee,Déjame terminar esto y te ayudaré.
+e,Daisy's parents didn't let her go to the party.
+tee,Los padres de Daisy no la dejaron ir a la fiesta.
 31
 v,make,made,made
 tf,meɪk,meɪd,meɪd
+se,"hacer"
+e,¿Tu camiseta está hecha de de algodón?
+tee,Is your shirt made of cotton?
+e,I've just made a cake.
+tee,Acabo de hacer un pastel.
 32
 v,mean,meant,meant
 tf,miːn,mɛnt,mɛnt
+se,"significar o querer decir o tener intención de"
+e,I don't understand. What do you mean?
+tee,No entiendo, ¿Qué quieres decir?
+e,Caroline had meant to help me but she could't.
+tee,Caroline tuvo la intención de ayudarme pero no pudo.
 33
 v,meet,met,met
 tf,miːt,mɛt,mɛt
+se,"encontrarse con o conocer"
+e, Have you ever met a famous movie star before?
+tee,¿Has conocido alguna vez a una estrella de cine famosa antes?
+e,Tracy met her husband when she was a college student.
+tee,Tracy conoció a su marido cuando era una estudiante en la universidad.
 34
 v,pay,paid,paid
 tf,peɪ,peɪd,peɪd
+se,"pagar"
+e,How much did you pay for that car?
+tee,¿Cuánto pagaste por ese coche?
+e,George doesn't have enough money to pay for his debt.
+tee,George no tiene suficiente dinero para pagar su deuda.
 35
 v,put,put,put
 tf,pʊt,pʊt,pʊt
+se,"poner"
+e,Have you put sugar in my tea?
+tee,¿Le has puesto azúcar a mi té?
+e,After the burglary, we put a new lock on the door.
+tee,Después del robo, pusimos una nueva cerradura en la puerta.
 36
 v,quit,quit,quit
 tf,kwɪt,kwɪt,kwɪt
+se,"abandonar, rendirse, dejar"
+e,My uncle decided to quit smoking.
+tee,Mi tío decidió dejar de fumar.
+e,If you don't give me a raise, Mr. Miller, I'll quit my job.
+tee,Si usted no me da un aumento, Sr. Miller, dejaré mi trabajo.
 37
 v,read,read,read
 tf,riːd,riːd,riːd
+se,"leer"
+e,Have you read any of his novels?
+tee,¿Has leído alguna de sus novelas?
+e,Please read this booklet and follow the instructions.
+tee,Por favor, lea este folleto y siga las instrucciones.
 38
 v,run,ran,run
 tf,rʌn,ræn,rʌn
+se,"correr"
+e,Sean ran to the station, but missed the train.
+tee,Sean corrió hasta la estación, pero perdió el tren.
+e,My brother can run 100 meters in 11 seconds.
+tee,Mi hermano puede correr 100 metros en 11 segundos.
 39
 v,say,said,said
 tf,seɪ,sɛd,sɛd
+se,"decir"
+e,“Good morning madam!” said the janitor.
+tee,“Buenos días señora!” dijo el portero.
+e,Listen to me. I have something to say.
+tee,Escúcheme. Tengo algo para decir.
 40
 v,see,saw,seen
 tf,siː,sɔː,siːn
+se,"ver"
+e,We saw a very good movie last night.
+tee,Vimos una película muy buena anoche.
+e,The murderer was seen running from the scene of the crime.
+tee,El asesino fue visto corriendo de la escena del crimen.
 41
 v,sell,sold,sold
 tf,sɛl,səʊld,səʊld
+se,"vender"
+e,My neighbours sold their house to Mr. Walker for $500,000.
+tee,Mis vecinos vendieron su casa al Sr. Walker por 500,000 dólares.
+e,Most record stores sell CD's and DVD's.
+tee,La mayoría de las tiendas de discos venden CD's y DVD's.
 42
 v,send,sent,sent
 tf,sɛnd,sɛnt,sɛnt
+se,"enviar"
+e,Bob sent the parcel by mail yesterday.
+tee,Bob envió el paquete por correo ayer.
+e,Alison hasn't sent any e-mails yet.
+tee,Alison no ha enviado ningún correo electrónico aún.
 43
 v,sit,sat,sat
 tf,sɪt,sæt,sæt
+se,"sentar o sentarse"
+e,We were sitting at the table when Robert arrived.
+tee,Estábamos sentados a la mesa cuando llegó Robert.
+e,In the waiting room Mrs. Jackson sat on a chair and read a magazine.
+tee,En la sala de espera la Sra. El Jackson se sentó en una silla y leyó una revista.
 44
 v,sleep,slept,slept
 tf,sliːp,slɛpt,slɛpt
+se,"dormir"
+e,I feel tired, I haven't slept very well for the last three days.
+tee,Me siento cansado, no he dormido muy bien durante los últimos tres días.
+e,We couldn't sleep last night because our neighbours had a noisy party.
+tee,No pudimos dormir anoche porque nuestros vecinos tuvieron una fiesta ruidosa.
 45
 v,speak,spoke,spoken
 tf,spiːk,spəʊk,ˈspəʊkən
+se,"hablar"
+e,The man who spoke to me had a foreign accent.
+tee,El hombre que me habló tenía un acento extranjero.
+e,Is Mr. Wilkins in, please? I need to speak to , it's urgent.
+tee,¿Está el Sr. Wilkins, por favor? Necesito hablar con el, es urgente.
 46
 v,spend,spent,spent
 tf,spɛnd,spɛnt,spɛnt
+se,"gastar, pagar"
+e,Joe has spent all his savings and now he's penniless.
+tee,Joe ha gastado todos sus ahorros y ahora está sin dinero.
+e,Mrs. Wayne spent a fortune on a fur coat.
+tee,La Sra. Wayne gastó una fortuna en un abrigo de piel.
 47
 v,stand,stood,stood
 tf,stænd,stʊd,stʊd
+se,"estar de pie, soportar, levantarse "
+e,When the teacher walked in, the pupils stood up.
+tee,Cuando el profesor entró, los alumnos se pusieron de pie.
+e,Don't just stand there. Help me!
+tee,No te quedes ahí parado. ¡Ayúdame!
 48
 v,steal,stole,stolen
 tf,stiːl,stəʊl,ˈstəʊlən
+se,"robar"
+e,Somebody stole my wallet on the bus.
+tee,Alguien me robó la cartera en el autobús.
+e,I saw a thief stealing that lady's purse.
+tee,Vi a un ladrón robandole el monedero de aquella señora.
 49
 v,tell,told,told
 tf,tɛl,təʊld,təʊld
+se,"decir, contar"
+e,Have I told you that Harold is getting married?
+tee,¿Te he dicho que Harold se casa?
+e,People don't believe him for he's always telling lies.
+tee,La gente no le cree porque siempre está contando mentiras.
 50
 v,think,thought,thought
 tf,θɪŋk,θɔːt,θɔːt
+se,"pensar"
+e,What do you think about this book? Do you like it?
+tee,¿Qué piensas de este libro? ¿Te gusta?
+e,I can't make a decision now. Let me think about it.
+tee,No puedo tomar una decisión ahora. Déjeme pensar en ello.
 51
 v,throw,threw,thrown
 tf,θrəʊ,θruː,θrəʊn
+se,"tirar, arrojar"
+e,The tourists threw litter on the park.
+tee,Los turistas tiraron basura en el parque.
+e,Freddy was in hospital because a hooligan had thrown a stone at him.
+tee,Freddy estaba en el hospital porque un gamberro le había lanzado una piedra.
 52
 v,wear,wore,worn
 tf,weə,wɔː,wɔːn
+se,"usar, vestir, gastar, deteriorar"
+e,The rug is starting to wear.
+tee,La alfombra está empezando a gastarse.
+e,The rocks have been worn smooth by the tide.
+tee,Las rocas han sido erosionas por la marea.
 53
 v,write,wrote,written
 tf,raɪt,rəʊt,ˈrɪtn
+se,"escribir"
+e,William Shakespeare wrote plays and sonnets.
+tee,Guillermo Shakespeare escribió obras teatrales y sonetos.
+e,Children usually learn to read and write at the age of six.
+tee,Los niños por lo general aprenden a leer y escribir a la edad de seis años.

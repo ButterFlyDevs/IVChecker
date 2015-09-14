@@ -99,7 +99,7 @@
 
     <!-- 7. wrc -->
     <string name="tituloAlerta">Error de red</string>
-    <string name="mensajeAlerta">Parece que hay algún problema con tu conexion. Revisala e intentalo de nuevo.</string>
+    <string name="mensajeAlerta">Parece que hay algún problema con tu conexion. Revísala e intentalo de nuevo.</string>
     <string name="botonAAlerta">OK</string>
     <string name="boton2Alerta">Recargar</string>
 

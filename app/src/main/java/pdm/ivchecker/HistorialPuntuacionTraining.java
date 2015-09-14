@@ -4,19 +4,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
-
-import com.androidplot.xy.LineAndPointFormatter;
-import com.androidplot.xy.PointLabelFormatter;
-import com.androidplot.xy.SimpleXYSeries;
-import com.androidplot.xy.XYPlot;
-import com.androidplot.xy.XYSeries;
-import com.androidplot.xy.XYStepMode;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -25,17 +16,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import lecho.lib.hellocharts.formatter.AxisValueFormatter;
+
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.model.SliceValue;
-import lecho.lib.hellocharts.model.ValueShape;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.LineChartView;
 import lecho.lib.hellocharts.view.PieChartView;
@@ -192,83 +181,78 @@ public class HistorialPuntuacionTraining extends ActionBarActivity {
         chart.setLineChartData(data);
 
 
-
-
-
         // ## PIE CHARTS ## //
 
-        layoutPieChart1 = (LinearLayout) findViewById(R.id.layoutPieChart1);
+        // ## PIE CHART 1 ## //
 
-        PieChartView chart2 = new PieChartView(this);
+            //Asociamos el layout donde irá el gráfico
+            layoutPieChart1 = (LinearLayout) findViewById(R.id.layoutPieChart1);
+            //Creamos el gráfico
+            PieChartView graficoCircular1 = new PieChartView(this);
+            //Añadimos el gráfico al layout
+            layoutPieChart1.addView(graficoCircular1);
 
+            //Creamos una lista de valores que usará el gráfico circular
+            List<SliceValue> valoresGraficoCircular1 = new ArrayList<SliceValue>();
+            valoresGraficoCircular1.add(new SliceValue((float) aciertosLista1Acumulados, ChartUtils.COLOR_GREEN));
+            valoresGraficoCircular1.add(new SliceValue((float) fallosLista1Acumulados, ChartUtils.COLOR_RED));
 
+            //Papra poder pasar estos valores al grafico tenemos que crear un objeto de tipo PieChartData que almacena estos datos entre otros:
+            PieChartData datosGraficoCircular1 = new PieChartData(valoresGraficoCircular1);
+            datosGraficoCircular1.setHasLabels(true);
+            datosGraficoCircular1.setHasLabelsOnlyForSelected(true);
+            datosGraficoCircular1.setHasLabelsOutside(true);
+            datosGraficoCircular1.setHasCenterCircle(true);
 
-        //Añadimos el gráfico al layout
-        layoutPieChart1.addView(chart2);
-
-        List<SliceValue> values = new ArrayList<SliceValue>();
-
-        //SliceValue sliceValue = new SliceValue((float) 20, ChartUtils.pickColor());
-        values.add(new SliceValue((float) aciertosLista1Acumulados, ChartUtils.COLOR_GREEN));
-        values.add(new SliceValue((float) fallosLista1Acumulados, ChartUtils.COLOR_RED));
-
-
-
-        PieChartData data2 = new PieChartData(values);
-        data2.setHasLabels(true);
-        data2.setHasLabelsOnlyForSelected(true);
-        data2.setHasLabelsOutside(true);
-        data2.setHasCenterCircle(true);
-
-        chart2.setPieChartData(data2);
-
-
-        PieChartView chart3 = new PieChartView(this);
+            //Por ultimo añadimos los datos al grafico.
+            graficoCircular1.setPieChartData(datosGraficoCircular1);
 
 
-
-        layoutPieChart2=(LinearLayout)findViewById(R.id.layoutPieChart2);
-        //Añadimos el gráfico al layout
-        layoutPieChart2.addView(chart3);
-
-        List<SliceValue> values2 = new ArrayList<SliceValue>();
-
-        //SliceValue sliceValue = new SliceValue((float) 20, ChartUtils.pickColor());
-        values2.add(new SliceValue((float) aciertosLista2Acumulados, ChartUtils.COLOR_GREEN));
-        values2.add(new SliceValue((float) fallosLista2Acumulados, ChartUtils.COLOR_RED));
+        // ## PIE CHART 2 ## //  (Replicamos el caso 1, condistintos valores de relleno)
 
 
+            layoutPieChart2=(LinearLayout)findViewById(R.id.layoutPieChart2);
 
-        PieChartData data3 = new PieChartData(values2);
-        data3.setHasLabels(true);
-        data3.setHasLabelsOnlyForSelected(true);
-        data3.setHasLabelsOutside(true);
-        data3.setHasCenterCircle(true);
+            PieChartView graficoCircular2 = new PieChartView(this);
+            layoutPieChart2.addView(graficoCircular2);
 
-        chart3.setPieChartData(data3);
+            List<SliceValue> valoresGraficoCircular2 = new ArrayList<SliceValue>();
 
+            //Usamos distintos valores de relleno.
+            valoresGraficoCircular2.add(new SliceValue((float) aciertosLista2Acumulados, ChartUtils.COLOR_GREEN));
+            valoresGraficoCircular2.add(new SliceValue((float) fallosLista2Acumulados, ChartUtils.COLOR_RED));
 
-        PieChartView chart4 = new PieChartView(this);
+            PieChartData datosGraficoCircular2 = new PieChartData(valoresGraficoCircular2);
+            datosGraficoCircular2.setHasLabels(true);
+            datosGraficoCircular2.setHasLabelsOnlyForSelected(true);
+            datosGraficoCircular2.setHasLabelsOutside(true);
+            datosGraficoCircular2.setHasCenterCircle(true);
 
-        layoutPieChart3=(LinearLayout)findViewById(R.id.layoutPieChart3);
-        //Añadimos el gráfico al layout
-        layoutPieChart3.addView(chart4);
-
-        List<SliceValue> values3 = new ArrayList<SliceValue>();
-
-        //SliceValue sliceValue = new SliceValue((float) 20, ChartUtils.pickColor());
-        values3.add(new SliceValue((float) aciertosLista3Acumulados, ChartUtils.COLOR_GREEN));
-        values3.add(new SliceValue((float) fallosLista3Acumulados, ChartUtils.COLOR_RED));
+            graficoCircular2.setPieChartData(datosGraficoCircular2);
 
 
+        // ## PIE CHART 2 ## //  (Replicamos el caso 1, condistintos valores de relleno)
 
-        PieChartData data4 = new PieChartData(values3);
-        data4.setHasLabels(true);
-        data4.setHasLabelsOnlyForSelected(true);
-        data4.setHasLabelsOutside(true);
-        data4.setHasCenterCircle(true);
 
-        chart4.setPieChartData(data4);
+            layoutPieChart3=(LinearLayout)findViewById(R.id.layoutPieChart3);
+
+            PieChartView graficoCircular3 = new PieChartView(this);
+
+            //Añadimos el gráfico al layout
+            layoutPieChart3.addView(graficoCircular3);
+
+            List<SliceValue> valoresGraficoCircular3= new ArrayList<SliceValue>();
+
+            valoresGraficoCircular3.add(new SliceValue((float) aciertosLista3Acumulados, ChartUtils.COLOR_GREEN));
+            valoresGraficoCircular3.add(new SliceValue((float) fallosLista3Acumulados, ChartUtils.COLOR_RED));
+
+            PieChartData datosGraficoCircular3 = new PieChartData(valoresGraficoCircular3);
+            datosGraficoCircular3.setHasLabels(true);
+            datosGraficoCircular3.setHasLabelsOnlyForSelected(true);
+            datosGraficoCircular3.setHasLabelsOutside(true);
+            datosGraficoCircular3.setHasCenterCircle(true);
+
+            graficoCircular3.setPieChartData(datosGraficoCircular3);
 
 
 

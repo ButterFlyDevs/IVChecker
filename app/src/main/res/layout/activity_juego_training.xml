@@ -2,9 +2,41 @@
     android:layout_height="fill_parent"
     android:layout_width="fill_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:baselineAligned="false"
-    android:background="#ff8b85a2">
+    android:background="@color/colorfondo">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="81dp">
+
+        <Button
+            android:id="@+id/buttonBAck"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/back"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignTop="@+id/linearLayout4"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="0dp" />
+
+        <TextView
+            android:id="@+id/etiqueta_progreso"
+            android:layout_width="135dp"
+            android:layout_height="69dp"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:text="1/17"
+            android:textColor="#ffffffff" />
+        <Button
+            android:id="@+id/nextButtonTraining"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:layout_toRightOf="@+id/infinitivo"
+            android:gravity="center"
+            android:background="@drawable/playtrainning" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -32,26 +64,4 @@
         android:gravity="center">
      </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="81dp">
-        <TextView
-            android:id="@+id/etiqueta_progreso"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center"
-            android:layout_weight="2"
-            android:textSize="30dp"
-            android:text="1/17"
-            android:textColor="#ffffffff" />
-        <Button
-            android:id="@+id/nextButtonTraining"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_toRightOf="@+id/infinitivo"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@drawable/playtrainning" />
-
-    </LinearLayout>
 </LinearLayout>

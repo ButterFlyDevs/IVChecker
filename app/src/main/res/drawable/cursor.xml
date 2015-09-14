@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--Definimos un cursor para poder ponerle el color blanco y un grosor mayor al normal -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
 
-</selector>
+    <solid android:color="#ffffffff" />
+
+    <size android:width="2dp" />
+</shape>

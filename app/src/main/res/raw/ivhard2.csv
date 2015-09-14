@@ -62,30 +62,63 @@ tf,daɪv,daɪvd/dʌv,daɪvd
 21
 v,dwell,dwelt/dwelled,dwelt/dwelled
 tf,dwɛl,dwɛlt/dwɛld,dwɛlt/dwɛld
+se,"habitar o morar"
+e,Prehistoric man dwell in caves.
+tee,El hombre prehistórico moraba en cuevas.
 22
 v,disprove,disproved,disproved
 tf,ˌdɪsˈpruːv,ˌdɪsˈpruːvd,ˌdɪsˈpruːvd,
 23
 v,flee,fled,fled
 tf,fliː,flɛd,flɛd
+se,"huir"
+e,The Jacksons fled to the U.S. when the war broke out.
+tee,Los Jackson huyeron a los Estados Unidos cuando la guerra estalló.
+e,When the police arrived, the driver had already fled the scene of the crime.
+tee,Cuando la policía llegó, el conductor ya había huido de la escena del crimen.
 24
 v,fling,flung,flung
 tf,flɪŋ,flʌŋ,flʌŋ
+se,"echar o arrojar o tirar"
+e,The kids flung themselves onto the bed and turned on the TV.
+tee,Los niños se tiraron en la cama y encendieron la televisión.
+e,As Peter arrives from school, he always flings his backpack on the sofa.
+tee,Cuando Peter llega de la escuela, el siempre tira su mochila  al sofá.
 25
 v,forbid,forbade,forbidden
 tf,fəˈbɪd,fəˈbeɪd,fəˈbɪdn
+se,"prohibir"
+e,His doctor has forbidden him to eat salt.
+tee,El doctor le ha prohibidoque coma sal.
+e,Take a picture is strictly forbidden during the show.
+tee,Hacer una foto está estrictamente prohibido durante el show.
 26
 v,forsake,forsook,forsaken
 tf,fəˈseɪk,fəˈsʊk,fəˈseɪkən
 27
 v,forecast,forecast,forecast
 tf,ˈfɔːkɑːst,ˈfɔːkɑːst,ˈfɔːkɑːst
+se,"prnosticar, preveer"
+e,Thunderstorms are forecast for tomorrow.
+tee,Se pronostican tormetas para mañana.
+e,Experts are forecasting an upturn in the economy.
+tee,Expertos están pronosticando una mejora en la economía.
 28
 v,foresee,foresaw,foreseen
 tf,fɔːˈsiː,fɔːˈsɔː,fɔːˈsiːn
+se,"preveer"
+e,Nobody could have foreseen the extent of the damage.
+tee,Nadia podría haber previsto el grado del daño.
+e,It's impossible to foresee how their plans will work out.
+tee,Es imposible preveer como saldrán sus proyectos.
 29
 v,foretell,foretold,foretold
 tf,fɔːˈtɛl,fɔːˈtəʊld,fɔːˈtəʊld
+se,"predecir"
+e,No one can foretell the future.
+tee,Nadie puede predecir el futuro.
+e,The witch foretold that Thomas would become famous.
+tee,La bruja predijo que Thomas se haría famoso.
 30
 v,gild,gilded,gilded/gilt
 tf,gɪld,ˈgɪldɪd,ˈgɪldɪd/gɪlt
@@ -113,6 +146,11 @@ tf,leɪd,ˈleɪdɪd,ˈleɪdn
 38
 v,lay,laid,laid
 tf,leɪ,leɪd,leɪd
+se,"poner, colocar"
+e,Hens lay eggs.
+tee,Las gallinas ponen huevos.
+e,Cindy has always laid the table before dinner.
+tee,Cindy siempre ponía la mesa antes de la comida.
 39
 v,lean,leaned/leant,leaned/leant
 tf,liːn,liːnd/lɛnt,liːnd/lɛnt
@@ -203,6 +241,9 @@ tf,ʃɛd,ʃɛd,ʃɛd
 68
 v,shine,shone/shined,shone/shined
 tf,ʃaɪn,ʃɒn/ʃaɪnd,ʃɒn/ʃaɪnd
+se,"brillar o lustrar"
+e,The sun is shining so let’s go to the beach.
+tee,El sol está brillando vayamos a la playa.
 69
 v,shoe,shod/shoed,shod/shoed
 tf,ʃuː,ʃɒd/ʃuːd,ʃɒd/ʃuːd
@@ -322,4 +363,4 @@ v,wind,winded/wound,winded/wound
 tf,wɪnd,ˈwɪndɪd/wuːnd,ˈwɪndɪd/wuːnd
 108
 v,wring,wrung,wrung
-tf,rɪŋ,rʌŋ,rʌŋ 
+tf,rɪŋ,rʌŋ,rʌŋ

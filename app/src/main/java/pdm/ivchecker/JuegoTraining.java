@@ -1,6 +1,7 @@
 package pdm.ivchecker;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,11 +11,13 @@ import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -26,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -49,7 +53,15 @@ public class JuegoTraining extends ActionBarActivity {
     String lista_verbos_fallados="\n";
 
     //Botón de siguiente verbo
-    private Button btnNext;
+    private Button btnNext, buttonBack;
+
+
+    /**
+     * Campo de texto donde el jugador introduce su respuresta.
+     * Existe solamente un campo de texto editText que se mueve de layout dependiendo de cual sea la forma
+     * por la que se le pregunta. En lugar de tener tres se tiene solo uno.
+     *
+     */
     private EditText txtVerbo;
 
     private TextView  etiqueta_progreso;
@@ -76,6 +88,8 @@ public class JuegoTraining extends ActionBarActivity {
     //Variable booleana para controlar si los datos de la partida actual han sido cargados de una instancia anterior
     //(se ha rotado la pantalla)
     boolean ocurridaRotacion = false;
+
+
 
     @Override
     //Método llamada cuando se crea por primera vez la actividad
@@ -115,28 +129,95 @@ public class JuegoTraining extends ActionBarActivity {
 
         //Obtenemos la referencia a ese botón de la vista
         btnNext=(Button)findViewById(R.id.nextButtonTraining);
+        buttonBack = (Button)findViewById(R.id.buttonBAck);
+
+         //Ajustes del campo de texto editText que se movera por los tres layouts.
+
+            //Inicialización y ajuste del campo introducción de texto
+            txtVerbo = new EditText(this);
+            //Ajustamos el tamaño del texto:
+            txtVerbo.setTextSize(tamTexto);
+            txtVerbo.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+            txtVerbo.setBackgroundColor(Color.TRANSPARENT);
+            txtVerbo.setTextColor(Color.WHITE);
+
+        /**
+         * Añadimos este código que enlaza el editText txtVerbo al cusor definido en R.drawable.cursor
+         */
+            try {
+                // https://github.com/android/platform_frameworks_base/blob/kitkat-release/core/java/android/widget/TextView.java#L562-564
+                Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
+                f.setAccessible(true);
+                f.set(txtVerbo, R.drawable.cursor);
+            } catch (Exception ignored) {}
 
 
-        //Inicialización y ajuste del campo introducción de texto
-        txtVerbo = new EditText(this);
-        //Ajustamos el tamaño del texto:
-        txtVerbo.setTextSize(tamTexto);
-        txtVerbo.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
-        txtVerbo.setBackgroundColor(Color.TRANSPARENT);
-        txtVerbo.setTextColor(Color.WHITE);
+            /**
+             * Programacion de la respuesta al evento "hacer click" dentro del campo de texto.
+             */
+            txtVerbo.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        //Implementamos la acción del click sobre el botón next.
+                        public void onClick(View v) {
 
-        //Cuando pinchamos para escribir se borrar los guiones de ayuda.
-        txtVerbo.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    //Implementamos la acción del click sobre el botón next.
-                    public void onClick(View v) {
+                      //Borramos el contenido escribiendo "" = nada.
+                      txtVerbo.setText("");
 
-                  txtVerbo.setText("_");
+                        }
+                    }
+            );
 
+
+            //Programación del evento que escucha los cambios de focos sobre el EditText
+            txtVerbo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        /*Codigo que ejecutamos cuando el editText pierde el foco, también se puede
+                        programar que hacer para cuando lo tiene con if(hasFocus){...}.
+                        Entonces lo que hacemos cuando lo pierde es simplemente devolvérselo, para evitar
+                        que el cursor no aparezca y que el usuario tenga que clicar dos veces sobre el
+                        campo de texto para escribir.
+                        */
+                        txtVerbo.requestFocus();
                     }
                 }
-        );
+            });
+
+            /**
+             * Programacion del evento "hacer click sobre el boton back" de la parte superior.
+             */
+            buttonBack.setOnClickListener(
+
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent  = new Intent(JuegoTraining.this, TrainingAreaInicio.class);
+                            //Iniciamos la nueva actividad
+                            startActivity(intent);
+                        }
+                    }
+            );
+
+
+
+            // Para cerrar el teclado al pulsar intro
+            txtVerbo.setOnKeyListener(new View.OnKeyListener() {
+            /**
+             * This listens for the user to press the enter button on
+             * the keyboard and then hides the virtual keyboard
+             */
+            public boolean onKey(View arg0, int arg1, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (arg1 == KeyEvent.KEYCODE_ENTER)) {
+                            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(txtVerbo.getWindowToken(), 0);
+                            return true;
+                }
+                return false;
+            }
+        });
 
         //Asociación e los layout contenedores:
         layoutInfinitivo = (LinearLayout) findViewById(R.id.layoutInfinitivo);
