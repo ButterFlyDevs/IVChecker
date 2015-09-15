@@ -104,6 +104,9 @@ public class Juego extends ActionBarActivity {
 
 
     private int lugar;
+    private int  formaVisible;
+
+    private boolean nivelesConDosEditText=false;
 
     //Constructor:
     public Juego(){
@@ -119,7 +122,7 @@ public class Juego extends ActionBarActivity {
             nVidas = 3;
 
             //La partida comienza en el nivel 1
-            nivel = 4;
+            nivel = 1;
 
             int defecto = 0;
 
@@ -276,6 +279,8 @@ public class Juego extends ActionBarActivity {
         y comprobar que coincida con uno de los dos.
          */
 
+        System.out.println("A: "+introducido+" B: "+original);
+
         String descompuestoA="", descompuestoB="";
 
 
@@ -377,7 +382,9 @@ public class Juego extends ActionBarActivity {
                         que el cursor no aparezca y que el usuario tenga que clicar dos veces sobre el
                         campo de texto para escribir.
                         */
-                    editTextInfinitivo.requestFocus();
+
+                    if(!nivelesConDosEditText)
+                        editTextInfinitivo.requestFocus();
                 }
             }
         });
@@ -410,7 +417,8 @@ public class Juego extends ActionBarActivity {
 
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    editTextPasado.requestFocus();
+                    if(!nivelesConDosEditText)
+                        editTextPasado.requestFocus();
                 }
             }
         });
@@ -459,7 +467,8 @@ public class Juego extends ActionBarActivity {
 
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    editTextParticipio.requestFocus();
+                    if(!nivelesConDosEditText)
+                        editTextParticipio.requestFocus();
                 }
             }
         });
@@ -1175,7 +1184,8 @@ public class Juego extends ActionBarActivity {
                     //Colocamos el textView para ver la forma que el jugador tiene de referencia en el lugar que haya
                     //quedado
 
-                    int formaVisible=(6-((numFormaA+1)+(numFormaB+1)))-1;
+
+                    formaVisible=3-(numFormaA+numFormaB);
                     //System.out.println("numFormaA: "+numFormaA);
                     //System.out.println("numFormaB: "+numFormaB);
                     //System.out.println("Forma visible"+formaVisible);
@@ -1200,250 +1210,117 @@ public class Juego extends ActionBarActivity {
 
 
 
-                    //Ponemos las tres formas en su orden:
-               //     infinitivo.setText(verboInfinitivo);
-               //     pasado.setText(verboPasado);
-               //     participio.setText(verboParticipio);
-
-                    //Pintamos de azul el verbo que corresponda la forma A
-                    if(numFormaA==0) {
-
-                        /*Habrá que poner en el layout del infinitivo el editTextInfinitivo
-                         */
-
-              //          infinitivo.setBackgroundColor(Color.rgb(49, 193, 255));
-              //          infinitivo.setText("");
-                    }if(numFormaA==1) {
-                        /*
-                        Habrá que poner en el layout del pasado el editTextPasado.
-                         */
-
-              //          pasado.setBackgroundColor(Color.rgb(49, 193, 255));
-              //          pasado.setText("");
-                    }if(numFormaA==2) {
-
-                        /*
-                        Habrá que poner en el layout del participio el editTextParticipio
-                         */
-
-              //          participio.setBackgroundColor(Color.rgb(49, 193, 255));
-              //          participio.setText("");
-                    }
-
-                    //Pintamos de verde el verbo que corresponda la forma B
-                    if(numFormaB==0) {
-              //          infinitivo.setBackgroundColor(Color.rgb(48, 255, 173));
-              //          infinitivo.setText("");
-                    }if(numFormaB==1) {
-              //          pasado.setBackgroundColor(Color.rgb(48, 255, 173));
-              //          pasado.setText("");
-                    }if(numFormaB==2) {
-              //          participio.setBackgroundColor(Color.rgb(48, 255, 173));
-              //          participio.setText("");
-                    }
 
                 }else if(nivel==5 || nivel==10 || nivel==15){
 
-                    int formaVisible=3-(numFormaA+numFormaB);
+                    /*
+                    Intento de solucionar que cada EditText quiera el foco de uso.
+                    Todo esto se solucionaría con un teclado propio.
+                     */
+                    nivelesConDosEditText=true;
+
+                    //La forma verbal de las tres que será la visible.
+                    formaVisible=3-(numFormaA+numFormaB);
 
                     //El lugar donde poner la forma visible
-                    int lugar = (int) (rnd.nextDouble() * 3 + 0); //(0 - 1- 2)
+                    lugar = (int) (rnd.nextDouble() * 3 + 0); //(0 - 1- 2)
 
-                /*
+                    System.out.println("CREADA lugar"+lugar+" forma visible"+formaVisible);
 
-                    if(lugar==0){ //Si la forma visible se coloca en hueco del infinitivo
+                    if(lugar==0){ //Si la forma visible se coloca en hueco del INFINITIVO
 
                         //Dependiendo de la forma verbal que se vaya a mostrar se mete un texto u otro en ##ESE HUECO##.
-                        if(formaVisible==0)
-                //            infinitivo.setText(verboInfinitivo);
-                        if(formaVisible==1)
-                //            infinitivo.setText(verboPasado);
-                        if(formaVisible==2)
-                //            infinitivo.setText(verboParticipio);
-
-
-                        //Quedan dos huecos:
-
-                        if( (int)(rnd.nextDouble()*2+0) == 0  ) { //Cara o cruz:
-                            //Cara
-
-
-                            //Colocalción de la formaA en el pasado.
-                            if(numFormaA==0)
-                //                pasado.setText("INFINITIVO");
-                            if(numFormaA==1)
-                //                pasado.setText("PASADO");
-                            if(numFormaA==2)
-                //                pasado.setText("PARTICIPIO");
-                            //Sea como sea pones el pasado azul (de la forma verboIntroducidoA:
-                //            pasado.setBackgroundColor(Color.rgb(49,193,255));
-
-                            //Colocación de la fomra B en el participio
-                            if(numFormaB==0)
-                //                participio.setText("INFINITIVO");
-                            if(numFormaB==1)
-                //                participio.setText("PASADO");
-                            if(numFormaB==2)
-                //                participio.setText("PARTICIPIO");
-
-                //            participio.setBackgroundColor(Color.rgb(48,255,173));
-
-                        }else {
-                            //Cruz
-
-                            //Colocalción de la formaA en el participio.
-                            if(numFormaA==0)
-                //                participio.setText("INFINITIVO");
-                            if(numFormaA==1)
-                //                participio.setText("PASADO");
-                            if(numFormaA==2)
-                //                participio.setText("PARTICIPIO");
-                            //Sea como sea pones el pasado azul (de la forma verboIntroducidoA:
- //                           participio.setBackgroundColor(Color.rgb(49,193,255));
-
-                            //Colocación de la fomra B en el pasado
-                            if(numFormaB==0)
-                //                pasado.setText("INFINITIVO");
-                            if(numFormaB==1)
-                //                pasado.setText("PASADO");
-                            if(numFormaB==2)
-                //                pasado.setText("PARTICIPIO");
-
-                //            pasado.setBackgroundColor(Color.rgb(48,255,173));
-
-
+                        if(formaVisible==0) {
+                            textViewInfinitivo.setText(verboInfinitivo);
+                            layoutInfinitivo.addView(textViewInfinitivo);
+                            //infinitivo.setText(verboInfinitivo);
                         }
+                        if(formaVisible==1){
+                            textViewInfinitivo.setText(verboPasado);
+                            layoutInfinitivo.addView(textViewInfinitivo);
+                            //infinitivo.setText(verboPasado);
+                        }
+
+                        if(formaVisible==2){
+                            textViewInfinitivo.setText(verboParticipio);
+                            layoutInfinitivo.addView(textViewInfinitivo);
+                            //infinitivo.setText(verboParticipio);
+                        }
+
+                    //seguimos en lugar==0
+
+                        //Quedan dos huecos, en los que hay que poner dos INTERROGACIONES, son editTEXT
+                        editTextPasado.setText("?");
+                        layoutPasado.addView(editTextPasado);
+
+                        editTextParticipio.setText("?");
+                        layoutParticipio.addView(editTextParticipio);
+
 
                     }
 
 
                     if(lugar==1){//Si la forma visible se coloca en el hueco del pasado
 
-                        if(formaVisible==0)
-                            pasado.setText(verboInfinitivo);
-                        if(formaVisible==1)
-                            pasado.setText(verboPasado);
-                        if(formaVisible==2)
-                            pasado.setText(verboParticipio);
+                        if(formaVisible==0){
+                            textViewPasado.setText(verboInfinitivo);
+                            layoutPasado.addView(textViewPasado);
+                        }
+                            //pasado.setText(verboInfinitivo);
+                        if(formaVisible==1) {
+                            textViewPasado.setText(verboPasado);
+                            layoutPasado.addView(textViewPasado);
+                           // pasado.setText(verboPasado);
+                        }
+                        if(formaVisible==2){
+                            textViewPasado.setText(verboParticipio);
+                            layoutPasado.addView(textViewPasado);
+                        }
+                           // pasado.setText(verboParticipio);
 
 
                         //Quedan dos huecos:
 
-                        if( (int)(rnd.nextDouble()*2+0) == 0  ) { //Cara o cruz:
-                            //Cara
+                        //Quedan dos huecos, en los que hay que poner dos INTERROGACIONES!!
+                        editTextInfinitivo.setText("?");
+                        layoutInfinitivo.addView(editTextInfinitivo);
+
+                        editTextParticipio.setText("?");
+                        layoutParticipio.addView(editTextParticipio);
 
 
-                            //Colocalción de la formaA en el infinitivo.
-                            if(numFormaA==0)
-                                infinitivo.setText("INFINITIVO");
-                            if(numFormaA==1)
-                                infinitivo.setText("PASADO");
-                            if(numFormaA==2)
-                                infinitivo.setText("PARTICIPIO");
-                            //Sea como sea pones el pasado azul (de la forma verboIntroducidoA:
-                            infinitivo.setBackgroundColor(Color.rgb(49,193,255));
 
-                            //Colocación de la fomra B en el participio
-                            if(numFormaB==0)
-                                participio.setText("INFINITIVO");
-                            if(numFormaB==1)
-                                participio.setText("PASADO");
-                            if(numFormaB==2)
-                                participio.setText("PARTICIPIO");
-
-                            participio.setBackgroundColor(Color.rgb(48,255,173));
-
-                        }else {
-                            //Cruz
-
-                            //Colocalción de la formaA en el participio.
-                            if(numFormaA==0)
-                                participio.setText("INFINITIVO");
-                            if(numFormaA==1)
-                                participio.setText("PASADO");
-                            if(numFormaA==2)
-                                participio.setText("PARTICIPIO");
-                            //Sea como sea pones el pasado azul (de la forma verboIntroducidoA:
-                            participio.setBackgroundColor(Color.rgb(49,193,255));
-
-                            //Colocación de la fomra B en el infinitivo
-                            if(numFormaB==0)
-                                infinitivo.setText("INFINITIVO");
-                            if(numFormaB==1)
-                                infinitivo.setText("PASADO");
-                            if(numFormaB==2)
-                                infinitivo.setText("PARTICIPIO");
-
-                            infinitivo.setBackgroundColor(Color.rgb(48,255,173));
-
-
-                        }
                     }
 
                     if(lugar==2){
 
-                        if(formaVisible==0)
-                            participio.setText(verboInfinitivo);
-                        if(formaVisible==1)
-                            participio.setText(verboPasado);
-                        if(formaVisible==2)
-                            participio.setText(verboParticipio);
-
-
-                        //Quedan dos huecos:
-
-                        if( (int)(rnd.nextDouble()*2+0) == 0  ) { //Cara o cruz:
-                            //Cara
-
-
-                            //Colocalción de la formaA en el pasado.
-                            if(numFormaA==0)
-                                pasado.setText("INFINITIVO");
-                            if(numFormaA==1)
-                                pasado.setText("PASADO");
-                            if(numFormaA==2)
-                                pasado.setText("PARTICIPIO");
-                            //Sea como sea pones el pasado azul (de la forma verboIntroducidoA:
-                            pasado.setBackgroundColor(Color.rgb(49,193,255));
-
-                            //Colocación de la fomra B en el infinitivo
-                            if(numFormaB==0)
-                                infinitivo.setText("INFINITIVO");
-                            if(numFormaB==1)
-                                infinitivo.setText("PASADO");
-                            if(numFormaB==2)
-                                infinitivo.setText("PARTICIPIO");
-
-                            infinitivo.setBackgroundColor(Color.rgb(48,255,173));
-
-                        }else {
-                            //Cruz
-
-                            //Colocalción de la formaA en el infinitivo.
-                            if(numFormaA==0)
-                                infinitivo.setText("INFINITIVO");
-                            if(numFormaA==1)
-                                infinitivo.setText("PASADO");
-                            if(numFormaA==2)
-                                infinitivo.setText("PARTICIPIO");
-                            //Sea como sea pones el pasado azul (de la forma verboIntroducidoA:
-                            infinitivo.setBackgroundColor(Color.rgb(49,193,255));
-
-                            //Colocación de la fomra B en el pasado
-                            if(numFormaB==0)
-                                pasado.setText("INFINITIVO");
-                            if(numFormaB==1)
-                                pasado.setText("PASADO");
-                            if(numFormaB==2)
-                                pasado.setText("PARTICIPIO");
-
-                            pasado.setBackgroundColor(Color.rgb(48,255,173));
-
-
+                        if(formaVisible==0){
+                            textViewParticipio.setText(verboInfinitivo);
+                            layoutParticipio.addView(textViewParticipio);
                         }
+                            //participio.setText(verboInfinitivo);
+                        if(formaVisible==1){
+                            textViewParticipio.setText(verboPasado);
+                            layoutParticipio.addView(textViewParticipio);
+                        }
+                            //participio.setText(verboPasado);
+                        if(formaVisible==2){
+                            textViewParticipio.setText(verboParticipio);
+                            layoutParticipio.addView(textViewParticipio);
+                        }
+                            //participio.setText(verboParticipio);
 
 
-                    }*/
+
+                        //Quedan dos huecos, en los que hay que poner dos INTERROGACIONES!!
+                        editTextInfinitivo.setText("?");
+                        layoutInfinitivo.addView(editTextInfinitivo);
+
+                        editTextPasado.setText("?");
+                        layoutPasado.addView(editTextPasado);
+
+
+                    }
 
 
 
@@ -1624,13 +1501,29 @@ public class Juego extends ActionBarActivity {
         //Fin de depuración
 
 
+        //Agrupamos las listas en un vector para poder manejarlas mejor dinamicamente.
+        ArrayList<Verbo> [] grupo = new ArrayList[3];
+        grupo[0]=verbosSoft;
+        grupo[1]=verbosMedium;
+        grupo[2]=verbosHard;
+
+        int eleccion=0;
+
+
+
         int seg=Integer.parseInt(timer.getText().toString());
+
 
         //  Comprobación de verbos:
 
-        if(nivel>=1 && nivel<=5) {
+        if(nivel>=1 && nivel<=5) //Se usa la lista simple.
+            eleccion=0;
+        if(nivel>=6 && nivel<=10)//Se usa la lista media.
+            eleccion=1;
+        if(nivel>=10 && nivel <=15)//Se usa la lista hard.
 
-            if(nivel==1 || nivel==2) {
+
+            if(nivel==1 || nivel==2 || nivel==6 || nivel==7 || nivel==11 || nivel==12) {
 
               //  if (campoVerboIntroducidoA.getText().toString().equals(verbosSoft[numVerbo][numFormaA])) {
                 //Nueva forma de cormprobar:
@@ -1639,82 +1532,68 @@ public class Juego extends ActionBarActivity {
                 switch (numFormaA) {
 
                     case 0:
-                        if (comprueba(editTextInfinitivo.getText().toString(), verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA)))
+                        if (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA)))
                             puntuacionPartida=puntuacionPartida+(nivel*seg);
                         else
                             perderVida();
-                        System.out.println("introducido: "+editTextInfinitivo.getText().toString()+" solucion: "+verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA));
+                        System.out.println("introducido: "+editTextInfinitivo.getText().toString()+" solucion: "+grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA));
                     break;
 
                     case 1:
-                        if (comprueba(editTextPasado.getText().toString(), verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA)))
+                        if (comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA)))
                             puntuacionPartida=puntuacionPartida+(nivel*seg);
                         else
                             perderVida();
-                        System.out.println("introducido: "+editTextPasado.getText().toString()+" solucion: "+verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA));
+                        System.out.println("introducido: "+editTextPasado.getText().toString()+" solucion: "+grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA));
                     break;
 
                     case 2:
-                        if (comprueba(editTextParticipio.getText().toString(), verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA)))
+                        if (comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA)))
                             puntuacionPartida=puntuacionPartida+(nivel*seg);
                         else
                             perderVida();
-                        System.out.println("introducido: "+editTextParticipio.getText().toString()+" solucion: "+verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA));
+                        System.out.println("introducido: "+editTextParticipio.getText().toString()+" solucion: "+grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA));
                     break;
 
                 }
 
-
-
-
-                /*
-                if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA) )){
-                    //En el nivel 1 cada acierto suma 1 en el nivel 2 suma 2 y así con el resto de niveles
-
-                    puntuacionPartida=puntuacionPartida+(nivel*seg);
-
-                } else {
-                    //Pierde una vida: ohhh!!
-                    perderVida();
-                }
-                */
             }
 
 
-            if(nivel==3){
+            if(nivel==3 || nivel==8 || nivel==13){
 
                 //Así comprobamos en el lugar donde se ha puesto el editText a rellenar por el suario con la forma elegida, que sigue pudiendo ser cualquiera.
                 switch (lugar) {
 
                     case 0:
-                        if (comprueba(editTextInfinitivo.getText().toString(), verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA)))
+                        if (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA)))
                             puntuacionPartida=puntuacionPartida+(nivel*seg);
                         else
                             perderVida();
-                        System.out.println("introducido: "+editTextInfinitivo.getText().toString()+" solucion: "+verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA));
+                        System.out.println("introducido: "+editTextInfinitivo.getText().toString()+" solucion: "+grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA));
                         break;
 
                     case 1:
-                        if (comprueba(editTextPasado.getText().toString(), verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA)))
+                        if (comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA)))
                             puntuacionPartida=puntuacionPartida+(nivel*seg);
                         else
                             perderVida();
-                        System.out.println("introducido: "+editTextPasado.getText().toString()+" solucion: "+verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA));
+                        System.out.println("introducido: "+editTextPasado.getText().toString()+" solucion: "+grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA));
                         break;
 
                     case 2:
-                        if (comprueba(editTextParticipio.getText().toString(), verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA)))
+                        if (comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA)))
                             puntuacionPartida=puntuacionPartida+(nivel*seg);
                         else
                             perderVida();
-                        System.out.println("introducido: "+editTextParticipio.getText().toString()+" solucion: "+verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA));
+                        System.out.println("introducido: "+editTextParticipio.getText().toString()+" solucion: "+grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA));
                         break;
 
                 }
 
 
             }
-            if(nivel==4){
+            if(nivel==4 || nivel==9 || nivel==14){
 
                 //Tenemos que comprobar que los dos verbos introducidos por el usuario estén bien.
 
@@ -1722,27 +1601,27 @@ public class Juego extends ActionBarActivity {
                 switch (numFormaA) {
 
                     case 0:
-                        if (comprueba(editTextInfinitivo.getText().toString(), verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA)))
+                        if (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA)))
                             puntuacionPartida=puntuacionPartida+(nivel*seg);
                         else
                             perderVida();
-                        System.out.println("introducido: "+editTextInfinitivo.getText().toString()+" solucion: "+verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA));
+                        System.out.println("introducido: "+editTextInfinitivo.getText().toString()+" solucion: "+grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA));
                         break;
 
                     case 1:
-                        if (comprueba(editTextPasado.getText().toString(), verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA)))
+                        if (comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA)))
                             puntuacionPartida=puntuacionPartida+(nivel*seg);
                         else
                             perderVida();
-                        System.out.println("introducido: "+editTextPasado.getText().toString()+" solucion: "+verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA));
+                        System.out.println("introducido: "+editTextPasado.getText().toString()+" solucion: "+grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA));
                         break;
 
                     case 2:
-                        if (comprueba(editTextParticipio.getText().toString(), verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA)))
+                        if (comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA)))
                             puntuacionPartida=puntuacionPartida+(nivel*seg);
                         else
                             perderVida();
-                        System.out.println("introducido: "+editTextParticipio.getText().toString()+" solucion: "+verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA));
+                        System.out.println("introducido: "+editTextParticipio.getText().toString()+" solucion: "+grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA));
                         break;
 
                 }
@@ -1751,27 +1630,27 @@ public class Juego extends ActionBarActivity {
                 switch (numFormaB) {
 
                     case 0:
-                        if (comprueba(editTextInfinitivo.getText().toString(), verbosSoft.get(numVerbo).getVerbo().getForma(numFormaB)))
+                        if (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaB)))
                             puntuacionPartida=puntuacionPartida+(nivel*seg);
                         else
                             perderVida();
-                        System.out.println("introducido: "+editTextInfinitivo.getText().toString()+" solucion: "+verbosSoft.get(numVerbo).getVerbo().getForma(numFormaB));
+                        System.out.println("introducido: "+editTextInfinitivo.getText().toString()+" solucion: "+grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaB));
                         break;
 
                     case 1:
-                        if (comprueba(editTextPasado.getText().toString(), verbosSoft.get(numVerbo).getVerbo().getForma(numFormaB)))
+                        if (comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaB)))
                             puntuacionPartida=puntuacionPartida+(nivel*seg);
                         else
                             perderVida();
-                        System.out.println("introducido: "+editTextPasado.getText().toString()+" solucion: "+verbosSoft.get(numVerbo).getVerbo().getForma(numFormaB));
+                        System.out.println("introducido: "+editTextPasado.getText().toString()+" solucion: "+grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaB));
                         break;
 
                     case 2:
-                        if (comprueba(editTextParticipio.getText().toString(), verbosSoft.get(numVerbo).getVerbo().getForma(numFormaB)))
+                        if (comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaB)))
                             puntuacionPartida=puntuacionPartida+(nivel*seg);
                         else
                             perderVida();
-                        System.out.println("introducido: "+editTextParticipio.getText().toString()+" solucion: "+verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA));
+                        System.out.println("introducido: "+editTextParticipio.getText().toString()+" solucion: "+grupo[eleccion].get(numVerbo).getVerbo().getForma(numFormaA));
                         break;
 
                 }
@@ -1779,78 +1658,222 @@ public class Juego extends ActionBarActivity {
 
             }
 
-            /*
-            else{
+            if(nivel==5 || nivel==10 || nivel==15){
 
-                if(nivel==4 || nivel==5) {
-                    if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosSoft.get(numVerbo).getVerbo().getForma(numFormaA)))
-                        puntuacionPartida=puntuacionPartida+(nivel*seg);
-                    else
-                        perderVida();
-                    if (comprueba(campoVerboIntroducidoB.getText().toString(),verbosSoft.get(numVerbo).getVerbo().getForma(numFormaB)))
-                        puntuacionPartida=puntuacionPartida+(nivel*seg);
-                    else
-                        perderVida();
+                //Tenemos que comprobar que los dos verbos introducidos por el usuario estén bien, aunque da igual donde lo haya puesto:
+
+                int infinitivo=0;
+                int pasado=1;
+                int participio=2;
+                //lugar es donde se coloca la forma visible.
+                System.out.println("Lugar al comprobar 5: "+lugar);
+                switch(lugar){
+
+                    //La forma visible está en el layout del Infinitivo, comprobaremos que en los otros
+                    //dos estén las otras dos formas visible.
+                    case 0:
+
+                        System.out.println("lugar"+lugar+" forma visible"+formaVisible);
+                        switch(formaVisible){
+
+                            /*Si la forma que está en el lugar 0 es la 0, comprobaremos que en en los lugares 1 y 2
+                            estén las formas 1 y 2 aunque de igual cual en cada lugar.
+                             */
+                            case 0:
+
+                                if ( (comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(pasado))
+                                      &&
+                                      comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(participio))
+                                     )
+                                     ||
+                                     (comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(participio))
+                                       &&
+                                      comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(pasado))
+                                     )
+
+                                   )puntuacionPartida=puntuacionPartida+(nivel*seg);
+                                else{
+                                    System.out.println("LEVEL5");
+
+                                    perderVida();
+                                }
+
+
+
+                            break;
+
+                            case 1:
+
+                                if ( (comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(infinitivo))
+                                        &&
+                                        comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(participio))
+                                     )
+                                     ||
+                                     (comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(participio))
+                                        &&
+                                        comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(infinitivo))
+                                     )
+                                   )puntuacionPartida=puntuacionPartida+(nivel*seg);
+                                else
+                                    perderVida();
+                            break;
+                            case 2:
+
+                                if ( (comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(pasado))
+                                        &&
+                                        comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(infinitivo))
+                                )
+                                        ||
+                                        (comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(infinitivo))
+                                                &&
+                                                comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(pasado))
+                                        )
+                                        )puntuacionPartida=puntuacionPartida+(nivel*seg);
+                                else
+                                    perderVida();
+                            break;
+
+
+                        }
+
+
+                    break;
+
+
+                    case 1:
+
+                        switch(formaVisible){
+
+                            /*Si la forma que está en el lugar 0 es la 0, comprobaremos que en en los lugares 1 y 2
+                            estén las formas 1 y 2 aunque de igual cual en cada lugar.
+                             */
+                            case 0:
+
+                                if ( (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(pasado))
+                                        &&
+                                        comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(participio))
+                                )
+                                        ||
+                                        (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(participio))
+                                                &&
+                                                comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(pasado))
+                                        )
+
+                                        )puntuacionPartida=puntuacionPartida+(nivel*seg);
+                                else
+                                    perderVida();
+
+
+                                    break;
+
+                            case 1:
+
+                                if ( (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(infinitivo))
+                                        &&
+                                        comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(participio))
+                                )
+                                        ||
+                                        (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(participio))
+                                                &&
+                                                comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(infinitivo))
+                                        )
+                                        )puntuacionPartida=puntuacionPartida+(nivel*seg);
+                                else
+                                    perderVida();
+                                    break;
+                            case 2:
+
+                                if ( (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(pasado))
+                                        &&
+                                        comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(infinitivo))
+                                )
+                                        ||
+                                        (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(infinitivo))
+                                                &&
+                                                comprueba(editTextParticipio.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(pasado))
+                                        )
+                                        )puntuacionPartida=puntuacionPartida+(nivel*seg);
+                                else
+                                    perderVida();
+                                    break;
+
+
+                        }
+
+                    break;
+
+
+                    case 2:
+
+                        switch(formaVisible){
+
+                            /*Si la forma que está en el lugar 0 es la 0, comprobaremos que en en los lugares 1 y 2
+                            estén las formas 1 y 2 aunque de igual cual en cada lugar.
+                             */
+                            case 0:
+
+                                if ( (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(participio))
+                                        &&
+                                        comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(pasado))
+                                )
+                                        ||
+                                        (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(pasado))
+                                                &&
+                                                comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(participio))
+                                        )
+
+                                        )puntuacionPartida=puntuacionPartida+(nivel*seg);
+                                else
+                                    perderVida();
+
+
+                                    break;
+
+                            case 1:
+
+                                if ( (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(infinitivo))
+                                        &&
+                                        comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(participio))
+                                )
+                                        ||
+                                        (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(participio))
+                                                &&
+                                                comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(infinitivo))
+                                        )
+                                        )puntuacionPartida=puntuacionPartida+(nivel*seg);
+                                else
+                                    perderVida();
+                                    break;
+                            case 2:
+
+                                if ( (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(pasado))
+                                        &&
+                                        comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(infinitivo))
+                                )
+                                        ||
+                                        (comprueba(editTextInfinitivo.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(infinitivo))
+                                                &&
+                                                comprueba(editTextPasado.getText().toString(), grupo[eleccion].get(numVerbo).getVerbo().getForma(pasado))
+                                        )
+                                        )puntuacionPartida=puntuacionPartida+(nivel*seg);
+                                else
+                                    perderVida();
+                                    break;
+
+
+                        }
+
+                    break;
+
+
                 }
 
-            }
-            */
-        }
-        else if(nivel>=6 && nivel<=10) { //Lista Medium
-            /*
-            if(nivel==6 || nivel==7 || nivel==8) {
-                if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosMedium.get(numVerbo).getVerbo().getForma(numFormaA))) {
-                    puntuacionPartida=puntuacionPartida+(nivel*seg);
 
-                } else {
-                    //Pierde una vida: ohhh!!
-                    perderVida();
-                }
-            }
-            else{
 
-                if(nivel==9 || nivel==10) {
-                    if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosMedium.get(numVerbo).getVerbo().getForma(numFormaA)))
-                        puntuacionPartida=puntuacionPartida+(nivel*seg);
-                    else
-                        perderVida();
-                    if (comprueba(campoVerboIntroducidoB.getText().toString(),verbosMedium.get(numVerbo).getVerbo().getForma(numFormaB)))
-                        puntuacionPartida=puntuacionPartida+(nivel*seg);
-                    else
-                        perderVida();
-                }
-
-            }
-        */
-        }else if(nivel>=11 && nivel<=15) {//Lista Hard
-            /*
-
-            if(nivel==11 || nivel==12 || nivel==13) {
-                if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosHard.get(numVerbo).getVerbo().getForma(numFormaA))) {
-                    puntuacionPartida=puntuacionPartida+(nivel*seg);
-
-                } else {
-                    //Pierde una vida: ohhh!!
-                    perderVida();
-                }
-            }
-            else{
-
-                if(nivel==14 || nivel==15) {
-                    if (comprueba(campoVerboIntroducidoA.getText().toString(),verbosHard.get(numVerbo).getVerbo().getForma(numFormaA)))
-                        puntuacionPartida=puntuacionPartida+(nivel*seg);
-                    else
-                        perderVida();
-                    if (comprueba(campoVerboIntroducidoB.getText().toString(),verbosHard.get(numVerbo).getVerbo().getForma(numFormaB)))
-                        puntuacionPartida=puntuacionPartida+(nivel*seg);
-                    else
-                        perderVida();
-                }
 
             }
 
-            */
-        }
+
 
 
         //Ajustamos la puntuación según el tiempo, multiplicandola por los segunods que quedan, así
