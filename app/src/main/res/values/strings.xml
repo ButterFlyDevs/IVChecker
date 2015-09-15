@@ -131,6 +131,7 @@
         <string name="aciertos">hits</string>
         <string name="errores">misses</string>
         <string name="verbos">verbs</string>
+        <string name="cabeceraVerbos">Not fail!</string>
 
 
 

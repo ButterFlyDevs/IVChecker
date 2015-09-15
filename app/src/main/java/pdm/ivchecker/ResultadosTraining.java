@@ -261,7 +261,7 @@ public class ResultadosTraining extends ActionBarActivity {
         if(listaVerbosFallados.isEmpty()){
 
            //Modificamos el texto en el que dice "Errores" antes del vector:
-           textViewErrores.setText("¡Ningún error!");
+           textViewErrores.setText(getString(R.string.cabeceraVerbos));
 
            //Creamos un visor de imágenes.
            ImageView iv = new ImageView(this);

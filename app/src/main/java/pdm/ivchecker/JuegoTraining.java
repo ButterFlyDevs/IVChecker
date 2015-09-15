@@ -591,7 +591,7 @@ public class JuegoTraining extends ActionBarActivity {
             txtVerbo.setText(misterio);
             layoutPasado.addView(txtVerbo);
         }else {
-
+            //Las variables de texto se crean en el momento.
             TextView texto = new TextView(this);
             //Ajustamos el tamaño del texto:
             texto.setTextSize(tamTexto);

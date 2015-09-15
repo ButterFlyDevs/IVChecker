@@ -15,13 +15,13 @@
         <string name="tD2">Ahora no conoces el tamaño del verbo</string>
 
         <string name="tM3">Las cosas se complican</string>
-        <string name="tD3">El orden de los verbos no es el correcto</string>
+        <string name="tD3">El orden de los verbos no es el correcto, debes colocar la forma que falta.</string>
 
         <string name="tM4">¡Lo estás consiguiendo!</string>
-        <string name="tD4">Ahora faltan dos formas</string>
+        <string name="tD4">Ahora faltan dos formas, colócalas en su orden.</string>
 
         <string name="tM5">¿Aún te quedan vidas?</string>
-        <string name="tD5">Faltan dos formas y están desordenadas</string>
+        <string name="tD5">Faltan dos formas y están desordenadas, introdúcelas, sin importar el orden.</string>
 
         <string name="tM6">A ver lo que sabes hacer</string>
         <string name="tD6">Verbos de nivel medio</string>
@@ -126,6 +126,7 @@
     <string name="aciertos">Aciertos: </string>
     <string name="errores">Fallos: </string>
     <string name="verbos">Nº verbos: </string>
+    <string name="cabeceraVerbos">¡Ningún fallo!</string>
 
 
     <!-- NO TRADUCIR -->

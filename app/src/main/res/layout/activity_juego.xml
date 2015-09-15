@@ -113,100 +113,34 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/infinitivo"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30px"
-            android:text="infinitivo"
-            android:layout_x="82dp"
-            android:layout_y="4dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="31dp"
-            android:gravity="center"
-            android:textColor="#ffececec"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/pasado"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30px"
-            android:text="pasado"
-            android:layout_x="85dp"
-            android:layout_y="52dp"
-            android:layout_marginTop="32dp"
-            android:layout_below="@+id/participio"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:gravity="center"
-            android:textColor="#ffececec"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/participio"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30px"
-            android:text="participio"
-            android:layout_x="66dp"
-            android:layout_y="97dp"
-            android:layout_marginTop="26dp"
-            android:layout_below="@+id/infinitivo"
-            android:layout_alignRight="@+id/infinitivo"
-            android:layout_alignEnd="@+id/infinitivo"
-            android:gravity="center"
-            android:textColor="#ffececec"
-            android:textStyle="bold" />
-
-        <Space
-            android:layout_width="287dp"
-            android:layout_height="22dp" />
 
         <LinearLayout
-            android:id="@+id/LinearLayoutA"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:background="#ff31c1ff">
-
-            <EditText
-                android:id="@+id/formaMisteriosaA"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:layout_x="22dp"
-                android:layout_y="142dp"
-                android:layout_above="@+id/nextButton"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:gravity="center" />
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:id="@+id/layoutInfinitivo"
+            android:gravity="center">
 
         </LinearLayout>
 
-        <Space
-            android:layout_width="287dp"
-            android:layout_height="15dp"
-            android:layout_gravity="right" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:id="@+id/layoutPasado"
+            android:gravity="center">
+
+        </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/LinearLayoutB"
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="#ff30ffad">
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/formaMisteriosaB"
-                android:layout_weight="0.70"
-                android:gravity="center" />
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:id="@+id/layoutParticipio"
+            android:gravity="center">
         </LinearLayout>
+
+
 
         <Button
             android:id="@+id/nextButton"
