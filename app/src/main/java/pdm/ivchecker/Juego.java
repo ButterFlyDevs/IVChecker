@@ -37,7 +37,6 @@ import com.google.android.gms.ads.*;
 
 public class Juego extends ActionBarActivity {
 
-
     //Variable del fragment:
     String id = "IdQueNecesitaMyFragment";
 
@@ -92,7 +91,7 @@ public class Juego extends ActionBarActivity {
     private int numVerbo, numFormaA, numFormaB, numLetrasForma; //Variables para crear la jugada
     private String formaMisteriosa; //Forma que el usuario debe introducir.
     private int nivel; //Nivel por el que el usuario va.
-    private int jugadaEnNivel; //Jugada (de 10) por la que va dentro del nivel.
+    private int jugadaEnNivel; //Jugada (de 15) por la que va dentro del nivel.
 
     private boolean finPartida=false;
     private boolean restauracion=false;
@@ -122,11 +121,14 @@ public class Juego extends ActionBarActivity {
             nVidas = 3;
 
             //La partida comienza en el nivel 1
-            nivel = 1;
+            nivel = 15;
 
             int defecto = 0;
 
-            jugadaEnNivel = 1;
+            //El número de jugada por nivel empieza en 1
+            jugadaEnNivel = 11;
+
+
             //Inicializamos  el objeto de tipo Random().
             rnd = new Random();
             numVerbo=0;
@@ -641,32 +643,38 @@ public class Juego extends ActionBarActivity {
                                 nivel++; //Pasamos de nivel
                                 jugadaEnNivel = 1; //Reiniciamos.
 
-                                if(!finPartida)
+                                //if(!finPartida)
+                                if(nivel<=15)
                                     runFragment(nivel);
 
-                                jugar();
+                                System.out.println("NIVEL: "+nivel);
+
+                                //jugar();
 
                             }
 
                             //Si se han completado todos los niveles (se ha acabado el juego) vamos a una pantalla de resultados:.
-                            else if (nivel > 15) {
-                                //Creamos el intent:
-                                Intent intent = new Intent(Juego.this, Resultado.class);
+                            if (nivel > 15) {
 
-                                //Creamos la información a pasar entre actividades:
-                                Bundle b = new Bundle();
-                                b.putString("PUNTOS", String.valueOf(puntuacionPartida));
+                                //Ejecutar este fragmente hace que se muestre y después se finalice la partida.
+                                if(!finPartida) {
+                                    runFragmentSucess();
 
-                                //Añadimos la información al intent:
-                                intent.putExtras(b);
 
-                                //Nos vamos al activity resultados:
-                                startActivity(intent);
+                                }
+
+                                //Después llamamos a mostrar la puntuación.
+
+
+
+
+
                             }
                             //Si no se han completado seguimos jugando!
                             else
                                 //Si no estuviera dentro de la estructura else nos crearía una jugada antes de pasar de nivel.
                                 jugar(); //COmo llamar a crearJugada()
+
 
                         //Al hacer click se reinicia el countDownTimer
                         time=30;
@@ -744,6 +752,52 @@ public class Juego extends ActionBarActivity {
 
             }
         }.start();
+    }
+
+
+    private void runFragmentSucess() {
+
+
+
+
+        //Declaramos una nueva hebra
+        new Thread() {
+            //Le decimos lo que queremos que haga:
+            public void run() {
+
+                MyDialogFragmentSucess frag = new MyDialogFragmentSucess();
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+
+                frag.show(ft, "txn_tag");
+
+                try {
+                    Thread.sleep(5000);
+
+                    //Después creamos el intent que nos llevará a la activity resultado.
+
+                    //Creamos el intent:
+                    Intent intent = new Intent(Juego.this, Resultado.class);
+                    intent.putExtra("puntos", puntuacionPartida);
+
+                    //Nos vamos al activity resultados:
+                    startActivity(intent);
+
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                frag.dismiss();
+
+
+
+
+            }
+        }.start();
+
+
     }
 
     /**
@@ -1521,6 +1575,7 @@ public class Juego extends ActionBarActivity {
         if(nivel>=6 && nivel<=10)//Se usa la lista media.
             eleccion=1;
         if(nivel>=10 && nivel <=15)//Se usa la lista hard.
+            eleccion=2;
 
 
             if(nivel==1 || nivel==2 || nivel==6 || nivel==7 || nivel==11 || nivel==12) {

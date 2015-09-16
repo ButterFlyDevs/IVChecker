@@ -74,6 +74,10 @@
             android:name=".ListaVerbos2"
             android:label="@string/title_activity_lista_verbos2" >
         </activity>
+        <activity
+            android:name=".ActivityFinalJuego"
+            android:label="@string/title_activity_activity_final_juego" >
+        </activity>
     </application>
 
 </manifest>
