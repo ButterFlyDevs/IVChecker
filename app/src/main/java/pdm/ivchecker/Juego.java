@@ -121,12 +121,12 @@ public class Juego extends ActionBarActivity {
             nVidas = 3;
 
             //La partida comienza en el nivel 1
-            nivel = 15;
+            nivel = 1;
 
             int defecto = 0;
 
             //El número de jugada por nivel empieza en 1
-            jugadaEnNivel = 11;
+            jugadaEnNivel = 1;
 
 
             //Inicializamos  el objeto de tipo Random().
@@ -952,7 +952,13 @@ public class Juego extends ActionBarActivity {
         String verbos[]={verboInfinitivo,verboPasado,verboParticipio};
 
 
-
+        //Vamos ajustar un poco el tamaño de letra para cuando sean verbos largos o compuestos
+        if(verboInfinitivo.length()>10)
+            textViewInfinitivo.setTextSize(30);
+        if(verboPasado.length()>10)
+            textViewPasado.setTextSize(30);
+        if(verboParticipio.length()>10)
+            textViewParticipio.setTextSize(30);
 
         //2º GENERAMOS LA FORMA O FORMAS dependiendo del nivel que no aparecerán (por la que preguntaremos)
 
