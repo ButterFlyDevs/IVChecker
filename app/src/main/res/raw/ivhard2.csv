@@ -5,69 +5,133 @@ se,"tolerar o aguantar o soportar"
 2
 v,arise,arose,arisen
 tf,əˈraɪz,əˈrəʊz,əˈrɪzn
+se,"surgir o presentarse"
+e,A strom arose
+tee,Se levantó una tormenta
 3
 v,awake,awoke/awaked,awoken/awaked
 tf,əˈweɪk,əˈwəʊk/əˈweɪkt,əˈwəʊkən/əˈweɪkt
+se,"despertarse"
+e,I was still only half awake when you called me.
+tee,Aún estaba medio dormido cuando me llamaste.
 4
 v,bend,bent,bent
 tf,bɛnd,bɛnt,bɛnt
+se,"doblar o curvar"
+
 5
 v,beseech,besought/beseeched,besought/beseeched
 tf,bɪˈsiːʧ,bɪˈsɔːt/bɪˈsiːʧt,bɪˈsɔːt/bɪˈsiːʧt
+se,"suplicar"
 6
 v,bet,bet/betted,bet/betted
 tf,bɛt,bɛt/ˈbɛtɪd,bɛt/ˈbɛtɪd
+se,"apostar"
+e,They are forbidden to bet o their own races.
+tee,Tienen prohibido apostar en sus propias carreras.
+e,What do you bet?
+tee,¿Qué te apuestas?
 7
 v,bid,bade/bid,bidden/bid
 tf,bɪd,beɪd/bɪd,ˈbɪdn/bɪd
+se,"ofrecer o pujar"
+e,I bide you 10 bucks for this comic.
+see,Te ofrezco 10 pavos por ese comic.
 8
 v,bind,bound,bound
 tf,baɪnd,baʊnd,baʊnd
+se,"atar o sujetar"
+e,I bound the dog to the streetlight.
+tee,Até el perro a la farola.
 9
 v,bleed,bled,bled
 tf,bliːd,blɛd,blɛd
+se,"sangrar"
+e,His nose is bleeding.
+tee,Le sangra la nariz.
 10
 v,breed,bred,bred
 tf,briːd,brɛd,brɛd
+se,"criar"
+e,We breed them for hunting
+tee,Los criamos para la caza
 11
 v,burn,burned/burnt,burned/burnt
 tf,bɜːn,bɜːnd/bɜːnt,bɜːnd/bɜːnt
+se,"quemar"
+e,The sun burned her skin.
+tee,El sol le quemó la piel.
+e,
 12
 v,burst,burst,burst
 tf,bɜːst,bɜːst,bɜːst
+se,"explotar o reventar"
+e,This pub is bursting at the seams
+tee,Este pub está a punto de reventar.
+e,The balloon will burst if you keep puffing.
+tee,El globo va a reventar si sigues hinchando.
 13
 v,cast,cast,cast
 tf,kɑːst,kɑːst,kɑːst
+se,"emitir o lanzar"
+
 14
 v,chide,chided/chid,chided/chidden
 tf,ʧaɪd,ˈʧaɪdɪd/ʧɪd,ˈʧaɪdɪd/ˈʧɪdn
+se,"regañar"
+e,Later on, my mom would chide me about it.
+tee,Luego, mi madre me regañará por eso.
+
 15
 v,cling,clung,clung
 tf,klɪŋ,klʌŋ,klʌŋ
+se,"aferrarse"
+
 16
 v,creep,crept,crept
 tf,kriːp,krɛpt,krɛpt
+se,"arrastrasrse, reptar"
+
 17
 v,dare,dared/durst,dared
 tf,deə,deəd/dɜːst,deəd
-18
-v,daydream,daydreamt,daydreamt
-tf,ˈdeɪˌdriːm,deɪ drɛmt,deɪ drɛmt
+se,"atreverse"
+e,Nobody would dare walk to school.
+tee,Nadie se atrevía a caminar hasta la escuela.
+
+
 19
 v,deal,dealt,dealt
 tf,diːl,dɛlt,dɛlt
+se,"acordar, pactar"
+e, We dealt the price on 200$.
+tee, Nosotros acordamos el precio en 200 dólares.
+
+
 20
 v,dive,dived/dove,dived
 tf,daɪv,daɪvd/dʌv,daɪvd
+se,"bucear, sumergirse"
+e,We're going to dive to see the ancient city.
+tee,Vamos a bucear para ver la antigua villa.
+e,I can't dive, but I would like learn.
+tee,No se bucear, pero me encantaría aprender.
+
+
 21
 v,dwell,dwelt/dwelled,dwelt/dwelled
 tf,dwɛl,dwɛlt/dwɛld,dwɛlt/dwɛld
 se,"habitar o morar"
 e,Prehistoric man dwell in caves.
 tee,El hombre prehistórico moraba en cuevas.
+
 22
 v,disprove,disproved,disproved
 tf,ˌdɪsˈpruːv,ˌdɪsˈpruːvd,ˌdɪsˈpruːvd,
+se,"refutar"
+e,There's no time to deny, to prove or disprove anything.
+tee,No hay tiempo de negar, demostrar, o refutar algo.
+
 23
 v,flee,fled,fled
 tf,fliː,flɛd,flɛd
@@ -76,6 +140,7 @@ e,The Jacksons fled to the U.S. when the war broke out.
 tee,Los Jackson huyeron a los Estados Unidos cuando la guerra estalló.
 e,When the police arrived, the driver had already fled the scene of the crime.
 tee,Cuando la policía llegó, el conductor ya había huido de la escena del crimen.
+
 24
 v,fling,flung,flung
 tf,flɪŋ,flʌŋ,flʌŋ
@@ -84,6 +149,7 @@ e,The kids flung themselves onto the bed and turned on the TV.
 tee,Los niños se tiraron en la cama y encendieron la televisión.
 e,As Peter arrives from school, he always flings his backpack on the sofa.
 tee,Cuando Peter llega de la escuela, el siempre tira su mochila  al sofá.
+
 25
 v,forbid,forbade,forbidden
 tf,fəˈbɪd,fəˈbeɪd,fəˈbɪdn
@@ -92,9 +158,14 @@ e,His doctor has forbidden him to eat salt.
 tee,El doctor le ha prohibidoque coma sal.
 e,Take a picture is strictly forbidden during the show.
 tee,Hacer una foto está estrictamente prohibido durante el show.
+
 26
 v,forsake,forsook,forsaken
 tf,fəˈseɪk,fəˈsʊk,fəˈseɪkən
+se,"abandonar"
+e,Don't worry, Diana. I'll never forsake you.
+tee,No te preocupes Diana, nunca te abandonaré.
+
 27
 v,forecast,forecast,forecast
 tf,ˈfɔːkɑːst,ˈfɔːkɑːst,ˈfɔːkɑːst
@@ -103,6 +174,7 @@ e,Thunderstorms are forecast for tomorrow.
 tee,Se pronostican tormetas para mañana.
 e,Experts are forecasting an upturn in the economy.
 tee,Expertos están pronosticando una mejora en la economía.
+
 28
 v,foresee,foresaw,foreseen
 tf,fɔːˈsiː,fɔːˈsɔː,fɔːˈsiːn
@@ -111,6 +183,7 @@ e,Nobody could have foreseen the extent of the damage.
 tee,Nadia podría haber previsto el grado del daño.
 e,It's impossible to foresee how their plans will work out.
 tee,Es imposible preveer como saldrán sus proyectos.
+
 29
 v,foretell,foretold,foretold
 tf,fɔːˈtɛl,fɔːˈtəʊld,fɔːˈtəʊld
@@ -119,30 +192,41 @@ e,No one can foretell the future.
 tee,Nadie puede predecir el futuro.
 e,The witch foretold that Thomas would become famous.
 tee,La bruja predijo que Thomas se haría famoso.
-30
-v,gild,gilded,gilded/gilt
-tf,gɪld,ˈgɪldɪd,ˈgɪldɪd/gɪlt
-31
-v,gird,girded/girt,girded/girt
-tf,gɜːd,ˈgɜːdɪd/gɜːt,ˈgɜːdɪd/gɜːt
+
+
+
+
 32
 v,grind,ground,ground
 tf,graɪnd,graʊnd,graʊnd
+se,"moler, machacar"
+e, I can't grind it up in a blender.
+tee,No se puede moler en una licuadora.
+
+
 33
 v,heave,heaved/hove,heaved/hove
 tf,hiːv,hiːvd/həʊv,hiːvd/həʊv
-34
-v,hew,hewed,hewn/hewed
-tf,hjuː,hjuːd,hjuːn/hjuːd
+se,"tirar, empujar"
+e,Please, don't heave me.
+tee,Por favor, no me empujes.
+
+
 35
 v,kneel,knelt/kneeled,knelt/kneeled
 tf,niːl,nɛlt/niːld,nɛlt/niːld
+se,"arrodillarse"
+e,In the presence of Pharaoh, you kneel.
+tee,En presencia del Faraon, arrodíllate.
+
 36
 v,knit,knit,knit
 tf,nɪt,nɪt,nɪt
-37
-v,lade,laded,laden
-tf,leɪd,ˈleɪdɪd,ˈleɪdn
+se,"tejer"
+e,I knit socks and sell them on the street.
+tee,Tejo calcetines y los vendo en la calle.
+
+
 38
 v,lay,laid,laid
 tf,leɪ,leɪd,leɪd
@@ -151,216 +235,341 @@ e,Hens lay eggs.
 tee,Las gallinas ponen huevos.
 e,Cindy has always laid the table before dinner.
 tee,Cindy siempre ponía la mesa antes de la comida.
+
 39
 v,lean,leaned/leant,leaned/leant
 tf,liːn,liːnd/lɛnt,liːnd/lɛnt
+se,"apoyarse, inclinarse"
+e,I need somebody to lean me in this project.
+tee,Necesito a alguien que me apoye en este proyecto.
+
 40
 v,leap,leaped/leapt,leaped/leapt
 tf,liːp,liːpt/lɛpt,liːpt/lɛpt
+se,"saltar"
+e,It's another giant leap for mankind...
+tee,Otro gran paso para la humanidad...
+
 41
 v,light,lit/lighted,lit/lighted
 tf,laɪt,lɪt/ˈlaɪtɪd,lɪt/ˈlaɪtɪd
+se,"encender"
+e,We can light a fire and dinner.
+tee,Podemos encender un fuego y cenar.
+
+
 42
 v,lip-read,lip-read,lip-read
 tf,ˈlɪpriːd,ˈlɪpriːd,ˈlɪpriːd
+se,"leer los labios"
+e,I am deaf, but i can lip-read.
+see,Soy sorda, pero puedo leer los labios.
+
 43
 v,may,might,might
 tf,meɪ,maɪt,maɪt
+se,"poder"
+e,I might need a couple extra minutes Tuesday night.
+tee,Puede que necesite un par de minutos extra el martes por la noche.
+
 44
 v,mow,mowed,mowed/mown
 tf,maʊ,maʊd,maʊd/məʊn
+se,"cortar, segar"
+e,He volunteered to mow your lawn.
+tee,El se ofreció a cortar el césped.
+
 45
 v,mishear,misheard,misheard
 tf,ˌmɪsˈhɪə,ˌmɪsˈhɜːd,ˌmɪsˈhɜːd
+se,"oir mal"
+e,And did you say you'd cook  or did I mishear that?
+tee,¿Dijiste que cocinabas tú, o lo escuché mal?
+
 46
 v,mislead,misled,misled
 tf,mɪsˈliːd,mɪsˈlɛd,mɪsˈlɛd
+se,"engañar, despistar"
+e,You are trying to mislead me
+tee,Estas tratando de engañarme.
+
 47
 v,misspell,misspelt,misspelt
 tf,ˈmɪsˈspɛl,ˈmɪsˈspɛlt,ˈmɪsˈspɛlt
+se,"escribir mal"
+e,I didn't misspell the name of that town.
+tee,No escribí mal el nombre de esa ciudad.
+
 48
 v,misunderstand,misunderstood,misunderstood
 tf,ˌmɪsʌndəˈstænd,ˌmɪsʌndəˈstʊd,ˌmɪsʌndəˈstʊd
-49
-v,outbid,outbid,outbid
-tf,aʊtˈbɪd,aʊtˈbɪd,aʊtˈbɪd
-50
-v,outdo,outdid,outdone
-tf,aʊtˈduː,aʊtˈdɪd,aʊtˈdʌn
-51
-v,outgrow,outgrew,outgrown
-tf,aʊtˈgrəʊ,aʊtˈgruː,aʊtˈgrəʊn
-52
-v,overeat,overate,overeaten
-tf,ˌəʊvəˈriːt,ˌəʊvəˈrɛt,ˌəʊvəˈriːtn
-53
-v,overhear,overheard,overheard
-tf,ˌəʊvəˈhɪə,ˌəʊvəˈhɜːd,ˌəʊvəˈhɜːd
-54
-v,overspend,overspent,overspent
-tf,ˌəʊvəˈspɛnd,ˌəʊvəˈspɛnt,ˌəʊvəˈspɛnt
+se,"malinterpretar, entender mal"
+e,It was impossible to misunderstand what Eva said
+tee,Es imposible malinterpretar lo que Eva decía.
+
+
 55
 v,plead,pled,pled
 tf,pliːd,plɛd,plɛd
+se,"alegar"
+e,In regards to my behavior, I can only plead insanity.
+tee,Considerando mi comportamiento, yo sólo puedo alegar demencia.
+
 56
 v,proofread,proofread,proofread
 tf,ˈpruːfriːd,ˈpruːfriːd,ˈpruːfriːd
+se,"corregir"
+e,Do you have to proofread more exams?
+tee,¿Tienes que corregir más exámenes?
+
 57
 v,quit,quit/quitted,quit/quitted
 tf,kwɪt,kwɪt/ˈkwɪtɪd,kwɪt/ˈkwɪtɪd
+se,"dejar, abandonar"
+e,She quit gymnastics and left town.
+tee,Ella dejó la gimnasia y se fue de la ciudad.
+
 58
 v,rend,rent,rent
 tf,rɛnd,rɛnt,rɛnt
+se,"desgarrar"
+
 59
 v,rid,rid/ridded,rid/ridded
 tf,rɪd,rɪd/ˈrɪdɪd,rɪd/ˈrɪdɪd
+se,"liberar"
+
 60
 v,redo,redid,redone
 tf,ˌriːˈduː,ˌriːˈdɪd,ˌriːˈdʌn
+se,"rehacer"
+
 61
 v,saw,sawed,sawed/sawn
 tf,sɔː,sɔːd,sɔːd/sɔːn
+se,"serrar"
+
 62
 v,seek,sought,sought
 tf,siːk,sɔːt,sɔːt
+se,"buscar o tratar"
+
 63
 v,sew,sewed,sewed/sewn
 tf,səʊ,səʊd,səʊd/səʊn
+se,"coser"
+
 64
 v,shake,shook,shaken
 tf,ʃeɪk,ʃʊk,ˈʃeɪkən
+se,"agitar"
+
 65
 v,shave,shaved,shaved/shaven
 tf,ʃeɪv,ʃeɪvd,ʃeɪvd/ˈʃeɪvn
-66
-v,shear,sheared,sheared/shorn
-tf,ʃɪə,ʃɪəd,ʃɪəd/ʃɔːn
+se,"afeitar"
+
+
 67
 v,shed,shed,shed
 tf,ʃɛd,ʃɛd,ʃɛd
+se,"derramar"
+
 68
 v,shine,shone/shined,shone/shined
 tf,ʃaɪn,ʃɒn/ʃaɪnd,ʃɒn/ʃaɪnd
 se,"brillar o lustrar"
 e,The sun is shining so let’s go to the beach.
 tee,El sol está brillando vayamos a la playa.
+
 69
 v,shoe,shod/shoed,shod/shoed
 tf,ʃuː,ʃɒd/ʃuːd,ʃɒd/ʃuːd
+se,"calzarse"
+
 70
 v,shrink,shrank,shrunk
 tf,ʃrɪŋk,ʃræŋk,ʃrʌŋk
+se,"disminuir"
+
 71
 v,sink,sank,sunk
 tf,sɪŋk,sæŋk,sʌŋk
+se,"hundirse"
+
 72
 v,slay,slews,lain
 tf,sleɪ,sluːz,leɪn
+se,"matar o asesinar"
+
+
 73
 v,slide,slid,slid
 tf,slaɪd,slɪd,slɪd
+se,"deslizar"
+
+
 74
 v,sling,slung,slung
 tf,slɪŋ,slʌŋ,slʌŋ
+se,"lanzar o arrojar"
+
+
 75
 v,slink,slunk,slunk
 tf,slɪŋk,slʌŋk,slʌŋk
+se,"huir"
+
+
 76
 v,slit,slit/slitted,slit/slitted
 tf,slɪt,slɪt/ˈslɪtɪd,slɪt/ˈslɪtɪd
+se,"cortar o rajar"
+
 77
 v,smell,smelled/smelt,smelled/smelt
 tf,smɛl,smɛld/smɛlt,smɛld/smɛlt
+se,"oler"
+
 78
 v,smite,smote,smitten
 tf,smaɪt,sməʊt,ˈsmɪtn
+se,"golpear"
+e,I could reveal myself and smite the demons.
+tee,Podría revelarme y golpear a los demonios.
+
 79
 v,sow,sowed,sowed/sown
 tf,səʊ,səʊd,səʊd/səʊn
+se,"sembrar"
+
 80
 v,speed,sped/speeded,sped/speeded
 tf,spiːd,spɛd/ˈspiːdɪd,spɛd/ˈspiːdɪd
+se,"acelerar"
+
 81
 v,spell,spelt/spelled,spelt/spelled
 tf,spɛl,spɛlt/spɛld,spɛlt/spɛld
+se,"deletrear"
+
 82
 v,spill,spilt/spilled,spilt/spilled
 tf,spɪl,ˈspɪlt/spɪld,ˈspɪlt/spɪld
+se,"derramar o verter"
 83
 v,spin,spun/span,spun
 tf,spɪn,spʌn/spæn,spʌn
+se,"volver o girar"
 84
 v,spit,spat,spat
 tf,spɪt,spæt,spæt
+se,"escupir"
 85
 v,split,split,split
 tf,splɪt,splɪt,splɪt
+se,"dividir"
 86
 v,spoil,spoiled/spoilt,spoiled/spoilt
 tf,spɔːɪl,spɔːɪld/spɔɪlt,spɔːɪld/spɔɪlt
+se,"estropear o echar a perder"
 87
 v,spread,spread,spread
 tf,sprɛd,sprɛd,sprɛd
+se,"propagaro difundir"
+
 88
 v,spring,sprang,sprung
 tf,sprɪŋ,spræŋ,sprʌŋ
-89
-v,stave,stove/staved,stove/staved
-tf,steɪv,stəʊv/steɪvd,stəʊv/steɪvd
+se,"saltar"
+
 90
 v,sting,stung,stung
 tf,stɪŋ,stʌŋ,stʌŋ
+se,"picar"
+e,Float like butterfly, sting like bee.
+tee,Flotar como una mariposa, picar como una abeja.
+
 91
 v,stink,stank,stunk
 tf,stɪŋk,stæŋk,stʌŋk
+se,"apestar o hedir"
+e,Your party stinks
+tee,Tu fiesta apesta.
+
+
 92
 v,strew,strewed,strewed/strewn
 tf,struː,struːd,struːd/struːn
-93
-v,stride,strode,stridden
-tf,straɪd,strəʊd,ˈstrɪdn
+se,"esparcir"
+e,I would like strew my love over here.
+tee,Me gustaría esparcir mi amor por aquí.
+
+
 94
 v,strike,struck,struck/stricken
 tf,straɪk,strʌk,strʌk/ˈstrɪkən
-95
-v,string,strung,strung
-tf,strɪŋ,strʌŋ,strʌŋ
+se,"golpear o sacudir"
+e, The thief strike my husband.
+tee, El ladrón golpeó a mi marido.
+
+
 96
 v,strive,strove,striven
 tf,straɪv,strəʊv,ˈstrɪvn
+se, "esforzarse"
+
+
 97
 v,swear,swore,sworn
 tf,sweə,swɔː,swɔːn
+se,"jurar"
+
 98
 v,sweep,swept,swept
 tf,swiːp,swɛpt,swɛpt
-99
-v,swell,swelled,swollen/swelled
-tf,swɛl,swɛld,ˈswəʊlən/swɛld
+se,"barrer"
+
+
 100
 v,swing,swung,swung
 tf,swɪŋ,swʌŋ,swʌŋ
-101
-v,tear,tore,torn
-tf,teə,tɔː,tɔːn
-12
+se,"girar o balancearse"
+
+
+
+102
 v,thrive,throve/thrived,thriven/thrived
 tf,θraɪv,θrəʊv/θraɪvd,ˈθrɪvn/θraɪvd
+se,"prosperar"
+
 103
 v,thrust,thrust,thrust
 tf,θrʌst,θrʌst,θrʌst
+se,"empujar, impulsar"
+
 104
 v,tread,trod,trodden
 tf,trɛd,trɒd,ˈtrɒdn
+se,"pisar"
+
 105
 v,weave,wove/weaved,woven/weaved
 tf,wiːv,wəʊv/wiːvd,ˈwəʊvən/wiːvd
+se,"tejer o hilvanar"
+
 106
 v,weep,wept,wept
 tf,wiːp,wɛpt,wɛpt
+se,"llorar"
+
 107
 v,wind,winded/wound,winded/wound
 tf,wɪnd,ˈwɪndɪd/wuːnd,ˈwɪndɪd/wuːnd
+se,"soplar"
+
 108
 v,wring,wrung,wrung
 tf,rɪŋ,rʌŋ,rʌŋ
+se,"retorcero exprimir o estrujar"
+
