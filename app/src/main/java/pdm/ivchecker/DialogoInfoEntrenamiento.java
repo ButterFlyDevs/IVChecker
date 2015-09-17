@@ -30,7 +30,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 public class DialogoInfoEntrenamiento extends DialogFragment {
 
     private Button botonEntendido;

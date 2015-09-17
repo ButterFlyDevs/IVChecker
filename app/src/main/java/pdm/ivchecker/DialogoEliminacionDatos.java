@@ -32,8 +32,6 @@ import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-
 public class DialogoEliminacionDatos extends DialogFragment {
 
     private Button botonBorrar, botonCancelar;

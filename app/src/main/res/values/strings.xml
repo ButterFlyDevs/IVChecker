@@ -124,7 +124,11 @@
         <string name="texto7">Privacy and personal data:</string>
         <string name="texto8">IV Checker do not use none of your personal data. We only need a nick to save your score in a server.
             The data are anonymous and we do not saving data of you or your device.</string>
-
+        <string name="texto9">collaboration</string>
+        <string name="texto10">Want to help us improve the app? If you think you lack a verb
+         or any of the examples is not correct or you like to add any contact us to butterflydevsmail@gmail.com
+         with your suggestions and we'll add in the next version.
+        </string>
 
     <!-- 9. Resultados Training -->
         <string name="verbosFallados">Mistakes: </string>
@@ -136,7 +140,7 @@
 
 
         <!-- NO TRADUCIR -->
-        <string name="developers">Inventarium Devs @ 2015</string>
+        <string name="developers">ButterFly Devs @ 2015</string>
 
     <!-- NO TRADUCIR -->
     <!-- Titulos de las actividades, obligatorios pero no usados -->

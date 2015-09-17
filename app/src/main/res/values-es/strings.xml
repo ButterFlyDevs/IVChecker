@@ -108,17 +108,23 @@
     <string name="texto1">¿Te sabes ya los verbos irregulares?</string>
     <string name="texto2">Ahora podrás aprender los más usados del inglés de una forma sencilla y rápida.</string>
     <string name="texto3">Más de 200 verbos organizados en tres niveles de dificultad y uso con los que dominarás el inglés.</string>
-        <string name="texto4">En la sección de entrenamiento podrás practicar tantas veces como quieras, dejando que IVChecker
-                              seleccione los verbos al azar o eligiendo su dificultad tu. Además podrás dejar que te pregunte
-                              los verbos que sabe que más te cuestan con su opción "Entrenamiento Inteligente".</string>
+        <string name="texto4">En la sección de entrenamiento podrás practicar, dejando que IVChecker
+                              seleccione los verbos al azar o eligiendo su dificultad tu. Además podrás usar
+                              su opción "Entrenamiento Inteligente".</string>
         <string name="texto5">En el juego principal podras poner a prueba tus conocimientos a traves de 15 niveles de dificultad.
                                ¿Hasta donde seras capaz de llegar?</string>
         <string name="texto6">Si quieres podras subir tu puntuacion al World Challenge Results donde podrás alcanzar el podio con
                               jugdores de todo el mundo.</string>
     <string name="texto7">Privacidad y datos personales:</string>
-        <string name="texto8">IVChecker no utiliza ninguno de tus datos personales. Solo necesita un nick para guardar tus datos
-        en su servidor. Los datos son totalmente anonimos y no guardan relacion directa con algún jugador o dispositivo. IVChecker
-        solo necesita internet para poder consultar los datos del ranking y subir los tuyos.</string>
+        <string name="texto8">IVChecker no utiliza ninguno de tus datos personales. Sólo necesita un nick para guardar tus datos
+        en su servidor. Los datos son totalmente anónimos y no guardan relación directa con algún jugador o dispositivo. IVChecker
+        sólo necesita internet para poder consultar los datos del ranking y subir los tuyos.</string>
+
+    <string name="texto9">Colaboración</string>
+    <string name="texto10">¿Quieres ayudarnos a mejorar la app? Si crees que falta algún verbo
+    o alguno de los ejemplos no es correcto o te gustaría añadir alguno escríbenos a butterflydevsmail@gmail.com
+    con tus sugerencias y las añadiremos en la próxima versión.
+    </string>
 
 
     <!-- 9. Resultados Training -->

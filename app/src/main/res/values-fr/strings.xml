@@ -125,6 +125,11 @@
         coordonnées sur le serveur. Ces données sont totalement anonymes et ils ne sont pas directement liés aux joueurs
         ou au dispositif. IVChecker n\'utilise qu\'une connexion Internet pour pouvoir vérifier les données du classement
         et envoyer les tiennes.</string>
+    <string name="texto9">Collaboration</string>
+    <string name="texto10">Vous voulez nous aider à améliorer l'application? Si vous pensez que vous manquez un verbe
+         ou l'un des exemples est correcte ou pas vous ajouter des nous contacter à butterflydevsmail@gmail.com
+         avec vos suggestions et nous allons ajouter dans la prochaine version.
+    </string>
 
     <!-- 9. Resultados Training -->
     <string name="verbosFallados">Fautes</string>

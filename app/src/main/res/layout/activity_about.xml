@@ -199,7 +199,32 @@
             android:textColor="#ff000000"
             android:textSize="15dp"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/texto9"
+            android:id="@+id/textView23"
+            android:textColor="#ff6fb931"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/texto10"
+            android:id="@+id/textView23"
+            android:textColor="#ff313131"
+            android:textSize="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
